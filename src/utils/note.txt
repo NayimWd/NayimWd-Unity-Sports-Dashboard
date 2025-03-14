@@ -1,0 +1,185 @@
+🔹 When to Use Different Font Colors?
+Component	                   Light Mode Font	        Dark Mode Font
+
+Headings (H1, H2, etc.)     #1E293B (Dark Gray)    #E0E0E0 (Soft White)
+
+Main Content Text	        #1E293B (Dark Gray)	   #E0E0E0 (Soft White)
+
+Subtext (Less Important Info)	#4B5563 (Muted Gray)	#9CA3AF (Muted Gray)
+
+Links & Interactive Text	  #007BFF (Bright Blue)	#1E88E5 (Bright Blue)
+
+
+Disabled/Inactive Text 	#9CA3AF (Soft Gray)	#4B5563 (Dark Gray)
+
+Dark Mode 
+Navy Black #0F172A → Main background, page background
+
+Dark Grayish Blue #1E293B → Sidebar panel background, top navigation bar, cards, modals, popups, table container background, forms, input containers
+
+Muted Dark Gray #334155 → Table headers, input fields, modal backgrounds, button hover states
+
+Muted Gray #4B5563 → Table borders, disabled text, form placeholders, input borders
+
+Bright Blue #1E88E5 → Sidebar active item, links, primary buttons, input focus border, highlighted text
+
+Deep Blue #1565C0 → Primary button hover, interactive elements hover
+
+Golden Yellow #FFC107 → Secondary buttons, accent highlights
+
+Soft White #E0E0E0 → Primary font color, sidebar text, table text, main headings
+Muted Light Gray #9CA3AF → Secondary text, subtext, less important labels
+
+/--------------------------------------------------------------/
+🎨
+ Light Mode 
+Soft Off-White #F8FAFC → Main background, page background
+
+Pure White #FFFFFF → Sidebar panel background, top navigation bar, cards, modals, popups, table container background, forms, input containers
+
+Very Light Gray #F1F5F9 → Table headers, footer background
+
+Soft Gray #E2E8F0 → Card borders, table row separators, modal borders
+
+Muted Gray #D1D5DB → Input borders, form separators
+
+Dark Grayish Blue #1E293B → Primary font color, sidebar menu text, table text, main headings
+
+Muted Dark Gray #4B5563 → Secondary text, descriptions, less important labels
+
+Bright Blue #007BFF → Sidebar active item, links, primary buttons, input focus border, highlighted text
+
+Deep Blue #005BB5 → Primary button hover, interactive elements hover
+
+Golden Yellow #FFB300 → Secondary buttons, accent highlights
+
+Muted Light Gray #9CA3AF → Disabled text, form placeholders
+
+/**--------------------------------------------------------**/
+ Dark Mode Gradients
+
+Navbar / Sidebar Background:
+linear-gradient(135deg, #1E293B, #0F172A) (Deep gray to navy black – adds depth without distraction)
+
+Primary Buttons:
+linear-gradient(90deg, #1E88E5, #1565C0) (Bright blue to deep blue – sporty and high contrast)
+
+Cards / Stats / Special Sections:
+linear-gradient(120deg, #334155, #1E293B) (Dark gray blend – gives a smooth, elegant look)
+
+Background for Hero Section (if used):
+linear-gradient(180deg, #0F172A, #1E293B) (Dark navy to deep gray – subtle but modern effect)
+
+ Light Mode Gradients
+Navbar / Sidebar Background:
+linear-gradient(135deg, #F8FAFC, #E2E8F0) (Soft white to light gray – clean and fresh look)
+
+Primary Buttons:
+linear-gradient(90deg, #007BFF, #005BB5) (Bright blue to deep blue – gives a sleek, modern touch)
+
+Cards / Stats / Special Sections:
+linear-gradient(120deg, #F1F5F9, #E2E8F0) (Light gray to softer gray – subtle and elegant effect)
+
+Background for Hero Section (if used):
+linear-gradient(180deg, #F8FAFC, #E2E8F0) (Soft off-white to light gray – smooth blend for depth)
+/--------------------------------------------------------/
+/--------------------------------------------------------/
+                        Font family & Size
+1. Hero Section font-family: 'Inter', sans-serif;  font-weight: 700;
+    Usage: Title/Headline in the hero section or main call-to-action.
+    Breakpoint &	Font Size: 
+                            xsm	36px
+                            sm	48px
+                            md	50px
+                            lg	58px
+                            xl	64px
+
+2. Headings font-family: 'Merriweather', serif; font-weight: 700;
+   Usage: For section titles or subheadings in different parts of the page.
+   Breakpoint & Font Size:
+                            xsm	24px
+                            sm	28px
+                            md	32px
+                            lg	36px
+                            xl	40px
+
+3. Body Text / Paragraphs  font-family: 'Inter', sans-serif; font-weight: 400;
+   Usage: For paragraphs, descriptions, and general body text.
+   Breakpoint	Font Size:
+                            xsm	14px
+                            sm	16px
+                            md	16px
+                            lg	18px
+                            xl	18px
+
+4. Buttons (Primary, Secondary, Call-to-Action)
+   font-family: 'Inter', sans-serif; font-weight: 600;
+   Usage: For primary and secondary action buttons, like "Sign Up", "Play Now", etc.
+   Breakpoint	Font Size:
+                            xsm	14px
+                            sm	16px
+                            md	16px
+                            lg	18px
+                            xl	18px
+
+5. Navigation (Clear and Simple) font-family: 'Inter', sans-serif; font-weight: 500;
+   Usage: For links or items in the navigation menu or sidebar.
+    Breakpoint	Font Size
+                            xsm	14px
+                            sm	16px
+                            md	16px
+                            lg	18px
+                            xl	18px
+
+6. Subtext and Labels (Small and Subtle) font-family: 'Inter', sans-serif; font-weight: 300; 
+Usage: For small text, form labels, and less important details.
+Breakpoint	Font Size
+                            xsm	12px
+                            sm	14px
+                            md	14px
+                            lg	16px
+                            xl	16px
+
+7. Form Inputs (Clear and Easy to Read) font-family: 'Inter', sans-serif; font-weight: 400;
+Usage: For input fields, search bars, and form controls.
+Breakpoint	Font Size
+                            xsm	14px
+                            sm	16px
+                            md	16px
+                            lg	16px
+                            xl	16px
+
+
+8. Table (Headers, Rows, and Data)
+Font: Inter (Regular or Medium)
+Usage: For table headers and rows.
+Breakpoint	Font Size
+                            xsm	12px
+                            sm	14px
+                            md	14px
+                            lg	16px
+                            xl	16px
+
+
+9. Error message Error Messages (Warnings, Alerts, Form Errors)- 
+  'Inter', sans-serif font-weight-600 12-16px(xs to 2xl)
+   Color :
+          Light Mode: #D32F2F (bright red)
+          Dark Mode: #FF5A5F (lighter red for contrast)
+
+   Background : 
+          Light Mode: #FFEBEE (light red background)
+          Dark Mode: #4E0D0D (dark red background)
+
+10. Success Messages (Confirmation, Success Alerts)
+    'Inter', sans-serif font-weight-500 12-16px(xs to 2xl)
+   Color :
+          Light Mode: #388E3C (dark green)
+          Dark Mode: #66BB6A (lighter green for contrast)
+
+   Background : 
+          Light Mode: #E8F5E9 (light green background)
+          Dark Mode: #0D3B20 (dark green background)
+
+
+
