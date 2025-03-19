@@ -34,3 +34,8 @@
     --gradient-secondary: linear-gradient(90deg, #007BFF, #005BB5);
     --gradient-bg: linear-gradient(135deg, #1E293B, #0F172A);
 }
+
+
+* {
+    @apply transition-colors delay-75 duration-150
+}
