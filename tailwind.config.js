@@ -14,7 +14,6 @@ module.exports = {
         sidebar: "var(--sidebar)",
         primary: "var(--primary)",
         secondary: "var(--secondary)",
-        card: "var(--card)",
         border: "var(--border)",
         font: "var(--font)",
         subtext: "var(--subtext)",

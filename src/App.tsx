@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
 import "./App.css";
 import { RootState } from "./app/store/store";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { ThemeType } from "./utils/types";
 import Header from "./component/common/Header";
 import Sidebar from "./component/common/Sidebar";
+import useToggle from "./hooks/useToggle";
 
 function App() {
   // theme
@@ -30,18 +31,19 @@ function App() {
   }, [theme]);
 
   // toggle function
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useToggle({defaultValue: false});
 
-  const handleToggle = () => {
-    setIsOpen((prev)=> !prev)
-  };
+  // const handleToggle = () => {
+  //   setIsOpen((prev)=> !prev)
+  // };
 
+  // const { isToggled, toggle } = useToggle({ initialState: false });
 
 
   return (
     <main className="overflow-x-hidden w-full h-[100vw] bg-bg">
-      <Header handleToggle={handleToggle}/>
-      <Sidebar  isOpen={isOpen}/>
+      <Header handleToggle={setIsOpen}/>
+      <Sidebar  isOpen={isOpen} setIsOpen={setIsOpen}/>
     </main>
   );
 }

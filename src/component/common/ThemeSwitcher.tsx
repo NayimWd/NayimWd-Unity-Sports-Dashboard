@@ -17,23 +17,14 @@ const ThemeSwitcher = () => {
 
   return (
     <div className="">
-      { theme === "dark" ? <button onClick={()=>handleThemeChange("light")} className="w-12 h-10 rounded-md border border-border p-1 bg-bg flex justify-center items-center shadow-sm hover:bg-card">
+      { theme === "dark" ? <button onClick={()=>handleThemeChange("light")} className="w-12 h-10 rounded-md  p-1 bg-bg flex justify-center items-center shadow hover:bg-card">
         <Sun className="text-font"/>
       </button>
       :
-      <button onClick={()=>handleThemeChange("dark")} className="w-12 h-10 rounded-md border border-border p-1 bg-bg flex justify-center items-center shadow-sm hover:bg-card">
+      <button onClick={()=>handleThemeChange("dark")} className="w-12 h-10 rounded-md  p-1 bg-bg flex justify-center items-center shadow-sm hover:bg-card">
         <Moon />
       </button>}
       
-    {/* <button onClick={() => handleThemeChange("light")} className="p-2 bg-gradient-secondary rounded">
-      Light
-    </button>
-    <button onClick={() => handleThemeChange("dark")} className="p-2 bg-gray-200 dark:bg-gray-700 rounded">
-      Dark
-    </button>
-    <button onClick={() => handleThemeChange("system")} className="p-2 bg-gray-200 dark:bg-gray-700 rounded">
-      System
-    </button> */}
   </div>
   )
 }
