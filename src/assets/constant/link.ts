@@ -1,4 +1,4 @@
-import { Edit, Home, Plus, Layers, Upload, FilePenLine, CalendarDays } from "lucide-react";
+import { Edit, Home, Plus, Layers, Upload, FilePenLine, CalendarDays, FileText, Trophy, SquarePen, Component, Users } from "lucide-react";
 
 
 
@@ -10,10 +10,30 @@ export const linksAdmin = [
     sublink: []
   },
   {
-    path: "/tournament",
+    path: "",
+    icon: Users,
+    text: ""
+  },
+  {
+    path: "",
     icon: Layers,
     text: "Tournament",
     sublink: [
+      {
+        path: "/tournament",
+        icons: FileText,
+        text: "ALL Tournament"
+      },
+      {
+        path: "/tournament/result",
+        icons: Trophy,
+        text: "Result"
+      },
+      {
+        path: "/tournament/result/create",
+        icons: SquarePen,
+        text: "Create Result"
+      },
       {
         path: "/tournament/create",
         icons: Plus,
@@ -40,7 +60,9 @@ export const linksAdmin = [
         text: "Update Date"
       },
       {
-        path: "/tournament/"
+        path: "/tournament/team",
+        icon: Component,
+        text: "Teams"
       }
     ]
   }
