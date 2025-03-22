@@ -54,6 +54,11 @@ Deep Blue #005BB5 → Primary button hover, interactive elements hover
 Golden Yellow #FFB300 → Secondary buttons, accent highlights
 
 Muted Light Gray #9CA3AF → Disabled text, form placeholders
+#E8F5E9 (light green background) for success toast background
+#388E3C (dark green) for success toast color
+#FFEBEE (light red background) for error toast bg
+#D32F2F (bright red)  for error text color
+
 
 /**--------------------------------------------------------**/
  Dark Mode Gradients
@@ -82,6 +87,10 @@ linear-gradient(120deg, #F1F5F9, #E2E8F0) (Light gray to softer gray – subtle 
 
 Background for Hero Section (if used):
 linear-gradient(180deg, #F8FAFC, #E2E8F0) (Soft off-white to light gray – smooth blend for depth)
+#0D3B20 (dark green background) for success toast bg
+#66BB6A (lighter green for contrast) for success toast color
+#4E0D0D (dark red background) for error toast bg
+#FF5A5F (lighter red for contrast) for error text color
 /--------------------------------------------------------/
 /--------------------------------------------------------/
                         Font family & Size

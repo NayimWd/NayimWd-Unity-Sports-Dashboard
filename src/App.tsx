@@ -6,6 +6,8 @@ import { ThemeType } from "./utils/types";
 import Header from "./component/common/Header";
 import Sidebar from "./component/common/Sidebar";
 import useToggle from "./hooks/useToggle";
+import Layout from "./component/layout/Layout";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   // theme
@@ -36,7 +38,7 @@ function App() {
   return (
     <main className="overflow-x-hidden w-full h-screen bg-bg">
       <Header handleToggle={setIsOpen} />
-      <div className="flex">
+      <Layout>
         <div className={`${isOpen ? "w-64" : "w-0"}`}>
           <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
@@ -45,9 +47,9 @@ function App() {
             isOpen ? "sm:ml-64" : ""
           } mt-[72px] sm:mt-16 md:mt-[72px] mt:top-20 p-5 sm:ml-64`}
         >
-          abc test
+          <Dashboard/>
         </div>
-      </div>
+      </Layout>
     </main>
   );
 }

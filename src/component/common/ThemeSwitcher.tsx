@@ -17,11 +17,11 @@ const ThemeSwitcher = () => {
 
   return (
     <div className="">
-      { theme === "dark" ? <button onClick={()=>handleThemeChange("light")} className="w-12 h-10 rounded-md  p-1 bg-bg flex justify-center items-center shadow hover:bg-card">
+      { theme === "dark" ? <button onClick={()=>handleThemeChange("light")} className="w-12 h-10 rounded-md  p-1 bg-bg flex justify-center items-center shadow hover:bg-subSurface">
         <Sun className="text-font"/>
       </button>
       :
-      <button onClick={()=>handleThemeChange("dark")} className="w-12 h-10 rounded-md  p-1 bg-bg flex justify-center items-center shadow-sm hover:bg-card">
+      <button onClick={()=>handleThemeChange("dark")} className="w-12 h-10 rounded-md  p-1 bg-bg flex justify-center items-center shadow-sm hover:bg-subSurface">
         <Moon />
       </button>}
       

@@ -3,34 +3,68 @@
 @tailwind utilities;
 
 
+/* Light Mode */
 .light {
-    --bg: #F9FAFC;
-    --sidebar: #FFFFFF;
-    --primary: #007BFF;
-    --secondary: #FFB300;
-    --border: #E2E8F0;
-    --font: #1E293B;
-    --subtext: #4B5563;
-    --muted: #9CA3AF;
-    --accent: #007BFF;
-    --gradient-primary: linear-gradient(90deg, #1E88E5, #1565C0);
-    --gradient-secondary: linear-gradient(90deg, #007BFF, #005BB5);
-    --gradient-bg: linear-gradient(135deg, #F9FAFC, #E2E8F0);
+    /* Base Colors */
+    --bg: #F8FAFC;
+    --surface: #FFFFFF; /* Used for sidebar, card, table-bg */
+    --subSurface: #F1F5F9; /* Used for table headers */
+    --border: #E2E8F0; /* Used for card borders, table row separators */
+    --inputBorder: #D1D5DB; /* Used for form input borders */
+    
+    /* Text Colors */
+    --font: #1E293B; /* Primary font color */
+    --subtext: #4B5563; /* Secondary text */
+    --muted: #9CA3AF; /* Disabled text, placeholders */
+
+    /* Accent Colors */
+    --primary: #007BFF; /* Used for buttons, links */
+    --primaryHover: #005BB5; /* Button hover */
+    --secondary: #FFB300; /* Secondary button, highlights */
+    --disabledText: #9CA3AF; /* Disabled elements */
+
+    /* Toast Notifications */
+    --toastSuccessBg: #E8F5E9;
+    --toastSuccessText: #2E7D32;
+    --toastErrorBg: #FFEBEE;
+    --toastErrorText: #C62828;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(90deg, #007BFF, #004C99);
+    --gradient-secondary: linear-gradient(120deg, #F1F5F9, #DCE4EC);
+    --gradient-bg: linear-gradient(180deg, #F8FAFC, #DDE7F0);
 }
 
+/* Dark Mode */
 .dark {
-    --bg: #0F172A;
-    --sidebar: #1E293B;
-    --primary: #1E88E5;
-    --secondary: #FFC107;
-    --border: #334155;
-    --font: #E0E0E0;
-    --subtext: #9CA3AF;
-    --muted: #4B5563;
-    --accent: #1E88E5;
-    --gradient-primary: linear-gradient(90deg, #1E88E5, #1565C0);
-    --gradient-secondary: linear-gradient(90deg, #007BFF, #005BB5);
-    --gradient-bg: linear-gradient(135deg, #1E293B, #0F172A);
+    /* Base Colors */
+    --bg: #0A192F;
+    --surface: #1B263B; /* Used for sidebar, card, table-bg */
+    --subSurface: #2C3E50; /* Used for table headers */
+    --border: #3A4A5E; /* Used for borders */
+    --inputBorder: #4A5D72; /* Used for input borders */
+
+    /* Text Colors */
+    --font: #C7D1E0; /* Primary font color */
+    --subtext: #A0A8B6; /* Secondary text */
+    --muted: #6C7A89; /* Disabled text, placeholders */
+
+    /* Accent Colors */
+    --primary: #1E88E5; /* Used for buttons, links */
+    --primaryHover: #165A9E; /* Button hover */
+    --secondary: #FF9100; /* Secondary button, highlights */
+    --disabledText: #778899; /* Disabled elements */
+
+    /* Toast Notifications */
+    --toastSuccessBg: #0D3B20;
+    --toastSuccessText: #43A047;
+    --toastErrorBg: #4E0D0D;
+    --toastErrorText: #E53935;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(90deg, #1976D2, #0D47A1);
+    --gradient-secondary: linear-gradient(120deg, #2C3E50, #1E2A38);
+    --gradient-bg: linear-gradient(180deg, #0A192F, #1B263B);
 }
 
 

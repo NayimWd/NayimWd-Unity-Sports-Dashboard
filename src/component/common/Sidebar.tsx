@@ -14,7 +14,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
   return (
     <aside
       ref={sidebarRef}
-      className={`bg-sidebar backdrop-opacity-90 fixed top-[72px] sm:top-16 md:top-[72px] lg:top-20 left-0 h-screen w-64 overflow-x-hidden py-5 border-r border-border sm:translate-x-0 transition-transform ${
+      className={`bg-surface opacity-90 fixed top-[72px] sm:top-16 md:top-[72px] lg:top-20 left-0 h-screen w-64 overflow-x-hidden py-5 border-r border-border sm:translate-x-0 transition-transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
