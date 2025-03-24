@@ -8,11 +8,11 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({handleToggle}) => {
   return (
-    <nav className="w-full  fixed top-0 z-50 overflow-x-hidden bg-surface border-b border-b-border opacity-90 shadow ">
+    <nav className="w-full  fixed top-0 z-50 overflow-x-hidden bg-surface border-b border-b-border  shadow ">
         <div className="p-3 md:p-4 lg:p-5 opacity-100">
             <div className="flex items-center justify-between">
             <div className="flex items-center justify-start rtl:justify-end">
-                <button className="mr-2 shadow-sm bg-bg dark:shadow-xl xs:mr-3 text-font inline-flex items-center focus:outline focus:outline-surface p-2 rounded-md sm:hidden">
+                <button className="mr-2 shadow-sm bg-bg dark:shadow-xl xs:mr-3 text-font inline-flex items-center focus:outline focus:outline-surface p-2 rounded-md md:hidden">
                 <ChartNoAxesGantt  onClick={handleToggle} className='h-8 w-10 text-black dark:text-white'/>
                 </button>
                 <div className='flex items-center me-2 md:me-24'>

@@ -44,8 +44,8 @@ function App() {
         </div>
         <div
           className={`${
-            isOpen ? "sm:ml-64" : ""
-          } mt-[72px] sm:mt-16 md:mt-[72px] mt:top-20 p-5 sm:ml-64`}
+            isOpen ? "-ml-64 md:ml-0" : "md:ml-64"
+          } mt-[72px] sm:mt-16 md:mt-[72px] mt:top-20 p-5 `}
         >
           <Dashboard/>
         </div>
