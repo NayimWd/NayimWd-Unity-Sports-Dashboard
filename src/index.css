@@ -72,5 +72,9 @@
 
 
 * {
-    @apply transition-colors delay-75 duration-200
+    @apply transition-colors duration-200
+}
+
+.sidebarBtn{
+    @apply w-full flex items-center p-2 gap-2 dark:hover:bg-bg hover:bg-subSurface cursor-pointer rounded text-primary text-left 
 }
