@@ -1,32 +1,35 @@
 import React from "react";
-import ThemeSwitcher from "./ThemeSwitcher"
-import { ChartNoAxesGantt , LayoutDashboard } from 'lucide-react';
+import ThemeSwitcher from "./ThemeSwitcher";
+import { ChartNoAxesGantt, LayoutDashboard } from "lucide-react";
 
 interface HeaderProps {
-    handleToggle: () => void
+  handleToggle: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({handleToggle}) => {
+const Header: React.FC<HeaderProps> = ({ handleToggle }) => {
   return (
-    <nav className="w-full  fixed top-0 z-50 overflow-x-hidden bg-surface border-b border-b-border  shadow ">
-        <div className="p-3 md:p-4 lg:p-5 opacity-100">
-            <div className="flex items-center justify-between">
-            <div className="flex items-center justify-start rtl:justify-end">
-                <button className="mr-2 shadow-sm bg-bg dark:shadow-xl xs:mr-3 text-font inline-flex items-center focus:outline focus:outline-surface p-2 rounded-md md:hidden">
-                <ChartNoAxesGantt  onClick={handleToggle} className='h-8 w-10 text-black dark:text-white'/>
-                </button>
-                <div className='flex items-center me-2 md:me-24'>
-                    <LayoutDashboard className='md:h-10 md:w-10 me-3 text-xl text-primary'/>
-                    <span className='self-center text-[clamp(1.25rem,2vw,2.6rem)] text-primary font-bold whitespace-nowrap font-inter'>
-                        Dashboard
-                    </span>
-                </div>
+    <nav className="fixed w-full h-18  top-0 z-50 overflow-hidden bg-surface border-b border-b-border  shadow ">
+      <div className="p-3 md:p-4 lg:p-5 opacity-100">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center justify-start rtl:justify-end">
+            <button className="mr-2 shadow bg-bg dark:shadow-xl xs:mr-3 text-font inline-flex items-center focus:outline focus:outline-surface p-2 rounded-md md:hidden">
+              <ChartNoAxesGantt
+                onClick={handleToggle}
+                className="h-8 w-10 text-black dark:text-white"
+              />
+            </button>
+            <div className="flex items-center me-2 md:me-24">
+              <LayoutDashboard className="md:h-10 md:w-10 me-3 text-xl text-primary" />
+              <span className="self-center text-[clamp(1.25rem,2vw,2.6rem)] text-primary font-bold whitespace-nowrap font-inter">
+                Dashboard
+              </span>
             </div>
-                <ThemeSwitcher/>
-            </div>
+          </div>
+          <ThemeSwitcher />
         </div>
+      </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

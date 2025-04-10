@@ -1,12 +1,13 @@
-import Buttons from "../component/common/Buttons"
-import NotFound from "./NotFound"
+// import Buttons from "../component/common/Buttons"
+// import NotFound from "./NotFound"
 
 const Dashboard = () => {
   return (
-    <div className="w-full">
+    <div className="min-h-screen flex flex-col">
+      {/* Dashboard
+      <Buttons variant="primary">Test button</Buttons> */}
+      {/* <NotFound/> */}
       Dashboard
-      <Buttons text="promary"/>
-      <NotFound/>
       </div>
   )
 }
