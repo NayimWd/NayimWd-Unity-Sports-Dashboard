@@ -1,4 +1,5 @@
 import "./App.css";
+// import Loader from "./component/common/loader/Loader";
 import DashBoardLayout from "./component/layout/DashBoardLayout";
 import Dashboard from "./pages/Dashboard";
 
@@ -8,6 +9,7 @@ function App() {
       <DashBoardLayout>
         <Dashboard />
       </DashBoardLayout>
+      {/* <Loader/> */}
     </main>
   );
 }
