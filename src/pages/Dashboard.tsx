@@ -1,13 +1,7 @@
-// import Buttons from "../component/common/Buttons"
-// import NotFound from "./NotFound"
-
 const Dashboard = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Dashboard
-      <Buttons variant="primary">Test button</Buttons> */}
-      {/* <NotFound/> */}
-      Dashboard
+        <h1 className="">Dashboard</h1>
       </div>
   )
 }
