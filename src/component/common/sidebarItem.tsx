@@ -25,7 +25,7 @@ const SidebarItem = ({ link }: { link: Link }) => {
             className="sidebarBtn my-1 relative"
           >
             <link.icon className="w-4 h-4" />
-            <span className="  font-merriweather">{link.label}</span>
+            <span className="font-semibold font-merriweather">{link.label}</span>
             <span className="absolute right-0 p-1">
               {" "}
               {open ? (
@@ -45,7 +45,7 @@ const SidebarItem = ({ link }: { link: Link }) => {
                   className="sidebarBtn"
                 >
                   <child.icon className="w-4 h-4" />
-                  <span className=" font-merriweather">{child.label}</span>
+                  <span className="font-semibold font-merriweather">{child.label}</span>
                 </button>
               ))}
             </div>
@@ -54,7 +54,7 @@ const SidebarItem = ({ link }: { link: Link }) => {
       ) : (
         <div className="sidebarBtn">
           <link.icon className="w-4 h-4 " />
-          <span className=" font-merriweather">{link.label}</span>
+          <span className="font-semibold font-merriweather">{link.label}</span>
         </div>
       )}
     </div>

@@ -1,11 +1,13 @@
-import { lazy, Suspense } from "react";
-import { createBrowserRouter, Navigate, Outlet } from "react-router-dom";
-import Loader from "../component/common/loader/Loader";
+import { lazy } from "react";
+import { createBrowserRouter, Navigate } from "react-router-dom";
+import SuspenseWrapper from "../utils/SuspenseWrapper";
 const Login = lazy(() => import("../pages/auth/Login"));
 const Registration = lazy(() => import("../pages/auth/Registration"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const Layout = lazy(() => import("../component/layout/DashBoardLayout"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
+
+
 
 export const router = createBrowserRouter([
   {
@@ -14,40 +16,24 @@ export const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: (
-      <Suspense fallback={<Loader />}>
-        <Login />
-      </Suspense>
-    ),
+    element: <SuspenseWrapper children={<Login />} />,
   },
   {
     path: "/registration",
-    element: (
-      <Suspense fallback={<Loader />}>
-        <Registration />
-      </Suspense>
-    ),
-  },
-  {
-    path: "*",
-    element: <NotFound />,
+    element: <SuspenseWrapper children={<Registration />} />,
   },
   {
     path: "/dashboard",
-    element: (
-      <Suspense fallback={<Loader />}>
-        <Layout children={<Outlet />} />
-      </Suspense>
-    ),
+    element: <SuspenseWrapper children={<Layout />} />,
     children: [
       {
         index: true,
-        element: (
-          <Suspense fallback={<Loader />}>
-            <Dashboard />
-          </Suspense>
-        ),
+        element: <SuspenseWrapper children={<Dashboard />} />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <SuspenseWrapper children={<NotFound/>}/>,
   },
 ]);
