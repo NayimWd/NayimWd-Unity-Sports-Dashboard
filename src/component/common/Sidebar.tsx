@@ -22,7 +22,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
-      <div className="h-full px-3 pt-5 pb-24 overflow-y-scroll scrollbar-hide">
+      <div className="h-full px-2 pt-5 pb-24 overflow-y-scroll scrollbar-hide">
         {navLinks[userRole].map((link, index) => (
           <SidebarItem key={index} link={link} />
         ))}
