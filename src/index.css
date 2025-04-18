@@ -76,5 +76,5 @@
 }
 
 .sidebarBtn{
-    @apply w-full flex items-center px-3 py-1.5 gap-2 dark:hover:bg-bg hover:bg-subSurface cursor-pointer rounded text-primary text-left sm:text-lg
+    @apply w-full flex items-center px-3 py-1.5 gap-2 dark:hover:bg-surface hover:bg-subSurface cursor-pointer rounded text-primary text-left sm:text-lg
 }

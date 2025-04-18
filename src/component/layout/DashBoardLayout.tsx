@@ -1,4 +1,4 @@
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 import Header from "../common/Header";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store/store";
@@ -6,8 +6,6 @@ import { ThemeType } from "../../utils/types";
 import useToggle from "../../hooks/useToggle";
 import Sidebar from "../common/Sidebar";
 import { Outlet } from "react-router-dom";
-
-
 
 const DashBoardLayout: React.FC = () => {
   // theme
@@ -60,8 +58,8 @@ const DashBoardLayout: React.FC = () => {
           />
         )}
         {/* main content */}
-        <main className={` ml-0 md:ml-64 mt-16 lg:mt-[76px] p-5 flex-1  overflow-y-auto`}>
-          <Outlet/>
+        <main className={` ml-0 md:ml-64 mt-16 sm:mt-[74px] xl:mt-20 flex-1 p-3 overflow-y-auto`}>
+          <Outlet />
         </main>
       </div>
     </div>
