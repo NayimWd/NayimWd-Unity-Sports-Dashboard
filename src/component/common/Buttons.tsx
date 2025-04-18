@@ -6,6 +6,9 @@ interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonvariants> {
   children: ReactNode;
+  loading?: boolean;
+  iconLeft?: ReactNode;
+  iconRight?: ReactNode;
 }
 
 const Buttons: FC<ButtonProps> = ({
@@ -13,6 +16,9 @@ const Buttons: FC<ButtonProps> = ({
   className,
   variant,
   size,
+  iconLeft,
+  iconRight,
+  loading = false,
   ...props
 }) => {
   return (
@@ -20,8 +26,19 @@ const Buttons: FC<ButtonProps> = ({
       <button
         className={cn(buttonvariants({ variant, size, className }))}
         {...props}
+        aria-busy={loading}
+        aria-disabled={loading || props.disabled}
       >
-        {children}
+        {/* ✅ Loading overrides everything */}
+        {loading ? (
+          <span className="animate-spin rounded-full border-2 border-white border-t-transparent h-4 w-4" />
+        ) : (
+          <span className="flex items-center justify-center gap-2">
+            {iconLeft && <span className="inline-flex">{iconLeft}</span>}
+            <span>{children}</span>
+            {iconRight && <span className="inline-flex">{iconRight}</span>}
+          </span>
+        )}
       </button>
     </>
   );
@@ -32,14 +49,20 @@ export default Buttons;
 const buttonvariants = cva("", {
   variants: {
     variant: {
-      primary: "",
-      secondary: "",
-      danger: "",
+      primary: "bg-primary hover:bg-primaryHover text-white",
+      secondary: "bg-secondary hover:brightness-90 text-white",
+      danger: "bg-toastErrorText hover:bg-[#c41d1d] text-white",
+      outline: "border border-border text-font dark:text-border dark:hover:text-font  hover:bg-subSurface",
+      ghost: "bg-transparent text-gray-700 dark:hover:text-font hover:bg-subSurface",
+      warning: "bg-secondary hover:brightness-90 text-white",
+      gradient: "bg-gradient-primary text-white hover:opacity-90 bg-no-repeat bg-cover",
+      gradientS: "bg-gradient-secondary to-l text-font hover:opacity-90 bg-no-repeat bg-cover",
+      gradientD: "bg-gradient-bg text-font hover:opacity-90 to-r bg-no-repeat bg-cover",
     },
     size: {
-      sm: "",
-      md: "",
-      lg: "",
+      sm: "px-2 py-1.5 text-sm",
+      md: "px-4 py-2 text-base",
+      lg: "px-5 py-2.5 text-lg",
     },
   },
   defaultVariants: {
