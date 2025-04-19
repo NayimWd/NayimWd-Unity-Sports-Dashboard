@@ -31,6 +31,7 @@ module.exports = {
         "gradient-primary": "var(--gradient-primary)",
         "gradient-secondary": "var(--gradient-secondary)",
         "gradient-bg": "var(--gradient-bg)",
+        "gradientN-bg": "var(--gradientN-bg)",
       },
       fontFamily: {
         // Font Family

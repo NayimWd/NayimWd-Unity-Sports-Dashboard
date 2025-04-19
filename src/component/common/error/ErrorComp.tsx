@@ -1,5 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import Buttons from '../Buttons';
+import { RefreshCcw, House } from 'lucide-react';
 
 interface ErrorProps {
     error?: Error | null;
@@ -13,11 +15,11 @@ const ErrorComp: React.FC<ErrorProps> = ({error}) => {
   };
 
   const handleGoHome = () => {
-    navigate("/");
+    navigate("/dashboard");
   };
   return (
     <div className="flex flex-col items-center justify-center h-screen text-center p-4 bg-bg">
-      <h2 className="text-3xl font-bold text-red-600 mb-3">Something went wrong</h2>
+      <h2 className="text-3xl font-bold text-toastErrorText mb-3">Something went wrong</h2>
       <p className="text-gray-600 dark:text-gray-300 mb-5">
         An unexpected error occurred. Please try again.
       </p>
@@ -28,19 +30,23 @@ const ErrorComp: React.FC<ErrorProps> = ({error}) => {
         </pre>
       )}
 
-      <div className="flex gap-4">
-        <button
+      <div className="flex items-center gap-4">
+        <Buttons
+        variant="primary"
+        iconRight={<RefreshCcw size={16}/>}
           onClick={handleRefresh}
-          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded shadow"
+          className="rounded"
         >
           Refresh Page
-        </button>
-        <button
+        </Buttons>
+        <Buttons
+        variant="secondary"
+        iconRight={<House size={16}/>}
           onClick={handleGoHome}
-          className="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded shadow"
+          className="rounded shadow-md"
         >
           Go to Home
-        </button>
+        </Buttons>
       </div>
     </div>
   )

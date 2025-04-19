@@ -1,5 +1,5 @@
 import { cva, VariantProps } from "class-variance-authority";
-import { ButtonHTMLAttributes, FC, ReactNode } from "react";
+import { ButtonHTMLAttributes,  ReactNode } from "react";
 import cn from "../../utils/cn";
 
 interface ButtonProps
@@ -11,7 +11,7 @@ interface ButtonProps
   iconRight?: ReactNode;
 }
 
-const Buttons: FC<ButtonProps> = ({
+const Buttons = ({
   children,
   className,
   variant,
@@ -20,7 +20,7 @@ const Buttons: FC<ButtonProps> = ({
   iconRight,
   loading = false,
   ...props
-}) => {
+} : ButtonProps ) => {
   return (
     <>
       <button
@@ -50,7 +50,7 @@ const buttonvariants = cva("", {
   variants: {
     variant: {
       primary: "bg-primary hover:bg-primaryHover text-white",
-      secondary: "bg-secondary hover:brightness-90 text-white",
+      secondary: "bg-subSurface hover:brightness-90 text-font",
       danger: "bg-toastErrorText hover:bg-[#c41d1d] text-white",
       outline: "border border-border text-font dark:text-border dark:hover:text-font  hover:bg-subSurface",
       ghost: "bg-transparent text-gray-700 dark:hover:text-font hover:bg-subSurface",
