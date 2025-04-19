@@ -34,7 +34,7 @@ const DashBoardLayout: React.FC = () => {
   const [isOpen, setIsOpen] = useToggle({ defaultValue: false });
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-bg flex flex-col">
       {/* navbar */}
       <Header handleToggle={setIsOpen} />
       {/* main content wrapper */}

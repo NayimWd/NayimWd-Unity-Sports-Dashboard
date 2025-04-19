@@ -36,6 +36,7 @@
     --gradient-primary: linear-gradient(90deg, #007BFF, #004C99);
     --gradient-secondary: linear-gradient(120deg, #F1F5F9, #DCE4EC);
     --gradient-bg: linear-gradient(180deg, #F8FAFC, #DDE7F0);
+    --gradientN-bg: linear-gradient(90deg, #F8FAFC, #DDE7F0);
 }
 
 /* Dark Mode */
@@ -68,6 +69,7 @@
     --gradient-primary: linear-gradient(90deg, #1976D2, #0D47A1);
     --gradient-secondary: linear-gradient(120deg, #2C3E50, #1E2A38);
     --gradient-bg: linear-gradient(180deg, #0A192F, #1B263B);
+    --gradientN-bg: linear-gradient(90deg, #0A192F, #1B263B);
 }
 
 
