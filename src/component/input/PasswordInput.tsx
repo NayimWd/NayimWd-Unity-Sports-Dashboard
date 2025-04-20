@@ -32,14 +32,18 @@ const PasswordInput = ({
     variant = error ? "error" : "success";
   }
 
-  useEffect(() => {}, [value, name, focused, trigger]);
+  useEffect(() => {
+    if(focused && value) {
+      trigger(name);
+    }
+  }, [value, name, focused, trigger, isTouched]);
 
   return (
-    <div className="mb-4">
+    <div className=" space-y-2 relative">
       {/* input label */}
       <label
-        htmlFor="label"
-        className="block font-medium mb-1"
+        htmlFor={name}
+        className="block text-font font-medium "
         aria-details="Password label"
       >
         {label}
@@ -55,6 +59,7 @@ const PasswordInput = ({
           {...register(name)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
+          
         />
         <button
           type="button"
@@ -64,8 +69,8 @@ const PasswordInput = ({
           {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
         </button>
       </div>
-      {error && isTouched && (
-        <p className="text-sm text-toastErrorText mt-1">{error}</p>
+      {error && focused &&  value && (
+        <p className="absolute text-sm text-toastErrorText ">{error}</p>
       )}
     </div>
   );

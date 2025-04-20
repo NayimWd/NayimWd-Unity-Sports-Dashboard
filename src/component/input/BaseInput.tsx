@@ -32,9 +32,9 @@ const inputStyles = cva(
     {
         variants: {
             variant: {
-                primary: "border-inputBorder focus:ring-2 focus:ring-primary",
-                success: "border-inputBorder focus:ring-2 focus:ring-green-500",
-                error: "border-inputBorder focus:ring-2 focus:ring-red-500",
+                primary: "bg-surface border-inputBorder focus:ring-2 focus:ring-primary",
+                success: "bg-surface border-inputBorder focus:ring-2 focus:ring-green-500",
+                error: "bg-surface border-inputBorder focus:ring-2 focus:ring-red-500",
             }
         },
         defaultVariants: {
