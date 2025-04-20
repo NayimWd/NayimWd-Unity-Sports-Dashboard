@@ -1,0 +1,60 @@
+import React, { useEffect, useState } from "react";
+import BaseInput from "./BaseInput";
+import { useFormContext } from "react-hook-form";
+
+interface TextInputProps {
+  name: string;
+  label: string;
+  placeholder: string;
+  icon?: React.ReactNode;
+}
+
+const TextInput = ({ name, label, placeholder, icon }: TextInputProps) => {
+  // importing useFormContext to get the form methods
+  const { register, watch, formState, trigger } = useFormContext();
+  const { errors, touchedFields } = formState;
+
+  const [focused, setFocused] = useState(false);
+  const value = watch(name);
+  const error = errors[name]?.message as string | undefined;
+
+  const isTouched = touchedFields[name];
+
+  // dynamic border color
+  let variant: "primary" | "success" | "error" = "primary";
+
+  // set the input variant based on the error and focus state
+  if (focused && value) {
+    variant = error ? "error" : "success";
+  }
+
+  useEffect(() => {
+    // trigger validation when the input is focused and has a value
+    if (focused && value) {
+      trigger(name);
+    }
+  }, [value, name, focused, trigger, isTouched]);
+
+  return (
+    <div className="relative space-y-2">
+      <label className="block text-font font-medium" htmlFor={name}>{label}</label>
+      <div>
+        <BaseInput
+          id={name}
+          type="text"
+          placeholder={placeholder}
+          icon={icon}
+          variant={variant}
+          {...register(name)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+        />
+      </div>
+      {error && focused &&  value && (
+        <p className="absolute text-sm text-toastErrorText "> {error} </p>
+      )}
+    </div>
+  );
+};
+
+export default TextInput;
