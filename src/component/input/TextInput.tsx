@@ -30,7 +30,7 @@ const TextInput = ({ name, label, placeholder, icon }: TextInputProps) => {
 
   useEffect(() => {
     // trigger validation when the input is focused and has a value
-    if (focused && value) {
+    if (focused) {
       trigger(name);
     }
   }, [value, name, focused, trigger, isTouched]);
@@ -49,10 +49,11 @@ const TextInput = ({ name, label, placeholder, icon }: TextInputProps) => {
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
-      </div>
-      {error && focused &&  value && (
-        <p className="absolute text-sm text-toastErrorText "> {error} </p>
+         {error && focused &&  value && (
+        <p className="absolute text-sm text-toastErrorText mt-1"> {error} </p>
       )}
+      </div>
+     
     </div>
   );
 };

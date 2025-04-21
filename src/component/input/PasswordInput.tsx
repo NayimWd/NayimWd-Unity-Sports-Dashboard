@@ -33,10 +33,12 @@ const PasswordInput = ({
   }
 
   useEffect(() => {
-    if(focused && value) {
+    if (focused) {
       trigger(name);
     }
   }, [value, name, focused, trigger, isTouched]);
+
+ 
 
   return (
     <div className=" space-y-2 relative">
@@ -59,7 +61,6 @@ const PasswordInput = ({
           {...register(name)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          
         />
         <button
           type="button"
@@ -68,10 +69,10 @@ const PasswordInput = ({
         >
           {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
         </button>
+        {error && value && focused && (
+          <p className="absolute text-sm text-toastErrorText ">{error}</p>
+        )}
       </div>
-      {error && focused &&  value && (
-        <p className="absolute text-sm text-toastErrorText ">{error}</p>
-      )}
     </div>
   );
 };

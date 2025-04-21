@@ -31,7 +31,7 @@ if(focused && value) {
 
 useEffect(() => {
     // trigger validation while the input is focused and has a value
-    if(focused && value) {
+    if(focused) {
         trigger(name)
     }
 },[value, name, focused, trigger, isTouched]);
@@ -56,8 +56,8 @@ useEffect(() => {
               onBlur={() => setFocused(false)}
             />
             {
-                error && focused &&  value && (
-                    <p className='absolute mt-2  text-sm text-toastErrorText'>{error}</p>
+                error && focused && value && (
+                    <p className='absolute mt-1  text-sm text-toastErrorText'>{error}</p>
                 )
             }
         </div>
