@@ -32,7 +32,7 @@ const RegistrationForm = () => {
     <FormContainer
       methods={methods}
       onSubmit={handleSubmit}
-      className="flex flex-col gap-7 w-full max-w-md mx-auto p-6 rounded-xl bg-surface shadow-sm space-y-5"
+      className="flex flex-col gap-5 w-full max-w-5xl mx-auto p-3 sm:p-4 md:p-6 rounded-lg bg-surface shadow-sm "
     >
       <TextInput
         name="name"
@@ -52,7 +52,7 @@ const RegistrationForm = () => {
         icon={<LockIcon size={16} />}
         placeholder="Your password"
       />
-      <Buttons className="w-full md:w-28 mt-2 " type="submit" variant="primary">
+      <Buttons className="w-full md:w-28 mt-3 rounded" type="submit" variant="gradient">
         {" "}
         Submit{" "}
       </Buttons>
