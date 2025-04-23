@@ -38,8 +38,6 @@ const PasswordInput = ({
     }
   }, [value, name, focused, trigger, isTouched]);
 
- 
-
   return (
     <div className=" space-y-2 relative">
       {/* input label */}
@@ -69,9 +67,7 @@ const PasswordInput = ({
         >
           {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
         </button>
-        {error && value && focused && (
-          <p className="absolute text-sm text-toastErrorText ">{error}</p>
-        )}
+        {error && value && focused && <p className="errorText">{error}</p>}
       </div>
     </div>
   );
