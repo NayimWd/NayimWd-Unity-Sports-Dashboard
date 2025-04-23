@@ -9,7 +9,7 @@ interface ITheme {
 // theme ditector function, if no preferance, detect system, and preferance theme
 const getInitialTheme = (): ThemeType => {
   // get existing theme from local storege
-  const existingTheme = localStorage.getItem("theme") as ThemeType | null;
+  const existingTheme = localStorage.getItem("theme") as ThemeType | "system";
 
   if (existingTheme) return existingTheme;
 

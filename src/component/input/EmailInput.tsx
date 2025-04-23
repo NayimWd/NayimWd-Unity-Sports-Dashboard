@@ -57,7 +57,7 @@ useEffect(() => {
             />
             {
                 error && focused && value && (
-                    <p className='absolute mt-1  text-sm text-toastErrorText'>{error}</p>
+                    <p className='errorText'>{error}</p>
                 )
             }
         </div>

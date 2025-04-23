@@ -50,7 +50,7 @@ const TextInput = ({ name, label, placeholder, icon }: TextInputProps) => {
           onBlur={() => setFocused(false)}
         />
          {error && focused &&  value && (
-        <p className="absolute text-sm text-toastErrorText mt-1"> {error} </p>
+        <p className="errorText"> {error} </p>
       )}
       </div>
      

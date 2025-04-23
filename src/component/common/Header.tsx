@@ -3,7 +3,7 @@ import ThemeSwitcher from "./ThemeSwitcher";
 import { ChartNoAxesGantt, LayoutDashboard } from "lucide-react";
 
 interface HeaderProps {
-  handleToggle: () => void;
+  handleToggle?: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ handleToggle }) => {
@@ -19,8 +19,8 @@ const Header: React.FC<HeaderProps> = ({ handleToggle }) => {
               />
             </button>
             <div className="flex items-center me-2 md:me-24">
-              <LayoutDashboard className="md:h-10 md:w-10 me-3 text-xl text-primary" />
-              <span className="self-center text-[clamp(1.25rem,2vw,2.6rem)] text-primary font-bold whitespace-nowrap font-inter">
+              <LayoutDashboard className="hidden md:block md:h-10 md:w-10 me-3 text-xl text-primary" />
+              <span className="self-center tracking-wider  uppercase text-[clamp(1.25rem,2vw,2.6rem)] text-primary font-bold whitespace-nowrap font-inter">
                 Dashboard
               </span>
             </div>

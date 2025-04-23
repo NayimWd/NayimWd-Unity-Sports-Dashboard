@@ -2,9 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* hide scrolbar for all elements */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+/* input background color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px var(--surface) inset !important;
+  -webkit-text-fill-color: var(--font) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
 
 /* Light Mode */
 .light {
@@ -78,5 +88,9 @@
 }
 
 .sidebarBtn{
-    @apply w-full flex items-center px-3 py-1.5 gap-2 dark:hover:bg-surface hover:bg-subSurface cursor-pointer rounded text-primary text-left sm:text-lg
+    @apply w-full tracking-tight flex items-center px-3 py-1.5 gap-2 dark:hover:bg-surface hover:bg-subSurface cursor-pointer rounded text-primary text-left sm:text-lg
+}
+
+.errorText{
+    @apply absolute text-sm text-toastErrorText
 }
