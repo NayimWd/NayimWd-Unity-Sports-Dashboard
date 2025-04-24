@@ -34,7 +34,7 @@ const RegistrationForm = () => {
   ];
 
   return (
-    <div className="background  flex items-center justify-center">
+    <div className="background h-screen   flex items-center justify-center">
       <FormContainer
         methods={methods}
         onSubmit={handleSubmit}
