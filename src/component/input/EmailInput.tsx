@@ -56,7 +56,7 @@ useEffect(() => {
               onBlur={() => setFocused(false)}
             />
             {
-                error && focused && value && (
+                error && (
                     <p className='errorText'>{error}</p>
                 )
             }

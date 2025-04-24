@@ -51,11 +51,11 @@ const DropdownInput = ({
           </option>
           {options.map((option) => (
             <option
-              className="text-font bg-bg "
+              className="text-font bg-bg"
               key={option.value}
               value={option.value}
             >
-              {option.label}
+             {option.label} 
             </option>
           ))}
         </select>

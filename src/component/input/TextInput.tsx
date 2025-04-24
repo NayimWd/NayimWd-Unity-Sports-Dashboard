@@ -49,7 +49,7 @@ const TextInput = ({ name, label, placeholder, icon }: TextInputProps) => {
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
-         {error && focused &&  value && (
+         {error && (
         <p className="errorText"> {error} </p>
       )}
       </div>
