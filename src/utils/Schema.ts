@@ -22,3 +22,5 @@ export const loginSchema = z.object({
     email: z.string().email("valid emial required"),
     password: z.string().min(6, "At least 6 characters").max(12, "At most 12 characters"),
 })
+
+// date picker schema

@@ -9,17 +9,17 @@ import TextInput from "../../component/input/TextInput";
 import EmailInput from "../../component/input/EmailInput";
 import DropdownInput from "../../component/input/DropdownInput";
 import { registrationSchema } from "../../utils/Schema";
-
+import DateInput from "../../component/input/DateInput";
 
 type FormValues = z.infer<typeof registrationSchema>;
 
-const RegistrationForm = () => {    
+const RegistrationForm = () => {
   const methods = useForm<FormValues>({
     resolver: zodResolver(registrationSchema),
     mode: "onSubmit",
     defaultValues: {
       role: "",
-    }
+    },
   });
 
   const handleSubmit = (data: FormValues) => {
@@ -34,7 +34,6 @@ const RegistrationForm = () => {
   ];
 
   return (
-  
     <div className="background  flex items-center justify-center">
       <FormContainer
         methods={methods}
@@ -42,7 +41,9 @@ const RegistrationForm = () => {
         className="formWrapper"
       >
         <div className="text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-font uppercase leading-7 tracking-wide mb-1">sign In</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-font uppercase leading-7 tracking-wide mb-1">
+            sign In
+          </h2>
           <p className="text-sm sm:text-base text-subtext">Register Account</p>
         </div>
         <TextInput
@@ -70,7 +71,12 @@ const RegistrationForm = () => {
           placeholder="Select your role"
           options={dropdownOptions}
         />
-
+        <DateInput
+          name="date"
+          label="Pick your date"
+          placeholder="Select your date"
+          className="cursor-pointer"
+        />
         <Buttons
           className="w-full mt-3 rounded"
           type="submit"
@@ -81,7 +87,6 @@ const RegistrationForm = () => {
         </Buttons>
       </FormContainer>
     </div>
-  
   );
 };
 

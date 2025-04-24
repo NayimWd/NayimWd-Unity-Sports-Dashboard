@@ -22,7 +22,7 @@ const Login = () => {
   };
 
   return (
-    <div className="background flexCenter">
+    <div className="background flexCenter paddingX">
       <FormContainer
         methods={methods}
         onSubmit={handleSubmit}
@@ -45,10 +45,14 @@ const Login = () => {
           label="Enter your password"
           placeholder="Enter your password"
           icon={<Lock size={16} />}
-          />
-          <Buttons variant="gradient" type="submit" className="w-full mt-4 rounded">
-              Login
-          </Buttons>
+        />
+        <Buttons
+          variant="gradient"
+          type="submit"
+          className="w-full mt-4 rounded"
+        >
+          Login
+        </Buttons>
       </FormContainer>
     </div>
   );

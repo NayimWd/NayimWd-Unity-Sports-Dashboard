@@ -102,6 +102,11 @@ input:-webkit-autofill:focus {
     @apply flex items-center justify-center;
 }
 
-.formWrapper {
-    @apply flex flex-col gap-5 w-full max-w-md mx-auto p-3 sm:p-4 md:p-6 rounded-lg bg-surface z-10 shadow-md;
+.paddingX {
+    @apply px-2  sm:px-4 md:px-6 lg:px-12 xl:px-20 2xl:px-32
 }
+
+.formWrapper {
+    @apply flex flex-col gap-5 w-full max-w-md mx-auto p-3 py-10 sm:p-4 sm:py-10 md:p-6 md:py-12 rounded-lg bg-surface z-10 shadow-md;
+}
+
