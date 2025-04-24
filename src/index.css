@@ -4,8 +4,8 @@
 
 /* hide scrolbar for all elements */
 .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
+  display: none;
+}
 
 /* input background color */
 input:-webkit-autofill,
@@ -18,79 +18,90 @@ input:-webkit-autofill:focus {
 
 /* Light Mode */
 .light {
-    /* Base Colors */
-    --bg: #F8FAFC;
-    --surface: #FFFFFF; /* Used for sidebar, card, table-bg */
-    --subSurface: #F1F5F9; /* Used for table headers */
-    --border: #E2E8F0; /* Used for card borders, table row separators */
-    --inputBorder: #D1D5DB; /* Used for form input borders */
-    
-    /* Text Colors */
-    --font: #1E293B; /* Primary font color */
-    --subtext: #4B5563; /* Secondary text */
-    --muted: #9CA3AF; /* Disabled text, placeholders */
+  /* Base Colors */
+  --bg: #f8fafc;
+  --surface: #ffffff; /* Used for sidebar, card, table-bg */
+  --subSurface: #f1f5f9; /* Used for table headers */
+  --border: #e2e8f0; /* Used for card borders, table row separators */
+  --inputBorder: #d1d5db; /* Used for form input borders */
 
-    /* Accent Colors */
-    --primary: #007BFF; /* Used for buttons, links */
-    --primaryHover: #005BB5; /* Button hover */
-    --secondary: #FFB300; /* Secondary button, highlights */
-    --disabledText: #9CA3AF; /* Disabled elements */
+  /* Text Colors */
+  --font: #1e293b; /* Primary font color */
+  --subtext: #4b5563; /* Secondary text */
+  --muted: #9ca3af; /* Disabled text, placeholders */
 
-    /* Toast Notifications */
-    --toastSuccessBg: #E8F5E9;
-    --toastSuccessText: #2E7D32;
-    --toastErrorBg: #FFEBEE;
-    --toastErrorText: #C62828;
+  /* Accent Colors */
+  --primary: #007bff; /* Used for buttons, links */
+  --primaryHover: #005bb5; /* Button hover */
+  --secondary: #ffb300; /* Secondary button, highlights */
+  --disabledText: #9ca3af; /* Disabled elements */
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(90deg, #007BFF, #004C99);
-    --gradient-secondary: linear-gradient(120deg, #F1F5F9, #DCE4EC);
-    --gradient-bg: linear-gradient(180deg, #F8FAFC, #DDE7F0);
-    --gradientN-bg: linear-gradient(90deg, #F8FAFC, #DDE7F0);
+  /* Toast Notifications */
+  --toastSuccessBg: #e8f5e9;
+  --toastSuccessText: #2e7d32;
+  --toastErrorBg: #ffebee;
+  --toastErrorText: #c62828;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(90deg, #007bff, #004c99);
+  --gradient-secondary: linear-gradient(120deg, #f1f5f9, #dce4ec);
+  --gradient-bg: linear-gradient(180deg, #f8fafc, #dde7f0);
+  --gradientN-bg: linear-gradient(90deg, #f8fafc, #dde7f0);
 }
 
 /* Dark Mode */
 .dark {
-    /* Base Colors */
-    --bg: #0A192F;
-    --surface: #1B263B; /* Used for sidebar, card, table-bg */
-    --subSurface: #2C3E50; /* Used for table headers */
-    --border: #3A4A5E; /* Used for borders */
-    --inputBorder: #4A5D72; /* Used for input borders */
+  /* Base Colors */
+  --bg: #0a192f;
+  --surface: #1b263b; /* Used for sidebar, card, table-bg */
+  --subSurface: #2c3e50; /* Used for table headers */
+  --border: #3a4a5e; /* Used for borders */
+  --inputBorder: #4a5d72; /* Used for input borders */
 
-    /* Text Colors */
-    --font: #C7D1E0; /* Primary font color */
-    --subtext: #A0A8B6; /* Secondary text */
-    --muted: #6C7A89; /* Disabled text, placeholders */
+  /* Text Colors */
+  --font: #c7d1e0; /* Primary font color */
+  --subtext: #a0a8b6; /* Secondary text */
+  --muted: #6c7a89; /* Disabled text, placeholders */
 
-    /* Accent Colors */
-    --primary: #1E88E5; /* Used for buttons, links */
-    --primaryHover: #165A9E; /* Button hover */
-    --secondary: #FF9100; /* Secondary button, highlights */
-    --disabledText: #778899; /* Disabled elements */
+  /* Accent Colors */
+  --primary: #1e88e5; /* Used for buttons, links */
+  --primaryHover: #165a9e; /* Button hover */
+  --secondary: #ff9100; /* Secondary button, highlights */
+  --disabledText: #778899; /* Disabled elements */
 
-    /* Toast Notifications */
-    --toastSuccessBg: #0D3B20;
-    --toastSuccessText: #43A047;
-    --toastErrorBg: #4E0D0D;
-    --toastErrorText: #E53935;
+  /* Toast Notifications */
+  --toastSuccessBg: #0d3b20;
+  --toastSuccessText: #43a047;
+  --toastErrorBg: #4e0d0d;
+  --toastErrorText: #e53935;
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(90deg, #1976D2, #0D47A1);
-    --gradient-secondary: linear-gradient(120deg, #2C3E50, #1E2A38);
-    --gradient-bg: linear-gradient(180deg, #0A192F, #1B263B);
-    --gradientN-bg: linear-gradient(90deg, #0A192F, #1B263B);
+  /* Gradients */
+  --gradient-primary: linear-gradient(90deg, #1976d2, #0d47a1);
+  --gradient-secondary: linear-gradient(120deg, #2c3e50, #1e2a38);
+  --gradient-bg: linear-gradient(180deg, #0a192f, #1b263b);
+  --gradientN-bg: linear-gradient(90deg, #0a192f, #1b263b);
 }
-
 
 * {
-    @apply transition-colors duration-200
+  @apply transition-colors duration-200;
 }
 
-.sidebarBtn{
-    @apply w-full tracking-tight flex items-center px-3 py-1.5 gap-2 dark:hover:bg-surface hover:bg-subSurface cursor-pointer rounded text-primary text-left sm:text-lg
+.sidebarBtn {
+  @apply w-full tracking-tight flex items-center px-3 py-1.5 gap-2 dark:hover:bg-surface hover:bg-subSurface cursor-pointer rounded text-primary text-left sm:text-lg;
 }
 
-.errorText{
-    @apply absolute text-sm text-toastErrorText
+.errorText {
+  @apply absolute text-sm text-toastErrorText;
+}
+
+.background {
+  @apply absolute  top-0  h-screen w-full bg-[#0A192F] bg-[radial-gradient(#1B263B_1px,#0A192F_1px)] bg-[size:20px_20px] ;
+}
+
+.flexCenter {
+    @apply flex items-center justify-center;
+}
+
+.formWrapper {
+    @apply flex flex-col gap-5 w-full max-w-md mx-auto p-3 sm:p-4 md:p-6 rounded-lg bg-surface z-10 shadow-md;
 }

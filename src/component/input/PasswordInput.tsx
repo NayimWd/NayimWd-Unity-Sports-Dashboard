@@ -67,7 +67,7 @@ const PasswordInput = ({
         >
           {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
         </button>
-        {error && value && focused && <p className="errorText">{error}</p>}
+        {error && <p className="errorText">{error}</p>}
       </div>
     </div>
   );
