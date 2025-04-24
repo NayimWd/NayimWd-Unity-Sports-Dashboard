@@ -22,7 +22,7 @@ const Login = () => {
   };
 
   return (
-    <div className="background flexCenter paddingX">
+    <div className="background h-screen flexCenter paddingX">
       <FormContainer
         methods={methods}
         onSubmit={handleSubmit}
