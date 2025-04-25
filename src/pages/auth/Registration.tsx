@@ -9,7 +9,7 @@ import TextInput from "../../component/input/TextInput";
 import EmailInput from "../../component/input/EmailInput";
 import DropdownInput from "../../component/input/DropdownInput";
 import { registrationSchema } from "../../utils/Schema";
-import DateInput from "../../component/input/DateInput";
+import PhotoInputProps from "../../component/input/PhotoInputProps";
 
 type FormValues = z.infer<typeof registrationSchema>;
 
@@ -34,7 +34,7 @@ const RegistrationForm = () => {
   ];
 
   return (
-    <div className="background h-screen   flex items-center justify-center">
+    <div className="background min-h-screen py-10 paddingX  flex items-center justify-center">
       <FormContainer
         methods={methods}
         onSubmit={handleSubmit}
@@ -71,10 +71,11 @@ const RegistrationForm = () => {
           placeholder="Select your role"
           options={dropdownOptions}
         />
-        <DateInput
-          name="date"
-          label="Pick your date"
-          placeholder="Select your date"
+
+        <PhotoInputProps
+          name="photo"
+          label="Upload your photo"
+          placeholder="Image"
           className="cursor-pointer"
         />
         <Buttons

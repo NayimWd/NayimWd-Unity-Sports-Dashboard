@@ -38,7 +38,7 @@ useEffect(() => {
 
 
   return (
-    <div className='space-y-2'>
+    <div className='space-y-1'>
         <label
         htmlFor={name}
         className='block text-font font-medium'>

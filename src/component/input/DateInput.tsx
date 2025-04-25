@@ -65,7 +65,7 @@ const DateInput = ({
               {open && (
                 <div
                   ref={calenderRef}
-                  className="absolute -top-[800%] left-4 z-50 mt-2 bg-surface border border-inputBorder rounded-md shadow-md"
+                  className="absolute -top-[800%] left-4 z-50  bg-surface border border-inputBorder rounded-md shadow-md"
                 >
                   <DayPicker
                     mode="single"
