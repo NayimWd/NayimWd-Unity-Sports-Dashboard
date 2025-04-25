@@ -36,7 +36,7 @@ const TextInput = ({ name, label, placeholder, icon }: TextInputProps) => {
   }, [value, name, focused, trigger, isTouched]);
 
   return (
-    <div className="relative space-y-2">
+    <div className="relative space-y-1">
       <label className="block text-font font-medium" htmlFor={name}>{label}</label>
       <div>
         <BaseInput

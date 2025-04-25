@@ -29,7 +29,7 @@ const DropdownInput = ({
   const variant: "primary" | "error" = error ? "error" : "primary";
 
   return (
-    <div className="mb-4">
+    <div className="">
       <label className="block font-medium text-font mb-1" htmlFor={name}>
         {label}
       </label>

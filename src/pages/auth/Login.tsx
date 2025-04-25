@@ -22,7 +22,7 @@ const Login = () => {
   };
 
   return (
-    <div className="background h-screen flexCenter paddingX">
+    <div className="background min-h-screen flexCenter paddingX">
       <FormContainer
         methods={methods}
         onSubmit={handleSubmit}
@@ -46,6 +46,7 @@ const Login = () => {
           placeholder="Enter your password"
           icon={<Lock size={16} />}
         />
+
         <Buttons
           variant="gradient"
           type="submit"
