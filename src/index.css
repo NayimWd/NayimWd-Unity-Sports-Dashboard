@@ -109,3 +109,15 @@ input:-webkit-autofill:focus {
 .formWrapper {
   @apply flex flex-col gap-5 w-full max-w-md mx-auto p-3 py-10 sm:p-4 sm:py-10 md:p-6  rounded-lg bg-surface z-10 shadow-md;
 }
+
+.paddingCard {
+  @apply p-4 sm:p-5 md:p-6 lg:p-8;
+}
+
+.paddingTable {
+  @apply px-3 sm:px-4 md:px-6 py-2 sm:py-3;
+}
+
+.paddingModal {
+  @apply p-6 md:p-8 lg:p-10;
+}

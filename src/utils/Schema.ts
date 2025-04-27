@@ -21,7 +21,8 @@ export const registrationSchema = z.object({
     })
     .refine((file) => file.size <= 1 * 1024 * 1024, {
       message: "File size must be less then 2MB",
-    }),
+    })
+    .refine(file => file.type.startsWith("image/"), "File Must be an image"),
 });
 
 // login form schema
