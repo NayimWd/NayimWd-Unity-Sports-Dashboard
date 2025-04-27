@@ -17,13 +17,12 @@ const PasswordInput = ({
   icon,
 }: PasswordInputProps) => {
   const { register, watch, formState, trigger } = useFormContext();
-  const { errors, touchedFields } = formState;
+  const { errors } = formState;
 
   const [showPassword, setShowPassword] = useState(false);
   const [focused, setFocused] = useState(false);
   const value = watch(name);
   const error = errors[name]?.message as string | undefined;
-  const isTouched = touchedFields[name];
 
   // dynamic border color
   let variant: "primary" | "success" | "error" = "primary";
@@ -36,7 +35,7 @@ const PasswordInput = ({
     if (focused) {
       trigger(name);
     }
-  }, [value, name, focused, trigger, isTouched]);
+  }, [focused, value, name]);
 
   return (
     <div className=" space-y-2 relative">

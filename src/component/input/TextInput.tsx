@@ -12,13 +12,11 @@ interface TextInputProps {
 const TextInput = ({ name, label, placeholder, icon }: TextInputProps) => {
   // importing useFormContext to get the form methods
   const { register, watch, formState, trigger } = useFormContext();
-  const { errors, touchedFields } = formState;
+  const { errors } = formState;
 
   const [focused, setFocused] = useState(false);
   const value = watch(name);
   const error = errors[name]?.message as string | undefined;
-
-  const isTouched = touchedFields[name];
 
   // dynamic border color
   let variant: "primary" | "success" | "error" = "primary";
@@ -33,11 +31,13 @@ const TextInput = ({ name, label, placeholder, icon }: TextInputProps) => {
     if (focused) {
       trigger(name);
     }
-  }, [value, name, focused, trigger, isTouched]);
+  }, [value, name, focused]);
 
   return (
     <div className="relative space-y-1">
-      <label className="block text-font font-medium" htmlFor={name}>{label}</label>
+      <label className="block text-font font-medium" htmlFor={name}>
+        {label}
+      </label>
       <div>
         <BaseInput
           id={name}
@@ -49,11 +49,8 @@ const TextInput = ({ name, label, placeholder, icon }: TextInputProps) => {
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
-         {error && (
-        <p className="errorText"> {error} </p>
-      )}
+        {error && <p className="errorText"> {error} </p>}
       </div>
-     
     </div>
   );
 };
