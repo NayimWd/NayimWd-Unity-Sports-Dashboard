@@ -11,7 +11,7 @@ interface PaginationProps {
 }
 
 
-const TablePagination = ({ currentPage, totalPage, onPageChange, onPageSizeChange, pageSize }: PaginationProps) => {
+const TablePagination = ({ currentPage, totalPage, onPageChange, onPageSizeChange, pageSize = 10 }: PaginationProps) => {
 
 
     const handlePageChange = (newPage: number) => {
