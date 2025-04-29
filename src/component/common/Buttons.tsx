@@ -26,6 +26,7 @@ const Buttons = ({
       <button
         className={cn(buttonvariants({ variant, size, className }))}
         {...props}
+        disabled={props.disabled}
         aria-busy={loading}
         aria-disabled={loading || props.disabled}
       >
