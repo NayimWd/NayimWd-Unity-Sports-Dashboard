@@ -13,7 +13,7 @@ const TableHeader = ({headers, className}: TableHeaderProps) => {
             {
                 headers.map((header, index)=>(
                     <th key={index}
-                      className={"px-4 py-2 text-left text-font font-semibold border-b border-inputBorder"}
+                      className={"px-4 py-2 text-left text-primary font-semibold border-b border-primary rounded font-inter"}
                     >
                         {header}
                     </th>

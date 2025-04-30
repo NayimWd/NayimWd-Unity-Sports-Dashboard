@@ -115,7 +115,7 @@ input:-webkit-autofill:focus {
 }
 
 .paddingTable {
-  @apply px-3 sm:px-4 md:px-6 py-2 sm:py-3;
+  @apply px-3 sm:px-4 md:px-6;
 }
 
 .paddingModal {
