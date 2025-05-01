@@ -4,6 +4,7 @@ import TableHeader from "../../component/Table/TableHeader";
 import TableRow from "../../component/Table/TableRow";
 import TableSkeleton from "../../component/Table/TableSkeleton";
 import TableEmpty from "../../component/Table/TableEmpty";
+import TablePagination from "../../component/Table/TablePagination";
 
 
 const PointTable = () => {
@@ -71,9 +72,11 @@ const PointTable = () => {
       ))
     );
   }
+ 
+
 
   return (
-    <div className="w-full  overflow-x-auto py-10">
+    <div className="w-full bg-subSurface dark:bg-surface paddingTable my-10  overflow-x-auto py-10 rounded">
       <h1 className="text-font text-3xl text-center space-y-2"> {(data as any).data?.tournament} </h1>
       <p className="text-xl text-font "> Point Table </p>
      <Table>
@@ -85,6 +88,13 @@ const PointTable = () => {
         content
        }
      </Table>
+     <TablePagination
+        currentPage={1}
+        totalPage={10}
+        pageSize={5}
+        onPageChange={(page) => console.log("Page changed to:", page)}
+        onPageSizeChange={(size) => console.log("Page size changed to:", size)}
+     />
     </div>
   )
 }

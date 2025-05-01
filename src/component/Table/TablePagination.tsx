@@ -48,7 +48,7 @@ const TablePagination = ({ currentPage, totalPage, onPageChange, onPageSizeChang
                 <Buttons variant="gradient"
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="disabled:opacity-60"
+                    className="disabled:opacity-60 rounded-sm"
                     iconLeft={<ChevronLeft size={18} />}
                 >
                     Prev
@@ -66,7 +66,7 @@ const TablePagination = ({ currentPage, totalPage, onPageChange, onPageSizeChang
                 <Buttons variant="gradient" iconRight={<ChevronRight size={18} />}
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPage}
-                    className="disabled:opacity-60"
+                    className="disabled:opacity-60 rounded-sm"
                 >
                     Next
                 </Buttons>

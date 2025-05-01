@@ -100,72 +100,96 @@ Breakpoint	Font Size
 
 animate-fade-right
 
+// pages admin 
+ 
+ Home: 
+  Total team, total player, total user, previous champion,  total tournament, 
+    Point Table, Schedule, blog 
 
-{tournament: 'Grassroots Cricket League (GCL)', pointTable: Array(8)}
+ Manage Application
+  2. All application, application details Manage application(delete/reject), 
 
-{tournament: 'Grassroots Cricket League (GCL)', pointTable: Array(8)}
-pointTable
-: 
-Array(8)
-0
-: 
-losses
-: 
-0
-matchPlayed
-: 
-3
-points
-: 
-6
-teamId
-: 
-{_id: '67501b71596bcf5e8c7dedc5', teamName: 'WR Rapids'}
-ties
-: 
-0
-tournamentId
-: 
-"6790207c69aa7be5f9cf52e3"
-wins
-: 
-3
-_id
-: 
-"67cb13612094e2cb1668d46e"
-[[Prototype]]
-: 
-Object
-1
-: 
-{_id: '67cbd9812094e2cb1668d4c2', teamId: {…}, tournamentId: '6790207c69aa7be5f9cf52e3', losses: 1, matchPlayed: 3, …}
-2
-: 
-{_id: '67cb1a6e2094e2cb1668d470', teamId: {…}, tournamentId: '6790207c69aa7be5f9cf52e3', losses: 1, matchPlayed: 2, …}
-3
-: 
-{_id: '67cbe2062094e2cb1668d4c7', teamId: {…}, tournamentId: '6790207c69aa7be5f9cf52e3', losses: 1, matchPlayed: 2, …}
-4
-: 
-{_id: '67cb13612094e2cb1668d46f', tournamentId: '6790207c69aa7be5f9cf52e3', teamId: {…}, losses: 1, matchPlayed: 1, …}
-5
-: 
-{_id: '67cb1a6e2094e2cb1668d471', teamId: {…}, tournamentId: '6790207c69aa7be5f9cf52e3', losses: 1, matchPlayed: 1, …}
-6
-: 
-{_id: '67cbd9812094e2cb1668d4c3', tournamentId: '6790207c69aa7be5f9cf52e3', teamId: {…}, losses: 1, matchPlayed: 1, …}
-7
-: 
-{_id: '67cbe2062094e2cb1668d4c6', teamId: {…}, tournamentId: '6790207c69aa7be5f9cf52e3', losses: 1, matchPlayed: 1, …}
-length
-: 
-8
-[[Prototype]]
-: 
-Array(0)
-tournament
-: 
-"Grassroots Cricket League (GCL)"
-[[Prototype]]
-: 
-Object
+ Venue
+  4. All venue, venue details, create venue, update or delete venue
+
+ Schedule 
+ 3. Schedule of latest tournament, create schedule(while creating schedule it will create match for 1st round after that it need to update), update schedule / delete, update qualifier schedule with match 
+
+ Match
+ 3.  all match(filter match by tournament, filter by status), match details(innings),
+   create qualifier match,  
+
+
+ Team 
+  3. total team, team of tournament, team member, 
+
+
+ Player
+  3. (total team), all Team -> player of teams by team Id, available player  
+
+
+ Tournament 
+  3. All tournament, filter tournament by status, current tournament, create tournament, update tournament, tournament details
+
+ Profile  
+  5. create profile, update profile, my profile, profile details, all profile, 
+
+ User 
+  2.  All user, user details with profile
+
+ Blog 
+  4.   All blog, blog details, create blog, update blog
+
+ // pages manager 
+Home
+ 2. Total Team, Total Player, Tournament, previous champion, tournament count, pointTable
+
+Profile
+ 4. my profile, team profile, player profile, create profile
+
+
+Team 
+3. All team, my team, team details, team player, add player to the team(from available player), remove player from team , 
+
+Player
+3. Teams, player of teams, player details 
+
+
+Registration (apply for tournament)
+3. my applications, current tournament, apply to the tournament,manage application(withdraw/reapply)
+
+
+Match
+4. tournament, tournament match, my upcoming match, create team squad for the match
+
+Schedule
+2. tournament, schedule, my schedule
+
+Tournament
+2. All tournament(by status), tournament details  
+
+
+// pages player & umpire
+Home
+2. Total Team, Total Player, Tournament, previous champion, tournament count, pointTable
+
+
+Profile
+ Profile
+ 4. my profile, team profile, player profile, create profile
+
+Team  
+ 3. Total team, Team details, Player Details
+
+Player
+ 3. Teams of the tournament, team details player details
+
+Match
+ 2. All match of the latest tournament, match details with innings if completed show result also
+
+Schedule
+1. schedule of tournament
+
+Tournament
+ All tournament, tournament details, tournament result
+
