@@ -1,17 +1,27 @@
 import React from "react";
 import Buttons from "../component/common/Buttons";
-import notFoundImg from "../assets/Image/notFound.svg"
+import { Link } from "react-router-dom";
+import { ArrowLeft, Home } from "lucide-react";
+
+
 
 const NotFound: React.FC = () => {
   return (
-    <div className="bg-red-300 w-full h-screen  grid place-items-center justify-center items-center  relative">
-      <img className="absolute top-0 -mt-4 w-full md:w-2/3" src={notFoundImg} alt="Not Found Image"/>
-      <div className="flex flex-col">
-      
-        <Buttons>Home</Buttons>
-      </div>
+
+
+    <div className="h-screen paddingX w-full background flex flex-col justify-center items-center space-y-4">
+
+      <p className="text-font text-6xl sm:text-8xl font-bold tracking-widest"> 404    </p>
+      <p className="text-font text-2xl sm:text-5xl font-bold tracking-wider uppercase font-merriweather">Page Not Found</p>
+      <Link to="/">
+        <Buttons className="mt-5" variant="warning" iconLeft={<ArrowLeft size={16} />} iconRight={<Home size={16} />}>
+          Go Home
+        </Buttons>
+      </Link>
     </div>
+
   );
 };
 
 export default NotFound;
+
