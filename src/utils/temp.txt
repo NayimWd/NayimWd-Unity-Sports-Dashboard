@@ -31,7 +31,7 @@ import {
   Notebook,
   BookText,
   BookCheck,
-  // Telescope,
+  Telescope,
   User2,
 } from "lucide-react";
 
@@ -266,5 +266,204 @@ export const navLinks = {
         },
       ],
     },
-  ]
+  ],
+  manager: [
+    {
+      path: "/",
+      icon: Home,
+      label: "Dashboard",
+      children: [],
+    },
+    {
+      path: "/user/currentUser",
+      icon: Users,
+      label: "Account",
+      children: [],
+    },
+    {
+      path: "/profile",
+      icon: ShieldUser,
+      label: "Profile",
+      children: [],
+    },
+    {
+      path: "",
+      icon: BookType,
+      label: "Team",
+      children: [
+        {
+          path: "/team/:userId",
+          icon: Telescope,
+          label: "My Team",
+        },
+        {
+          path: "/team/:tournamentId",
+          icon: BookType,
+          label: "Teams",
+        },
+        {
+          path: "/team/create",
+          icon: PenLine,
+          label: "Create Team",
+        },
+      ],
+    },
+    {
+      path: "/venue",
+      icon: School,
+      label: "Venue",
+      children: [],
+    },
+    {
+      path: "",
+      icon: Layers,
+      label: "Tournament",
+      children: [
+        {
+          path: "/tournament",
+          icon: FileText,
+          label: "ALL Tournament",
+        },
+        {
+          path: "/tournament/result",
+          icon: Trophy,
+          label: "Result",
+        },
+      ],
+    },
+    {
+      path: "/application/myApplication",
+      icon: Layers,
+      label: "My Application",
+      children: []
+    },
+    ,
+    {
+      path: "/schedule/:tournamentId",
+      icon: CalendarDays,
+      label: "Schedule",
+      children: [],
+    },
+    {
+      path: "/match/:tournamentId",
+      icon: SquareSigma,
+      label: "Match",
+      children: [],
+    },
+    {
+      path: "/match/matchResult/:matchId",
+      icon: PartyPopper,
+      label: "Match Result",
+    },
+    {
+      path: "/pointTable",
+      icon: ChartLine,
+      label: "Point Table",
+    },
+    {
+      path: "/blog",
+      icon: Newspaper,
+      label: "Blogs",
+      children: [],
+    },
+  ],
+  player: [
+    {
+      path: "/",
+      icon: Home,
+      label: "Dashboard",
+      children: [],
+    },
+    {
+      path: "/user/currentUser",
+      icon: Users,
+      label: "Account",
+      children: []
+    },
+    {
+      path: "/profile",
+      icon: ShieldUser,
+      label: "Profile",
+      children: [],
+    },
+    {
+      path: "",
+      icon: BookType,
+      label: "Team",
+      children: [
+        {
+          path: "/team/:userId",
+          icon: Telescope,
+          label: "My Team",
+        },
+        {
+          path: "/team/:tournamentId",
+          icon: BookType,
+          label: "Teams",
+        },
+      ],
+    },
+    {
+      path: "/team/member/:teamId",
+      icon: Users,
+      label: "Team Members",
+      children: [],
+    },
+    {
+      path: "/venue",
+      icon: School,
+      label: "Venues",
+      children: [],
+    },
+    {
+      path: "",
+      icon: Layers,
+      label: "Tournament",
+      children: [
+        {
+          path: "/tournament",
+          icon: FileText,
+          label: "ALL Tournament",
+        },
+        {
+          path: "/tournament/result",
+          icon: Trophy,
+          label: "Result",
+        },
+        {
+          path: "/tournament/team",
+          icon: Component,
+          label: "Teams",
+        },
+      ],
+    },
+    {
+      path: "/schedule/:tournamentId",
+      icon: CalendarDays,
+      label: "Schedule",
+      children: [],
+    },
+    {
+      path: "/match/:tournamentId",
+      icon: SquareSigma,
+      label: "Match",
+      children: [],
+    },
+    {
+      path: "/match/matchResult",
+      icon: PartyPopper,
+      label: "Match Result",
+    },
+    {
+      path: "/pointTable",
+      icon: ChartLine,
+      label: "Point Table",
+    },
+    {
+      path: "",
+      icon: Newspaper,
+      label: "Blogs",
+      children: [],
+    },
+  ],
 };

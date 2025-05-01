@@ -13,7 +13,7 @@ const TableRow = ({rawData, className}: TableRowProps) => {
             rawData.map((data, index)=>(
                 <td
                     key={index}
-                    className={"px-4 py-2 border-b border-inputBorder font-merriweather tracking-wider text-font font-semibold"}
+                    className={"px-4 py-3 border-b border-inputBorder font-merriweather tracking-wider text-font font-semibold"}
                 >
                     {data}
                 </td>

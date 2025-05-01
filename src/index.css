@@ -87,7 +87,7 @@ input:-webkit-autofill:focus {
 }
 
 .sidebarBtn {
-  @apply w-full tracking-tight flex items-center px-3 py-1.5 gap-2 dark:hover:bg-surface hover:bg-subSurface cursor-pointer rounded text-primary text-left sm:text-lg;
+  @apply w-full tracking-tight flex items-center px-3 py-1.5 gap-2 dark:hover:bg-surface hover:bg-primary hover:text-white cursor-pointer rounded text-primary text-left sm:text-lg;
 }
 
 .errorText {
