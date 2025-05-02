@@ -8,31 +8,24 @@ import {
   SquarePen,
   Component,
   Users,
-  NotebookPen,
   ShieldUser,
   BookType,
-  UserSearch,
   School,
   FileStack,
   CalendarPlus,
   CalendarPlus2,
   CalendarRange,
-  CalendarClock,
-  FolderSync,
   SquareSigma,
   GalleryHorizontalEnd,
-  ReceiptText,
-  Puzzle,
   PenLine,
-  PartyPopper,
   ChartLine,
   Newspaper,
   BookPlus,
   Notebook,
-  BookText,
-  BookCheck,
+
   // Telescope,
   User2,
+  Boxes,
 } from "lucide-react";
 
 export const navLinks = {
@@ -67,43 +60,10 @@ export const navLinks = {
       children: [],
     },
     {
-      path: "",
+      path: "/dashboard/team",
       icon: BookType,
       label: "Team",
-      children: [
-        {
-          path: "/dashboard/team",
-          icon: BookType,
-          label: "Teams",
-        },
-        {
-          path: "/dashboard/team/member/:teamId",
-          icon: Users,
-          label: "Team Members",
-        },
-        {
-          path: "/dashboard/team/availablePlayer",
-          icon: UserSearch,
-          label: "Available Players",
-        },
-      ],
-    },
-    {
-      path: "",
-      icon: School,
-      label: "Venue",
-      children: [
-        {
-          path: "/dashboard/venue/create",
-          icon: Plus,
-          label: "Create Venue",
-        },
-        {
-          path: "/dashboard/venue/get",
-          icon: School,
-          label: "All Venue",
-        },
-      ],
+      children: [],
     },
     {
       path: "",
@@ -116,19 +76,9 @@ export const navLinks = {
           label: "ALL Tournament",
         },
         {
-          path: "/dashboard/tournament/:tournamentId",
-          icon: FileText,
-          label: "Tournament Details",
-        },
-        {
-          path: "/dashboard/tournament/result/:tournamentId",
-          icon: Trophy,
-          label: "Result",
-        },
-        {
-          path: "/dashboard/tournament/result/create/:tournamentId",
-          icon: SquarePen,
-          label: "Create Result",
+          path: "/dashboard/currentTournament",
+          icon: Component,
+          label: "Running Tournament",
         },
         {
           path: "/dashboard/tournament/create",
@@ -136,16 +86,16 @@ export const navLinks = {
           label: "Create Tournament",
         },
         {
-          path: "/dashboard/tournament/team/:tournamentId",
-          icon: Component,
-          label: "Teams",
+          path: "/dashboard/tournamentResult",
+          icon: Trophy,
+          label: "Tournament Result",
         },
       ],
     },
     {
-      path: "/dashboard/application/:tournamentId",
+      path: "/dashboard/application",
       icon: FileStack,
-      label: "Tournament Application",
+      label: "Applications",
       children: [],
     },
     {
@@ -154,7 +104,7 @@ export const navLinks = {
       label: "Schedule",
       children: [
         {
-          path: "/dashboard/schedule/:tournamentId",
+          path: "/dashboard/schedule",
           icon: CalendarRange,
           label: "Schedule",
         },
@@ -167,16 +117,6 @@ export const navLinks = {
           path: "/dashboard/schedule/qualifier/create",
           icon: CalendarPlus2,
           label: "Create qualifier round",
-        },
-        {
-          path: "/dashboard/schedule/changeTime/:scheduleId",
-          icon: CalendarClock,
-          label: "Change Time",
-        },
-        {
-          path: "/dashboard/schedule/changeTeam/:scheduleId",
-          icon: FolderSync,
-          label: "Change Team",
         },
       ],
     },
@@ -191,41 +131,14 @@ export const navLinks = {
           label: "All Match",
         },
         {
-          path: "/match/create/:tournamentId",
+          path: "/match/create",
           icon: SquarePen,
           label: "Create Qualifire Match",
         },
         {
-          path: "/match/MatchResult/:tournamentId/:matchId",
-          icon: PenLine,
-          label: "Create Match Result",
-        },
-        {
-          path: "/match/matchResult/:matchId",
-          icon: PartyPopper,
-          label: "Match Result",
-        },
-      ],
-    },
-    {
-      path: "",
-      icon: Puzzle,
-      label: "Innings",
-      children: [
-        {
           path: "/innings/create",
           icon: SquarePen,
           label: "Create Innings",
-        },
-        {
-          path: "/innings/updateInnings/:tournamentId/:inningsId",
-          icon: SquarePen,
-          label: "Update Innings",
-        },
-        {
-          path: "/innings/:tournamentId",
-          icon: ReceiptText,
-          label: "Get Innings",
         },
       ],
     },
@@ -236,35 +149,230 @@ export const navLinks = {
     },
     {
       path: "",
+      icon: School,
+      label: "Venue",
+      children: [
+        {
+          path: "/dashboard/venue",
+          icon: School,
+          label: "All Venue",
+        },
+        {
+          path: "/dashboard/venue/create",
+          icon: Plus,
+          label: "Create Venue",
+        },
+      ],
+    },
+    {
+      path: "",
       icon: Newspaper,
       label: "Blog",
       children: [
         {
-          path: "/blog",
+          path: "dashboard/blog",
           icon: Notebook,
           label: "Blogs",
-        },
-        {
-          path: "/blog/:blogId",
-          icon: BookText,
-          label: "Blog Details",
         },
         {
           path: "/blog/create",
           icon: BookPlus,
           label: "Create Blog",
         },
+      ],
+    },
+  ],
+  manager: [
+    {
+      path: "/dashboard",
+      icon: Home,
+      label: "Dashboard",
+      children: [],
+    },
+    {
+      path: "/dashboard/account",
+      icon: Users,
+      label: "Account",
+      children: [],
+    },
+    {
+      path: "/dashboard/profile",
+      icon: ShieldUser,
+      label: "Profile",
+      children: [],
+    },
+    {
+      path: "",
+      icon: BookType,
+      label: "Team",
+      children: [
         {
-          path: "/blog/update/:blogId",
-          icon: NotebookPen,
-          label: "Update Blog",
+          path: "/dashboard/teams",
+          icon: Boxes,
+          label: "Teams",
         },
         {
-          path: "/blog/update/:blogId",
-          icon: BookCheck,
-          label: "Update Details",
+          path: "/dashboard/team/myTeam",
+          icon: Users,
+          label: "My Team",
+        },
+        {
+          path: "/dashboard/team/create",
+          icon: PenLine,
+          label: "Create Team",
         },
       ],
     },
-  ]
+    {
+      path: "",
+      icon: Layers,
+      label: "Tournament",
+      children: [
+        {
+          path: "/dashboard/tournament",
+          icon: FileText,
+          label: "ALL Tournament",
+        },
+        {
+          path: "/dashboard/currentTournament",
+          icon: Component,
+          label: "Running Tournament",
+        },
+        {
+          path: "/dashboard/tournamentResult",
+          icon: Trophy,
+          label: "Tournament Result",
+        },
+      ],
+    },
+    {
+      path: "/dashboard/schedule",
+      icon: CalendarDays,
+      label: "Schedule",
+      children: [],
+    },
+    {
+      path: "",
+      icon: SquareSigma,
+      label: "Match",
+      children: [
+        {
+          path: "/dashboard/match",
+          icon: GalleryHorizontalEnd,
+          label: "All Match",
+        },
+      ],
+    },
+    {
+      path: "/dashboard/pointTable",
+      icon: ChartLine,
+      label: "Point Table",
+    },
+    {
+      path: "/dashboard/venue",
+      icon: School,
+      label: "Venue",
+      children: [],
+    },
+    {
+      path: "/dashboard/blog",
+      icon: Newspaper,
+      label: "Blog",
+      children: [],
+    },
+  ],
+  player: [
+    {
+      path: "/dashboard",
+      icon: Home,
+      label: "Dashboard",
+      children: [],
+    },
+    {
+      path: "/dashboard/account",
+      icon: Users,
+      label: "Account",
+      children: [],
+    },
+    {
+      path: "/dashboard/profile",
+      icon: ShieldUser,
+      label: "Profile",
+      children: [],
+    },
+    {
+      path: "",
+      icon: BookType,
+      label: "Team",
+      children: [
+        {
+          path: "/dashboard/teams",
+          icon: Boxes,
+          label: "Teams",
+        },
+        {
+          path: "/dashboard/team/myTeam",
+          icon: Users,
+          label: "My Team",
+        },
+      ],
+    },
+    {
+      path: "",
+      icon: Layers,
+      label: "Tournament",
+      children: [
+        {
+          path: "/dashboard/tournament",
+          icon: FileText,
+          label: "ALL Tournament",
+        },
+        {
+          path: "/dashboard/currentTournament",
+          icon: Component,
+          label: "Running Tournament",
+        },
+        {
+          path: "/dashboard/tournamentResult",
+          icon: Trophy,
+          label: "Tournament Result",
+        },
+      ],
+    },
+    {
+      path: "/dashboard/schedule",
+      icon: CalendarDays,
+      label: "Schedule",
+      children: [],
+    },
+    {
+      path: "",
+      icon: SquareSigma,
+      label: "Match",
+      children: [
+        {
+          path: "/dashboard/match",
+          icon: GalleryHorizontalEnd,
+          label: "All Match",
+        },
+      ],
+    },
+    {
+      path: "/dashboard/pointTable",
+      icon: ChartLine,
+      label: "Point Table",
+    },
+    {
+      path: "/dashboard/venue",
+      icon: School,
+      label: "Venue",
+      children: [],
+    },
+    {
+      path: "/dashboard/blog",
+      icon: Newspaper,
+      label: "Blog",
+      children: [],
+    },
+  ],
 };
