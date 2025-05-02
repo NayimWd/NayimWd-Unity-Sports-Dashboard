@@ -5,11 +5,18 @@ import TableRow from "../../component/Table/TableRow";
 import TableSkeleton from "../../component/Table/TableSkeleton";
 import TableEmpty from "../../component/Table/TableEmpty";
 import TablePagination from "../../component/Table/TablePagination";
+import TableToolbar from "../../component/Table/TableToolbar";
 
 
 const PointTable = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  // toolbar 
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("");
+  const [status, setStatus] = useState("");
+  const [role, setRole] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -79,6 +86,32 @@ const PointTable = () => {
     <div className="w-full bg-subSurface dark:bg-surface paddingTable my-10  overflow-x-auto py-10 rounded">
       <h1 className="text-font text-3xl text-center space-y-2"> {(data as any).data?.tournament} </h1>
       <p className="text-xl text-font "> Point Table </p>
+      <TableToolbar
+         searchValue={search}
+         onSearchChange={setSearch}
+         sortValue={sort}
+         onSortChange={setSort}
+         filters={[
+           {
+             label: "Status",
+             value: status,
+             onChange: setStatus,
+             options: [
+               { label: "Active", value: "active" },
+               { label: "Inactive", value: "inactive" },
+             ],
+           },
+           {
+             label: "Role",
+             value: role,
+             onChange: setRole,
+             options: [
+               { label: "Admin", value: "admin" },
+               { label: "User", value: "user" },
+             ],
+           },
+         ]}
+      />
      <Table>
      <TableHeader
         headers={headerData}
