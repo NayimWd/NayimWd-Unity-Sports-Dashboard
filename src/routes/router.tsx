@@ -6,7 +6,7 @@ const Registration = lazy(() => import("../pages/auth/Registration"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const Layout = lazy(() => import("../component/layout/DashBoardLayout"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
-const PointTable = lazy(()=> import("../pages/tournament/PointTable"))
+const PointTable = lazy(()=> import("../pages/pointTable/PointTable"))
 
 
 export const router = createBrowserRouter([
