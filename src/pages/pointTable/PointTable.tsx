@@ -7,7 +7,7 @@ import TableEmpty from "../../component/Table/TableEmpty";
 import TablePagination from "../../component/Table/TablePagination";
 import TableToolbar from "../../component/Table/TableToolbar";
 
-
+ 
 const PointTable = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
