@@ -12,3 +12,4 @@ export const apiSlice = createApi({
     baseQuery,
     endpoints: (_builder) => ({}),
 })
+

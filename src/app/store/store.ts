@@ -6,6 +6,7 @@ export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     theme: themeReducer,
+    
   },
   devTools: import.meta.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddlewares) =>
