@@ -34,7 +34,7 @@ const RegistrationForm = () => {
   ];
 
   return (
-    <div className="background min-h-screen py-10 paddingX  flex items-center justify-center">
+    <div className="background w-full min-h-screen py-10 paddingX  flex items-center justify-center">
       <FormContainer
         methods={methods}
         onSubmit={handleSubmit}
