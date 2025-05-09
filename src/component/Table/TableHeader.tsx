@@ -8,12 +8,12 @@ interface TableHeaderProps {
 const TableHeader = ({headers, className}: TableHeaderProps) => {
 
   return (
-    <thead className={cn("bg-subSurface", className)}>
+    <thead className={cn("bg-gradient-primary ", className)}>
         <tr>
             {
                 headers.map((header, index)=>(
                     <th key={index}
-                      className={"px-4 py-2 text-left  text-primary font-semibold border-b border-primary rounded font-inter"}
+                      className={"px-4 py-2 text-left  text-font font-semibold border-b border-primary  font-inter"}
                     >
                         {header}
                     </th>

@@ -3,9 +3,7 @@ import { apiSlice } from "../api/apiSlice";
 export const pointTableApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getPointTable: builder.query({
-            query: (tournamentId) => `
-                pointTable/get/${tournamentId}
-            `
+            query: (tournamentId: string) => `pointTable/get/${tournamentId}`
         })
     })
 });
