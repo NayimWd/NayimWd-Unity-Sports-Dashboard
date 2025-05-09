@@ -1,4 +1,3 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import Buttons from '../Buttons';
 import { RefreshCcw, House } from 'lucide-react';
@@ -7,7 +6,7 @@ interface ErrorProps {
     error?: Error | null;
 }
 
-const ErrorComp: React.FC<ErrorProps> = ({error}) => {
+const ErrorComp = ({error}: ErrorProps) => {
     const navigate = useNavigate();
 
   const handleRefresh = () => {

@@ -6,6 +6,7 @@ interface SkeletonProps {
 
 const TableSkeleton = ({ columns }: SkeletonProps) => {
   return (
+    <tbody>
     <tr>
       {Array.from({ length: columns }).map((_, index) => (
         <td key={index} className="px-4 py-3">
@@ -13,6 +14,7 @@ const TableSkeleton = ({ columns }: SkeletonProps) => {
         </td>
       ))}
     </tr>
+    </tbody>
   )
 }
 
