@@ -9,10 +9,10 @@ import { useGetPointTableQuery } from "../../features/pointTable/pointTableApi";
 
 const PointTable = () => {
   // fetch latest tournament 
-  const { data: latestTournament } = useLatestTournamentQuery({});
+  const { data: latestTournament } = useLatestTournamentQuery();
 
   // fetch point table data based on tournament id
-  const { data: pointTable, isLoading: loading } = useGetPointTableQuery(latestTournament?.data?._id, {
+  const { data: pointTable, isLoading: loading } = useGetPointTableQuery(latestTournament?.data._id ?? "", {
     skip: !latestTournament?.data?._id, // Skip the query if tournament id is not available
     refetchOnMountOrArgChange: true, // Refetch when the component mounts or the arg change
   })
@@ -36,17 +36,17 @@ const PointTable = () => {
         ))
       }
     </>
-  } else if (!loading && !(pointTable as any)?.data?.pointTable?.length) {
+  } else if (!loading && !pointTable?.data?.pointTable?.length) {
     content = (
       <TableEmpty colSpan={headerData.length} message="No data found" />
     )
   } else {
     content = (
-      Array.isArray((pointTable as any).data?.pointTable) &&
+      Array.isArray(pointTable?.data?.pointTable) &&
       (pointTable as any).data.pointTable.map((row: any) => (
         <TableRow
           key={row._id}
-          rawData={[
+          rowData={[
             row.teamId?.teamName,
             row.matchPlayed,
             row.wins,
@@ -62,7 +62,7 @@ const PointTable = () => {
   return (
     <div className="w-full bg-subSurface dark:bg-surface paddingTable my-10  overflow-x-auto py-10 rounded">
       <h1 className="text-font text-3xl text-center space-y-2">
-        {(pointTable as any)?.data?.tournament || "Loading"} </h1>
+        {pointTable?.data?.tournament || "Loading"} </h1>
       <p className="text-xl text-font "> Point Table </p>
 
       <Table>
