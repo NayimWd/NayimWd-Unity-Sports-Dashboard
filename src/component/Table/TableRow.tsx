@@ -1,19 +1,19 @@
 import cn from "../../utils/cn";
 
 interface TableRowProps {
-    rawData: (string | number | React.ReactNode)[];
+    rowData: (string | number | React.ReactNode)[];
     className?: string;
 }
 
-const TableRow = ({rawData, className}: TableRowProps) => {
+const TableRow = ({rowData, className}: TableRowProps) => {
   return (
-    <tbody className=" even:bg-surface dark:even:bg-bg">
-    <tr className={cn(className, `px-4 py-2  text-font `)}>
+    <tbody className=" even:bg-surface dark:even:bg-bg rounded">
+    <tr className={cn(className, `px-4 py-2  text-font`)}>
         {
-            rawData.map((data, index)=>(
+            rowData.map((data, index)=>(
                 <td
                     key={index}
-                    className={` px-4 py-3 font-merriweather tracking-wider text-font font-semibold`}
+                    className={` px-4 py-3 font-merriweather tracking-wider text-font font-semibold rounded`}
                 >
                     {data}
                 </td>
