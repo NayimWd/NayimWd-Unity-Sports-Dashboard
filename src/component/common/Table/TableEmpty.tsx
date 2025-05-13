@@ -1,5 +1,5 @@
 import { InboxIcon } from "lucide-react";
-import cn from "../../utils/cn";
+import cn from "../../../utils/cn";
 
 interface EmptyTableProps {
   message?: string;
