@@ -8,6 +8,6 @@ export const pointTableApi = apiSlice.injectEndpoints({
         })
     })
 });
-
+ 
 
 export const {useGetPointTableQuery, useLazyGetPointTableQuery} = pointTableApi;

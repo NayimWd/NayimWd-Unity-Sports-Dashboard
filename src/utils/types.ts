@@ -13,6 +13,7 @@ export interface ApiResponse<T> {
 export interface Tournament {
   _id: string;
   tournamentName: string;
+  photo: string;
 }
 
 // point table type
@@ -35,5 +36,5 @@ export interface PointTableRow {
 
 export interface PointTableData {
   pointTable: PointTableRow[];
-  tournament: string;
+  tournament: Tournament;
 }
