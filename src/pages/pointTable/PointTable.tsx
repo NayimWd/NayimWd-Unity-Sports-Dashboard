@@ -53,7 +53,7 @@ console.log(pointTable?.data)
           <img
             src={row.teamId?.teamLogo}
             alt={row.teamId?.teamName}
-            className="w-8 h-8 rounded-full object-cover"
+            className="w-8 h-8 rounded-5 object-cover"
           />
           <span>{row.teamId?.teamName}</span>
         </div>,,
@@ -71,8 +71,8 @@ console.log(pointTable?.data)
   return (
     <div className="w-full bg-subSurface dark:bg-surface paddingTable my-10  overflow-x-auto py-10 rounded">
       <h1 className="text-font text-3xl text-center space-y-2">
-        {pointTable?.data?.tournament || "Loading"} </h1>
-        {/* <img src={pointTable?.data?.tournament}/> */}
+        {pointTable?.data?.tournament?.tournamentName || "Loading"} </h1>
+        <img src={pointTable?.data?.tournament?.photo}/>
       <p className="text-xl text-font "> Point Table </p>
 
       <Table>

@@ -7,6 +7,7 @@ const NotFound = lazy(() => import("../pages/NotFound"));
 const Layout = lazy(() => import("../component/layout/DashBoardLayout"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
 const PointTable = lazy(()=> import("../pages/pointTable/PointTable"))
+const Blogs = lazy(()=> import("../pages/Blogs/Blogs"))
 
 
 export const router = createBrowserRouter([
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       {
         path:"pointTable",
         element: <SuspenseWrapper children={<PointTable/>} />
+      },
+      {
+        path: "blogs",
+        element: <SuspenseWrapper children={<Blogs/>}/>
       }
     ],
   },
