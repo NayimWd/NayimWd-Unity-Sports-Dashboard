@@ -2,10 +2,10 @@ import z from "zod";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "../../utils/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import FormContainer from "../../component/Form/FormContainer";
-import EmailInput from "../../component/input/EmailInput";
+import FormContainer from "../../component/common/Form/FormContainer";
+import EmailInput from "../../component/common/input/EmailInput";
 import { Lock, Mail } from "lucide-react";
-import PasswordInput from "../../component/input/PasswordInput";
+import PasswordInput from "../../component/common/input/PasswordInput";
 import Buttons from "../../component/common/Buttons";
 
 type LoginType = z.infer<typeof loginSchema>;

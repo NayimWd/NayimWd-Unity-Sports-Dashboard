@@ -1,7 +1,7 @@
 import { cva, VariantProps } from "class-variance-authority";
 import { InputHTMLAttributes, useRef, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import cn from "../../utils/cn";
+import cn from "../../../utils/cn";
 import { ImageIcon } from "lucide-react";
 
 interface PhotoInputProps

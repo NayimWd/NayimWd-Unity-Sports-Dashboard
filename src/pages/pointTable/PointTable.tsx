@@ -1,9 +1,9 @@
-import Table from "../../component/Table/Table";
-import TableHeader from "../../component/Table/TableHeader";
-import TableRow from "../../component/Table/TableRow";
-import TableSkeleton from "../../component/Table/TableSkeleton";
-import TableEmpty from "../../component/Table/TableEmpty";
-import TablePagination from "../../component/Table/TablePagination";
+import Table from "../../component/common/Table/Table";
+import TableHeader from "../../component/common/Table/TableHeader";
+import TableRow from "../../component/common/Table/TableRow";
+import TableSkeleton from "../../component/common/Table/TableSkeleton";
+import TableEmpty from "../../component/common/Table/TableEmpty";
+import TablePagination from "../../component/common/Table/TablePagination";
 import { useLatestTournamentQuery } from "../../features/tournament/tournamentApi";
 import { useGetPointTableQuery } from "../../features/pointTable/pointTableApi";
 
@@ -16,6 +16,8 @@ const PointTable = () => {
     skip: !latestTournament?.data?._id, // Skip the query if tournament id is not available
     refetchOnMountOrArgChange: true, // Refetch when the component mounts or the arg change
   })
+
+console.log(pointTable?.data)
 
   const headerData = [
     "Team",
@@ -47,7 +49,14 @@ const PointTable = () => {
         <TableRow
           key={row._id}
           rowData={[
-            row.teamId?.teamName,
+             <div className="flex items-center gap-4">
+          <img
+            src={row.teamId?.teamLogo}
+            alt={row.teamId?.teamName}
+            className="w-8 h-8 rounded-full object-cover"
+          />
+          <span>{row.teamId?.teamName}</span>
+        </div>,,
             row.matchPlayed,
             row.wins,
             row.losses,
@@ -63,6 +72,7 @@ const PointTable = () => {
     <div className="w-full bg-subSurface dark:bg-surface paddingTable my-10  overflow-x-auto py-10 rounded">
       <h1 className="text-font text-3xl text-center space-y-2">
         {pointTable?.data?.tournament || "Loading"} </h1>
+        {/* <img src={pointTable?.data?.tournament}/> */}
       <p className="text-xl text-font "> Point Table </p>
 
       <Table>

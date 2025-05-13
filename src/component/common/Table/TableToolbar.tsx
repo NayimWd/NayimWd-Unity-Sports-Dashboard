@@ -1,5 +1,5 @@
 import { cva } from "class-variance-authority";
-import cn from "../../utils/cn";
+import cn from "../../../utils/cn";
 
 interface FilterOption {
     label: string;

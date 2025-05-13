@@ -1,15 +1,15 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-import FormContainer from "../../component/Form/FormContainer";
-import PasswordInput from "../../component/input/PasswordInput";
+import FormContainer from "../../component/common/Form/FormContainer";
+import PasswordInput from "../../component/common/input/PasswordInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LockIcon, Mail, User2 } from "lucide-react";
 import Buttons from "../../component/common/Buttons";
-import TextInput from "../../component/input/TextInput";
-import EmailInput from "../../component/input/EmailInput";
-import DropdownInput from "../../component/input/DropdownInput";
+import TextInput from "../../component/common/input/TextInput";
+import EmailInput from "../../component/common/input/EmailInput";
+import DropdownInput from "../../component/common/input/DropdownInput";
 import { registrationSchema } from "../../utils/Schema";
-import PhotoInputProps from "../../component/input/PhotoInputProps";
+import PhotoInputProps from "../../component/common/input/PhotoInputProps";
 
 type FormValues = z.infer<typeof registrationSchema>;
 
