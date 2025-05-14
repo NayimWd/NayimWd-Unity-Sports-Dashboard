@@ -9,13 +9,26 @@ export interface ApiResponse<T> {
   error?: string;
 }
 
+// pagination type
+export interface PaginationMeta {
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
+  pageSize: number;
+}
+
+export interface PaginateData<T> {
+  items: T[];
+  pagination: PaginationMeta;
+}
+
 // tournament type
 export interface Tournament {
   _id: string;
   tournamentName: string;
   photo: string;
 }
-
+// -------------------------------------------------------------------- //
 // point table type
 // team
 export interface Team {
@@ -37,4 +50,20 @@ export interface PointTableRow {
 export interface PointTableData {
   pointTable: PointTableRow[];
   tournament: Tournament;
+}
+// --------------------------------------------------------------------- //
+// --------------------------- Blogs ----------------------------------//
+// -------------------------------------------------------------------- //
+export interface Blog {
+   _id: string;
+  title: string;
+  author: string;
+  createdAt: string;
+  tags: string;
+  photo: string[];
+}
+
+export interface Blogs {
+  blogs: [],
+  pagination: PaginationMeta;
 }
