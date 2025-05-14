@@ -8,4 +8,4 @@ const TeamSkeleton = () => {
   )
 }
 
-export default TeamSkeleton
+export default TeamSkeleton;

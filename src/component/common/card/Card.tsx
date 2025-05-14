@@ -16,7 +16,7 @@ export const Card = ({ children, className, variant, size }: CardProps) => {
   )
 }
 
-const cardVariants = cva("rounded-xl shadow-sm border text-font transition-colors", {
+const cardVariants = cva("rounded-xl border text-font transition-colors", {
   variants: {
     variant: {
       Base: "bg-surface border-border",
@@ -24,7 +24,7 @@ const cardVariants = cva("rounded-xl shadow-sm border text-font transition-color
       Player: "bg-surface border border-border",
       Tournament: "bg-gradient-to-br from-bg to-surface",
       match: "bg-gradient-to-br from-subSurface to-surface",
-      Blog: "bg-surface hover:shadow-md"
+      Blog: "bg-surface border-border hover:shadow-md"
     },
     size: {
       sm: "p-4",

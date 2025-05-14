@@ -9,4 +9,4 @@ const BlogSkeleton = () => {
   )
 }
 
-export default BlogSkeleton
+export default BlogSkeleton;
