@@ -15,4 +15,4 @@ const MatchSkeleton = () => {
   )
 }
 
-export default MatchSkeleton
+export default MatchSkeleton;
