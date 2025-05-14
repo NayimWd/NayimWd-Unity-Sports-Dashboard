@@ -3,9 +3,9 @@ import TableHeader from "../../component/common/Table/TableHeader";
 import TableRow from "../../component/common/Table/TableRow";
 import TableSkeleton from "../../component/common/Table/TableSkeleton";
 import TableEmpty from "../../component/common/Table/TableEmpty";
-import TablePagination from "../../component/common/Table/TablePagination";
 import { useLatestTournamentQuery } from "../../features/tournament/tournamentApi";
 import { useGetPointTableQuery } from "../../features/pointTable/pointTableApi";
+import { fontStyle } from "../../utils/ClassUtils";
 
 const PointTable = () => {
   // fetch latest tournament 
@@ -17,7 +17,7 @@ const PointTable = () => {
     refetchOnMountOrArgChange: true, // Refetch when the component mounts or the arg change
   })
 
-console.log(pointTable?.data)
+console.log(pointTable)
 
   const headerData = [
     "Team",
@@ -70,11 +70,13 @@ console.log(pointTable?.data)
 
   return (
     <div className="w-full bg-subSurface dark:bg-surface paddingTable my-10  overflow-x-auto py-10 rounded">
-      <h1 className="text-font text-3xl text-center space-y-2">
-        {pointTable?.data?.tournament?.tournamentName || "Loading"} </h1>
-        <img src={pointTable?.data?.tournament?.photo}/>
-      <p className="text-xl text-font "> Point Table </p>
-
+      <h1 className={`${fontStyle.pageTitle} text-font text-center space-y-2`}>Point Table</h1>
+      {/* <p className="text-center text-font font-medium text-lg">Of</p> */}
+      <div className={`${fontStyle.SectionHeading} flex items-center gap-4 flex-wrap mt-5`}>
+          <p className="text-font text-xl text-center">
+        {pointTable?.data?.tournament?.tournamentName || "Loading"} </p>
+        <img className="size-6 rounded" src={pointTable?.data?.tournament?.photo} alt="tournamentLogo" loading="lazy"/>
+      </div>
       <Table>
         <TableHeader
           headers={headerData}
@@ -83,13 +85,6 @@ console.log(pointTable?.data)
           content
         }
       </Table>
-      <TablePagination
-        currentPage={1}
-        totalPage={10}
-        pageSize={5}
-        onPageChange={(page) => console.log("Page changed to:", page)}
-        onPageSizeChange={(size) => console.log("Page size changed to:", size)}
-      />
     </div>
   )
 }

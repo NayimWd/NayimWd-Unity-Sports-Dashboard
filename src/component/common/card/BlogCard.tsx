@@ -18,7 +18,7 @@ interface BlogCardProps {
 
 const BlogCard = ({_id, title, photo, author, tags, createdAt}: BlogCardProps) => {
   return (
-    <Card size="sm" variant="Blog" className="text-font overflow-hidden flex flex-col gap-4">
+    <Card size="md" variant="Blog" className="text-font overflow-hidden flex flex-col gap-4">
       <div>
         <img src={photo[0]} alt="Blog" className="w-full h-56 object-cover rounded-md" loading="lazy"/>
       </div>
