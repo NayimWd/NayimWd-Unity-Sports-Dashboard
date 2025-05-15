@@ -170,7 +170,7 @@ export const navLinks = {
       label: "Blog",
       children: [
         {
-          path: "dashboard/blog",
+          path: "/dashboard/blogs",
           icon: Notebook,
           label: "Blogs",
         },

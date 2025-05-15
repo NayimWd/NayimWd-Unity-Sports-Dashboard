@@ -16,7 +16,7 @@ export const Card = ({ children, className, variant, size }: CardProps) => {
   )
 }
 
-const cardVariants = cva("rounded-xl border text-font transition-colors", {
+const cardVariants = cva("rounded-lg border text-font transition-colors", {
   variants: {
     variant: {
       Base: "bg-surface border-border",
@@ -27,9 +27,9 @@ const cardVariants = cva("rounded-xl border text-font transition-colors", {
       Blog: "bg-surface border-border hover:shadow-md"
     },
     size: {
-      sm: "p-4",
-      md: "p-6",
-      lg: "p-8",
+      sm: "p-3",
+      md: "p-5",
+      lg: "p-6",
     },
     defaultVariants: {
       variant: "base",

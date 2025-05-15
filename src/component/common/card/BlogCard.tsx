@@ -18,20 +18,20 @@ interface BlogCardProps {
 
 const BlogCard = ({_id, title, photo, author, tags, createdAt}: BlogCardProps) => {
   return (
-    <Card size="md" variant="Blog" className="text-font overflow-hidden flex flex-col gap-4">
+    <Card size="md" variant="Blog" className="text-font overflow-hidden flex flex-col gap-4 ">
       <div>
-        <img src={photo[0]} alt="Blog" className="w-full h-56 object-cover rounded-md" loading="lazy"/>
+        <img src={photo[0]} alt="Blog" className="w-full h-56 object-cover rounded" loading="lazy"/>
       </div>
       <div>
         <div className="flex justify-between items-center mb-5">
-          <p className={fontStyle.cardDesc}>{formatDate(createdAt)}</p>
-          <Link to={`dashboard/blogs/:${_id}`}>
+          <p className={`${fontStyle.cardDesc} text-secondary`}>{formatDate(createdAt)}</p>
+          <Link to={`/dashboard/blogs/details/${_id}`}>
           <Buttons variant="primary" size="sm" className="rounded-sm" iconRight={<MoveRight size={8}/>}> Details </Buttons>
           </Link>
       </div>
-      <h3 className={`${fontStyle.cardTitle} `}> {title.slice(0, 130)}... </h3>
-      <div className="flex justify-between flex-wrap items-center w-full mt-5">
-          <p className={`${fontStyle.secondaryText}`}>{author}</p>
+      <h3 className={`${fontStyle.cardTitle} text-font`}> {title.slice(0, 130)}... </h3>
+      <div className="flex justify-between flex-wrap items-center w-full mt-5 text-subtext">
+          <p className={`${fontStyle.secondaryText} `}>{author}</p>
           <p className={fontStyle.secondaryText}>{tags}</p>
       </div>
       </div>

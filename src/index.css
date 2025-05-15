@@ -103,7 +103,7 @@ input:-webkit-autofill:focus {
 }
 
 .paddingX {
-  @apply px-2  sm:px-4 md:px-6 lg:px-12 xl:px-20 2xl:px-32;
+  @apply px-2  sm:px-3;
 }
 
 .formWrapper {
@@ -111,7 +111,7 @@ input:-webkit-autofill:focus {
 }
 
 .paddingCard {
-  @apply p-4 sm:p-5 md:p-6 lg:p-8;
+  @apply p-4 sm:p-5 md:p-6;
 }
 
 .paddingTable {
@@ -122,3 +122,6 @@ input:-webkit-autofill:focus {
   @apply p-6 md:p-8 lg:p-10;
 }
 
+.glassBg {
+  @apply bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-50
+}

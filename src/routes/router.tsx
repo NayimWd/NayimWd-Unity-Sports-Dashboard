@@ -6,8 +6,9 @@ const Registration = lazy(() => import("../pages/auth/Registration"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const Layout = lazy(() => import("../component/layout/DashBoardLayout"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
-const PointTable = lazy(()=> import("../pages/pointTable/PointTable"))
-const Blogs = lazy(()=> import("../pages/Blogs/Blogs"))
+const PointTable = lazy(()=> import("../pages/pointTable/PointTable"));
+const Blogs = lazy(()=> import("../pages/Blogs/Blogs"));
+const BlogDetails = lazy(()=> import("../pages/Blogs/BlogDetails"));
 
 
 export const router = createBrowserRouter([
@@ -38,7 +39,11 @@ export const router = createBrowserRouter([
       {
         path: "blogs",
         element: <SuspenseWrapper children={<Blogs/>}/>
-      }
+      },
+      {
+        path: "blogs/details/:blogId",
+        element: <SuspenseWrapper children={<BlogDetails/>}/>
+      },
     ],
   },
   {

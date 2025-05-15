@@ -69,15 +69,15 @@ console.log(pointTable)
   }
 
   return (
-    <div className="w-full bg-subSurface dark:bg-surface paddingTable my-10  overflow-x-auto py-10 rounded">
-      <h1 className={`${fontStyle.pageTitle} text-font text-center space-y-2`}>Point Table</h1>
+    <div className="w-full bg-surface paddingTable my-10  overflow-x-auto py-10 rounded">
+      <h1 className={`${fontStyle.pageTitle} text-font space-y-2`}>Point Table</h1>
       {/* <p className="text-center text-font font-medium text-lg">Of</p> */}
-      <div className={`${fontStyle.SectionHeading} flex items-center gap-4 flex-wrap mt-5`}>
+      <div className={`${fontStyle.SectionHeading} flex items-center justify-center gap-4 flex-wrap mt-5`}>
           <p className="text-font text-xl text-center">
         {pointTable?.data?.tournament?.tournamentName || "Loading"} </p>
-        <img className="size-6 rounded" src={pointTable?.data?.tournament?.photo} alt="tournamentLogo" loading="lazy"/>
+        <img className="size-12 rounded " src={pointTable?.data?.tournament?.photo} alt="tournamentLogo" loading="lazy"/>
       </div>
-      <Table>
+      <Table className="">
         <TableHeader
           headers={headerData}
         />

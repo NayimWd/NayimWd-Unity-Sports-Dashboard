@@ -23,7 +23,7 @@ const SidebarItem = ({ link }: { link: Link }) => {
       {hasChildren ? (
         <>
           {/* parant link dropdown */}
-         <Link to={link.path}>
+        
           <button
             onClick={handleOpen}
             className="sidebarBtn my-1 relative"
@@ -39,12 +39,12 @@ const SidebarItem = ({ link }: { link: Link }) => {
               )}{" "}
             </span>
           </button>
-          </Link>
+         
           {/* nested links */}
           {open && (
             <div className="pl-4">
               {link.children?.map((child: any, index: any) => (
-              <Link to={child.path}>
+              <Link key={index} to={child.path}>
                 <button
                   key={index}
                   className="sidebarBtn"
