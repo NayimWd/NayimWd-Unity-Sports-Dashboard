@@ -7,8 +7,8 @@ interface TableProps {
 
 const Table = ({children, className}: TableProps) => {
   return (
-    <div className='bg-subSurface  dark:bg-surface w-full py-10 overflow-x-auto rounded-xl '>
-      <table className={cn("w-full py-10 text-sm md:text-base border-collapse font-inter", className)}>
+    <div className={cn(className, ' w-full py-10 overflow-x-auto rounded-md')}>
+      <table className="w-full py-10 text-sm md:text-base border-collapse font-inter">
         {children}
       </table>
     </div>

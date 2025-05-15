@@ -58,7 +58,7 @@ const DashBoardLayout: React.FC = () => {
           />
         )}
         {/* main content */}
-        <main className={` ml-0 md:ml-64 mt-16 sm:mt-[74px] xl:mt-20 flex-1 px-2 sm:px-3  overflow-y-auto`}>
+        <main className={` ml-0 md:ml-64 mt-16 sm:mt-[74px] xl:mt-20 flex-1  overflow-y-auto`}>
           <Outlet />
         </main>
       </div>

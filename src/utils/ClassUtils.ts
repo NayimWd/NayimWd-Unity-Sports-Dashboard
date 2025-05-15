@@ -4,7 +4,7 @@ export const fontStyle = {
     pageDesc: "text-lg lg:text-xl font-medium font-inter font-medium md:font-semibold",
     SectionHeading: "text-2xl lg:text-3xl font-bold font-merriweather font-bold",
     cardTitle: "text-base lg:text-md font-semibold font-inter font-semibold",
-    cardDesc: "text-base font-normal font-inter text-subtext",
-    secondaryText: "text-sm text-muted font-inter md:font-md",
-    labelText: "text-xs text-muted font-medium font-inter font-md"
+    cardDesc: "text-base font-normal font-inter",
+    secondaryText: "text-sm  font-inter md:font-md",
+    labelText: "text-xs  font-medium font-inter font-md"
 }
