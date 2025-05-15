@@ -2,7 +2,6 @@ import { ChevronRight, ChevronUp } from "lucide-react";
 import useToggle from "../../hooks/useToggle";
 import { Link } from "react-router-dom";
 
-
 interface Link {
   path: string,
   label: string;
@@ -17,13 +16,13 @@ const SidebarItem = ({ link }: { link: Link }) => {
     setIsOpen(!open);
   };
   const hasChildren = link.children && link.children.length > 0;
- 
+
   return (
     <div>
       {hasChildren ? (
         <>
           {/* parant link dropdown */}
-        
+
           <button
             onClick={handleOpen}
             className="sidebarBtn my-1 relative"
@@ -39,30 +38,30 @@ const SidebarItem = ({ link }: { link: Link }) => {
               )}{" "}
             </span>
           </button>
-         
+
           {/* nested links */}
           {open && (
             <div className="pl-4">
               {link.children?.map((child: any, index: any) => (
-              <Link key={index} to={child.path}>
-                <button
-                  key={index}
-                  className="sidebarBtn"
-                >
-                  <child.icon className="w-4 h-4" />
-                  <span className="font-semibold font-merriweather">{child.label}</span>
-                </button>
-            </Link>
+                <Link key={index} to={child.path}>
+                  <button
+                    key={index}
+                    className="sidebarBtn"
+                  >
+                    <child.icon className="w-4 h-4" />
+                    <span className="font-semibold font-merriweather">{child.label}</span>
+                  </button>
+                </Link>
               ))}
             </div>
           )}
         </>
       ) : (
         <Link to={link.path}>
-        <div className="sidebarBtn">
-          <link.icon className="w-4 h-4 " />
-          <span className="font-semibold font-merriweather">{link.label}</span>
-        </div>
+          <div className="sidebarBtn">
+            <link.icon className="w-4 h-4 " />
+            <span className="font-semibold font-merriweather">{link.label}</span>
+          </div>
         </Link>
       )}
     </div>
