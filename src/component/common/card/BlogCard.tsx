@@ -7,8 +7,6 @@ import { formatDate } from "../../../utils/timeFormat";
 import CopyButton from "../../ui/CopyButton";
 import { useCurrentUrl } from "../../../utils/Url";
 
-
-
 interface BlogCardProps {
   _id: string;
   title: string;

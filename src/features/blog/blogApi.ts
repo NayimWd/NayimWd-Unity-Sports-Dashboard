@@ -1,4 +1,4 @@
-import { ApiResponse, Blogs } from "../../utils/types";
+import { ApiResponse, BlogDetails, Blogs } from "../../utils/types";
 import { apiSlice } from "../api/apiSlice";
 
 export const blogApi = apiSlice.injectEndpoints({
@@ -14,7 +14,7 @@ export const blogApi = apiSlice.injectEndpoints({
       query: (blogId) => ({
         url: `blog/details/${blogId}`,
       }),
-      transformResponse: (response: ApiResponse<Blogs>) => response.data,
+      transformResponse: (response: ApiResponse<BlogDetails>) => response.data,
     }),
   }),
 });
