@@ -27,7 +27,7 @@ const Tooltip = ({ content, children, className, position }: TooltipProps) => {
         <div className={cn(className, "relative group inline-block z-40")}>
             {children}
             <div className={cn(
-                "pointer-events-none absolute z-10 hidden w-max group-hover:flex group-focus:flex flex-col items-center transition-all duration-200 opacity-0 group-hover:opacity-100 group-focus:opacity-100 scale-95 group-hover:scale-100 group-focus:scale-100",
+                "pointer-events-none absolute z-10 hidden w-max group-hover:flex group-focus:flex flex-col items-center transition-all duration-200 opacity-0 group-hover:opacity-100 group-focus:opacity-100",
                 positionClasses[position ? position : "top"],
                 className
             )}>

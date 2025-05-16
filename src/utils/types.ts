@@ -67,3 +67,14 @@ export interface Blogs {
   blogs: [],
   pagination: PaginationMeta;
 }
+
+export interface BlogDetails {
+  _id: string;
+  content: string;
+  title: string;
+  author: string;
+  createdAt: string;
+  photo: [string];
+  tags: string;
+  
+}
