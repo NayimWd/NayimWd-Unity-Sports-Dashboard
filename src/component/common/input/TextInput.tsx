@@ -16,7 +16,7 @@ const TextInput = ({ name, label, placeholder, icon }: TextInputProps) => {
 
   const [focused, setFocused] = useState(false);
   const value = watch(name);
-  const error = errors[name]?.message as string | undefined;
+  const error = errors[name]?.message as string | undefined; 
 
   // dynamic border color
   let variant: "primary" | "success" | "error" = "primary";

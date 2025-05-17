@@ -3,7 +3,6 @@ import Banner from "../../component/common/banner/Banner";
 import { useBlogDetailsQuery, useGetRelatedBlogsQuery } from "../../features/blog/blogApi";
 import { Clock9, Heart, Star } from "lucide-react";
 import CopyButton from "../../component/ui/CopyButton";
-import { fontStyle } from "../../utils/ClassUtils";
 import { formatDate } from "../../utils/timeFormat";
 import { BlogDetailsSkeleton } from "../../component/common/skeleton/BlogDetailsSkeleton";
 import { useCurrentUrl } from "../../utils/Url";
@@ -12,7 +11,6 @@ import SectionError from "../../component/common/error/SectionError";
 import TableEmpty from "../../component/common/Table/TableEmpty";
 import BlogCard from "../../component/common/card/BlogCard";
 import ScrollToTop from "../../utils/scrollToTop";
-
 
 const BlogDetails = () => {
   const { blogId } = useParams();
@@ -65,65 +63,71 @@ const BlogDetails = () => {
 
   return (
     <div className="w-full">
-      <Banner pageText="Blog Details" navText="Blog" navLink="Details" />
-      {
-        isLoading ?
-          <BlogDetailsSkeleton />
-          :
-          <div className="paddingX w-full bg-surface flex flex-col gap-10 justify-center items-center my-20 py-10">
-            <div className="w-full  max-w-2xl">
-              <img
-                src={blog?.photo[0]}
-                className="w-full  max-h-[420px] object-fill object-center rounded-md " alt="BlogPhoto" loading="lazy" />
-            </div>
-            <div className="w-full">
-              {/* author and share button */}
-              <div className="flex justify-between w-full">
-                <p className="text-subtext"> Author: {blog?.author} </p>
-                <div className="flex items-center gap-1">
-                  <div onClick={handleShare} className="flex justify-center items-center w-7 h-7 hover:shadow cursor-pointer rounded bg-bg hover:bg-subSurface">
-                    <CopyButton textCopy="Share" />
-                  </div>
-                  <span className=" flex justify-center items-center w-7 h-7 hover:shadow cursor-pointer rounded bg-bg hover:bg-subSurface">
-                    <Star size={20} className="text-orange-400" />
-                  </span>
-                  <span className="flex justify-center items-center w-7 h-7 hover:shadow cursor-pointer rounded bg-bg hover:bg-subSurface">
-                    <Heart size={20} className="text-red-500" />
-                  </span>
-                </div>
-              </div>
-              {/* Blog title */}
-              <div className={` my-10 `}>
-                <h1 className={`${fontStyle.pageDesc} mt-10 text-font mb-4`}>
-                  {
-                    blog?.title
-                  }
-                </h1>
-                <div className="flex justify-between items-center">
-                  <p className="text-subtext font-inter uppercase"> {blog?.tags} </p>
-                  <span className="flex items-center gap-4">
-                    <Clock9 className="text-red-500" size={16} />
-                    <p className="text-subtext leading-8 tracking-wide font-merriweather"> {blog ? formatDate(blog.createdAt) : ""} </p>
-                  </span>
-                </div>
-              </div>
-              {/* Blog Description */}
-              <p className="text-font font-inter text-foreground tracking-wider leading-relaxed transition-all duration-300 hover:pl-2">
-                {blog?.content}
-              </p>
-            </div>
+  <Banner pageText="Blog Details" navText="Blog" navLink="Details" />
+
+  {isLoading ? (
+    <BlogDetailsSkeleton />
+  ) : (
+    <div className="paddingX w-full max-w-4xl mx-auto bg-surface my-20 py-12 px-6 rounded-2xl shadow-sm space-y-10">
+      
+      {/* Blog Banner Image */}
+      <div className="w-full overflow-hidden rounded-xl shadow-md">
+        <img
+          src={blog?.photo[0]}
+          alt="Blog Cover"
+          className="w-full h-[420px] object-cover object-center transition-transform duration-300 hover:scale-105"
+        />
+      </div>
+
+      {/* Author and Action Row */}
+      <div className="flex justify-between items-center text-sm text-muted">
+        <p className="">By <span className="font-medium text">{blog?.author}</span></p>
+        <div className="flex gap-2 items-center">
+          <div onClick={handleShare} className="bg-bg hover:bg-surface w-8 h-8 rounded flex items-center justify-center shadow transition">
+          <CopyButton textCopy="Share" />
           </div>
-      }
-      <div className="my-10 paddingX">
-        <h2 className={`${fontStyle.SectionHeading} text-font font-inter mb-5 text-center`}> Related Vlogs </h2>
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
-          {
-            content
-          }
+          <button className="bg-bg hover:bg-subSurface w-8 h-8 rounded flex items-center justify-center shadow transition">
+            <Star size={18} className="text-orange-400" />
+          </button>
+          <button className="bg-bg hover:bg-subSurface w-8 h-8 rounded flex items-center justify-center shadow transition">
+            <Heart size={18} className="text-red-500" />
+          </button>
         </div>
       </div>
-      <ScrollToTop />
+
+      {/* Blog Title + Metadata */}
+      <div>
+        <h1 className="text-3xl font-bold font-inter text-foreground mb-4 leading-tight text-font">
+          {blog?.title}
+        </h1>
+        <div className="flex justify-between text-sm text-muted-foreground uppercase text-subtext">
+          <p>{blog?.tags}</p>
+          <div className="flex items-center gap-2">
+            <Clock9 size={16} className="text-red-500" />
+            <span>{blog ? formatDate(blog.createdAt) : ""}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Blog Content */}
+      <article className="prose lg:prose-lg dark:prose-invert font-merriweather text-subtext">
+        {blog?.content}
+      </article>
     </div>
+  )}
+
+  {/* Related Blogs */}
+  <section className="my-16 paddingX max-w-6xl mx-auto">
+    <h2 className="text-2xl font-semibold text-center font-inter mb-8">
+      Related Blogs
+    </h2>
+    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      {content}
+    </div>
+  </section>
+
+  <ScrollToTop />
+</div>
   )
 }
 
