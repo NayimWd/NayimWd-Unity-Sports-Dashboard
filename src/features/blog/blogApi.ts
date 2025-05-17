@@ -16,7 +16,19 @@ export const blogApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: ApiResponse<BlogDetails>) => response.data,
     }),
+    getRelatedBlogs: builder.query<Blogs, { tags: string; limit: number }>({
+      query: ({ tags, limit = 5 }) => ({
+        url: `blog/getAll`,
+        method: "GET",
+        params: { tags, limit },
+      }),
+      transformResponse: (response: ApiResponse<Blogs>) => response.data,
+    }),
   }),
 });
 
-export const { useGetBlogsQuery, useBlogDetailsQuery } = blogApi;
+export const {
+  useGetBlogsQuery,
+  useBlogDetailsQuery,
+  useGetRelatedBlogsQuery,
+} = blogApi;

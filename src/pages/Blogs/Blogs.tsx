@@ -14,7 +14,6 @@ const Blogs = () => {
   // set page size 
   const totalPages = blogs?.pagination?.totalPages ?? 1;
 
-
   let content = null;
 
   if (isLoading) {
