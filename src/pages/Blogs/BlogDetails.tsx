@@ -117,12 +117,12 @@ const BlogDetails = () => {
       <div className="my-10 paddingX">
         <h2 className={`${fontStyle.SectionHeading} text-font font-inter mb-5 text-center`}> Related Vlogs </h2>
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
-        {
-          content
-        }
+          {
+            content
+          }
         </div>
       </div>
-      <ScrollToTop/>
+      <ScrollToTop />
     </div>
   )
 }
