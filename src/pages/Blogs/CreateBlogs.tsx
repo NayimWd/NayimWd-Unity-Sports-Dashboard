@@ -1,6 +1,8 @@
 const CreateBlogs = () => {
   return (
-    <div>CreateBlogs</div>
+    <div>
+      CreateBlogs
+      </div>
   )
 }
 
