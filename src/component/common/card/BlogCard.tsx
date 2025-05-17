@@ -31,13 +31,13 @@ const BlogCard = ({ _id, title, photo, author, tags, createdAt }: BlogCardProps)
       </div>
       <div>
         <div className="flex justify-between items-center mb-5">
-          <p className={`${fontStyle.cardDesc} text-secondary`}>{formatDate(createdAt)}</p>
+          <p className={`${fontStyle.cardDesc} text-primary`}>{formatDate(createdAt)}</p>
           <Link to={`/dashboard/blogs/details/${_id}`}>
             <Buttons variant="primary" size="sm" className="rounded-sm" iconRight={<MoveRight size={8} />}> Details </Buttons>
           </Link>
         </div>
         <h3 className={`${fontStyle.cardTitle} text-font`}> {title.slice(0, 130)}... </h3>
-        <div className="flex justify-between flex-wrap items-center w-full mt-5 text-subtext">
+        <div className="flex justify-between flex-wrap items-center w-full mt-5 text-primary">
           <p className={`${fontStyle.secondaryText} `}>{author}</p>
           <p className={fontStyle.secondaryText}>{tags}</p>
         </div>

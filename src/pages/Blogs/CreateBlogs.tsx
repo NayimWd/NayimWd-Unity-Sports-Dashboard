@@ -1,5 +1,3 @@
-
-
 const CreateBlogs = () => {
   return (
     <div>CreateBlogs</div>

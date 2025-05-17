@@ -8,7 +8,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ handleToggle }) => {
   return (
-    <nav className="fixed w-full   top-0 z-50 overflow-hidden bg-gradient-bg border-b border-b-border  drop-shadow ">
+    <nav className="fixed w-full   top-0 z-[100] overflow-hidden bg-gradient-bg border-b border-b-border  drop-shadow ">
       <div className="p-3 md:p-4 lg:p-5 opacity-100">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start rtl:justify-end">

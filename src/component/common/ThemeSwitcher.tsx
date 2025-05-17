@@ -16,13 +16,13 @@ const ThemeSwitcher = () => {
       };
 
   return (
-    <div className="">
+    <div className="hover:outline hover:outline-2 outline-primary rounded">
       { theme === "dark" ? <button onClick={()=>handleThemeChange("light")} className="w-12 h-10 rounded-md  p-1 bg-bg flex justify-center items-center shadow hover:bg-subSurface">
-        <Sun className="text-font"/>
+        <Sun className="text-primary"/>
       </button>
       :
       <button onClick={()=>handleThemeChange("dark")} className="w-12 h-10 rounded-md  p-1 bg-bg flex justify-center items-center shadow-sm hover:bg-subSurface">
-        <Moon />
+        <Moon className="text-primary"/>
       </button>}
       
   </div>
