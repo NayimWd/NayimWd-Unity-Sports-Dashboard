@@ -7,6 +7,7 @@ import EmailInput from "../../component/common/input/EmailInput";
 import { Lock, Mail } from "lucide-react";
 import PasswordInput from "../../component/common/input/PasswordInput";
 import Buttons from "../../component/common/Buttons";
+import { Link } from "react-router-dom";
 
 type LoginType = z.infer<typeof loginSchema>;
 
@@ -22,7 +23,8 @@ const Login = () => {
   };
 
   return (
-    <div className="background min-h-screen flexCenter paddingX">
+    <div className="background min-h-screen w-full flexCenter flex-col paddingX">
+      <div className="formContainer bg-surface">
       <FormContainer
         methods={methods}
         onSubmit={handleSubmit}
@@ -32,7 +34,7 @@ const Login = () => {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-font">
             Login
           </h2>
-          <p className="text-sm text-subtext">Access your dashboard</p>
+          <p className="text-sm text-subtext mt-2">Login to access your Unity account </p>
         </div>
         <EmailInput
           name="email"
@@ -55,6 +57,11 @@ const Login = () => {
           Login
         </Buttons>
       </FormContainer>
+      {/* link */}
+      <div className="w-full px-3 sm:px-4  md:px-6 flex items-center justify-center">
+        <p className="text-font">Don’t have an account? <Link to="/SignUp"> <span className="text-primary cursor-pointer"> Sign up </span> </Link> </p>
+      </div>
+      </div>
     </div>
   );
 };

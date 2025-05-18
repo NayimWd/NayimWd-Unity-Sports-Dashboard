@@ -10,6 +10,7 @@ import EmailInput from "../../component/common/input/EmailInput";
 import DropdownInput from "../../component/common/input/DropdownInput";
 import { registrationSchema } from "../../utils/Schema";
 import PhotoInputProps from "../../component/common/input/PhotoInputProps";
+import { Link } from "react-router-dom";
 
 type FormValues = z.infer<typeof registrationSchema>;
 
@@ -34,7 +35,8 @@ const RegistrationForm = () => {
   ];
 
   return (
-    <div className="background w-full min-h-screen py-10 paddingX  flex items-center justify-center">
+    <div className="background w-full min-h-screen py-5 paddingX  flex items-center justify-center">
+      <div className="formContainer bg-surface">
       <FormContainer
         methods={methods}
         onSubmit={handleSubmit}
@@ -44,7 +46,7 @@ const RegistrationForm = () => {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-font uppercase leading-7 tracking-wide mb-1">
             sign In
           </h2>
-          <p className="text-sm sm:text-base text-subtext">Register Account</p>
+          <p className="text-sm sm:text-base text-subtext mt-2">Let’s get you all set up so you can access your account</p>
         </div>
         <TextInput
           name="name"
@@ -87,6 +89,10 @@ const RegistrationForm = () => {
           Submit{" "}
         </Buttons>
       </FormContainer>
+      <div className="w-full px-3 sm:px-4  md:px-6 flex items-center justify-center">
+        <p className="text-font">Already have an account? <Link to="/login"> <span className="text-primary cursor-pointer"> Sign In </span> </Link> </p>
+      </div>
+      </div>
     </div>
   );
 };
