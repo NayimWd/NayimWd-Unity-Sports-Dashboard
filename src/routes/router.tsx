@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
     element: <SuspenseWrapper children={<Login />} />,
   },
   {
-    path: "/registration",
+    path: "/SignUp",
     element: <SuspenseWrapper children={<Registration />} />,
   },
   {

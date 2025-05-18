@@ -17,8 +17,6 @@ const PointTable = () => {
     refetchOnMountOrArgChange: true, // Refetch when the component mounts or the arg change
   })
 
-console.log(pointTable)
-
   const headerData = [
     "Team",
     "Match",
