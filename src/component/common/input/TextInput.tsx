@@ -9,14 +9,14 @@ interface TextInputProps {
   icon?: React.ReactNode;
 }
 
-const TextInput = ({ name, label, placeholder, icon }: TextInputProps) => {
+const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", icon }: TextInputProps) => {
   // importing useFormContext to get the form methods
   const { register, watch, formState, trigger } = useFormContext();
   const { errors } = formState;
 
   const [focused, setFocused] = useState(false);
   const value = watch(name);
-  const error = errors[name]?.message as string | undefined; 
+  const error = errors[name]?.message as string | undefined;
 
   // dynamic border color
   let variant: "primary" | "success" | "error" = "primary";

@@ -69,7 +69,7 @@ const PhotoInputProps = ({
                   <img
                     src={preview}
                     alt="Preview"
-                    className="absolute inset-0 p-1 object-cover w-full h-full rounded-lg"
+                    className="absolute inset-0 p-1 object-contain object-center w-full h-full rounded-lg"
                   />
                 ) : (
                   <div className="flex flex-col items-center">

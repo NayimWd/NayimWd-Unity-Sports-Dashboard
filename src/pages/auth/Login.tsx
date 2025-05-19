@@ -48,7 +48,6 @@ const Login = () => {
           placeholder="Enter your password"
           icon={<Lock size={16} />}
         />
-
         <Buttons
           variant="gradient"
           type="submit"
