@@ -35,3 +35,10 @@ export const loginSchema = z.object({
 });
 
 // date picker schema
+
+
+// blog schema
+export const blogSchema = z.object({
+  title: z.string().min(10).max(250),
+  description: z.string().min(50).max(600)
+})
