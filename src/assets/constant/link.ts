@@ -175,7 +175,7 @@ export const navLinks = {
           label: "Blogs",
         },
         {
-          path: "/blog/create",
+          path: "/dashboard/blog/create",
           icon: BookPlus,
           label: "Create Blog",
         },
