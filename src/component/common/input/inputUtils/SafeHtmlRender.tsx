@@ -34,4 +34,4 @@ const SafeHtmlRender = ({ html, className, style, fallback = <p className="text-
     )
 }
 
-export default SafeHtmlRender
+export default SafeHtmlRender;
