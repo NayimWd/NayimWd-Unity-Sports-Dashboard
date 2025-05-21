@@ -38,8 +38,8 @@ export const loginSchema = z.object({
 
 // blog schema
 export const blogSchema = z.object({
-  title: z.string().min(10).max(250),
-  content: z.string().min(50).max(600),
+  title: z.string().min(10).max(100),
+  content: z.string().min(30).max(600),
   author: z.string().min(5).max(50),
   tags: z
     .string()

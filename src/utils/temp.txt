@@ -467,3 +467,12 @@ export const navLinks = {
     },
   ],
 };
+
+
+photo: z
+    .array(
+      z.custom<File>((v) => v instanceof File && v.size > 0, {
+        message: "Each file must be a valid image",
+      })
+    )
+    .min(1, { message: "At least one blog image is required" }),
