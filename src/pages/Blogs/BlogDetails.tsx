@@ -68,7 +68,7 @@ const BlogDetails = () => {
   {isLoading ? (
     <BlogDetailsSkeleton />
   ) : (
-    <div className="paddingX w-full max-w-4xl mx-auto bg-surface my-20 py-12 px-6 rounded-2xl shadow-sm space-y-10">
+    <div className="paddingX lg:px-10 w-full max-w-5xl mx-auto bg-surface my-20 py-12 rounded-xl shadow-sm space-y-10">
       
       {/* Blog Banner Image */}
       <div className="w-full overflow-hidden rounded-xl shadow-md">
@@ -97,7 +97,7 @@ const BlogDetails = () => {
 
       {/* Blog Title + Metadata */}
       <div>
-        <h1 className="text-3xl font-bold font-inter text-foreground mb-4 leading-tight text-font">
+        <h1 className="w-full text-3xl font-bold font-inter text-foreground mb-4 leading-tight text-font">
           {blog?.title}
         </h1>
         <div className="flex justify-between text-sm text-muted-foreground uppercase text-subtext">
@@ -110,7 +110,7 @@ const BlogDetails = () => {
       </div>
 
       {/* Blog Content */}
-      <article className="prose lg:prose-lg dark:prose-invert font-merriweather text-subtext">
+      <article className="w-full text-base md:text-lg  font-merriweather text-subtext">
         {blog?.content}
       </article>
     </div>
@@ -118,7 +118,7 @@ const BlogDetails = () => {
 
   {/* Related Blogs */}
   <section className="my-16 paddingX max-w-6xl mx-auto">
-    <h2 className="text-2xl font-semibold text-center font-inter mb-8">
+    <h2 className="text-2xl md:text-3xl xl:text-4xl text-font font-semibold text-center font-inter mb-8">
       Related Blogs
     </h2>
     <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">

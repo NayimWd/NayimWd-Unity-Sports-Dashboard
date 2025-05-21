@@ -62,14 +62,14 @@ const TextAreaInput = ({ name, label, height = " min-h-[150px]", className, plac
     editorProps: {
       attributes: {
         class: cn(
-          `w-full rounded border px-4 py-2 font-inter text-font outline-none transition-all bg-surface focus:outline-none prose max-w-none ${height}`,
+          `w-full rounded border  px-4 py-2 font-inter text-font outline-none transition-all bg-surface focus:outline-none prose max-w-none ${height}`,
           (error && focused) ? "border-red-500" : (!error && focused && value) ? "border-green-500" : focused ? "border-primary" : "border-border",
           className
         ),
         placeholder: placeholder ?? "Write Your Thoughts",
         title: "text-area",
 
-        // 🚫 Disable Grammarly
+        //  Disable Grammarly
         "data-gramm": "false",
         "data-gramm_editor": "false",
         "data-enable-grammarly": "false",

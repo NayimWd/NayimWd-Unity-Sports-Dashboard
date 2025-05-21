@@ -1,5 +1,6 @@
 import z from "zod";
 
+
 // registration form schema
 export const registrationSchema = z.object({
   name: z
@@ -19,7 +20,7 @@ export const registrationSchema = z.object({
     .custom<File>((v) => v instanceof File && v.size > 0, {
       message: "Photo is required",
     })
-    .refine((file) => file.size <= 1 * 1024 * 1024, {
+    .refine((file) => file.size <= 2 * 1024 * 1024, {
       message: "File size must be less then 2MB",
     })
     .refine(file => file.type.startsWith("image/"), "File Must be an image"),
@@ -40,5 +41,16 @@ export const loginSchema = z.object({
 // blog schema
 export const blogSchema = z.object({
   title: z.string().min(10).max(250),
-  description: z.string().min(50).max(600)
+  content: z.string().min(50).max(600),
+  author: z.string().min(5).max(50),
+  tags: z.string().refine((tag) => ["news", "highlight", "tournaments", "awards"].includes(tag), {
+    message: "Please Select a tag"
+  }),
+  isPublished: z.boolean(),
+  photo: z.custom<File>((v) => v instanceof File && v.size > 0, {
+    message: "Blog Image is required"
+  })
+  .refine((file) => file.size <= 2 * 1024 * 1024, {
+    message: ""
+  })
 })

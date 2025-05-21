@@ -24,14 +24,14 @@ const CreateBlogs = () => {
 
   return (
     <div className="w-full">
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-font">Create Blogs</h1>
+      <h1 className="paddingX text-2xl sm:text-3xl md:text-4xl font-semibold text-font">Create Blogs</h1>
       <div className="paddingX w-full max-w-5xl mx-auto bg-surface my-20 py-12 px-6 rounded-xl shadow-sm space-y-10">
         <FormContainer
           methods={methods}
           onSubmit={handleSubmit}
           className=" w-full space-y-6 paddingX">
           <TextInput name="title" label="Title" placeholder="Write Title" />
-          <TextAreaInput label="Blog" placeholder="Write Your Blog" name="description" />
+          <TextAreaInput label="Blog" placeholder="Write Your Blog" name="description" height="min-h-[300px]"/>
           <Buttons iconRight={<Plus size={16}/>} variant="primary" className=" rounded">Create</Buttons>
         </FormContainer>
       </div>
