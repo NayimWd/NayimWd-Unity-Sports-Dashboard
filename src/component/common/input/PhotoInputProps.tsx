@@ -13,7 +13,7 @@ interface PhotoInputProps
   className?: string;
 }
 
-const PhotoInputProps = ({
+const PhotoInput = ({
   name,
   label,
   icon,
@@ -26,6 +26,7 @@ const PhotoInputProps = ({
   } = useFormContext();
 
   const error = errors[name]?.message as string | undefined;
+
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -42,6 +43,7 @@ const PhotoInputProps = ({
               <input
                 type="file"
                 accept="image/*"
+
                 ref={inputRef}
                 onChange={(e) => {
                   const file = e.target.files?.[0];
@@ -87,7 +89,7 @@ const PhotoInputProps = ({
   );
 };
 
-export default PhotoInputProps;
+export default PhotoInput;
 
 const inputVariants = cva(
   "w-full bg-surface rounded-md border text-sm border-inputBorder appearance-none transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary",

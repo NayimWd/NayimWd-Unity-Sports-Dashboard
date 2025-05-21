@@ -7,6 +7,9 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Buttons from "../../component/common/Buttons"
 import { Plus } from "lucide-react"
+import DropdownInput from "../../component/common/input/DropdownInput"
+import ToggleInput from "../../component/common/input/ToggleInput"
+import PhotoArrayInput from "../../component/common/input/PhotoArrayInput"
 
 type blogType = z.infer<typeof blogSchema>;
 
@@ -16,6 +19,13 @@ const CreateBlogs = () => {
     resolver: zodResolver(blogSchema),
     mode: "onSubmit"
   })
+
+  let tags = [
+    { label: "news", value: "news" },
+    { label: "highlight", value: "highlight" },
+    { label: "tournaments", value: "tournaments" },
+    { label: "awards", value: "awards" }
+  ];
 
   const handleSubmit = (data: blogType) => {
     console.log(data)
@@ -31,7 +41,11 @@ const CreateBlogs = () => {
           onSubmit={handleSubmit}
           className=" w-full space-y-6 paddingX">
           <TextInput name="title" label="Title" placeholder="Write Title" />
-          <TextAreaInput label="Blog" placeholder="Write Your Blog" name="description" height="min-h-[300px]"/>
+          <TextInput name="author" label="Author" placeholder="Author Name" />
+          <DropdownInput label="Tags" name="tags" placeholder="Select an option" options={tags}/>
+          <PhotoArrayInput label="Image" name="photo" className="w-1/4" />
+          <TextAreaInput label="Blog" placeholder="Write Your Blog" name="content" height="min-h-[300px]"/>
+          <ToggleInput label="Publish" name="isPublished"/>
           <Buttons iconRight={<Plus size={16}/>} variant="primary" className=" rounded">Create</Buttons>
         </FormContainer>
       </div>
