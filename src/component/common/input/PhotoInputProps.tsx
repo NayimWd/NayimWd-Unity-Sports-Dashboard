@@ -63,7 +63,7 @@ const PhotoInput = ({
                 onClick={() => inputRef.current?.click()}
                 className={cn(
                   inputVariants({ variant: error ? "error" : "default" }),
-                  "cursor-pointer h-40 flex items-center justify-center text-muted relative overflow-hidden",
+                  "cursor-pointer h-40 flex items-center border-dashed justify-center text-muted relative overflow-hidden",
                   className
                 )}
               >

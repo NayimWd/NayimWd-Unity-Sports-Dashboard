@@ -76,5 +76,4 @@ export interface BlogDetails {
   createdAt: string;
   photo: [string];
   tags: string;
-  
 }

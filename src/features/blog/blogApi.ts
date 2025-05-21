@@ -24,6 +24,13 @@ export const blogApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: ApiResponse<Blogs>) => response.data,
     }),
+    createBlog: builder.mutation({
+      query: (data) => ({
+        url: "blog/create",
+        method: "POST",
+        body: data
+      })
+    })
   }),
 });
 
