@@ -1,7 +1,7 @@
 import { ApiResponse, BlogDetails, Blogs } from "../../utils/types";
 import { apiSlice } from "../api/apiSlice";
 
-export const blogApi = apiSlice.injectEndpoints({
+ const blogApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getBlogs: builder.query<Blogs, { page: number; limit: number }>({
       query: ({ page, limit }) => ({
