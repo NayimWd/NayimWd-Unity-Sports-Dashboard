@@ -7,6 +7,7 @@ import useToggle from "../../hooks/useToggle";
 import Sidebar from "../common/Sidebar";
 import { Outlet } from "react-router-dom";
 
+
 const DashBoardLayout: React.FC = () => {
   // theme
   const theme = useSelector((state: RootState) => state.theme.mode);

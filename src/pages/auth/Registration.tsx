@@ -12,6 +12,9 @@ import { registrationSchema } from "../../utils/Schema";
 import { Link } from "react-router-dom";
 import { useSignUpMutation } from "../../features/auth/authApi";
 import PhotoInput from "../../component/common/input/PhotoInputProps";
+import { ErrorToast, SuccessToast } from "../../utils/toastUtils";
+import { useEffect } from "react";
+
 
 type FormValues = z.infer<typeof registrationSchema>;
 
@@ -40,14 +43,25 @@ const RegistrationForm = () => {
       if (data.photo) {
         formData.append("photo", data.photo);
       }
-      const res = await signUp(formData);
-      console.log("Success:", res);
+       await signUp(formData);
+
     } catch (err) {
-      console.error("Error:", err);
+
     }
-    console.log("Submitted", data);
-    methods.reset();
+
+    // methods.reset();
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      SuccessToast({ msg: "success", position: "bottom-center" })
+    }
+
+    if (isError) {
+      ErrorToast({ msg: "Error", position: "top-center" })
+    }
+  }, [isSuccess, isError])
+
 
   const dropdownOptions = [
     { label: "player", value: "player" },
@@ -57,6 +71,7 @@ const RegistrationForm = () => {
 
   return (
     <div className="background w-full min-h-screen py-5 paddingX  flex items-center justify-center">
+
       <div className="formContainer bg-surface">
         <FormContainer
           methods={methods}
@@ -87,7 +102,7 @@ const RegistrationForm = () => {
             icon={<Phone size={16} />}
             placeholder="Inter Your Phone Number"
           />
-           <PasswordInput
+          <PasswordInput
             name="password"
             label="Password"
             icon={<LockIcon size={16} />}

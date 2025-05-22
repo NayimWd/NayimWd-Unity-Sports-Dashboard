@@ -8,6 +8,7 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/router.tsx";
 import ThemeWrapper from "./utils/ThemeWrapper.tsx";
 import ScrollToTop from "./utils/scrollToTop.tsx";
+import { Toaster } from "react-hot-toast";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById("root")!).render(
         <ThemeWrapper>
           <ScrollToTop />
           <RouterProvider router={router} />
+          <Toaster/>
         </ThemeWrapper>
       </Provider>
     </ErrorBoundaryWrapper>

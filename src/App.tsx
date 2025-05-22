@@ -1,10 +1,11 @@
-import { Outlet } from "react-router-dom";
+// import { Outlet } from "react-router-dom";
 import "./App.css";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <main className="overflow-x-hidden w-full h-screen  bg-bg">
-      <Outlet />
+      <Toaster/>
     </main>
   );
 }
