@@ -1,12 +1,12 @@
 import { cva, VariantProps } from "class-variance-authority";
-import { InputHTMLAttributes, useRef, useState } from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import { InputHTMLAttributes, useEffect, useRef, useState } from "react";
+import { Controller, useFormContext, useWatch } from "react-hook-form";
 import cn from "../../../utils/cn";
 import { ImageIcon } from "lucide-react";
 
 interface PhotoInputProps
   extends InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof inputVariants> {
+  VariantProps<typeof inputVariants> {
   name: string;
   label: string;
   icon?: React.ReactNode;
@@ -30,6 +30,14 @@ const PhotoInput = ({
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
+
+  // reset preview on form reset
+  const watchFile = useWatch({ name, control });
+  useEffect(() => {
+    if (!watchFile) {
+      setPreview(null);
+    }
+  }, [watchFile])
 
   return (
     <div>

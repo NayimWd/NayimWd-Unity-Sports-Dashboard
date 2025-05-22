@@ -1,7 +1,7 @@
 import { cva, VariantProps } from "class-variance-authority";
 import { ImageIcon } from "lucide-react";
-import { InputHTMLAttributes, ReactNode, useRef, useState } from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import { InputHTMLAttributes, ReactNode, useEffect, useRef, useState } from "react";
+import { Controller, useFormContext, useWatch } from "react-hook-form";
 import cn from "../../../utils/cn";
 
 interface photoArrayInputProps
@@ -25,6 +25,14 @@ const PhotoArrayInput = ({name, label, icon, className, ...reset}: photoArrayInp
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [previews, setPreviews] = useState<string[]>([]);
+
+    // reset preview on form reset
+      const watchFile = useWatch({ name, control });
+      useEffect(() => {
+        if (!watchFile) {
+          setPreviews([]);
+        }
+      }, [watchFile])
 
 
 
