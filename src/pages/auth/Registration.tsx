@@ -9,11 +9,11 @@ import TextInput from "../../component/common/input/TextInput";
 import EmailInput from "../../component/common/input/EmailInput";
 import DropdownInput from "../../component/common/input/DropdownInput";
 import { registrationSchema } from "../../utils/Schema";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSignUpMutation } from "../../features/auth/authApi";
 import PhotoInput from "../../component/common/input/PhotoInputProps";
-import { ErrorToast, SuccessToast } from "../../utils/toastUtils";
-import { useEffect } from "react";
+import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
+import toast from "react-hot-toast";
 
 
 type FormValues = z.infer<typeof registrationSchema>;
@@ -21,8 +21,9 @@ type FormValues = z.infer<typeof registrationSchema>;
 const RegistrationForm = () => {
 
   // send data throw redux toolkit query
-  const [signUp, { data: blog, isLoading, isError, isSuccess }] = useSignUpMutation();
+  const [signUp, { isLoading }] = useSignUpMutation();
 
+  const navigate = useNavigate();
 
   const methods = useForm<FormValues>({
     resolver: zodResolver(registrationSchema),
@@ -32,7 +33,10 @@ const RegistrationForm = () => {
     },
   });
 
+
   const handleSubmit = async (data: FormValues) => {
+    const loadingId = LoadingToast({ msg: "Register Inprogress" })
+
     try {
       const formData = new FormData();
       formData.append("name", data.name);
@@ -43,24 +47,18 @@ const RegistrationForm = () => {
       if (data.photo) {
         formData.append("photo", data.photo);
       }
-       await signUp(formData);
+      await signUp(formData).unwrap();
+      toast.dismiss(loadingId);
+      SuccessToast({ msg: "success", position: "bottom-center" })
+      navigate("/login")
 
     } catch (err) {
-
-    }
-
-    // methods.reset();
-  };
-
-  useEffect(() => {
-    if (isSuccess) {
-      SuccessToast({ msg: "success", position: "bottom-center" })
-    }
-
-    if (isError) {
+      toast.dismiss(loadingId);
       ErrorToast({ msg: "Error", position: "top-center" })
     }
-  }, [isSuccess, isError])
+
+    methods.reset();
+  };
 
 
   const dropdownOptions = [

@@ -38,9 +38,10 @@ export const ErrorToast = ({msg, position, duration}: ToastProps) => {
   });
 };
 
-export const LoadingToast = ({msg, position}: ToastProps) => {
+export const LoadingToast = ({msg, position, duration}: ToastProps) => {
   return toast.loading(msg || "Loading...", {
     position: position ? position : "top-center",
+    duration: duration ?? 6000,
     style: {
       background: "var(--primary)",
       color: "#fff",
