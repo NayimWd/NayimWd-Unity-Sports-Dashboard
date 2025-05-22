@@ -15,6 +15,7 @@ export const registrationSchema = z.object({
     .refine((val) => ["player", "manager", "umpire"].includes(val), {
       message: "Please select a role",
     }),
+  phoneNumber: z.string().min(10, "Miminum 10 Digits are required").max(12),
   photo: z
     .custom<File>((v) => v instanceof File && v.size > 0, {
       message: "Photo is required",
