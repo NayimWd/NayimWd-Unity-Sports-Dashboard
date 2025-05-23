@@ -28,7 +28,7 @@ export const registrationSchema = z.object({
 
 // login form schema
 export const loginSchema = z.object({
-  email: z.string().email("valid emial required"),
+  email: z.string().email("valid emial is required"),
   password: z
     .string()
     .min(6, "At least 6 characters")
