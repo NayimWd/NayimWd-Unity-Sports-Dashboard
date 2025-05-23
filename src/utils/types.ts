@@ -22,6 +22,19 @@ export interface PaginateData<T> {
   pagination: PaginationMeta;
 }
 
+// --------------------------------------------------------------------- //
+// --------------------------- USER ----------------------------------//
+// -------------------------------------------------------------------- //
+export interface IUser {
+  _id: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  role: string;
+  photo: string;
+}
+
+
 // tournament type
 export interface Tournament {
   _id: string;
