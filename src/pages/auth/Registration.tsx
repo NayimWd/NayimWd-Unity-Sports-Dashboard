@@ -54,7 +54,7 @@ const RegistrationForm = () => {
 
     } catch (err) {
       toast.dismiss(loadingId);
-      ErrorToast({ msg: "Error", position: "top-center" })
+      ErrorToast({ msg: "SignUp Failed!", position: "top-center" })
     }
 
     methods.reset();
