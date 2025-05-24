@@ -4,7 +4,7 @@ import { RootState } from "../app/store/store"; // Adjust the path to where your
 
 const Dashboard = () => {
 
-  const user = useSelector((state: RootState) => state.auth)
+  const user = useSelector((state: RootState) => state.auth?.user)
 
   console.log(user)
 
