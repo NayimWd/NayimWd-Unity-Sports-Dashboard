@@ -6,9 +6,13 @@ import { ThemeType } from "../../utils/types";
 import useToggle from "../../hooks/useToggle";
 import Sidebar from "../common/Sidebar";
 import { Outlet } from "react-router-dom";
+import UseAuthInit from "../../pages/auth/useAuthInit";
 
 
 const DashBoardLayout: React.FC = () => {
+ // persist user 
+  UseAuthInit();
+
   // theme
   const theme = useSelector((state: RootState) => state.theme.mode);
 
