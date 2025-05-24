@@ -33,10 +33,10 @@ const Login = () => {
     const loadingId = LoadingToast({ msg: "Login In-Progress" });
 
     try {
-  
+
       // send login request
       const res = await signIn({ email: data.email, password: data.password }).unwrap();
-      dispatch(setCredentials(res.user))
+      dispatch(setCredentials(res?.data?.user))
       // hide loading toast
       toast.dismiss(loadingId);
       // set success toast
@@ -50,8 +50,7 @@ const Login = () => {
       ErrorToast({ msg: "Login Failed!" })
     }
 
-    console.log(data);
-    // methods.reset();
+    methods.reset();
   };
 
   return (

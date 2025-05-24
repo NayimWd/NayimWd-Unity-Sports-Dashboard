@@ -1,27 +1,18 @@
-import { ErrorToast, SuccessToast } from "../utils/toastUtils";
-import Buttons from "../component/common/Buttons";
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store/store"; // Adjust the path to where your store is defined
 
 
 const Dashboard = () => {
 
-  const handleSuccess = () => {
-    SuccessToast({msg: "Green success", position: "bottom-center"});
+  const user = useSelector((state: RootState) => state.auth)
 
-  }
-  const handleError = () => {
-    ErrorToast({msg: "REd Error", position: "top-center"})
-  }
+  console.log(user)
 
   return (
     <div className="min-h-screen flex flex-col">
-     
+
       <h1 className="text-3xl font-bold text-font">Dashboard</h1>
-        <Buttons className="my-5" onClick={handleSuccess}>
-            Success
-        </Buttons>
-        <Buttons onClick={handleError}>
-            Error
-        </Buttons>
+
     </div>
   );
 };
