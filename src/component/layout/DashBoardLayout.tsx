@@ -6,7 +6,7 @@ import { ThemeType } from "../../utils/types";
 import useToggle from "../../hooks/useToggle";
 import Sidebar from "../common/Sidebar";
 import { Outlet } from "react-router-dom";
-import UseAuthInit from "../../pages/auth/useAuthInit";
+import UseAuthInit from "../../pages/auth/UseAuthInit";
 
 
 const DashBoardLayout: React.FC = () => {

@@ -1,15 +1,16 @@
 import { lazy } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import SuspenseWrapper from "../utils/SuspenseWrapper";
+import ProtectedRoute from "./ProtectedRoute";
 const Login = lazy(() => import("../pages/auth/Login"));
 const Registration = lazy(() => import("../pages/auth/Registration"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const Layout = lazy(() => import("../component/layout/DashBoardLayout"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
-const PointTable = lazy(()=> import("../pages/pointTable/PointTable"));
-const Blogs = lazy(()=> import("../pages/Blogs/Blogs"));
-const BlogDetails = lazy(()=> import("../pages/Blogs/BlogDetails"));
-const CreateBlog = lazy(()=> import("../pages/Blogs/CreateBlogs"))
+const PointTable = lazy(() => import("../pages/pointTable/PointTable"));
+const Blogs = lazy(() => import("../pages/Blogs/Blogs"));
+const BlogDetails = lazy(() => import("../pages/Blogs/BlogDetails"));
+const CreateBlog = lazy(() => import("../pages/Blogs/CreateBlogs"))
 
 
 export const router = createBrowserRouter([
@@ -27,33 +28,37 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <SuspenseWrapper children={<Layout />} />,
+    element: (
+      <ProtectedRoute>
+        <SuspenseWrapper children={<Layout />} />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
         element: <SuspenseWrapper children={<Dashboard />} />,
       },
       {
-        path:"pointTable",
-        element: <SuspenseWrapper children={<PointTable/>} />
+        path: "pointTable",
+        element: <SuspenseWrapper children={<PointTable />} />
       },
-        /* blog */
+      /* blog */
       {
         path: "blogs",
-        element: <SuspenseWrapper children={<Blogs/>}/>
+        element: <SuspenseWrapper children={<Blogs />} />
       },
       {
         path: "blogs/details/:blogId",
-        element: <SuspenseWrapper children={<BlogDetails/>}/>
+        element: <SuspenseWrapper children={<BlogDetails />} />
       },
       {
         path: "blog/create",
-        element: <SuspenseWrapper children={<CreateBlog/>} />
+        element: <SuspenseWrapper children={<CreateBlog />} />
       }
     ],
   },
   {
     path: "*",
-    element: <SuspenseWrapper children={<NotFound/>}/>,
+    element: <SuspenseWrapper children={<NotFound />} />,
   },
 ]);

@@ -1,12 +1,5 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../app/store/store"; // Adjust the path to where your store is defined
-
 
 const Dashboard = () => {
-
-  const user = useSelector((state: RootState) => state.auth?.user)
-
-  console.log(user)
 
   return (
     <div className="min-h-screen flex flex-col">
