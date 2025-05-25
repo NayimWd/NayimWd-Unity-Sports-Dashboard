@@ -2,12 +2,9 @@ import React, { useRef } from "react";
 import useClickOutSide from "../../hooks/useClickOutSide";
 import { navLinks } from "../../assets/constant/link";
 import SidebarItem from "./sidebarItem";
-import { LogOut } from "lucide-react";
-import { useSignOutMutation } from "../../features/auth/authApi";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { clearCredenTials } from "../../features/auth/authSlice";
-import { ErrorToast, SuccessToast } from "../../utils/toastUtils";
+import { useCurrentUserQuery } from "../../features/auth/authApi";
+import SidebarProfile from "./profile/SidebarProfile";
+
 
 
 interface SidebarProps {
@@ -16,31 +13,20 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
-  // access signout from authApi
-  const [signOut] = useSignOutMutation();
-  // access current user
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // access current user
+  const { data: user } = useCurrentUserQuery();
 
   const sidebarRef = useRef<HTMLElement>(null!);
 
   useClickOutSide(sidebarRef, () => setIsOpen(false));
 
-  // logout function 
-  const handleLogout = async () => {
-    try {
-      await signOut({}).unwrap()
-      dispatch(clearCredenTials())
-      navigate("/login")
-      SuccessToast({ msg: "Logout Successfull" })
-    } catch (error) {
-      ErrorToast({ msg: "Sign Out Failed!", position: "top-center", duration: 3000 });
-    }
-  }
 
 
-  const userRole = "admin";
+  type UserRole = keyof typeof navLinks;
+  const userRole: UserRole = (user?.role && ["admin", "manager", "player"].includes(user.role))
+    ? user.role as UserRole
+    : "player";
 
   return (
     <aside
@@ -53,11 +39,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
           <SidebarItem key={index} link={link} />
         ))}
       </div>
-      <div className="absolute bottom-20 bg-surface h-10 w-full flex items-center justify-center text-primary shadow">
-        <div onClick={handleLogout} className="flex gap-2 justify-center items-center cursor-pointer p-2">
-          <LogOut size={16} />
-          <p>SIGN OUT</p>
-        </div>
+      <div className="w-full absolute -bottom-[2px] left-0 bg-bg shadow">
+          <SidebarProfile/>
       </div>
     </aside>
   );

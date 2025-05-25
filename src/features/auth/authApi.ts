@@ -1,4 +1,4 @@
-import { IUser } from "../../utils/types";
+import { ApiResponse, IUser } from "../../utils/types";
 import { apiSlice } from "../api/apiSlice";
 
 const authApi = apiSlice.injectEndpoints({
@@ -21,23 +21,22 @@ const authApi = apiSlice.injectEndpoints({
       query: () => ({
         url: "auth/logout",
         method: "POST",
-        credentials: "include"
+        credentials: "include",
       }),
     }),
     currentUser: builder.query<IUser, void>({
       query: () => ({
         url: "auth/current_user",
       }),
+      transformResponse: (respoinse: ApiResponse<IUser>) => respoinse.data,
       keepUnusedDataFor: 0,
     }),
-    refreshToken: builder.query<IUser, void>({
-      query: () => ({
-        url: "auth/refreshToken",
-        method: "POST",
-        credentials: "include",
-      })
-    })
   }),
 });
 
-export const { useSignUpMutation, useSignInMutation, useSignOutMutation, useCurrentUserQuery, useRefreshTokenQuery } = authApi;
+export const {
+  useSignUpMutation,
+  useSignInMutation,
+  useSignOutMutation,
+  useCurrentUserQuery,
+} = authApi;

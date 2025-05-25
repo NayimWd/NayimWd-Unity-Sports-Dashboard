@@ -1,22 +1,24 @@
 import { useDispatch } from "react-redux"
 import { useEffect } from "react";
 import { setCredentials } from "../../features/auth/authSlice";
-import { useRefreshTokenQuery } from "../../features/auth/authApi";
+import { useCurrentUserQuery } from "../../features/auth/authApi";
 
 const UseAuthInit = () => {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  const { data: user, isSuccess } = useRefreshTokenQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  });
+    const { data: user, isSuccess } = useCurrentUserQuery(undefined, {
+        refetchOnMountOrArgChange: true,
+    });
 
-  useEffect(() => {
-    if (isSuccess && (user as any)?.data) {
-      dispatch(setCredentials((user as any).data)); // <- .data.data because server returns { success, message, data }
-    }
-  }, [user, isSuccess, dispatch]);
+    console.log(user)
 
-  return null; // prevent accidental UI rendering
+    useEffect(() => {
+        if (isSuccess && user._id) {
+            dispatch(setCredentials((user)));
+        }
+    }, [user, isSuccess, dispatch]);
+
+    return null; // For prevent accidental UI rendering
 };
 
 export default UseAuthInit;
