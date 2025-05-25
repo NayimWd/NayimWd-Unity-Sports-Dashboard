@@ -30,7 +30,14 @@ const authApi = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 0,
     }),
+    refreshToken: builder.query<IUser, void>({
+      query: () => ({
+        url: "auth/refreshToken",
+        method: "POST",
+        credentials: "include",
+      })
+    })
   }),
 });
 
-export const { useSignUpMutation, useSignInMutation, useSignOutMutation, useCurrentUserQuery } = authApi;
+export const { useSignUpMutation, useSignInMutation, useSignOutMutation, useCurrentUserQuery, useRefreshTokenQuery } = authApi;

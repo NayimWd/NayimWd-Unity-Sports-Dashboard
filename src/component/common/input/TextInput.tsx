@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BaseInput from "./BaseInput";
 import { useFormContext } from "react-hook-form";
+import { BadgeAlert } from "lucide-react";
 
 interface TextInputProps {
   name: string;
@@ -49,7 +50,8 @@ const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", ico
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
-        {error && <p className="errorText"> {error} </p>}
+         {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14}/> {error}</p>
+        }
       </div>
     </div>
   );

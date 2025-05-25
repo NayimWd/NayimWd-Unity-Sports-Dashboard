@@ -1,5 +1,5 @@
 import { cva, VariantProps } from "class-variance-authority";
-import { ImageIcon } from "lucide-react";
+import { BadgeAlert, ImageIcon } from "lucide-react";
 import { InputHTMLAttributes, ReactNode, useEffect, useRef, useState } from "react";
 import { Controller, useFormContext, useWatch } from "react-hook-form";
 import cn from "../../../utils/cn";
@@ -98,7 +98,8 @@ const PhotoArrayInput = ({name, label, icon, className, ...reset}: photoArrayInp
             </>
           )}
         />
-        {error && <p className="text-toastErrorText text-sm mt-1">{error}</p>}
+         {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14}/> {error}</p>
+        }
       </div>
     </div>
   )

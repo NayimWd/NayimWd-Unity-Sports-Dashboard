@@ -2,7 +2,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import { InputHTMLAttributes, useEffect, useRef, useState } from "react";
 import { Controller, useFormContext, useWatch } from "react-hook-form";
 import cn from "../../../utils/cn";
-import { ImageIcon } from "lucide-react";
+import { BadgeAlert, ImageIcon } from "lucide-react";
 
 interface PhotoInputProps
   extends InputHTMLAttributes<HTMLInputElement>,
@@ -91,7 +91,8 @@ const PhotoInput = ({
             </>
           )}
         />
-        {error && <p className="text-toastErrorText text-sm mt-1">{error}</p>}
+         {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14}/> {error}</p>
+        }
       </div>
     </div>
   );
