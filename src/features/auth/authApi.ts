@@ -17,6 +17,13 @@ const authApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    signOut: builder.mutation({
+      query: () => ({
+        url: "auth/logout",
+        method: "POST",
+        credentials: "include"
+      }),
+    }),
     currentUser: builder.query<IUser, void>({
       query: () => ({
         url: "auth/current_user",
@@ -26,4 +33,4 @@ const authApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useSignUpMutation, useSignInMutation, useCurrentUserQuery } = authApi;
+export const { useSignUpMutation, useSignInMutation, useSignOutMutation, useCurrentUserQuery } = authApi;
