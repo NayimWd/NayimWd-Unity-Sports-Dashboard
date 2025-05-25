@@ -6,6 +6,7 @@ import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import cn from "../../../utils/cn";
 import { CustomHeading } from "./inputUtils/CustomHeading";
+import { BadgeAlert } from "lucide-react";
 
 
 interface TextAreaProps {
@@ -172,7 +173,8 @@ const TextAreaInput = ({ name, label, height = " min-h-[150px]", className, plac
             Loading editor...
           </div>
         )}
-        {error && <p className="errorText">{error.message}</p>}
+         {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14}/> {error.message}</p>
+        }
       </div>
     </div>
   )

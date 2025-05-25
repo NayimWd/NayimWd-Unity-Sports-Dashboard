@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import BaseToggle from "./BaseToggle";
+import { BadgeAlert } from "lucide-react";
 
 interface toggleInputProps {
     name: string;
@@ -48,7 +49,8 @@ const ToggleInput = ({ name, label, disabled }: toggleInputProps) => {
                 />
                 <input type="hidden" {...register(name)} />
             </div>
-            {error && <p className="errorText">{error}</p>}
+             {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14}/> {error}</p>
+        }
         </div>
     )
 }

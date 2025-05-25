@@ -3,7 +3,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import cn from "../../../utils/cn";
 import { cva, VariantProps } from "class-variance-authority";
 import { InputHTMLAttributes, useRef, useState } from "react";
-import { CalendarIcon } from "lucide-react";
+import { BadgeAlert, CalendarIcon } from "lucide-react";
 import "react-day-picker/dist/style.css";
 import { format } from "date-fns";
 import useClickOutSide from "../../../hooks/useClickOutSide";
@@ -90,9 +90,8 @@ const DateInput = ({
           {icon ?? <CalendarIcon size={16} />}
         </span>
       </div>
-      {error && isTouched && (
-        <p className="text-sm text-toastErrorText mt-1">{error}</p>
-      )}
+       {(error && isTouched) && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14}/> {error}</p>
+        }
     </div>
   );
 };

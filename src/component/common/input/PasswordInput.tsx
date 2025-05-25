@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import BaseInput from "./BaseInput";
-import { Eye, EyeOff } from "lucide-react";
+import { BadgeAlert, Eye, EyeOff } from "lucide-react";
 
 interface PasswordInputProps {
   name: string;
@@ -66,7 +66,8 @@ const PasswordInput = ({
         >
           {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
         </button>
-        {error && <p className="errorText">{error}</p>}
+         {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14}/> {error}</p>
+        }
       </div>
     </div>
   );

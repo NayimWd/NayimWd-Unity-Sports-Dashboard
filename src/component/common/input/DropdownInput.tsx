@@ -1,4 +1,4 @@
-import { ChevronDown } from "lucide-react";
+import { BadgeAlert, ChevronDown } from "lucide-react";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -69,7 +69,8 @@ const DropdownInput = ({
           className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-muted"
         />
       </div>
-      {error && <p className="errorText">{error}</p>}
+       {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14}/> {error}</p>
+        }
     </div>
   );
 };
