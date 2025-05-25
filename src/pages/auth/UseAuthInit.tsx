@@ -7,13 +7,14 @@ const UseAuthInit = () => {
     // fetch current user 
     const dispatch = useDispatch();
 
-    const { data, isSuccess } = useCurrentUserQuery(undefined, { refetchOnMountOrArgChange: true })
+    const { data: user, isSuccess } = useCurrentUserQuery(undefined, { refetchOnMountOrArgChange: true })
+
 
     useEffect(() => {
-        if (isSuccess && data) {
-            dispatch(setCredentials(data))
+        if (isSuccess && user) {
+            dispatch(setCredentials((user as any).data))
         }
-    }, [data, isSuccess, dispatch])
+    }, [user, isSuccess, dispatch])
 }
 
 export default UseAuthInit;
