@@ -1,14 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-
-const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_API_URL_LOCAL as string,
-  credentials: "include",
-});
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { baseQueryWithAuth } from "./baseQueryWithReauth";
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery,
+  baseQuery: baseQueryWithAuth,
   endpoints: () => ({}),
 });
-
