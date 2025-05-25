@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BaseInput from "./BaseInput";
 import { useFormContext } from "react-hook-form";
+import { BadgeAlert } from "lucide-react";
 
 interface EmailInputProps {
   name: string;
@@ -13,6 +14,7 @@ const EmailInput = ({ name, label, placeholder, icon }: EmailInputProps) => {
   // import useFormContext to get the form methods
   const { register, watch, formState, trigger } = useFormContext();
   const { errors } = formState;
+
 
   // focus state
   const [focused, setFocused] = useState(false);
@@ -50,7 +52,9 @@ const EmailInput = ({ name, label, placeholder, icon }: EmailInputProps) => {
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
-        {error && <p className="errorText">{error}</p>}
+        {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14}/> {error}</p>
+        }
+        
       </div>
     </div>
   );
