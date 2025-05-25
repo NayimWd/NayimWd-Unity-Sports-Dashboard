@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux"
 import { RootState } from "../app/store/store"
 import { Navigate } from "react-router-dom";
-import { ReactNode } from "react";
 import { useCurrentUserQuery } from "../features/auth/authApi";
 import Loader from "../component/common/loader/Loader";
+import { ReactNode } from "react";
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -20,11 +20,11 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     return <Loader />
   }
 
-  if (!isAuthenticated || !user?._id) {
-    return <Navigate to="/login" />;
+  if (!isAuthenticated && !user?._id) {
+    <Navigate to="/login" replace />
   }
 
-  return  <>{children && <Navigate to="/dashboard"/>}</> ;
+  return <> {children}</>;
 }
 
 export default ProtectedRoute

@@ -1,7 +1,9 @@
 import { lazy } from "react";
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import SuspenseWrapper from "../utils/SuspenseWrapper";
 import ProtectedRoute from "./ProtectedRoute";
+import RedirectRoute from "./RedirectRoute";
+import PublicRoute from "./PublicRoute";
 const Login = lazy(() => import("../pages/auth/Login"));
 const Registration = lazy(() => import("../pages/auth/Registration"));
 const NotFound = lazy(() => import("../pages/NotFound"));
@@ -16,15 +18,15 @@ const CreateBlog = lazy(() => import("../pages/Blogs/CreateBlogs"))
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navigate to="/login" />,
+    element: <RedirectRoute />,
   },
   {
     path: "/login",
-    element: <SuspenseWrapper children={<Login />} />,
+    element: <PublicRoute> <SuspenseWrapper children={<Login />} /> </PublicRoute>,
   },
   {
     path: "/SignUp",
-    element: <SuspenseWrapper children={<Registration />} />,
+    element: <PublicRoute> <SuspenseWrapper children={<Registration />} /> </PublicRoute>,
   },
   {
     path: "/dashboard",
