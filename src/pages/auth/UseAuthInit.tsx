@@ -10,8 +10,6 @@ const UseAuthInit = () => {
         refetchOnMountOrArgChange: true,
     });
 
-    console.log(user)
-
     useEffect(() => {
         if (isSuccess && user._id) {
             dispatch(setCredentials((user)));
