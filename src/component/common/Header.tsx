@@ -2,7 +2,7 @@ import ThemeSwitcher from "./ThemeSwitcher";
 import { ChartNoAxesGantt, LayoutDashboard, Settings, User2 } from "lucide-react";
 import Buttons from "./Buttons";
 import { Link, useNavigate } from "react-router-dom";
-import {  useSignOutMutation } from "../../features/auth/authApi";
+import { useSignOutMutation } from "../../features/auth/authApi";
 import { useRef, useState } from "react";
 import ProfileDropdown from "./dropdown/ProfileDropdown";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +19,7 @@ const Header = ({ handleToggle }: HeaderProps) => {
   // access signout from authApi
   const [signOut] = useSignOutMutation();
   // access current user
-  const {user} = useSelector((state: RootState) => state.auth)
+  const { user } = useSelector((state: RootState) => state.auth)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
