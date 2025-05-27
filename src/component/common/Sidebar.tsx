@@ -40,7 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
           <SidebarItem key={index} link={link} />
         ))}
       </div>
-      <div className="w-full absolute -bottom-[2px] left-0 bg-bg shadow">
+      <div className="w-full absolute bottom-0 left-0 bg-bg shadow">
         <Tooltip position="left" content="SignOut">
           <SidebarProfile/>
           </Tooltip>

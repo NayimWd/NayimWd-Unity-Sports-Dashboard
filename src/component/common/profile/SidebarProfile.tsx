@@ -1,15 +1,17 @@
 import { LogOut } from "lucide-react"
-import { useCurrentUserQuery, useSignOutMutation } from "../../../features/auth/authApi";
-import { useDispatch } from "react-redux";
+import { useSignOutMutation } from "../../../features/auth/authApi";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearCredenTials } from "../../../features/auth/authSlice";
 import { ErrorToast, SuccessToast } from "../../../utils/toastUtils";
+import { RootState } from "../../../app/store/store";
+
 
 const SidebarProfile = () => {
     // access signout from authApi
     const [signOut] = useSignOutMutation();
     // access current user
-    const { data: user } = useCurrentUserQuery();
+    const { user } = useSelector((state: RootState) => state.auth);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
