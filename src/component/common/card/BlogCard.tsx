@@ -27,7 +27,7 @@ const BlogCard = ({ _id, title, photo, author, tags, createdAt }: BlogCardProps)
   return (
     <Card size="md" variant="Blog" className="relative text-font overflow-hidden flex flex-col gap-4 ">
       <div>
-        <img src={photo[0]} alt="Blog" className="w-full h-56 object-cover rounded" loading="lazy" />
+        <img src={photo[0]} alt="Blog" className="w-full h-56 object-cover object-center rounded" loading="lazy" />
       </div>
       <div>
         <div className="flex justify-between items-center mb-5">
