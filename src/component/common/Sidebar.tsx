@@ -6,8 +6,6 @@ import { useCurrentUserQuery } from "../../features/auth/authApi";
 import SidebarProfile from "./profile/SidebarProfile";
 import Tooltip from "../ui/Tooltip";
 
-
-
 interface SidebarProps {
   isOpen: boolean;
   setIsOpen: any;
@@ -21,8 +19,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
   const sidebarRef = useRef<HTMLElement>(null!);
 
   useClickOutSide(sidebarRef, () => setIsOpen(false));
-
-
 
   type UserRole = keyof typeof navLinks;
   const userRole: UserRole = (user?.role && ["admin", "manager", "player"].includes(user.role))
@@ -42,8 +38,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
       </div>
       <div className="w-full absolute bottom-0 left-0 bg-bg shadow">
         <Tooltip position="left" content="SignOut">
-          <SidebarProfile/>
-          </Tooltip>
+          <SidebarProfile />
+        </Tooltip>
       </div>
     </aside>
   );

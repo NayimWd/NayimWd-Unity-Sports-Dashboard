@@ -1,10 +1,10 @@
 import { cva, VariantProps } from "class-variance-authority";
-import { ButtonHTMLAttributes,  ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import cn from "../../utils/cn";
 
 interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonvariants> {
+  VariantProps<typeof buttonvariants> {
   children: ReactNode;
   loading?: boolean;
   iconLeft?: ReactNode;
@@ -20,7 +20,7 @@ const Buttons = ({
   iconRight,
   loading = false,
   ...props
-} : ButtonProps ) => {
+}: ButtonProps) => {
   return (
     <>
       <button
