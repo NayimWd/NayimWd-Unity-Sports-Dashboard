@@ -35,7 +35,7 @@ const ProfileDropdown = forwardRef<HTMLDivElement, DropdownMenuProps>(
         className={cn(dropdownStyle({ open: isOpen }), className, "z-[200]")}
         role="menu"
         aria-hidden={!isOpen}
-        
+
       >
         {/* User info */}
         <div className="p-4 border-b border-inputBorder">
@@ -63,7 +63,7 @@ const ProfileDropdown = forwardRef<HTMLDivElement, DropdownMenuProps>(
             onClick={onLogout}
             className="w-full flex items-center justify-between text-left px-4 py-2 text-sm text-toastErrorText hover:bg-red-200 rounded transition"
           >
-            Logout <LogOut size={16}/>
+            Logout <LogOut size={16} />
           </button>
         </div>
       </div>
