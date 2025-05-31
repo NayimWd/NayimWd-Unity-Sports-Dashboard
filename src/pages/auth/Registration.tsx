@@ -51,15 +51,14 @@ const RegistrationForm = () => {
       toast.dismiss(loadingId);
       SuccessToast({ msg: "success", position: "bottom-center" })
       navigate("/login")
+      methods.reset();
 
     } catch (err) {
       toast.dismiss(loadingId);
       ErrorToast({ msg: "SignUp Failed!", position: "top-center" })
     }
 
-    methods.reset();
   };
-
 
   const dropdownOptions = [
     { label: "player", value: "player" },
