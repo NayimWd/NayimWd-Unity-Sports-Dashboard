@@ -4,6 +4,7 @@ import "./App.css";
 import UseAuthInit from "./pages/auth/UseAuthInit";
 import { router } from "./routes/router";
 
+
 function App() {
   UseAuthInit();
   return (

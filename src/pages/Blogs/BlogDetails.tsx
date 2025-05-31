@@ -11,6 +11,7 @@ import SectionError from "../../component/common/error/SectionError";
 import TableEmpty from "../../component/common/Table/TableEmpty";
 import BlogCard from "../../component/common/card/BlogCard";
 import ScrollToTop from "../../utils/scrollToTop";
+import SafeHtmlRender from "../../component/common/input/inputUtils/SafeHtmlRender";
 
 const BlogDetails = () => {
   const { blogId } = useParams();
@@ -111,7 +112,7 @@ const BlogDetails = () => {
 
       {/* Blog Content */}
       <article className="w-full text-base md:text-lg  font-merriweather text-subtext">
-        {blog?.content}
+        {<SafeHtmlRender html={blog?.content}/>}
       </article>
     </div>
   )}
