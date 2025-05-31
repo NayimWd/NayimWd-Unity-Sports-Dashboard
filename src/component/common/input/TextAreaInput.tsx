@@ -108,7 +108,7 @@ const TextAreaInput = ({ name, label, height = " min-h-[150px]", className, plac
           className={getButtonClass(editor?.isActive("paragraph") ?? false)}>P</button>
 
         <button type="button" title="Bold" onClick={() => editor?.chain().focus().toggleBold().run()}
-          className={getButtonClass(editor?.isActive("bold") ?? false)}><strong>B</strong></button>
+          className={getButtonClass(editor?.isActive("bold") ?? false)}><strong className="text-font">B</strong></button>
 
         <button type="button" title="Italic" onClick={() => editor?.chain().focus().toggleItalic().run()}
           className={getButtonClass(editor?.isActive("italic") ?? false)}><em>I</em></button>

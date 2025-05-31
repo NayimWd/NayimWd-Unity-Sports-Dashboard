@@ -38,4 +38,5 @@ export const {
   useGetBlogsQuery,
   useBlogDetailsQuery,
   useGetRelatedBlogsQuery,
+  useCreateBlogMutation,
 } = blogApi;
