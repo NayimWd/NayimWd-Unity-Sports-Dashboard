@@ -13,6 +13,7 @@ import PhotoArrayInput from "../../component/common/input/PhotoArrayInput"
 import { useCreateBlogMutation } from "../../features/blog/blogApi"
 import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils"
 import toast from "react-hot-toast"
+import { useNavigate } from "react-router-dom"
 
 type blogType = z.infer<typeof blogSchema>;
 
@@ -20,6 +21,8 @@ const CreateBlogs = () => {
   // post blog api throw apiSlice
   const [createBlog, { isLoading }] = useCreateBlogMutation();
 
+  // navigate
+  const navigate = useNavigate();
 
   const methods = useForm<blogType>({
     resolver: zodResolver(blogSchema),
@@ -49,6 +52,7 @@ const CreateBlogs = () => {
       toast.dismiss(loadingId);
       SuccessToast({ msg: "Blog Posted Successfully" })
       methods.reset();
+      navigate("/dashboard/blogs")
 
     } catch (error) {
       toast.dismiss(loadingId);
@@ -69,7 +73,7 @@ const CreateBlogs = () => {
           <TextInput name="title" label="Title" placeholder="Write Title" />
           <TextAreaInput label="Blog" placeholder="Write Your Blog" name="content" height="min-h-[300px]" />
           <div className="flex justify-between items-center flex-wrap gap-5">
-              <DropdownInput label="Tags" name="tags" placeholder="Select an option" options={tags} />
+            <DropdownInput label="Tags" name="tags" placeholder="Select an option" options={tags} />
             <ToggleInput label="Publish" name="isPublished" />
           </div>
           <Buttons disabled={isLoading} iconRight={<Plus size={16} />} variant="primary" className=" rounded">Create</Buttons>
