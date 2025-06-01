@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import { store } from "./app/store/store";
 import ErrorBoundaryWrapper from "./utils/ErrorWrapper.tsx";
 import ThemeWrapper from "./utils/ThemeWrapper.tsx";
-import ScrollToTop from "./utils/scrollToTop.tsx";
 import { Toaster } from "react-hot-toast";
 import App from "./App.tsx";
 
@@ -17,7 +16,6 @@ createRoot(document.getElementById("root")!).render(
     <ErrorBoundaryWrapper>
       <Provider store={store}>
         <ThemeWrapper>
-          <ScrollToTop />
           <App />
           <Toaster/>
         </ThemeWrapper>

@@ -28,7 +28,7 @@ const SidebarProfile = () => {
         }
     }
     return (
-        <div className="flex w-full items-center justify-between gap-2 px-3 py-6 rounded  mb-16 shadow-xl">
+        <div className="flex w-full items-center justify-between gap-2 px-3 py-6 rounded  mb-16">
             <div className="flex items-center gap-2">
                 <img className="w-14 h-14 rounded-full object-cover object-center" src={user?.photo} alt="user photo" aria-label="photo" loading="lazy" />
                 <div className="flex flex-col font-inter">
