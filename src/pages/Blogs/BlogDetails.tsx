@@ -10,8 +10,8 @@ import BlogSkeleton from "../../component/common/skeleton/BlogSkeleton";
 import SectionError from "../../component/common/error/SectionError";
 import TableEmpty from "../../component/common/Table/TableEmpty";
 import BlogCard from "../../component/common/card/BlogCard";
-import ScrollToTop from "../../utils/scrollToTop";
 import SafeHtmlRender from "../../component/common/input/inputUtils/SafeHtmlRender";
+
 
 const BlogDetails = () => {
   const { blogId } = useParams();
@@ -69,14 +69,14 @@ const BlogDetails = () => {
   {isLoading ? (
     <BlogDetailsSkeleton />
   ) : (
-    <div className="paddingX lg:px-10 w-full max-w-5xl mx-auto bg-surface my-20 py-12 rounded-xl shadow-sm space-y-10">
+    <div className="paddingX lg:px-10 w-full max-w-5xl mx-auto bg-surface my-20 py-12 rounded-md shadow-sm space-y-10">
       
       {/* Blog Banner Image */}
       <div className="w-full overflow-hidden rounded-xl shadow-md">
         <img
           src={blog?.photo[0]}
           alt="Blog Cover"
-          className="w-full h-[420px] object-cover object-center transition-transform duration-300 hover:scale-105"
+          className="w-full h-[420px] object-contain object-center transition-transform duration-300 hover:scale-105"
         />
       </div>
 
@@ -126,8 +126,6 @@ const BlogDetails = () => {
       {content}
     </div>
   </section>
-
-  <ScrollToTop />
 </div>
   )
 }
