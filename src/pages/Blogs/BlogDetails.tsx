@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import Banner from "../../component/common/banner/Banner";
 import { useBlogDetailsQuery, useGetRelatedBlogsQuery } from "../../features/blog/blogApi";
-import { Clock9, Heart, Star } from "lucide-react";
+import { Clock9, Edit2, Heart, Star } from "lucide-react";
 import CopyButton from "../../component/ui/CopyButton";
 import { formatDate } from "../../utils/timeFormat";
 import { BlogDetailsSkeleton } from "../../component/common/skeleton/BlogDetailsSkeleton";
@@ -11,10 +11,16 @@ import SectionError from "../../component/common/error/SectionError";
 import TableEmpty from "../../component/common/Table/TableEmpty";
 import BlogCard from "../../component/common/card/BlogCard";
 import SafeHtmlRender from "../../component/common/input/inputUtils/SafeHtmlRender";
+import Buttons from "../../component/common/Buttons";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store/store";
 import ScrollToTop from "../../utils/scrollToTop";
 
 
 const BlogDetails = () => {
+  // get user role 
+  const { user } = useSelector((state: RootState) => state.auth);
+
   const { blogId } = useParams();
   const { data: blog, isLoading } = useBlogDetailsQuery(blogId)
 
@@ -65,14 +71,18 @@ const BlogDetails = () => {
 
   return (
     <div className="w-full">
-      <ScrollToTop />
+      <ScrollToTop/>
       <Banner pageText="Blog Details" navText="Blog" navLink="Details" />
 
       {isLoading ? (
         <BlogDetailsSkeleton />
       ) : (
-        <div className="paddingX lg:px-10 w-full max-w-5xl mx-auto bg-surface my-20 py-12 rounded-md shadow-sm space-y-10">
-
+        <div className="paddingX lg:px-10 w-full max-w-5xl mx-auto bg-surface my-20 py-12 rounded-md shadow-sm space-y-10 relative">
+          <div className="absolute top-5 right-5">
+            <Buttons className="rounded-sm" size="sm" variant="primary" iconRight={<Edit2 className="text-font font-semibold" size={16} />} >
+              Edit
+            </Buttons>
+          </div>
           {/* Blog Banner Image */}
           <div className="w-full overflow-hidden rounded-xl shadow-md">
             <img

@@ -15,6 +15,7 @@ const Blogs = () => {
   const totalPages = blogs?.pagination?.totalPages ?? 1;
 
   let content = null;
+ 
 
   if (isLoading) {
     content = <>
@@ -65,4 +66,4 @@ const Blogs = () => {
   )
 }
 
-export default Blogs
+export default Blogs;

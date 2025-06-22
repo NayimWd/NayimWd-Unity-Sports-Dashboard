@@ -16,15 +16,15 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   // persist user 
   const { isLoading, isFetching } = useCurrentUserQuery(undefined, { skip: isAuthenticated });
 
-  if (isLoading && isFetching) {
+  if (isLoading || isFetching) {
     return <Loader />
   }
 
   if (!isAuthenticated && !user?._id) {
-    <Navigate to="/login" replace />
+    return <Navigate to="/login" replace />
   }
 
-  return <> {children}</>;
+  return children ? <>{children}</> : <Navigate to="/login" replace />;
 }
 
-export default ProtectedRoute
+export default ProtectedRoute;

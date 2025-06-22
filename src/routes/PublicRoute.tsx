@@ -16,7 +16,7 @@ const PublicRoute = ({ children }: PubLicRouteProps) => {
         return <Navigate to="/dashboard" />
     }
 
-    return <> {children} </>
+    return children ? <>{children}</> : <Navigate to="/login" replace />;
 }
 
 export default PublicRoute;
