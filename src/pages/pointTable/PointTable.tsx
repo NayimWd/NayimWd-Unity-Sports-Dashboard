@@ -47,14 +47,14 @@ const PointTable = () => {
         <TableRow
           key={row._id}
           rowData={[
-             <div className="flex items-center gap-4">
-          <img
-            src={row.teamId?.teamLogo}
-            alt={row.teamId?.teamName}
-            className="w-8 h-8 rounded-5 object-cover"
-          />
-          <span>{row.teamId?.teamName}</span>
-        </div>,,
+            <div className="flex items-center gap-4">
+              <img
+                src={row.teamId?.teamLogo}
+                alt={row.teamId?.teamName}
+                className="w-8 h-8 rounded-5 object-cover"
+              />
+              <span>{row.teamId?.teamName}</span>
+            </div>, ,
             row.matchPlayed,
             row.wins,
             row.losses,
@@ -71,9 +71,9 @@ const PointTable = () => {
       <h1 className={`${fontStyle.pageTitle} text-font space-y-2`}>Point Table</h1>
       {/* <p className="text-center text-font font-medium text-lg">Of</p> */}
       <div className={`${fontStyle.SectionHeading} flex items-center justify-center gap-4 flex-wrap mt-5`}>
-          <p className="text-font text-xl text-center">
-        {pointTable?.data?.tournament?.tournamentName || "Loading"} </p>
-        <img className="size-12 rounded " src={pointTable?.data?.tournament?.photo} alt="tournamentLogo" loading="lazy"/>
+        <p className="text-font text-xl text-center">
+          {pointTable?.data?.tournament?.tournamentName || "Loading"} </p>
+        <img className="size-12 rounded " src={pointTable?.data?.tournament?.photo} alt="tournamentLogo" loading="lazy" />
       </div>
       <Table className="">
         <TableHeader
@@ -87,4 +87,4 @@ const PointTable = () => {
   )
 }
 
-export default PointTable
+export default PointTable;

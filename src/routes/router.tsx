@@ -4,6 +4,7 @@ import SuspenseWrapper from "../utils/SuspenseWrapper";
 import ProtectedRoute from "./ProtectedRoute";
 import RedirectRoute from "./RedirectRoute";
 import PublicRoute from "./PublicRoute";
+import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
 const Login = lazy(() => import("../pages/auth/Login"));
 const Registration = lazy(() => import("../pages/auth/Registration"));
 const NotFound = lazy(() => import("../pages/NotFound"));
@@ -22,45 +23,95 @@ export const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <PublicRoute> <SuspenseWrapper children={<Login />} /> </PublicRoute>,
+    element: (
+      <ErrorBoundaryWrapper>
+        <PublicRoute>
+          <SuspenseWrapper>
+            <Login />
+          </SuspenseWrapper>
+        </PublicRoute>
+      </ErrorBoundaryWrapper>
+    ),
   },
   {
     path: "/SignUp",
-    element: <PublicRoute> <SuspenseWrapper children={<Registration />} /> </PublicRoute>,
+    element: (<ErrorBoundaryWrapper>
+      <PublicRoute>
+        <SuspenseWrapper>
+          <Registration />
+        </SuspenseWrapper>
+      </PublicRoute>
+    </ErrorBoundaryWrapper>
+    ),
   },
   {
     path: "/dashboard",
     element: (
-      <ProtectedRoute>
-        <SuspenseWrapper children={<Layout />} />
-      </ProtectedRoute>
+      <ErrorBoundaryWrapper>
+        <ProtectedRoute>
+          <SuspenseWrapper>
+            <Layout />
+          </SuspenseWrapper>
+        </ProtectedRoute>
+      </ErrorBoundaryWrapper>
     ),
     children: [
       {
         index: true,
-        element: <SuspenseWrapper children={<Dashboard />} />,
+        element: (<ErrorBoundaryWrapper>
+          <SuspenseWrapper>
+            <Dashboard />
+          </SuspenseWrapper>
+        </ErrorBoundaryWrapper>
+        ),
       },
       {
         path: "pointTable",
-        element: <SuspenseWrapper children={<PointTable />} />
+        element: (
+          <ErrorBoundaryWrapper>
+            <SuspenseWrapper>
+              <PointTable />
+            </SuspenseWrapper>
+          </ErrorBoundaryWrapper>
+        )
       },
       /* blog */
       {
         path: "blogs",
-        element: <SuspenseWrapper children={<Blogs />} />
+        element: (
+          <ErrorBoundaryWrapper>
+            <SuspenseWrapper>
+              <Blogs />
+            </SuspenseWrapper>
+          </ErrorBoundaryWrapper>
+        )
       },
       {
         path: "blogs/details/:blogId",
-        element: <SuspenseWrapper children={<BlogDetails />} />
+        element: (
+          <ErrorBoundaryWrapper>
+            <SuspenseWrapper>
+              <BlogDetails />
+            </SuspenseWrapper>
+          </ErrorBoundaryWrapper>
+        )
       },
       {
         path: "blog/create",
-        element: <SuspenseWrapper children={<CreateBlog />} />
+        element: (
+          <ErrorBoundaryWrapper>
+            <SuspenseWrapper>
+              <CreateBlog />
+            </SuspenseWrapper>
+          </ErrorBoundaryWrapper>
+        )
       }
     ],
   },
   {
     path: "*",
-    element: <SuspenseWrapper children={<NotFound />} />,
+    element: (<SuspenseWrapper>
+      <NotFound />
+    </SuspenseWrapper>),
   },
 ]);
