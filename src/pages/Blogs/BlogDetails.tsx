@@ -11,6 +11,7 @@ import SectionError from "../../component/common/error/SectionError";
 import TableEmpty from "../../component/common/Table/TableEmpty";
 import BlogCard from "../../component/common/card/BlogCard";
 import SafeHtmlRender from "../../component/common/input/inputUtils/SafeHtmlRender";
+import ScrollToTop from "../../utils/scrollToTop";
 
 
 const BlogDetails = () => {
@@ -64,69 +65,70 @@ const BlogDetails = () => {
 
   return (
     <div className="w-full">
-  <Banner pageText="Blog Details" navText="Blog" navLink="Details" />
+      <ScrollToTop />
+      <Banner pageText="Blog Details" navText="Blog" navLink="Details" />
 
-  {isLoading ? (
-    <BlogDetailsSkeleton />
-  ) : (
-    <div className="paddingX lg:px-10 w-full max-w-5xl mx-auto bg-surface my-20 py-12 rounded-md shadow-sm space-y-10">
-      
-      {/* Blog Banner Image */}
-      <div className="w-full overflow-hidden rounded-xl shadow-md">
-        <img
-          src={blog?.photo[0]}
-          alt="Blog Cover"
-          className="w-full h-[420px] object-contain object-center transition-transform duration-300 hover:scale-105"
-        />
-      </div>
+      {isLoading ? (
+        <BlogDetailsSkeleton />
+      ) : (
+        <div className="paddingX lg:px-10 w-full max-w-5xl mx-auto bg-surface my-20 py-12 rounded-md shadow-sm space-y-10">
 
-      {/* Author and Action Row */}
-      <div className="flex justify-between items-center text-sm text-muted">
-        <p className="">By <span className="font-medium text">{blog?.author}</span></p>
-        <div className="flex gap-2 items-center">
-          <div onClick={handleShare} className="bg-bg hover:bg-surface w-8 h-8 rounded flex items-center justify-center shadow transition">
-          <CopyButton textCopy="Share" />
+          {/* Blog Banner Image */}
+          <div className="w-full overflow-hidden rounded-xl shadow-md">
+            <img
+              src={blog?.photo[0]}
+              alt="Blog Cover"
+              className="w-full h-[420px] object-contain object-center transition-transform duration-300 hover:scale-105"
+            />
           </div>
-          <button className="bg-bg hover:bg-subSurface w-8 h-8 rounded flex items-center justify-center shadow transition">
-            <Star size={18} className="text-orange-400" />
-          </button>
-          <button className="bg-bg hover:bg-subSurface w-8 h-8 rounded flex items-center justify-center shadow transition">
-            <Heart size={18} className="text-red-500" />
-          </button>
-        </div>
-      </div>
 
-      {/* Blog Title + Metadata */}
-      <div>
-        <h1 className="w-full text-3xl font-bold font-inter text-foreground mb-4 leading-tight text-font">
-          {blog?.title}
-        </h1>
-        <div className="flex justify-between text-sm text-muted-foreground uppercase text-subtext">
-          <p>{blog?.tags}</p>
-          <div className="flex items-center gap-2">
-            <Clock9 size={16} className="text-red-500" />
-            <span>{blog ? formatDate(blog.createdAt) : ""}</span>
+          {/* Author and Action Row */}
+          <div className="flex justify-between items-center text-sm text-muted">
+            <p className="">By <span className="font-medium text">{blog?.author}</span></p>
+            <div className="flex gap-2 items-center">
+              <div onClick={handleShare} className="bg-bg hover:bg-surface w-8 h-8 rounded flex items-center justify-center shadow transition">
+                <CopyButton textCopy="Share" />
+              </div>
+              <button className="bg-bg hover:bg-subSurface w-8 h-8 rounded flex items-center justify-center shadow transition">
+                <Star size={18} className="text-orange-400" />
+              </button>
+              <button className="bg-bg hover:bg-subSurface w-8 h-8 rounded flex items-center justify-center shadow transition">
+                <Heart size={18} className="text-red-500" />
+              </button>
+            </div>
           </div>
+
+          {/* Blog Title + Metadata */}
+          <div>
+            <h1 className="w-full text-3xl font-bold font-inter text-foreground mb-4 leading-tight text-font">
+              {blog?.title}
+            </h1>
+            <div className="flex justify-between text-sm text-muted-foreground uppercase text-subtext">
+              <p>{blog?.tags}</p>
+              <div className="flex items-center gap-2">
+                <Clock9 size={16} className="text-red-500" />
+                <span>{blog ? formatDate(blog.createdAt) : ""}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Blog Content */}
+          <article className="w-full text-base md:text-lg  font-merriweather text-subtext">
+            {<SafeHtmlRender html={blog?.content} />}
+          </article>
         </div>
-      </div>
+      )}
 
-      {/* Blog Content */}
-      <article className="w-full text-base md:text-lg  font-merriweather text-subtext">
-        {<SafeHtmlRender html={blog?.content}/>}
-      </article>
+      {/* Related Blogs */}
+      <section className="my-16 paddingX max-w-6xl mx-auto">
+        <h2 className="text-2xl md:text-3xl xl:text-4xl text-font font-semibold text-center font-inter mb-8">
+          Related Blogs
+        </h2>
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {content}
+        </div>
+      </section>
     </div>
-  )}
-
-  {/* Related Blogs */}
-  <section className="my-16 paddingX max-w-6xl mx-auto">
-    <h2 className="text-2xl md:text-3xl xl:text-4xl text-font font-semibold text-center font-inter mb-8">
-      Related Blogs
-    </h2>
-    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-      {content}
-    </div>
-  </section>
-</div>
   )
 }
 

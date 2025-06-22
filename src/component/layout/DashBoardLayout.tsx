@@ -6,7 +6,6 @@ import { ThemeType } from "../../utils/types";
 import useToggle from "../../hooks/useToggle";
 import Sidebar from "../common/Sidebar";
 import { Outlet } from "react-router-dom";
-import ScrollToTop from "../../utils/scrollToTop";
 
 const DashBoardLayout: React.FC = () => {
 
@@ -37,6 +36,7 @@ const DashBoardLayout: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-bg flex flex-col">
+
       {/* navbar */}
       <Header handleToggle={setIsOpen} />
       {/* main content wrapper */}
@@ -60,8 +60,7 @@ const DashBoardLayout: React.FC = () => {
           />
         )}
         {/* main content */}
-        <main id="scrollable-container" className={` ml-0 md:ml-64 mt-16 sm:mt-[74px] xl:mt-20 flex-1  overflow-y-auto min-h-screen`}>
-          <ScrollToTop/>
+        <main className={` ml-0 md:ml-64 mt-16 sm:mt-[74px] xl:mt-20 flex-1  overflow-y-auto min-h-screen`}>
           <Outlet />
         </main>
       </div>
