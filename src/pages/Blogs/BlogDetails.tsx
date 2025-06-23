@@ -78,11 +78,11 @@ const BlogDetails = () => {
         <BlogDetailsSkeleton />
       ) : (
         <div className="paddingX lg:px-10 w-full max-w-5xl mx-auto bg-surface my-20 py-12 rounded-md shadow-sm space-y-10 relative">
-          <div className="absolute top-5 right-5">
+          { (user?.role === "admin" || user?.role === "staff") ? <div className="absolute top-5 right-5">
             <Buttons className="rounded-sm" size="sm" variant="primary" iconRight={<Edit2 className="text-font font-semibold" size={16} />} >
               Edit
             </Buttons>
-          </div>
+          </div> : ""}
           {/* Blog Banner Image */}
           <div className="w-full overflow-hidden rounded-xl shadow-md">
             <img
@@ -110,7 +110,7 @@ const BlogDetails = () => {
 
           {/* Blog Title + Metadata */}
           <div>
-            <h1 className="w-full text-3xl font-bold font-inter text-foreground mb-4 leading-tight text-font">
+            <h1 id="title" className="w-full text-3xl font-bold font-inter text-foreground mb-4 leading-tight text-font">
               {blog?.title}
             </h1>
             <div className="flex justify-between text-sm text-muted-foreground uppercase text-subtext">
