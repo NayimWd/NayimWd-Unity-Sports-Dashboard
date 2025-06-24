@@ -13,8 +13,8 @@ const Dashboard = lazy(() => import("../pages/Dashboard"));
 const PointTable = lazy(() => import("../pages/pointTable/PointTable"));
 const Blogs = lazy(() => import("../pages/Blogs/Blogs"));
 const BlogDetails = lazy(() => import("../pages/Blogs/BlogDetails"));
-const CreateBlog = lazy(() => import("../pages/Blogs/CreateBlogs"))
-
+const CreateBlog = lazy(() => import("../pages/Blogs/CreateBlogs"));
+const UpdateBlogDetails = lazy(()=> import("../pages/Blogs/UpdateBlogDetails"));
 
 export const router = createBrowserRouter([
   {
@@ -102,6 +102,16 @@ export const router = createBrowserRouter([
           <ErrorBoundaryWrapper>
             <SuspenseWrapper>
               <CreateBlog />
+            </SuspenseWrapper>
+          </ErrorBoundaryWrapper>
+        )
+      },
+      {
+        path: "blog/update/:blogId",
+        element: (
+          <ErrorBoundaryWrapper>
+            <SuspenseWrapper>
+              <UpdateBlogDetails/>
             </SuspenseWrapper>
           </ErrorBoundaryWrapper>
         )

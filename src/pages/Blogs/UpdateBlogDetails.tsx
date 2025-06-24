@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useCreateBlogMutation } from "../../features/blog/blogApi";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,11 +17,15 @@ import { Plus } from "lucide-react";
 
 type blogType = z.infer<typeof blogSchema>;
 
-export const UpdateBlogDetails = () => {
+const UpdateBlogDetails = () => {
+
+  // get blog id
+  const { blogId } = useParams();
 
    // post blog api throw apiSlice
     const [createBlog, { isLoading }] = useCreateBlogMutation();
   
+
     // navigate
     const navigate = useNavigate();
   
@@ -83,3 +87,5 @@ export const UpdateBlogDetails = () => {
     </div>
   )
 }
+
+export default UpdateBlogDetails;
