@@ -1,7 +1,7 @@
 import { ApiResponse, BlogDetails, Blogs } from "../../utils/types";
 import { apiSlice } from "../api/apiSlice";
 
- const blogApi = apiSlice.injectEndpoints({
+const blogApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getBlogs: builder.query<Blogs, { page: number; limit: number }>({
       query: ({ page, limit }) => ({
@@ -9,12 +9,26 @@ import { apiSlice } from "../api/apiSlice";
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<Blogs>) => response.data,
+      // tags 
+      providesTags: (result) =>
+        result?.blogs.length
+          ? [
+              ...result.blogs.map((blog) => ({
+                type: "Blog" as const,
+                id: (blog as BlogDetails)?._id,
+              })),
+              { type: "Blog", id: "LIST" },
+            ]
+          : [{ type: "Blog", id: "LIST" }],
     }),
     blogDetails: builder.query({
       query: (blogId) => ({
         url: `blog/details/${blogId}`,
+        method: "GET"
       }),
       transformResponse: (response: ApiResponse<BlogDetails>) => response.data,
+      // tags
+      providesTags: (_result, _error, blogId) => [{type: "Blog", id: blogId}]
     }),
     getRelatedBlogs: builder.query<Blogs, { tags: string; limit: number }>({
       query: ({ tags, limit = 5 }) => ({
@@ -28,9 +42,21 @@ import { apiSlice } from "../api/apiSlice";
       query: (data) => ({
         url: "blog/create",
         method: "POST",
-        body: data
-      })
-    })
+        body: data,
+      }),
+      invalidatesTags: [{type: "Blog", id: "LIST"}]
+    }),
+    updateBlog: builder.mutation({
+      query: ({ blogId, ...data }) => ({
+        url: `/blog/${blogId}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: (_result, _error, {blogId}) => [
+        {type: "Blog", id: blogId},
+        {type: "Blog", id: "LIST"}
+      ]
+    }),
   }),
 });
 

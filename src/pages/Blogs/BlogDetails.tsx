@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import Banner from "../../component/common/banner/Banner";
 import { useBlogDetailsQuery, useGetRelatedBlogsQuery } from "../../features/blog/blogApi";
 import { Clock9, Edit2, Heart, Star } from "lucide-react";
@@ -79,9 +79,11 @@ const BlogDetails = () => {
       ) : (
         <div className="paddingX lg:px-10 w-full max-w-5xl mx-auto bg-surface my-20 py-12 rounded-md shadow-sm space-y-10 relative">
           { (user?.role === "admin" || user?.role === "staff") ? <div className="absolute top-5 right-5">
-            <Buttons className="rounded-sm" size="sm" variant="primary" iconRight={<Edit2 className="text-font font-semibold" size={16} />} >
+            <Link to={`/dashboard/blog/update/${blog?._id}`}>
+            <Buttons className="rounded" size="sm" variant="primary" iconRight={<Edit2 className="text-font font-semibold" size={16} />} >
               Edit
             </Buttons>
+            </Link>
           </div> : ""}
           {/* Blog Banner Image */}
           <div className="w-full overflow-hidden rounded-xl shadow-md">
