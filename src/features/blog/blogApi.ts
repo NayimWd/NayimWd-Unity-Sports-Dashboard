@@ -48,7 +48,7 @@ const blogApi = apiSlice.injectEndpoints({
     }),
     updateBlog: builder.mutation({
       query: ({ blogId, ...data }) => ({
-        url: `/blog/${blogId}`,
+        url: `/blog/update/${blogId}`,
         method: "PUT",
         body: data,
       }),
@@ -65,4 +65,5 @@ export const {
   useBlogDetailsQuery,
   useGetRelatedBlogsQuery,
   useCreateBlogMutation,
+  useUpdateBlogMutation,
 } = blogApi;

@@ -87,8 +87,12 @@ input:-webkit-autofill:focus {
 * {
   @apply transition-colors duration-200;
 }
-
-
+ /* tip tap color */
+.ProseMirror strong,
+.ProseMirror b,
+.ProseMirror blockquote {
+  color: inherit !important;
+}
 
 .sidebarBtn {
   @apply w-full tracking-tight flex items-center px-3 py-1.5 gap-2 dark:hover:bg-surface hover:bg-primary hover:text-white cursor-pointer rounded text-primary text-left sm:text-lg;
@@ -138,3 +142,5 @@ input:-webkit-autofill:focus {
 .glassBg {
   @apply bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-50
 }
+
+
