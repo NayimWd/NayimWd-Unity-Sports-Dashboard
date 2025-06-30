@@ -18,7 +18,6 @@ const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
           {...props}
           className={cn(inputStyles({ variant, className }), icon ? "pl-9" : "")}
           {...props}
-
         />
       </div>
     );

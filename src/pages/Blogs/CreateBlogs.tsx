@@ -15,7 +15,7 @@ import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils"
 import toast from "react-hot-toast"
 import { useNavigate } from "react-router-dom"
 
-type blogType = z.infer<typeof blogSchema>;
+type updateBlogType = z.infer<typeof blogSchema>;
 
 const CreateBlogs = () => {
   // post blog api throw apiSlice
@@ -24,7 +24,7 @@ const CreateBlogs = () => {
   // navigate
   const navigate = useNavigate();
 
-  const methods = useForm<blogType>({
+  const methods = useForm<updateBlogType>({
     resolver: zodResolver(blogSchema),
     mode: "onSubmit"
   })
@@ -36,7 +36,7 @@ const CreateBlogs = () => {
     { label: "awards", value: "awards" }
   ];
 
-  const handleSubmit = async (data: blogType) => {
+  const handleSubmit = async (data: updateBlogType) => {
     const loadingId = LoadingToast({ msg: "Creating Blog..." });
     try {
       const formData = new FormData();

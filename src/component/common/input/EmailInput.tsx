@@ -8,9 +8,10 @@ interface EmailInputProps {
   label: string;
   placeholder: string;
   icon?: React.ReactNode;
+  autoComplete?: string;
 }
 
-const EmailInput = ({ name, label, placeholder, icon }: EmailInputProps) => {
+const EmailInput = ({ name, label, placeholder, icon, autoComplete }: EmailInputProps) => {
   // import useFormContext to get the form methods
   const { register, watch, formState, trigger } = useFormContext();
   const { errors } = formState;
@@ -48,13 +49,14 @@ const EmailInput = ({ name, label, placeholder, icon }: EmailInputProps) => {
           placeholder={placeholder}
           icon={icon}
           variant={variant}
+          autoComplete={autoComplete}
           {...register(name)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
-        {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14}/> {error}</p>
+        {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14} /> {error}</p>
         }
-        
+
       </div>
     </div>
   );

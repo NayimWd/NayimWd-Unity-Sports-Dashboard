@@ -47,9 +47,9 @@ const blogApi = apiSlice.injectEndpoints({
       invalidatesTags: [{type: "Blog", id: "LIST"}]
     }),
     updateBlog: builder.mutation({
-      query: ({ blogId, ...data }) => ({
+      query: ({ blogId, data }) => ({
         url: `/blog/update/${blogId}`,
-        method: "PUT",
+        method: "PATCH",
         body: data,
       }),
       invalidatesTags: (_result, _error, {blogId}) => [

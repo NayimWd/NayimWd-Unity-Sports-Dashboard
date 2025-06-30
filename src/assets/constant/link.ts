@@ -26,6 +26,7 @@ import {
   // Telescope,
   User2,
   Boxes,
+  Settings,
 } from "lucide-react";
 
 export const navLinks = {
@@ -179,6 +180,11 @@ export const navLinks = {
           icon: BookPlus,
           label: "Create Blog",
         },
+        {
+          path: "/dashboard/blogs/manage",
+          icon: Settings,
+          label: "Manage Blogs",
+        }
       ],
     },
   ],

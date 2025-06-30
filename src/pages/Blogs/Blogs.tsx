@@ -46,7 +46,7 @@ const Blogs = () => {
   return (
     <div className="my-5 w-full paddingX">
       <h1 className={`${fontStyle.pageTitle} text-font`}> Tournament Blogs </h1>
-      <div className="mt-5 grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 ">
+      <div className="mt-5 grid gap-6 grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
         {content}
       </div>
       <div className="w-full flex justify-center">

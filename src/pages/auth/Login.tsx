@@ -72,12 +72,14 @@ const Login = () => {
             label="Ener your email"
             placeholder="Enter your email"
             icon={<Mail size={16} />}
+            autoComplete="usename"
           />
           <PasswordInput
             name="password"
             label="Enter your password"
             placeholder="Enter your password"
             icon={<Lock size={16} />}
+            autoComplete="current-password"
           />
           <Buttons
             variant="gradient"
