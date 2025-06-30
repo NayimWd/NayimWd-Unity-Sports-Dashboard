@@ -58,3 +58,26 @@ export const blogSchema = z.object({
     )
     .min(1, { message: "At least one blog image is required" }),
 });
+
+// update blog
+export const updateBlogSchema = z
+  .object({
+    title: z.string().min(10).max(100).optional(),
+    content: z.string().min(30).max(5000).optional(),
+    tags: z
+      .string()
+      .refine(
+        (tag) => ["news", "highlight", "tournaments", "awards"].includes(tag),
+        {
+          message: "Please select a valid tag",
+        }
+      )
+      .optional(),
+  })
+  .refine(
+    (data) => data.title || data.content || data.tags,
+    {
+      message: "At least one field must be provided",
+      path: ["_form"], 
+    }
+  );

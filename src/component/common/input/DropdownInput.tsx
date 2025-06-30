@@ -37,14 +37,12 @@ const DropdownInput = ({
         <select
           id={name}
           {...register(name)}
-          defaultValue="select an option"
           className={`w-full cursor-pointer h-10 px-3 py-2 text-font bg-surface rounded-md appearance-none text-sm transition-all duration-150 ease-in-out focus:outline-none border focus:ring-2 p-1 
-            ${
-              variant === "error"
-                ? "border-toastErrorText focus:ring-toastErrorText"
-                : "border-inputBorder focus:ring-primary"
+    ${variant === "error"
+              ? "border-toastErrorText focus:ring-toastErrorText"
+              : "border-inputBorder focus:ring-primary"
             }    
-            `}
+  `}
         >
           <option value="" disabled hidden className="text-muted">
             {placeholder}
@@ -55,7 +53,7 @@ const DropdownInput = ({
               key={option.value}
               value={option.value}
             >
-             {option.label} 
+              {option.label}
             </option>
           ))}
         </select>
@@ -69,8 +67,8 @@ const DropdownInput = ({
           className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-muted"
         />
       </div>
-       {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14}/> {error}</p>
-        }
+      {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14} /> {error}</p>
+      }
     </div>
   );
 };

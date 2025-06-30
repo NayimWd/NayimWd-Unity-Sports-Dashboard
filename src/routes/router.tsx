@@ -15,6 +15,7 @@ const Blogs = lazy(() => import("../pages/Blogs/Blogs"));
 const BlogDetails = lazy(() => import("../pages/Blogs/BlogDetails"));
 const CreateBlog = lazy(() => import("../pages/Blogs/CreateBlogs"));
 const UpdateBlogDetails = lazy(()=> import("../pages/Blogs/UpdateBlogDetails"));
+const ManageBlogs = lazy(()=> import("../pages/Blogs/ManageBlogs"));
 
 export const router = createBrowserRouter([
   {
@@ -115,7 +116,17 @@ export const router = createBrowserRouter([
             </SuspenseWrapper>
           </ErrorBoundaryWrapper>
         )
-      }
+      },
+      {
+        path: "blogs/manage",
+        element: (
+          <ErrorBoundaryWrapper>
+            <SuspenseWrapper>
+              <ManageBlogs/>
+            </SuspenseWrapper>
+          </ErrorBoundaryWrapper>
+        )
+      },
     ],
   },
   {

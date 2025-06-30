@@ -77,7 +77,7 @@ const BlogDetails = () => {
       {isLoading ? (
         <BlogDetailsSkeleton />
       ) : (
-        <div className="paddingX lg:px-10 w-full max-w-5xl mx-auto bg-surface my-20 py-12 rounded-md shadow-sm space-y-10 relative">
+        <div className="paddingX lg:px-10 w-full mx-auto bg-surface my-20 py-12 rounded-md shadow-sm space-y-10 relative">
           { (user?.role === "admin" || user?.role === "staff") ? <div className="absolute top-5 right-5">
             <Link to={`/dashboard/blog/update/${blog?._id}`}>
             <Buttons className="rounded" size="sm" variant="primary" iconRight={<Edit2 className="text-font font-semibold" size={16} />} >

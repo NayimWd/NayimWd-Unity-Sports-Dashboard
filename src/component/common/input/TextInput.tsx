@@ -8,9 +8,10 @@ interface TextInputProps {
   label: string;
   placeholder: string;
   icon?: React.ReactNode;
+  autoComplete?: string;
 }
 
-const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", icon }: TextInputProps) => {
+const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", icon, autoComplete }: TextInputProps) => {
   // importing useFormContext to get the form methods
   const { register, watch, formState, trigger } = useFormContext();
   const { errors } = formState;
@@ -45,12 +46,13 @@ const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", ico
           type="text"
           placeholder={placeholder}
           icon={icon}
+          autoComplete={autoComplete}
           variant={variant}
           {...register(name)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
-         {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14}/> {error}</p>
+        {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14} /> {error}</p>
         }
       </div>
     </div>

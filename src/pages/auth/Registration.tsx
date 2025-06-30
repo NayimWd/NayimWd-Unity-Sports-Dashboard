@@ -86,24 +86,28 @@ const RegistrationForm = () => {
             label="Name"
             icon={<User2 size={16} />}
             placeholder="Inter Your Name"
+            autoComplete="name"
           />
           <EmailInput
             name="email"
             label="Email"
             icon={<Mail size={16} />}
             placeholder="Your email"
+            autoComplete="usename"
           />
           <TextInput
             name="phoneNumber"
             label="Phone Number"
             icon={<Phone size={16} />}
             placeholder="Inter Your Phone Number"
+            autoComplete="phonenumber"
           />
           <PasswordInput
             name="password"
             label="Password"
             icon={<LockIcon size={16} />}
             placeholder="Your password"
+            autoComplete="current-password"
           />
           <DropdownInput
             name="role"

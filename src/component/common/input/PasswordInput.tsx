@@ -8,6 +8,7 @@ interface PasswordInputProps {
   label: string;
   placeholder: string;
   icon?: React.ReactNode;
+  autoComplete?: string;
 }
 
 const PasswordInput = ({
@@ -15,6 +16,7 @@ const PasswordInput = ({
   label,
   placeholder,
   icon,
+  autoComplete
 }: PasswordInputProps) => {
   const { register, watch, formState, trigger } = useFormContext();
   const { errors } = formState;
@@ -55,6 +57,7 @@ const PasswordInput = ({
           placeholder={placeholder}
           variant={variant}
           icon={icon}
+          autoComplete={autoComplete}
           {...register(name)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
@@ -66,7 +69,7 @@ const PasswordInput = ({
         >
           {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
         </button>
-         {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14}/> {error}</p>
+        {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14} /> {error}</p>
         }
       </div>
     </div>
