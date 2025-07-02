@@ -7,7 +7,6 @@ interface CardProps extends VariantProps<typeof cardVariants> {
   className?: string
 }
 
-
 export const Card = ({ children, className, variant, size }: CardProps) => {
   return (
     <div className={cn(cardVariants({ variant, size, className }))}>
