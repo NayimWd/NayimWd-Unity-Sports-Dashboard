@@ -16,7 +16,6 @@ const Blogs = () => {
 
   let content = null;
  
-
   if (isLoading) {
     content = <>
       {

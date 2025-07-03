@@ -11,4 +11,3 @@ const Loader: React.FC = () => {
 };
 
 export default Loader;
-// This code defines a Loader component that displays a loading animation using Tailwind CSS classes. The animation consists of three circles that change size and opacity to create a pulsing effect, indicating that content is loading. The component is centered on the screen using flexbox utilities.

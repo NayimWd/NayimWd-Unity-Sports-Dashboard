@@ -6,7 +6,7 @@ interface BannerProps {
 }
 
 
-const Banner = ({pageText, navText, navLink}: BannerProps) => {
+const Banner = ({ pageText, navText, navLink }: BannerProps) => {
     return (
         <div className=" shadow-md flex items-center h-40 rounded-md w-full bg-surface glassBg">
             <div className="w-full bg-surface paddingX flex flex-wrap justify-between items-center gap-2 leading-7 tracking-wider sm:text-lg font-bold">
@@ -15,7 +15,7 @@ const Banner = ({pageText, navText, navLink}: BannerProps) => {
                 <div className="text-primary font-merriweather uppercase flex items-center gap-5">
                     {" "}
                     <p>{navText ? navText : "Place Holder"}</p>
-                    <span className="text-2xl text-primary"> &#62;</span> 
+                    <span className="text-2xl text-primary"> &#62;</span>
                     <p>{navLink ? navLink : "Place Holder"}</p>
                 </div>
             </div>

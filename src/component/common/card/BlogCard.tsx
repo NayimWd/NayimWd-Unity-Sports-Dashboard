@@ -1,12 +1,11 @@
 import { MoveRight } from "lucide-react";
 import { fontStyle } from "../../../utils/ClassUtils";
 import Buttons from "../Buttons";
-import { Card } from "./Card";
+import  Card  from "./Card";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../../utils/timeFormat";
 import CopyButton from "../../ui/CopyButton";
 import { useCurrentUrl } from "../../../utils/Url";
-
 
 interface BlogCardProps {
   _id: string;
@@ -33,7 +32,7 @@ const BlogCard = ({ _id, title, photo, author, tags, createdAt }: BlogCardProps)
       <div>
         <div className="flex justify-between items-center mb-5">
           <p className={`${fontStyle.cardDesc} text-primary`}>{formatDate(createdAt)}</p>
-          <Link to={`/dashboard/blogs/details/${_id}`}>
+          <Link to={`/dashboard/blog/details/${_id}`}>
             <Buttons variant="primary" size="sm" className="rounded-sm" iconRight={<MoveRight size={8} />}> Details </Buttons>
           </Link>
         </div>

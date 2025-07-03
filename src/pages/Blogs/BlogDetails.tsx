@@ -1,10 +1,9 @@
 import { Link, useParams } from "react-router-dom"
 import Banner from "../../component/common/banner/Banner";
 import { useBlogDetailsQuery, useGetRelatedBlogsQuery } from "../../features/blog/blogApi";
-import { Clock9, Edit2, Heart, Star } from "lucide-react";
+import { Clock9, Edit2, FileImage, Heart, Star } from "lucide-react";
 import CopyButton from "../../component/ui/CopyButton";
 import { formatDate } from "../../utils/timeFormat";
-import { BlogDetailsSkeleton } from "../../component/common/skeleton/BlogDetailsSkeleton";
 import { useCurrentUrl } from "../../utils/Url";
 import BlogSkeleton from "../../component/common/skeleton/BlogSkeleton";
 import SectionError from "../../component/common/error/SectionError";
@@ -15,6 +14,8 @@ import Buttons from "../../component/common/Buttons";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store/store";
 import ScrollToTop from "../../utils/scrollToTop";
+import Tooltip from "../../component/ui/Tooltip";
+import BlogDetailsSkeleton from "../../component/common/skeleton/BlogDetailsSkeleton";
 
 
 const BlogDetails = () => {
@@ -79,19 +80,30 @@ const BlogDetails = () => {
       ) : (
         <div className="paddingX lg:px-10 w-full mx-auto bg-surface my-20 py-12 rounded-md shadow-sm space-y-10 relative">
           { (user?.role === "admin" || user?.role === "staff") ? <div className="absolute top-5 right-5">
+            <Tooltip position="left" content="Edit Details">
             <Link to={`/dashboard/blog/update/${blog?._id}`}>
             <Buttons className="rounded" size="sm" variant="primary" iconRight={<Edit2 className="text-font font-semibold" size={16} />} >
               Edit
             </Buttons>
             </Link>
+            </Tooltip>
           </div> : ""}
           {/* Blog Banner Image */}
-          <div className="w-full overflow-hidden rounded-xl shadow-md">
+          <div className="w-full overflow-hidden rounded-xl shadow-md relative">
             <img
               src={blog?.photo[0]}
               alt="Blog Cover"
-              className="w-full h-[420px] object-contain object-center transition-transform duration-300 hover:scale-105"
+              className="w-full h-[420px] object-scale-down object-center transition-transform duration-300 hover:scale-105"
             />
+            { (user?.role === "admin" || user?.role === "staff") ? <div className="absolute top-5 left-5">
+            <Tooltip position="right" content="Edit photo">
+            <Link to={`/dashboard/blog/updatePhoto/${blog?._id}`}>
+            <Buttons className="rounded" size="sm" variant="primary" iconRight={<FileImage className="text-font font-semibold" size={16} />} >
+              Edit
+            </Buttons>
+            </Link>
+            </Tooltip>
+          </div> : ""}
           </div>
 
           {/* Author and Action Row */}
@@ -132,7 +144,7 @@ const BlogDetails = () => {
       )}
 
       {/* Related Blogs */}
-      <section className="my-16 paddingX max-w-6xl mx-auto">
+      <section className="my-16  mx-auto">
         <h2 className="text-2xl md:text-3xl xl:text-4xl text-font font-semibold text-center font-inter mb-8">
           Related Blogs
         </h2>

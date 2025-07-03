@@ -1,4 +1,4 @@
-export const CreateScheduleR1 = () => {
+const CreateScheduleR1 = () => {
  
     // while creating 1st rount schedule match or 1st round will create but need to update with umpires
 
@@ -6,3 +6,5 @@ export const CreateScheduleR1 = () => {
     <div>CreateScheduleR1</div>
   )
 }
+
+export default CreateScheduleR1;
