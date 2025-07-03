@@ -1,7 +1,14 @@
+import { useParams } from "react-router-dom"
 
-function UpdateBlogPhoto() {
+const UpdateBlogPhoto = () => {
+
+  const { blogId } = useParams();
+
   return (
-    <div>UpdateBlogPhoto</div>
+    <div>
+      <p>{blogId}</p>
+      UpdateBlogPhoto
+    </div>
   )
 }
 

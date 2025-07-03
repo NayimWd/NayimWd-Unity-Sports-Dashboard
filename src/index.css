@@ -121,6 +121,10 @@ input:-webkit-autofill:focus {
   @apply py-4 sm:py-6 md:py-8;
 }
 
+.paddingTopPage {
+  @apply pt-6 sm:pt-8 md:pt-12 lg:pt-16;
+}
+
 .formWrapper {
   @apply flex flex-col gap-5 w-full max-w-md mx-auto p-3 sm:p-4  md:p-6 z-10;
 }
@@ -128,7 +132,6 @@ input:-webkit-autofill:focus {
 .formContainer {
   @apply flex flex-col w-full max-w-md  py-6 rounded-lg
 }
-
 
 
 .paddingCard {

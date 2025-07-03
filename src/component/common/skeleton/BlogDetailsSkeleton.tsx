@@ -1,5 +1,4 @@
-
-export const BlogDetailsSkeleton = () => {
+ const BlogDetailsSkeleton = () => {
     return (
         <div className=" paddingX w-full flex flex-col paddingX justify-center items-center my-36 py-10 bg-surface">
             <div className="w-full bg-subSurface md:w-[80%] lg:w-[70%] h-64 rounded-md mt-10  animate-pulse">
@@ -28,3 +27,5 @@ export const BlogDetailsSkeleton = () => {
         </div>
     )
 }
+
+export default BlogDetailsSkeleton;

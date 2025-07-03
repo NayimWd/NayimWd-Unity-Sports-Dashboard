@@ -17,7 +17,6 @@ import { useEffect } from "react";
 type blogType = z.infer<typeof updateBlogSchema>;
 
 const UpdateBlogDetails = () => {
-
   // get blog id
   const { blogId } = useParams();
 
@@ -83,7 +82,6 @@ const UpdateBlogDetails = () => {
       ErrorToast({ msg: "Blog Update Failed!" })
     }
   }
-
 
   return (
     <div className="w-full">

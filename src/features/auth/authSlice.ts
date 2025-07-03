@@ -20,11 +20,13 @@ const authslice = createSlice({
     setCredentials: (state, action: PayloadAction<IUser>) => {
       state.user = action.payload;
       state.isAuthenticated = true;
+      state.authLoaded = true;
     },
 
     clearCredenTials: (state) => {
       state.user = null;
       state.isAuthenticated = false;
+      state.authLoaded = false;
     },
     setAuthLoaded: (state, action: PayloadAction<boolean>) => {
       state.authLoaded = action.payload;

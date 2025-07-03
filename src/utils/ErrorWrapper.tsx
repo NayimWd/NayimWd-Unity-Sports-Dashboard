@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import {ErrorBoundary, FallbackProps} from "react-error-boundary";
+import { ErrorBoundary, FallbackProps } from "react-error-boundary";
 import ErrorComp from "../component/common/error/ErrorComp";
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
   CustomErrorFallback?: (props: FallbackProps) => ReactNode;
 }
 
-const ErrorBoundaryWrapper = ({children, CustomErrorFallback}: Props) => {
+const ErrorBoundaryWrapper = ({ children, CustomErrorFallback }: Props) => {
   return (
     <ErrorBoundary
       fallbackRender={(fallbackProps) =>

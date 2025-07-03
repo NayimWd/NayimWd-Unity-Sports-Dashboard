@@ -7,7 +7,7 @@ interface CardProps extends VariantProps<typeof cardVariants> {
   className?: string
 }
 
-export const Card = ({ children, className, variant, size }: CardProps) => {
+const Card = ({ children, className, variant, size }: CardProps) => {
   return (
     <div className={cn(cardVariants({ variant, size, className }))}>
       {children}
@@ -36,3 +36,5 @@ const cardVariants = cva("rounded-lg border text-font transition-colors", {
     }
   }
 }) 
+
+export default Card;
