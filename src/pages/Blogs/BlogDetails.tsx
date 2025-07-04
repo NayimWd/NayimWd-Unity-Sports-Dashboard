@@ -93,6 +93,7 @@ const BlogDetails = () => {
             <img
               src={blog?.photo[0]}
               alt="Blog Cover"
+              loading="lazy"
               className="w-full h-[420px] object-scale-down object-center transition-transform duration-300 hover:scale-105"
             />
             { (user?.role === "admin" || user?.role === "staff") ? <div className="absolute top-5 left-5">
