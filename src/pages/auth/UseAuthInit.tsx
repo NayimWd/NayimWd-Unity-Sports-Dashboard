@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { setCredentials } from "../../features/auth/authSlice";
 import { useCurrentUserQuery } from "../../features/auth/authApi";
 
-const UseAuthInit = () => {
+export const UseAuthInit = () => {
     const dispatch = useDispatch();
 
     const { data: user, isSuccess } = useCurrentUserQuery(undefined, {
@@ -19,4 +19,3 @@ const UseAuthInit = () => {
     return null; // For prevent accidental UI rendering
 };
 
-export default UseAuthInit;

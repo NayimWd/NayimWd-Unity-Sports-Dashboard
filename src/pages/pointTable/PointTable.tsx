@@ -17,6 +17,7 @@ const PointTable = () => {
     refetchOnMountOrArgChange: true, // Refetch when the component mounts or the arg change
   })
 
+
   const headerData = [
     "Team",
     "Match",
@@ -38,7 +39,7 @@ const PointTable = () => {
     </>
   } else if (!loading && !pointTable?.data?.pointTable?.length) {
     content = (
-      <TableEmpty colSpan={headerData.length} message="No data found" />
+      <TableEmpty colSpan={headerData.length} message="No Point found!" />
     )
   } else {
     content = (
@@ -51,10 +52,11 @@ const PointTable = () => {
               <img
                 src={row.teamId?.teamLogo}
                 alt={row.teamId?.teamName}
+                loading="lazy"
                 className="w-8 h-8 rounded-5 object-cover"
               />
               <span>{row.teamId?.teamName}</span>
-            </div>, ,
+            </div>,
             row.matchPlayed,
             row.wins,
             row.losses,
