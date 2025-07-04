@@ -21,6 +21,24 @@ const blogApi = apiSlice.injectEndpoints({
             ]
           : [{ type: "Blog", id: "LIST" }],
     }),
+    manageBlogs: builder.query<Blogs, { page: number; limit: number }>({
+      query: ({ page, limit }) => ({
+        url: `blog/manage?page=${page}&limit=${limit}`,
+        method: "GET",
+      }),
+      transformResponse: (response: ApiResponse<Blogs>) => response.data,
+      // tags 
+      providesTags: (result) =>
+        result?.blogs.length
+          ? [
+              ...result.blogs.map((blog) => ({
+                type: "Blog" as const,
+                id: (blog as BlogDetails)?._id,
+              })),
+              { type: "Blog", id: "LIST" },
+            ]
+          : [{ type: "Blog", id: "LIST" }],
+    }),
     blogDetails: builder.query({
       query: (blogId) => ({
         url: `blog/details/${blogId}`,
@@ -62,6 +80,7 @@ const blogApi = apiSlice.injectEndpoints({
 
 export const {
   useGetBlogsQuery,
+  useManageBlogsQuery,
   useBlogDetailsQuery,
   useGetRelatedBlogsQuery,
   useCreateBlogMutation,

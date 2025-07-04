@@ -24,7 +24,7 @@ const ErrorComp = ({error}: ErrorProps) => {
       </p>
 
       {error && (
-        <pre className="bg-red-100 dark:bg-red-950 text-red-500 text-sm p-3 rounded max-w-xl overflow-auto mb-5">
+        <pre className="w-full bg-red-100 dark:bg-red-950 text-red-500 text-sm p-5 rounded  max-w-xl overflow-auto mb-5">
           {error.message}
         </pre>
       )}

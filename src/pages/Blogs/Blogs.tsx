@@ -10,7 +10,7 @@ const Blogs = () => {
   const [pageSize, setPageSize] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   // fetch blog
-  const { data: blogs, isLoading, error } = useGetBlogsQuery({ page: currentPage, limit: pageSize });
+  const { data: blogs, isLoading, isError } = useGetBlogsQuery({ page: currentPage, limit: pageSize });
   // set page size 
   const totalPages = blogs?.pagination?.totalPages ?? 1;
 
@@ -24,9 +24,9 @@ const Blogs = () => {
         ))
       }
     </>
-  } else if (!isLoading && error) {
+  } else if (!isLoading && isError) {
     content = <div className="w-full text-center text-toastErrorText text-lg"> Something went wrong! </div>
-  } else if (!isLoading && !error && blogs?.blogs?.length === 0) {
+  } else if (!isLoading && !isError && blogs?.blogs?.length === 0) {
     content = <TableEmpty message="No Blogs Found" />
   } else {
     content = blogs?.blogs.map((blog: any) => (
