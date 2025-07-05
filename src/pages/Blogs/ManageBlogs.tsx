@@ -73,12 +73,12 @@ const ManageBlogs = () => {
         data.isPublished === "true"
           ? true
           : data.isPublished === "false"
-          ? false
-          : "",
+            ? false
+            : "",
     };
 
     setFilters(sanitizedFilters);
-    setCurrentPage(1); // Reset to page 1 on filter change
+    setCurrentPage(1); // reset to page 1 on filter change
   };
 
   const handleClearFilters = () => {
@@ -123,7 +123,7 @@ const ManageBlogs = () => {
   return (
     <div>
       <h1 className={`${fontStyle.pageTitle} text-font`}>Manage Tournament Blogs</h1>
-
+      // filter ui
       <div className="w-full bg-surface paddingTable my-5 overflow-x-auto py-8 rounded">
         <FormContainer
           methods={form}
@@ -135,18 +135,18 @@ const ManageBlogs = () => {
           <DropdownInput label="Status" name="isPublished" options={statusOptions} />
           <DropdownInput label="Sort" name="sort" options={sortOptions} />
           <div className="mt-7 flex items-center gap-4">
-          <Buttons type="submit" className="rounded " iconLeft={<Filter size={16} />}>
-            Filter
-          </Buttons>
+            <Buttons type="submit" className="rounded " iconLeft={<Filter size={16} />}>
+              Filter
+            </Buttons>
 
-          <Buttons
-            type="button"
-            variant="secondary"
-            className="rounded"
-            onClick={handleClearFilters}
-          >
-            Clear
-          </Buttons>
+            <Buttons
+              type="button"
+              variant="secondary"
+              className="rounded"
+              onClick={handleClearFilters}
+            >
+              Clear
+            </Buttons>
           </div>
         </FormContainer>
 

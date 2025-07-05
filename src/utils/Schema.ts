@@ -94,3 +94,18 @@ export const filterBlogSchema = z.object({
   sort: z.string().optional(),
   isPublished: z.string().optional(),
 });
+
+// get all blogs filter schema
+export const filterAllBlogsSchema = z.object({
+  tags: z
+    .string()
+    .refine(
+      (tag) => ["news", "highlight", "tournaments", "awards", ""].includes(tag),
+      {
+        message: "Select a valid tag",
+      }
+    )
+    .optional(),
+  search: z.string().optional(),
+  sort: z.string().optional(),
+});
