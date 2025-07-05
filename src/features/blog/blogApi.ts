@@ -65,7 +65,7 @@ const blogApi = apiSlice.injectEndpoints({
           .join("&");
 
         return {
-          url: `blog/getAll?${queryParams}`,
+          url: `blog/manage?${queryParams}`,
           method: "GET",
         };
       },
