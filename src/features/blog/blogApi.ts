@@ -3,13 +3,33 @@ import { apiSlice } from "../api/apiSlice";
 
 const blogApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getBlogs: builder.query<Blogs, { page: number; limit: number }>({
-      query: ({ page, limit }) => ({
-        url: `blog/getAll?page=${page}&limit=${limit}`,
-        method: "GET",
-      }),
+    getBlogs: builder.query<
+      Blogs,
+      {
+        page: number;
+        limit: number;
+        search?: string;
+        sort?: string;
+        tags?: string;
+      }
+    >({
+      query: ({ page, limit, search, sort, tags }) => {
+        const queryParams = [
+          `page=${page}`,
+          `limit=${limit}`,
+          search ? `search=${search}` : "",
+          sort ? `sort=${sort}` : "",
+          tags ? `tags=${tags}` : "",
+        ]
+          .filter(Boolean)
+          .join("&");
+
+        return {
+          url: `blog/getAll?${queryParams}`,
+          method: "GET",
+        };
+      },
       transformResponse: (response: ApiResponse<Blogs>) => response.data,
-      // tags 
       providesTags: (result) =>
         result?.blogs.length
           ? [
@@ -21,13 +41,35 @@ const blogApi = apiSlice.injectEndpoints({
             ]
           : [{ type: "Blog", id: "LIST" }],
     }),
-    manageBlogs: builder.query<Blogs, { page: number; limit: number }>({
-      query: ({ page, limit }) => ({
-        url: `blog/manage?page=${page}&limit=${limit}`,
-        method: "GET",
-      }),
+    manageBlogs: builder.query<
+      Blogs,
+      {
+        page: number;
+        limit: number;
+        search?: string;
+        sort?: string;
+        tags?: string;
+        isPublished?: boolean;
+      }
+    >({
+      query: ({ page, limit, search, sort, tags, isPublished }) => {
+        const queryParams = [
+          `page=${page}`,
+          `limit=${limit}`,
+          search ? `search=${search}` : "",
+          sort ? `sort=${sort}` : "",
+          tags ? `tags=${tags}` : "",
+          typeof isPublished === "boolean" ? `isPublished=${isPublished}` : "",
+        ]
+          .filter(Boolean)
+          .join("&");
+
+        return {
+          url: `blog/getAll?${queryParams}`,
+          method: "GET",
+        };
+      },
       transformResponse: (response: ApiResponse<Blogs>) => response.data,
-      // tags 
       providesTags: (result) =>
         result?.blogs.length
           ? [
@@ -42,11 +84,11 @@ const blogApi = apiSlice.injectEndpoints({
     blogDetails: builder.query({
       query: (blogId) => ({
         url: `blog/details/${blogId}`,
-        method: "GET"
+        method: "GET",
       }),
       transformResponse: (response: ApiResponse<BlogDetails>) => response.data,
       // tags
-      providesTags: (_result, _error, blogId) => [{type: "Blog", id: blogId}]
+      providesTags: (_result, _error, blogId) => [{ type: "Blog", id: blogId }],
     }),
     getRelatedBlogs: builder.query<Blogs, { tags: string; limit: number }>({
       query: ({ tags, limit = 5 }) => ({
@@ -62,7 +104,7 @@ const blogApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: [{type: "Blog", id: "LIST"}]
+      invalidatesTags: [{ type: "Blog", id: "LIST" }],
     }),
     updateBlog: builder.mutation({
       query: ({ blogId, data }) => ({
@@ -70,10 +112,10 @@ const blogApi = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: (_result, _error, {blogId}) => [
-        {type: "Blog", id: blogId},
-        {type: "Blog", id: "LIST"}
-      ]
+      invalidatesTags: (_result, _error, { blogId }) => [
+        { type: "Blog", id: blogId },
+        { type: "Blog", id: "LIST" },
+      ],
     }),
   }),
 });

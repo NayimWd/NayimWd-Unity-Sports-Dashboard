@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { setCredentials } from "../../features/auth/authSlice";
 import { useCurrentUserQuery } from "../../features/auth/authApi";
 
-export const UseAuthInit = () => {
+export const useAuthInit = () => {
     const dispatch = useDispatch();
 
     const { data: user, isSuccess } = useCurrentUserQuery(undefined, {

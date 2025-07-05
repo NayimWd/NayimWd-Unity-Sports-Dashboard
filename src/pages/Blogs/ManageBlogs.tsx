@@ -54,6 +54,7 @@ const ManageBlogs = () => {
     <div>
       <h1 className={`${fontStyle.pageTitle} text-font`}>Manage Tournament Blogs</h1>
       <div className="w-full bg-surface paddingTable my-5 overflow-x-auto py-8 rounded">
+          <div></div>
         <Table>
           <TableHeader headers={headerData} />
           {content}
