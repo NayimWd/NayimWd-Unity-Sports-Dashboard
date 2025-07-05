@@ -1,5 +1,5 @@
-import {z} from "zod";
-import { useState } from "react"
+import { z } from "zod";
+import { useState, useMemo } from "react";
 import { useManageBlogsQuery } from "../../features/blog/blogApi";
 import TablePagination from "../../component/common/Table/TablePagination";
 import { fontStyle } from "../../utils/ClassUtils";
@@ -17,117 +17,145 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import TextInput from "../../component/common/input/TextInput";
 import { Filter, Search } from "lucide-react";
 
-type filterBlogsType = z.infer<typeof filterBlogSchema>;
+type FilterBlogsType = z.infer<typeof filterBlogSchema>;
 
 const ManageBlogs = () => {
   const [pageSize, setPageSize] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filters, setFilters] = useState<Record<string, any>>({});
 
-  const { data: blogs, isLoading } = useManageBlogsQuery({
+  const { data: blogs, isLoading, isError } = useManageBlogsQuery({
     page: currentPage,
     limit: pageSize,
-    // 🚀 You will add filters here later
+    ...filters,
   });
 
-  const headerData = ["Photo", "Title", "Status", "Details"];
   const totalPages = blogs?.pagination?.totalPages ?? 1;
 
-  const tags = [
+  const headerData = useMemo(() => ["Photo", "Title", "Status", "Details"], []);
+
+  const tagsOptions = [
     { label: "news", value: "news" },
     { label: "highlight", value: "highlight" },
     { label: "tournaments", value: "tournaments" },
     { label: "awards", value: "awards" },
   ];
 
-  const status = [
+  const statusOptions = [
     { label: "Published", value: "true" },
     { label: "Not Published", value: "false" },
   ];
 
-  const sort = [
-    { label: "asc", value: "" },
-    { label: "desc", value: "oldest" },
+  const sortOptions = [
+    { label: "Ascending", value: "" },
+    { label: "Descending", value: "oldest" },
   ];
 
-  const method = useForm<filterBlogsType>({
+  const form = useForm<FilterBlogsType>({
     resolver: zodResolver(filterBlogSchema),
     mode: "onSubmit",
+    defaultValues: {
+      search: "",
+      tags: "",
+      sort: "",
+      isPublished: "" as any,
+    },
   });
 
-  const handleSubmit = async (data: filterBlogsType) => {
-    try {
-      const filters = {
-        ...data,
-        isPublished:
-          data.isPublished === true
-            ? true
-            : data.isPublished === false
-            ? false
-            : undefined,
-      };
+  const { reset } = form;
 
-      console.log(filters);
-      // 👉 Call refetch here if needed or pass filters to query
-    } catch (error) {
-      console.error(error);
-    }
+  const onSubmit = (data: FilterBlogsType) => {
+    const sanitizedFilters = {
+      search: data.search?.trim() || "",
+      tags: data.tags || "",
+      sort: data.sort || "",
+      isPublished:
+        data.isPublished === "true"
+          ? true
+          : data.isPublished === "false"
+          ? false
+          : "",
+    };
+
+    setFilters(sanitizedFilters);
+    setCurrentPage(1); // Reset to page 1 on filter change
   };
 
-  let content = null;
+  const handleClearFilters = () => {
+    reset();
+    setFilters({});
+    setCurrentPage(1);
+  };
 
-  if (isLoading) {
-    content = [...Array(5)].map((_, index) => (
-      <TableSkeleton key={index} columns={headerData.length} />
-    ));
-  } else if (!isLoading && blogs?.blogs?.length === 0) {
-    content = <TableEmpty colSpan={headerData.length} message="No Blogs Found!" />;
-  } else {
-    content = blogs?.blogs.map((blog: any) => (
+  const content = useMemo(() => {
+    if (isLoading) {
+      return [...Array(5)].map((_, index) => (
+        <TableSkeleton key={index} columns={headerData.length} />
+      ));
+    }
+
+    if (isError || !blogs?.blogs?.length) {
+      return <TableEmpty colSpan={headerData.length} message="No Blogs Found!" />;
+    }
+
+    return blogs.blogs.map((blog: any) => (
       <TableRow
         key={blog._id}
         rowData={[
           <div className="flex items-center gap-4">
             <img
               className="w-8 h-8 rounded-5 object-cover"
-              src={blog?.photo}
+              src={blog.photo}
               alt="Blog"
               loading="lazy"
             />
           </div>,
-          blog?.title.length > 70 ? blog.title.slice(0, 60) + "..." : blog.title,
+          blog.title?.length > 60 ? blog.title.slice(0, 60) + "..." : blog.title,
           blog.isPublished ? "Published" : "Not Published",
-          <Buttons size="md" variant="outline">
+          <Buttons size="md" variant="gradientD">
             Details
           </Buttons>,
         ]}
       />
     ));
-  }
+  }, [isLoading, isError, blogs, headerData]);
 
   return (
     <div>
       <h1 className={`${fontStyle.pageTitle} text-font`}>Manage Tournament Blogs</h1>
+
       <div className="w-full bg-surface paddingTable my-5 overflow-x-auto py-8 rounded">
-        <div className="w-full">
-          <FormContainer
-            methods={method}
-            onSubmit={handleSubmit}
-            className="w-full flex flex-wrap justify-center gap-10 items-center"
+        <FormContainer
+          methods={form}
+          onSubmit={onSubmit}
+          className="w-full flex flex-wrap justify-center gap-3 lg:gap-10 items-center"
+        >
+          <TextInput label="Search" name="search" placeholder="Search by title..." icon={<Search size={16} />} />
+          <DropdownInput label="Select Tag" name="tags" options={tagsOptions} />
+          <DropdownInput label="Status" name="isPublished" options={statusOptions} />
+          <DropdownInput label="Sort" name="sort" options={sortOptions} />
+          <div className="mt-7 flex items-center gap-4">
+          <Buttons type="submit" className="rounded " iconLeft={<Filter size={16} />}>
+            Filter
+          </Buttons>
+
+          <Buttons
+            type="button"
+            variant="secondary"
+            className="rounded"
+            onClick={handleClearFilters}
           >
-            <TextInput label="Search" name="search" placeholder="Search" icon={<Search size={16} />} />
-            <DropdownInput label="Select a Tag" name="tags" options={tags} />
-            <DropdownInput label="Status" name="isPublished" options={status} />
-            <DropdownInput label="Sort" name="sort" options={sort} />
-            <Buttons type="submit" className="rounded" iconLeft={<Filter size={16} />}>
-              Filter
-            </Buttons>
-          </FormContainer>
-        </div>
+            Clear
+          </Buttons>
+          </div>
+        </FormContainer>
+
         <Table>
           <TableHeader headers={headerData} />
           {content}
         </Table>
       </div>
+
       <div className="w-full flex justify-center mt-6">
         <TablePagination
           currentPage={currentPage}

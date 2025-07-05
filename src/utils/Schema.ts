@@ -84,7 +84,7 @@ export const filterBlogSchema = z.object({
   tags: z
     .string()
     .refine(
-      (tag) => ["news", "highlight", "tournaments", "awards"].includes(tag),
+      (tag) => ["news", "highlight", "tournaments", "awards", ""].includes(tag),
       {
         message: "Select a valid tag",
       }
@@ -92,5 +92,5 @@ export const filterBlogSchema = z.object({
     .optional(),
   search: z.string().optional(),
   sort: z.string().optional(),
-  isPublished: z.boolean().optional(),
+  isPublished: z.string().optional(),
 });
