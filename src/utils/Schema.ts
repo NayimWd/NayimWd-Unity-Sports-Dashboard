@@ -74,10 +74,23 @@ export const updateBlogSchema = z
       )
       .optional(),
   })
-  .refine(
-    (data) => data.title || data.content || data.tags,
-    {
-      message: "At least one field must be provided",
-      path: ["_form"], 
-    }
-  );
+  .refine((data) => data.title || data.content || data.tags, {
+    message: "At least one field must be provided",
+    path: ["_form"],
+  });
+
+// blog filter schema
+export const filterBlogSchema = z.object({
+  tags: z
+    .string()
+    .refine(
+      (tag) => ["news", "highlight", "tournaments", "awards"].includes(tag),
+      {
+        message: "Select a valid tag",
+      }
+    )
+    .optional(),
+  search: z.string().optional(),
+  sort: z.string().optional(),
+  isPublished: z.boolean().optional(),
+});

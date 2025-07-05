@@ -1,3 +1,4 @@
+import {z} from "zod";
 import { useState } from "react"
 import { useManageBlogsQuery } from "../../features/blog/blogApi";
 import TablePagination from "../../component/common/Table/TablePagination";
@@ -8,16 +9,69 @@ import TableRow from "../../component/common/Table/TableRow";
 import Buttons from "../../component/common/Buttons";
 import Table from "../../component/common/Table/Table";
 import TableHeader from "../../component/common/Table/TableHeader";
+import DropdownInput from "../../component/common/input/DropdownInput";
+import FormContainer from "../../component/common/Form/FormContainer";
+import { filterBlogSchema } from "../../utils/Schema";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import TextInput from "../../component/common/input/TextInput";
+import { Filter, Search } from "lucide-react";
 
-
+type filterBlogsType = z.infer<typeof filterBlogSchema>;
 
 const ManageBlogs = () => {
   const [pageSize, setPageSize] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
-  const { data: blogs, isLoading } = useManageBlogsQuery({ page: currentPage, limit: pageSize });
+
+  const { data: blogs, isLoading } = useManageBlogsQuery({
+    page: currentPage,
+    limit: pageSize,
+    // 🚀 You will add filters here later
+  });
 
   const headerData = ["Photo", "Title", "Status", "Details"];
   const totalPages = blogs?.pagination?.totalPages ?? 1;
+
+  const tags = [
+    { label: "news", value: "news" },
+    { label: "highlight", value: "highlight" },
+    { label: "tournaments", value: "tournaments" },
+    { label: "awards", value: "awards" },
+  ];
+
+  const status = [
+    { label: "Published", value: "true" },
+    { label: "Not Published", value: "false" },
+  ];
+
+  const sort = [
+    { label: "asc", value: "" },
+    { label: "desc", value: "oldest" },
+  ];
+
+  const method = useForm<filterBlogsType>({
+    resolver: zodResolver(filterBlogSchema),
+    mode: "onSubmit",
+  });
+
+  const handleSubmit = async (data: filterBlogsType) => {
+    try {
+      const filters = {
+        ...data,
+        isPublished:
+          data.isPublished === true
+            ? true
+            : data.isPublished === false
+            ? false
+            : undefined,
+      };
+
+      console.log(filters);
+      // 👉 Call refetch here if needed or pass filters to query
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   let content = null;
 
@@ -54,7 +108,21 @@ const ManageBlogs = () => {
     <div>
       <h1 className={`${fontStyle.pageTitle} text-font`}>Manage Tournament Blogs</h1>
       <div className="w-full bg-surface paddingTable my-5 overflow-x-auto py-8 rounded">
-          <div></div>
+        <div className="w-full">
+          <FormContainer
+            methods={method}
+            onSubmit={handleSubmit}
+            className="w-full flex flex-wrap justify-center gap-10 items-center"
+          >
+            <TextInput label="Search" name="search" placeholder="Search" icon={<Search size={16} />} />
+            <DropdownInput label="Select a Tag" name="tags" options={tags} />
+            <DropdownInput label="Status" name="isPublished" options={status} />
+            <DropdownInput label="Sort" name="sort" options={sort} />
+            <Buttons type="submit" className="rounded" iconLeft={<Filter size={16} />}>
+              Filter
+            </Buttons>
+          </FormContainer>
+        </div>
         <Table>
           <TableHeader headers={headerData} />
           {content}
