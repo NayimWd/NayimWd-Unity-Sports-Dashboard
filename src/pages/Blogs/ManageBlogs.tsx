@@ -123,7 +123,7 @@ const ManageBlogs = () => {
   return (
     <div>
       <h1 className={`${fontStyle.pageTitle} text-font`}>Manage Tournament Blogs</h1>
-      // filter ui
+      
       <div className="w-full bg-surface paddingTable my-5 overflow-x-auto py-8 rounded">
         <FormContainer
           methods={form}

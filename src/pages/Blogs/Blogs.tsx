@@ -83,9 +83,7 @@ const Blogs = () => {
         ))
       }
     </>
-  } else if (!isLoading && isError) {
-    content = <div className="w-full text-center text-toastErrorText text-lg"> Something went wrong! </div>
-  } else if (!isLoading && !isError && (!blogs?.blogs || blogs.blogs.length === 0)) {
+  } else if (!isLoading && isError && (!blogs?.blogs || blogs.blogs.length === 0)) {
     content = <TableEmpty message="No Blogs Found" />
   } else {
     content = blogs?.blogs.map((blog: any) => (
