@@ -8,16 +8,13 @@ import ThemeWrapper from "./utils/ThemeWrapper.tsx";
 import { Toaster } from "react-hot-toast";
 import App from "./App.tsx";
 
-
-
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ErrorBoundaryWrapper>
       <Provider store={store}>
         <ThemeWrapper>
           <App />
-          <Toaster/>
+          <Toaster />
         </ThemeWrapper>
       </Provider>
     </ErrorBoundaryWrapper>
