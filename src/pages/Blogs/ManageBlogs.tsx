@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TextInput from "../../component/common/input/TextInput";
 import { Filter, Search } from "lucide-react";
+import { formatDate } from "../../utils/timeFormat";
 
 type FilterBlogsType = z.infer<typeof filterBlogSchema>;
 
@@ -32,7 +33,7 @@ const ManageBlogs = () => {
 
   const totalPages = blogs?.pagination?.totalPages ?? 1;
 
-  const headerData = useMemo(() => ["Photo", "Title", "Status", "Details"], []);
+  const headerData = useMemo(() => ["Photo", "Title", "Status", "Date", "Action"], []);
 
   const tagsOptions = [
     { label: "news", value: "news" },
@@ -104,17 +105,18 @@ const ManageBlogs = () => {
         rowData={[
           <div className="flex items-center gap-4">
             <img
-              className="w-8 h-8 rounded-5 object-cover"
+              className="w-10 h-10 rounded-full object-cover object-center"
               src={blog.photo}
               alt="Blog"
               loading="lazy"
             />
           </div>,
-          blog.title?.length > 60 ? blog.title.slice(0, 60) + "..." : blog.title,
+          blog.title?.length > 55 ? blog.title.slice(0, 55) + "..." : blog.title,
           blog.isPublished ? "Published" : "Not Published",
-          <Buttons size="md" variant="gradientD">
-            Details
-          </Buttons>,
+          formatDate(blog?.createdAt).slice(0, 11),
+          <Buttons className="rounded" size="sm" variant='warning'>
+            {blog?.isPublished ? "Unpublish" : "Publish"}
+          </Buttons>
         ]}
       />
     ));
@@ -123,7 +125,7 @@ const ManageBlogs = () => {
   return (
     <div>
       <h1 className={`${fontStyle.pageTitle} text-font`}>Manage Tournament Blogs</h1>
-      
+
       <div className="w-full bg-surface paddingTable my-5 overflow-x-auto py-8 rounded">
         <FormContainer
           methods={form}
