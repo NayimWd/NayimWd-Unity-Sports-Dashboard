@@ -46,9 +46,8 @@ const BlogDetails = () => {
     </>
   } else if (!loadingRelatedBlog && error) {
     content = <div>
-      content = <>
-        <SectionError message="Fetch Related Video Failed! Something went wrong" />
-      </>
+      content = <SectionError message="Fetch Related Video Failed! Something went wrong" />
+
     </div>
   } else if (!loadingRelatedBlog && !error && relatedBlogs?.blogs.length === 0) {
     content = <div>
@@ -72,20 +71,20 @@ const BlogDetails = () => {
 
   return (
     <div className="w-full">
-      <ScrollToTop/>
+      <ScrollToTop />
       <Banner pageText="Blog Details" navText="Blog" navLink="Details" />
 
       {isLoading ? (
         <BlogDetailsSkeleton />
       ) : (
         <div className="paddingX lg:px-10 w-full mx-auto bg-surface my-20 py-12 rounded-md shadow-sm space-y-10 relative">
-          { (user?.role === "admin" || user?.role === "staff") ? <div className="absolute top-5 right-5">
+          {(user?.role === "admin" || user?.role === "staff") ? <div className="absolute top-5 right-5">
             <Tooltip position="left" content="Edit Details">
-            <Link to={`/dashboard/blog/update/${blog?._id}`}>
-            <Buttons className="rounded" size="sm" variant="primary" iconRight={<Edit2 className="text-font font-semibold" size={16} />} >
-              Edit
-            </Buttons>
-            </Link>
+              <Link to={`/dashboard/blog/update/${blog?._id}`}>
+                <Buttons className="rounded" size="sm" variant="primary" iconRight={<Edit2 className="text-font font-semibold" size={16} />} >
+                  Edit
+                </Buttons>
+              </Link>
             </Tooltip>
           </div> : ""}
           {/* Blog Banner Image */}
@@ -96,15 +95,15 @@ const BlogDetails = () => {
               loading="lazy"
               className="w-full h-[420px] object-scale-down object-center transition-transform duration-300 hover:scale-105"
             />
-            { (user?.role === "admin" || user?.role === "staff") ? <div className="absolute top-5 left-5">
-            <Tooltip position="right" content="Edit photo">
-            <Link to={`/dashboard/blog/updatePhoto/${blog?._id}`}>
-            <Buttons className="rounded" size="sm" variant="primary" iconRight={<FileImage className="text-font font-semibold" size={16} />} >
-              Edit
-            </Buttons>
-            </Link>
-            </Tooltip>
-          </div> : ""}
+            {(user?.role === "admin" || user?.role === "staff") ? <div className="absolute top-5 left-5">
+              <Tooltip position="right" content="Edit photo">
+                <Link to={`/dashboard/blog/updatePhoto/${blog?._id}`}>
+                  <Buttons className="rounded" size="sm" variant="primary" iconRight={<FileImage className="text-font font-semibold" size={16} />} >
+                    Edit
+                  </Buttons>
+                </Link>
+              </Tooltip>
+            </div> : ""}
           </div>
 
           {/* Author and Action Row */}

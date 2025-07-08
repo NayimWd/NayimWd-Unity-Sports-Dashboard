@@ -2,7 +2,6 @@ import { z } from "zod";
 import { useState } from "react";
 import BlogCard from "../../component/common/card/BlogCard";
 import BlogSkeleton from "../../component/common/skeleton/BlogSkeleton";
-import TableEmpty from "../../component/common/Table/TableEmpty";
 import TablePagination from "../../component/common/Table/TablePagination";
 import { useGetBlogsQuery } from "../../features/blog/blogApi"
 import { fontStyle } from "../../utils/ClassUtils";
@@ -14,6 +13,7 @@ import TextInput from "../../component/common/input/TextInput";
 import { Filter, Search } from "lucide-react";
 import DropdownInput from "../../component/common/input/DropdownInput";
 import Buttons from "../../component/common/Buttons";
+import EmptyData from "../../component/ui/EmptyData";
 
 type FilterAllBlogsType = z.infer<typeof filterAllBlogsSchema>
 
@@ -76,28 +76,30 @@ const Blogs = () => {
   let content = null;
 
   if (isLoading) {
-    content = <>
-      {
-        [...Array(6)].map((__, index) => (
-          <BlogSkeleton key={index} />
-        ))
-      }
+  content = (
+    <>
+      {[...Array(6)].map((__, index) => (
+        <BlogSkeleton key={index} />
+      ))}
     </>
-  } else if (!isLoading && isError && (!blogs?.blogs || blogs.blogs.length === 0)) {
-    content = <TableEmpty message="No Blogs Found" />
-  } else {
-    content = blogs?.blogs.map((blog: any) => (
-      <BlogCard
-        key={blog._id}
-        _id={blog._id}
-        title={blog.title}
-        photo={blog.photo}
-        author={blog.author}
-        createdAt={blog.createdAt}
-        tags={blog.tags}
-      />
-    ))
-  }
+  );
+} else if (isError) {
+  content = <EmptyData message="No Blogs Found" />;
+} else if (!blogs?.blogs || blogs.blogs.length === 0) {
+  content = <EmptyData message="No Blogs Found" />;
+} else {
+  content = blogs.blogs.map((blog: any) => (
+    <BlogCard
+      key={blog._id}
+      _id={blog._id}
+      title={blog.title}
+      photo={blog.photo}
+      author={blog.author}
+      createdAt={blog.createdAt}
+      tags={blog.tags}
+    />
+  ));
+}
 
   return (
     <div className="w-full">
