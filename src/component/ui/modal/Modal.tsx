@@ -1,6 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
-import cn from "../../utils/cn";
+import cn from "../../../utils/cn";
+import { baseModal } from "./baseModal";
 
 
 interface ModalProps {
@@ -13,6 +14,8 @@ interface ModalProps {
   confirmText?: string;
   cancelText?: string;
   isLoading?: boolean;
+  variant?: "default" | "info" | "danger" | "success";
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
 const Modal = ({
@@ -24,32 +27,24 @@ const Modal = ({
   onConfirm,
   confirmText = "Confirm",
   cancelText = "Cancel",
-  isLoading,
+  isLoading = false,
+  variant = "default",
+  size = "md",
 }: ModalProps) => {
   return (
     <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50" />
-        <Dialog.Content
-          className={cn(
-            "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-            "w-full max-w-md rounded-2xl p-6 shadow-xl z-50",
-            "bg-surface border border-border transition-all duration-300 ease-out",
-            "focus:outline-none"
-          )}
-        >
+        <Dialog.Overlay className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40" />
+        <Dialog.Content className={baseModal({ variant, size })}>
           {/* Header */}
-          <div className="flex items-start justify-between mb-4">
+          <div className="flex justify-between items-start mb-4">
             {title && (
               <Dialog.Title className="text-lg font-semibold text-font">
                 {title}
               </Dialog.Title>
             )}
             <Dialog.Close asChild>
-              <button
-                className="text-subtext hover:text-font transition-colors"
-                aria-label="Close modal"
-              >
+              <button className="text-subtext hover:text-font transition">
                 <X size={20} />
               </button>
             </Dialog.Close>
@@ -63,24 +58,20 @@ const Modal = ({
           )}
 
           {/* Body */}
-          <div>{children}</div>
+          {children}
 
           {/* Footer */}
           <div className="mt-6 flex justify-end gap-3">
             <Dialog.Close asChild>
-              <button
-                type="button"
-                className="px-4 py-2 rounded-lg text-sm text-font border border-inputBorder bg-bg hover:bg-subSurface transition"
-              >
+              <button className="px-4 py-2 text-sm rounded-md border border-border text-font hover:bg-subSurface transition">
                 {cancelText}
               </button>
             </Dialog.Close>
             <button
-              type="button"
               onClick={onConfirm}
               disabled={isLoading}
               className={cn(
-                "px-4 py-2 rounded-lg text-sm font-medium text-white bg-primary hover:bg-primaryHover transition",
+                "px-4 py-2 text-sm rounded-md text-white bg-primary hover:bg-primaryHover transition",
                 isLoading && "opacity-50 cursor-not-allowed"
               )}
             >

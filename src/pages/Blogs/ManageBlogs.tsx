@@ -17,17 +17,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import TextInput from "../../component/common/input/TextInput";
 import { Filter, Search } from "lucide-react";
 import { formatDate } from "../../utils/timeFormat";
-import Modal from "../../component/ui/Modal";
+import ConfirmModal from "../../component/ui/modal/ConfirmModal";
+
 
 type FilterBlogsType = z.infer<typeof filterBlogSchema>;
 
 const ManageBlogs = () => {
-// states for modal 
-const [open, setOpen] = useState(false);
-const [loading, setLoading] = useState(false);
+  // states for modal 
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-// publish controller 
-const handleConfirm =  () => {
+  // publish controller 
+  const handleConfirm = () => {
     setLoading(true);
     setLoading(false);
     setOpen(false);
@@ -132,7 +133,7 @@ const handleConfirm =  () => {
           blog.title?.length > 55 ? blog.title.slice(0, 55) + "..." : blog.title,
           blog.isPublished ? "Published" : "Not Published",
           formatDate(blog?.createdAt).slice(0, 11),
-          <Buttons onClick={()=> setOpen(true)} className="rounded" size="sm" variant='warning'>
+          <Buttons onClick={() => setOpen(true)} className="rounded" size="sm" variant='warning'>
             {blog?.isPublished ? "Unpublish" : "Publish"}
           </Buttons>
         ]}
@@ -187,15 +188,13 @@ const handleConfirm =  () => {
           }}
         />
       </div>
-      <Modal
+      <ConfirmModal
         isOpen={open}
         onOpenChange={setOpen}
-        title="Are you sure?"
-        description="This action will unpublish the blog. You can publish it again later."
         onConfirm={handleConfirm}
-        confirmText="Yes, Unpublish"
-        cancelText="Cancel"
         isLoading={loading}
+        title="Are you sure?"
+        description="You can publish"
       />
     </div>
   );
