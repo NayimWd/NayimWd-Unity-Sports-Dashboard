@@ -17,22 +17,38 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import TextInput from "../../component/common/input/TextInput";
 import { Filter, Search } from "lucide-react";
 import { formatDate } from "../../utils/timeFormat";
+import Modal from "../../component/ui/Modal";
 
 type FilterBlogsType = z.infer<typeof filterBlogSchema>;
 
 const ManageBlogs = () => {
+// states for modal 
+const [open, setOpen] = useState(false);
+const [loading, setLoading] = useState(false);
+
+// publish controller 
+const handleConfirm =  () => {
+    setLoading(true);
+    setLoading(false);
+    setOpen(false);
+  };
+
+  // pagination 
   const [pageSize, setPageSize] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState<Record<string, any>>({});
 
+  // manage api slice
   const { data: blogs, isLoading, isError } = useManageBlogsQuery({
     page: currentPage,
     limit: pageSize,
     ...filters,
   });
 
+  // pagination page number
   const totalPages = blogs?.pagination?.totalPages ?? 1;
 
+  // filter data 
   const headerData = useMemo(() => ["Photo", "Title", "Status", "Date", "Action"], []);
 
   const tagsOptions = [
@@ -64,7 +80,7 @@ const ManageBlogs = () => {
   });
 
   const { reset } = form;
-
+  // handle submit for filter blogs
   const onSubmit = (data: FilterBlogsType) => {
     const sanitizedFilters = {
       search: data.search?.trim() || "",
@@ -82,12 +98,14 @@ const ManageBlogs = () => {
     setCurrentPage(1); // reset to page 1 on filter change
   };
 
+  // clear blog filter
   const handleClearFilters = () => {
     reset();
     setFilters({});
     setCurrentPage(1);
   };
 
+  // blog table for manage
   const content = useMemo(() => {
     if (isLoading) {
       return [...Array(5)].map((_, index) => (
@@ -114,7 +132,7 @@ const ManageBlogs = () => {
           blog.title?.length > 55 ? blog.title.slice(0, 55) + "..." : blog.title,
           blog.isPublished ? "Published" : "Not Published",
           formatDate(blog?.createdAt).slice(0, 11),
-          <Buttons className="rounded" size="sm" variant='warning'>
+          <Buttons onClick={()=> setOpen(true)} className="rounded" size="sm" variant='warning'>
             {blog?.isPublished ? "Unpublish" : "Publish"}
           </Buttons>
         ]}
@@ -125,7 +143,6 @@ const ManageBlogs = () => {
   return (
     <div>
       <h1 className={`${fontStyle.pageTitle} text-font`}>Manage Tournament Blogs</h1>
-
       <div className="w-full bg-surface paddingTable my-5 overflow-x-auto py-8 rounded">
         <FormContainer
           methods={form}
@@ -170,6 +187,16 @@ const ManageBlogs = () => {
           }}
         />
       </div>
+      <Modal
+        isOpen={open}
+        onOpenChange={setOpen}
+        title="Are you sure?"
+        description="This action will unpublish the blog. You can publish it again later."
+        onConfirm={handleConfirm}
+        confirmText="Yes, Unpublish"
+        cancelText="Cancel"
+        isLoading={loading}
+      />
     </div>
   );
 };

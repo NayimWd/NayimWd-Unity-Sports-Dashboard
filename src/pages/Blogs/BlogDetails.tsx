@@ -7,7 +7,6 @@ import { formatDate } from "../../utils/timeFormat";
 import { useCurrentUrl } from "../../utils/Url";
 import BlogSkeleton from "../../component/common/skeleton/BlogSkeleton";
 import SectionError from "../../component/common/error/SectionError";
-import TableEmpty from "../../component/common/Table/TableEmpty";
 import BlogCard from "../../component/common/card/BlogCard";
 import SafeHtmlRender from "../../component/common/input/inputUtils/SafeHtmlRender";
 import Buttons from "../../component/common/Buttons";
@@ -16,6 +15,7 @@ import { RootState } from "../../app/store/store";
 import ScrollToTop from "../../utils/scrollToTop";
 import Tooltip from "../../component/ui/Tooltip";
 import BlogDetailsSkeleton from "../../component/common/skeleton/BlogDetailsSkeleton";
+import EmptyData from "../../component/ui/EmptyData";
 
 
 const BlogDetails = () => {
@@ -45,16 +45,17 @@ const BlogDetails = () => {
       }
     </>
   } else if (!loadingRelatedBlog && error) {
-    content = <div>
-      content = <SectionError message="Fetch Related Video Failed! Something went wrong" />
-
-    </div>
+    content = (
+      <div>
+        <SectionError message="Fetch Related Video Failed! Something went wrong" />
+      </div>
+    );
   } else if (!loadingRelatedBlog && !error && relatedBlogs?.blogs.length === 0) {
-    content = <div>
-      content = <>
-        <TableEmpty message="No Related Blogs found!" />
-      </>
-    </div>
+    content = (
+      <div>
+        <EmptyData message="No Related Blogs found!" />
+      </div>
+    );
   } else if (!loadingRelatedBlog && !error && relatedBlogs?.blogs.length !== 0) {
     content = relatedBlogs?.blogs?.map((blog: any) => (
       <BlogCard
