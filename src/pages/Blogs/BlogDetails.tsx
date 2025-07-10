@@ -1,7 +1,7 @@
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import Banner from "../../component/common/banner/Banner";
 import { useBlogDetailsQuery, useGetRelatedBlogsQuery } from "../../features/blog/blogApi";
-import { Clock9, Edit2, FileImage, Heart, Star } from "lucide-react";
+import { Clock9, Edit2, Edit3, EllipsisVertical, Heart, Star } from "lucide-react";
 import CopyButton from "../../component/ui/CopyButton";
 import { formatDate } from "../../utils/timeFormat";
 import { useCurrentUrl } from "../../utils/Url";
@@ -9,16 +9,23 @@ import BlogSkeleton from "../../component/common/skeleton/BlogSkeleton";
 import SectionError from "../../component/common/error/SectionError";
 import BlogCard from "../../component/common/card/BlogCard";
 import SafeHtmlRender from "../../component/common/input/inputUtils/SafeHtmlRender";
-import Buttons from "../../component/common/Buttons";
+
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store/store";
 import ScrollToTop from "../../utils/scrollToTop";
 import Tooltip from "../../component/ui/Tooltip";
 import BlogDetailsSkeleton from "../../component/common/skeleton/BlogDetailsSkeleton";
 import EmptyData from "../../component/ui/EmptyData";
+import { useRef, useState } from "react";
+import useClickOutSide from "../../hooks/useClickOutSide";
+import CommonDropDown from "../../component/common/dropdown/CommonDropDown";
 
 
 const BlogDetails = () => {
+  // state and ref for edit dropdown
+  const [openLink, setOpenLink] = useState(false);
+  const editDropdownRef = useRef<HTMLDivElement>(null!);
+
   // get user role 
   const { user } = useSelector((state: RootState) => state.auth);
 
@@ -70,6 +77,15 @@ const BlogDetails = () => {
     ))
   }
 
+  // edit link buttons
+  const editButtons = [
+    { label: "Edit Details", href: `/dashboard/blog/update/${blog?._id}`, icon: <Edit2 size={14} /> },
+    { label: "Edit Photo", href: `/dashboard/blog/updatePhoto/${blog?._id}`, icon: <Edit3 size={14} /> },
+  ]
+
+  // toggle dropdown
+  useClickOutSide(editDropdownRef, () => setOpenLink(false))
+
   return (
     <div className="w-full">
       <ScrollToTop />
@@ -80,13 +96,18 @@ const BlogDetails = () => {
       ) : (
         <div className="paddingX lg:px-10 w-full mx-auto bg-surface my-20 py-12 rounded-md shadow-sm space-y-10 relative">
           {(user?.role === "admin" || user?.role === "staff") ? <div className="absolute top-5 right-5">
-            <Tooltip position="left" content="Edit Details">
-              <Link to={`/dashboard/blog/update/${blog?._id}`}>
-                <Buttons className="rounded" size="sm" variant="primary" iconRight={<Edit2 className="text-font font-semibold" size={16} />} >
-                  Edit
-                </Buttons>
-              </Link>
+            <Tooltip position="left" content="Edit Blogs">
+              <div onClick={() => setOpenLink(!openLink)} className="size-10 bg-bg rounded-full flex justify-center items-center cursor-pointer">
+                <EllipsisVertical className="text-font" size={22} />
+              </div>
             </Tooltip>
+            <div ref={editDropdownRef}>
+              <CommonDropDown
+                isOpen={openLink}
+                onClose={() => setOpenLink(false)}
+                links={editButtons}
+              />
+            </div>
           </div> : ""}
           {/* Blog Banner Image */}
           <div className="w-full overflow-hidden rounded-xl shadow-md relative">
@@ -96,17 +117,7 @@ const BlogDetails = () => {
               loading="lazy"
               className="w-full h-[420px] object-scale-down object-center transition-transform duration-300 hover:scale-105"
             />
-            {(user?.role === "admin" || user?.role === "staff") ? <div className="absolute top-5 left-5">
-              <Tooltip position="right" content="Edit photo">
-                <Link to={`/dashboard/blog/updatePhoto/${blog?._id}`}>
-                  <Buttons className="rounded" size="sm" variant="primary" iconRight={<FileImage className="text-font font-semibold" size={16} />} >
-                    Edit
-                  </Buttons>
-                </Link>
-              </Tooltip>
-            </div> : ""}
           </div>
-
           {/* Author and Action Row */}
           <div className="flex justify-between items-center text-sm text-muted">
             <p className="">By <span className="font-medium text">{blog?.author}</span></p>
