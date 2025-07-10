@@ -8,8 +8,7 @@ interface TooltipProps {
     position?: "top" | "bottom" | "left" | "right"
 }
 
-const Tooltip = ({ content, children, className, position }: TooltipProps) => {
-
+const Tooltip = ({ content, children, className, position = "top" }: TooltipProps) => {
     const positionClasses = {
         top: "bottom-full left-1/2 -translate-x-1/2 mb-2",
         bottom: "top-full left-1/2 -translate-x-1/2 mt-2",
@@ -17,33 +16,24 @@ const Tooltip = ({ content, children, className, position }: TooltipProps) => {
         right: "left-full top-1/2 -translate-y-1/2 ml-2",
     };
 
-    const arrowPosition = {
-        top: "top-full left-1/2 -translate-x-1/2",
-        bottom: "bottom-full left-1/2 -translate-x-1/2 rotate-180",
-        left: "left-full top-1/2 -translate-y-1/2 -rotate-90",
-        right: "right-full top-1/2 -translate-y-1/2 rotate-90",
-    };
     return (
-        <div className={cn(className, "relative group inline-block z-40")}>
+        <div className={cn("relative group inline-block z-40", className)}>
             {children}
-            <div className={cn(
-                "pointer-events-none absolute z-5 hidden w-max group-hover:flex group-focus:flex flex-col items-center transition-all duration-200 opacity-0 group-hover:opacity-100 group-focus:opacity-100",
-                positionClasses[position ? position : "top"],
-                className
-            )}>
-                <div className="relative rounded bg-black px-2 py-1 text-xs text-white shadow-md p-2">
-                    {content}
-                    <div
-                        className={cn(
-                            "absolute w-2 h-2 bg-black rotate-45",
-                            arrowPosition[position ? position : "top"]
-                        )}
-                    />
 
+            <div
+                className={cn(
+                    "pointer-events-none absolute hidden group-hover:flex group-focus:flex flex-col items-center",
+                    "transition-opacity duration-200 opacity-0 group-hover:opacity-100 group-focus:opacity-100",
+                    positionClasses[position]
+                )}
+            >
+                <div className="relative rounded bg-black px-3 py-1.5 text-xs leading-tight text-white shadow-lg w-20  max-w-xs text-center">
+                    {content}
+                    {/* Arrow removed for modern look */}
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Tooltip

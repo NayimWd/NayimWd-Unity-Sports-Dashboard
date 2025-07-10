@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 import { forwardRef, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import cn from "../../../utils/cn";
-import { LogOut } from "lucide-react";
+import { LogOut, X } from "lucide-react";
 
 interface LinkItems {
   label: string;
@@ -21,14 +21,14 @@ interface User {
 interface DropdownMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  user: User;
+  user?: User;
   links: LinkItems[];
-  onLogout: () => void;
+  onLogout?: () => void;
   className?: string;
 }
 
 const ProfileDropdown = forwardRef<HTMLDivElement, DropdownMenuProps>(
-  ({ isOpen, user, links, onLogout, className }, ref) => {
+  ({ isOpen, user, links, onLogout, className, onClose }, ref) => {
     return (
       <div
         ref={ref}
@@ -39,7 +39,7 @@ const ProfileDropdown = forwardRef<HTMLDivElement, DropdownMenuProps>(
       >
         {/* User info */}
         <div className="p-4 border-b border-inputBorder">
-          <p className="text-sm font-medium text-font">{user.name}</p>
+          <p className="text-sm font-medium text-font">{user?.name ? user?.name : ""}</p>
           <p className="text-xs text-subtext">Signed in</p>
         </div>
 
@@ -65,6 +65,9 @@ const ProfileDropdown = forwardRef<HTMLDivElement, DropdownMenuProps>(
           >
             Logout <LogOut size={16} />
           </button>
+        </div>
+        <div className="absolute top-0 right-0 p-2">
+          <X onClick={onClose} className="text-font bg-subSurface p-1.5 rounded-full cursor-pointer hover:bg-surface hover:scale-105 shadow" size={28} />
         </div>
       </div>
     );
