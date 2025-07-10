@@ -192,7 +192,7 @@ const ManageBlogs = () => {
         isOpen={open}
         onOpenChange={setOpen}
         onConfirm={handleConfirm}
-        isLoading={loading}
+        loading={loading}
         title="Are you sure?"
         description="You can publish"
       />
