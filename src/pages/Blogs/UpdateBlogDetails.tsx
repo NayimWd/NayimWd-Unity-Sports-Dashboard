@@ -88,7 +88,7 @@ const UpdateBlogDetails = () => {
       <h1 className=" text-center text-2xl sm:text-3xl md:text-4xl mt-5 font-semibold text-font font-merriweather">Edit Blogs</h1>
       <div className="paddingX w-full max-w-5xl mx-auto bg-surface  py-12 px-6 rounded shadow-sm">
         <FormContainer
-          methods={methods}
+          methods={methods} 
           onSubmit={handleSubmit}
           className=" w-full space-y-6 paddingX">
           <TextInput name="title" label="Title" placeholder="Write Title" />
