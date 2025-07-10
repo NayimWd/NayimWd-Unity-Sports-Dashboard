@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { useState, useMemo } from "react";
-import { useManageBlogsQuery } from "../../features/blog/blogApi";
+import { useManageBlogsQuery, useUpdatePublishStatusMutation } from "../../features/blog/blogApi";
 import TablePagination from "../../component/common/Table/TablePagination";
 import { fontStyle } from "../../utils/ClassUtils";
 import TableSkeleton from "../../component/common/Table/TableSkeleton";
@@ -18,7 +18,8 @@ import TextInput from "../../component/common/input/TextInput";
 import { Filter, Search } from "lucide-react";
 import { formatDate } from "../../utils/timeFormat";
 import ConfirmModal from "../../component/ui/modal/ConfirmModal";
-
+import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
+import toast from "react-hot-toast";
 
 type FilterBlogsType = z.infer<typeof filterBlogSchema>;
 
@@ -27,11 +28,39 @@ const ManageBlogs = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // state for select specefic blog
+  const [selectedBlog, setSelectedBlog] = useState<{ blogId: string; isPublished: boolean } | null>(null);
+
+  // publish blog api slice
+  const [updatePublishStatus] = useUpdatePublishStatusMutation()
+
   // publish controller 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
+    // if blog id not select, return
+    if (!selectedBlog) return;
     setLoading(true);
-    setLoading(false);
-    setOpen(false);
+
+    const loadingId = LoadingToast({ msg: "Updating Blog Details..." });
+
+    try {
+      const { blogId, isPublished } = selectedBlog;
+      const updateStatus = { isPublished: !isPublished };
+
+      await updatePublishStatus({ blogId, data: updateStatus }).unwrap();
+      toast.dismiss(loadingId)
+      SuccessToast({ msg: "Blog Status Update Successfully" })
+      setSelectedBlog(null);
+      setOpen(false)
+
+    } catch (error) {
+      ErrorToast({ msg: "Blog status update failed" })
+      toast.dismiss(loadingId)
+      setOpen(false);
+    } finally {
+      toast.dismiss(loadingId)
+      setLoading(false)
+      setOpen(false);
+    }
   };
 
   // pagination 
@@ -133,7 +162,18 @@ const ManageBlogs = () => {
           blog.title?.length > 55 ? blog.title.slice(0, 55) + "..." : blog.title,
           blog.isPublished ? "Published" : "Not Published",
           formatDate(blog?.createdAt).slice(0, 11),
-          <Buttons onClick={() => setOpen(true)} className="rounded" size="sm" variant='warning'>
+          <Buttons
+            onClick={() => {
+              setOpen(true);
+              setSelectedBlog({
+                blogId: blog._id,
+                isPublished: blog.isPublished,
+              });
+            }}
+            className="rounded"
+            size="sm"
+            variant='warning'
+          >
             {blog?.isPublished ? "Unpublish" : "Publish"}
           </Buttons>
         ]}
@@ -194,7 +234,7 @@ const ManageBlogs = () => {
         onConfirm={handleConfirm}
         loading={loading}
         title="Are you sure?"
-        description="You can publish"
+        description="You can control Publish status"
       />
     </div>
   );
