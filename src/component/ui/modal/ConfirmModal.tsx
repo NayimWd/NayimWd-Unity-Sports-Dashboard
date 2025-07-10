@@ -7,10 +7,10 @@ interface ConfirmModalProps {
     title?: string;
     description?: string;
     onConfirm: () => void;
-    isLoading?: boolean;
+    loading?: boolean;
 }
 
-const ConfirmModal = ({ isOpen, onOpenChange, title, description, onConfirm, isLoading }: ConfirmModalProps) => {
+const ConfirmModal = ({ isOpen, onOpenChange, title, description, onConfirm, loading }: ConfirmModalProps) => {
 
     return (
         <Modal
@@ -21,7 +21,7 @@ const ConfirmModal = ({ isOpen, onOpenChange, title, description, onConfirm, isL
             confirmText="Yes, Confirm"
             cancelText="Cancel"
             onConfirm={onConfirm}
-            isLoading={isLoading}
+            isLoading={loading}
             variant="info"
             size="sm"
         />
