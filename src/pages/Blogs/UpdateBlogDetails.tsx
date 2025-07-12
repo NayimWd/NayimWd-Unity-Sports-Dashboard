@@ -85,7 +85,7 @@ const UpdateBlogDetails = () => {
 
   return (
     <div className="w-full">
-      <h1 className=" text-center text-2xl sm:text-3xl md:text-4xl mt-5 font-semibold text-font font-merriweather">Edit Blogs</h1>
+      <h1 className=" text-center text-2xl sm:text-3xl md:text-4xl mt-5 font-semibold text-font font-merriweather">Edit Blogs Details</h1>
       <div className="paddingX w-full max-w-5xl mx-auto bg-surface  py-12 px-6 rounded shadow-sm">
         <FormContainer
           methods={methods} 

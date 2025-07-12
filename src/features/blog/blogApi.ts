@@ -117,17 +117,28 @@ const blogApi = apiSlice.injectEndpoints({
         { type: "Blog", id: "LIST" },
       ],
     }),
+    updateBlogPhoto: builder.mutation({
+      query: ({ blogId, data }) => ({
+        url: `/blog/updatPhoto/${blogId}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: (_result, _error, { blogId }) => [
+        { type: "Blog", id: blogId },
+        { type: "Blog", id: "LIST" },
+      ],
+    }),
     updatePublishStatus: builder.mutation({
-      query: ({blogId, data}) => ({
+      query: ({ blogId, data }) => ({
         url: `/blog/publishStatus/${blogId}`,
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: (_result, _error, {blogId}) => [
-        {type: "Blog", id: blogId},
-        {type: "Blog", id: "LIST"},
+      invalidatesTags: (_result, _error, { blogId }) => [
+        { type: "Blog", id: blogId },
+        { type: "Blog", id: "LIST" },
       ],
-    })
+    }),
   }),
 });
 
@@ -138,5 +149,6 @@ export const {
   useGetRelatedBlogsQuery,
   useCreateBlogMutation,
   useUpdateBlogMutation,
+  useUpdateBlogPhotoMutation,
   useUpdatePublishStatusMutation,
 } = blogApi;
