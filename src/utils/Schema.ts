@@ -59,6 +59,15 @@ export const blogSchema = z.object({
     .min(1, { message: "At least one blog image is required" }),
 });
 
+// update blog schema
+export const updateBlogPhotoSchema = z.object({
+  photo: z.array(
+    z.custom<File>((v) => v instanceof File && v.size > 0, {
+      message: "At least one photo is required",
+    })
+  ),
+});
+
 // update blog
 export const updateBlogSchema = z
   .object({

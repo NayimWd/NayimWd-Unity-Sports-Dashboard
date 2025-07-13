@@ -69,7 +69,7 @@ const CreateBlogs = () => {
           methods={methods}
           onSubmit={handleSubmit}
           className=" w-full space-y-6 paddingX">
-          <PhotoArrayInput label="Image" name="photo" className="" />
+          <PhotoArrayInput label="Image" name="photo" />
           <TextInput name="title" label="Title" placeholder="Write Title" />
           <TextAreaInput label="Blog" placeholder="Write Your Blog" name="content" height="min-h-[300px]" />
           <div className="flex justify-between items-center flex-wrap gap-5">
