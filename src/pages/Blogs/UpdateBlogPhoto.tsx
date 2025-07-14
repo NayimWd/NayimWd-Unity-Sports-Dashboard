@@ -77,4 +77,4 @@ const UpdateBlogPhoto = () => {
   )
 }
 
-export default UpdateBlogPhoto
+export default UpdateBlogPhoto;
