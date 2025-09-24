@@ -43,7 +43,7 @@ export const navLinks = {
       label: "Users",
       children: [
         {
-          path: "/dashboard/account",
+          path: "/dashboard/myAccount",
           icon: User2,
           label: "Account",
         },

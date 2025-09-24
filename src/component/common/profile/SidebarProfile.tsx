@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { clearCredenTials } from "../../../features/auth/authSlice";
 import { ErrorToast, SuccessToast } from "../../../utils/toastUtils";
 import { RootState } from "../../../app/store/store";
+import Tooltip from "../../ui/Tooltip";
 
 
 const SidebarProfile = () => {
@@ -28,15 +29,17 @@ const SidebarProfile = () => {
         }
     }
     return (
-        <div className="flex w-full items-center justify-between gap-2 px-3 py-6 rounded  mb-16">
+        <div className="flex w-full items-center justify-between gap-2 px-3 py-6 rounded-md bg-bg mb-16">
             <div className="flex items-center gap-2">
-                <img className="w-14 h-14 rounded-full object-cover object-center" src={user?.photo} alt="user photo" aria-label="photo" loading="lazy" />
+                <img className="w-14 h-14 rounded-full  object-cover object-center" src={user?.photo} alt="user photo" aria-label="photo" loading="lazy" />
                 <div className="flex flex-col font-inter">
                     <h3 className="text-font font-semibold"> {user?.name} </h3>
                     <p className="text-sm text-subtext"> {user?.email.slice(0, 15)} </p>
                 </div>
             </div>
+            <Tooltip position="left" content="Sign out">
             <LogOut className="text-toastErrorText" onClick={handleLogout} size={24} aria-label="logout button" role="button" />
+            </Tooltip>
         </div>
     )
 }

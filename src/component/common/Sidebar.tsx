@@ -4,7 +4,7 @@ import { navLinks } from "../../assets/constant/link";
 import SidebarItem from "./sidebarItem";
 import { useCurrentUserQuery } from "../../features/auth/authApi";
 import SidebarProfile from "./profile/SidebarProfile";
-import Tooltip from "../ui/Tooltip";
+
 
 interface SidebarProps {
   isOpen: boolean;
@@ -36,10 +36,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
           <SidebarItem key={index} link={link} />
         ))}
       </div>
-      <div className="w-full absolute bottom-0 left-0 bg-bg shadow">
-        <Tooltip position="left" content="SignOut">
-          <SidebarProfile />
-        </Tooltip>
+      <div className="w-full absolute bottom-0 left-0 py-2 rounded-md shadow">
+
+        <SidebarProfile />
+
       </div>
     </aside>
   );
