@@ -10,7 +10,7 @@ const SuspenseWrapper: React.FC<SuspenseWrapperProps> = ({
   children,
   CustomLoader,
 }) => {
-  return <Suspense fallback={CustomLoader ?? <Loader />}>{children}</Suspense>;
+  return <Suspense fallback={CustomLoader ?? <Loader fullScreen/>}>{children}</Suspense>;
 };
 
 export default SuspenseWrapper;

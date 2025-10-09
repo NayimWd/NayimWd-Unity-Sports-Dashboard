@@ -1,4 +1,4 @@
-import Modal from "./Modal";
+import RedixModal from "./RedixModal";
 
 interface modalProps {
     infoOpen: boolean;
@@ -11,7 +11,7 @@ interface modalProps {
 
 const InfoModal = ({infoOpen, onOpenChange, title, description, onConfirm, loading}: modalProps) => {
   return (
-    <Modal
+    <RedixModal
        isOpen={infoOpen}
        onOpenChange={onOpenChange}
        title={title}

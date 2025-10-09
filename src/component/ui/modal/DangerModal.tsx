@@ -1,4 +1,4 @@
-import Modal from "./Modal";
+import RedixModal from "./RedixModal";
 
 interface dangerModalProps {
     dangerOpen: boolean;
@@ -11,7 +11,7 @@ interface dangerModalProps {
 
 const DangerModal = ({dangerOpen, onOpenChange, title, description, onConfirm, loading}: dangerModalProps) => {
   return (
-    <Modal
+    <RedixModal
        isOpen={dangerOpen}
        onOpenChange={onOpenChange}
        title={title}

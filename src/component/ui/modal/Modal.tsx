@@ -1,87 +1,61 @@
-import * as Dialog from "@radix-ui/react-dialog";
-import { X } from "lucide-react";
-import cn from "../../../utils/cn";
+import { VariantProps } from "class-variance-authority"
+import cn from "../../../utils/cn"
+import { HtmlHTMLAttributes, ReactNode } from "react";
 import { baseModal } from "./baseModal";
+import Loader from "../../common/loader/Loader";
 
-
-interface ModalProps {
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
-  title?: string;
-  description?: string;
-  children?: React.ReactNode;
-  onConfirm?: () => void;
-  confirmText?: string;
-  cancelText?: string;
-  isLoading?: boolean;
-  variant?: "default" | "info" | "danger" | "success";
-  size?: "sm" | "md" | "lg" | "xl";
+interface ModalProps
+    extends HtmlHTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof baseModal> {
+    children: ReactNode;
+    isOpen: boolean;
+    onOpenChange: () => void;
+    isLoading?: boolean;
 }
 
-const Modal = ({
-  isOpen,
-  onOpenChange,
-  title,
-  description,
-  children,
-  onConfirm,
-  confirmText = "Confirm",
-  cancelText = "Cancel",
-  isLoading = false,
-  variant = "default",
-  size = "md",
-}: ModalProps) => {
-  return (
-    <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
-      <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40" />
-        <Dialog.Content className={baseModal({ variant, size })}>
-          {/* Header */}
-          <div className="flex justify-between items-start mb-4">
-            {title && (
-              <Dialog.Title className="text-lg font-semibold text-font">
-                {title}
-              </Dialog.Title>
-            )}
-            <Dialog.Close asChild>
-              <button className="text-subtext hover:text-font transition">
-                <X size={20} />
-              </button>
-            </Dialog.Close>
-          </div>
+interface ModalBodyProps {
+    children: ReactNode;
+}
 
-          {/* Description */}
-          {description && (
-            <Dialog.Description className="text-sm text-subtext mb-4">
-              {description}
-            </Dialog.Description>
-          )}
 
-          {/* Body */}
-          {children}
+const Modal = ({ children, className, isOpen, onOpenChange, isLoading, variant, size }: ModalProps) => {
 
-          {/* Footer */}
-          <div className="mt-6 flex justify-end gap-3">
-            <Dialog.Close asChild>
-              <button className="px-4 py-2 text-sm rounded-md border border-border text-font hover:bg-subSurface transition">
-                {cancelText}
-              </button>
-            </Dialog.Close>
-            <button
-              onClick={onConfirm}
-              disabled={isLoading}
-              className={cn(
-                "px-4 py-2 text-sm rounded-md text-white bg-primary hover:bg-primaryHover transition",
-                isLoading && "opacity-50 cursor-not-allowed"
-              )}
-            >
-              {isLoading ? "Processing..." : confirmText}
-            </button>
-          </div>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
-  );
-};
+    return (
+        <div className="bg-black/30 w-full h-full">
+            <div className={cn(baseModal({ variant, size, className }))}>
+                {isLoading ? <Loader size="md"/> : children}
+                <button onClick={onOpenChange} className="absolute top-5 right-5 rounded-full bg-red-500 shadow">
+                </button>
+            </div>
+        </div>
+    )
+}
+
+function ModalHeader({ children }: ModalBodyProps) {
+    return (
+        <>
+            <h1 className="">{children}</h1>
+        </>
+    )
+}
+function ModalBody({ children }: ModalBodyProps) {
+    return (
+        <div>
+            {children}
+        </div>
+    )
+}
+function ModalFooter({ children }: ModalBodyProps) {
+    return (
+        <div>
+            {children}
+        </div>
+    )
+}
+
+Modal.Header = ModalHeader;
+Modal.Body = ModalBody;
+Modal.Footer = ModalFooter;
+
 
 export default Modal;

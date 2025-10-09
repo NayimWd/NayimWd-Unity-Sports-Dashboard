@@ -1,4 +1,4 @@
-import Modal from "./Modal";
+import RedixModal from "./RedixModal";
 
 // interface confirm modal props
 interface ConfirmModalProps {
@@ -13,7 +13,7 @@ interface ConfirmModalProps {
 const ConfirmModal = ({ isOpen, onOpenChange, title, description, onConfirm, loading }: ConfirmModalProps) => {
 
     return (
-        <Modal
+        <RedixModal
             isOpen={isOpen}
             onOpenChange={onOpenChange}
             title={title}
