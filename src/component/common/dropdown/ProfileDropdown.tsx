@@ -51,7 +51,7 @@ const ProfileDropdown = forwardRef<HTMLDivElement, DropdownMenuProps>(
               to={link.href ?? "#"}
               className="block w-full px-4 py-2 text-sm text-foreground hover:bg-subSurface rounded transition"
             >
-              <div className="flex items-center justify-between text-subtext">
+              <div onClick={onClose} className="flex items-center justify-between text-subtext">
                 <span>{link.label}</span>
                 {link.icon && <span>{link.icon}</span>}
               </div>

@@ -1,6 +1,6 @@
+import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux"
 import { RootState } from "../app/store/store"
-import { Navigate } from "react-router-dom";
 import { useCurrentUserQuery } from "../features/auth/authApi";
 import Loader from "../component/common/loader/Loader";
 import { ReactNode } from "react";
