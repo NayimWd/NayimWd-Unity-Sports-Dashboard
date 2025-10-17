@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Buttons from "../../component/common/Buttons";
-import RedixModal from "../../component/ui/modal/RedixModal";
+import InfoModal from "../../component/ui/modal/InfoModal";
+
 
 
 
@@ -14,15 +15,16 @@ const MyProfile = () => {
 
   return (
     <div>
-      <RedixModal
-      isOpen={open}
+      <InfoModal
+      infoOpen={open}
       onOpenChange={handleClick1}
       title="Modal test"
       description="Modal test desc"
-      variant="success"
-
+      onConfirm={() => {
+        // handle confirm action here
+        setOpen(false);
+      }}
       />
-
 
 
       <Buttons onClick={handleClick1} variant="primary"> Modal 1 </Buttons>
