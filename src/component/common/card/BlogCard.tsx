@@ -36,7 +36,9 @@ const BlogCard = ({ _id, title, photo, author, tags, createdAt }: BlogCardProps)
             <Buttons variant="primary" size="sm" className="rounded-sm" iconRight={<MoveRight size={8} />}> Details </Buttons>
           </Link>
         </div>
-        <h3 id="title" className={`${fontStyle.cardTitle} text-font`}> {title.slice(0, 130)}... </h3>
+        <Link to={`/dashboard/blog/details/${_id}`}>
+        <h3 id="title" className={`${fontStyle.cardTitle} text-font`}> {title.slice(0, 100)}... </h3>
+        </Link>
         <div className="flex justify-between flex-wrap items-center w-full mt-5 text-primary">
           <p className={`${fontStyle.secondaryText} `}>{author}</p>
           <p className={fontStyle.secondaryText}>{tags}</p>

@@ -2,16 +2,16 @@ import { cva, VariantProps } from "class-variance-authority";
 import { ReactNode } from "react";
 import cn from "../../../utils/cn";
 
-const cardVariants = cva("relative overflow-hidden rounded-lg border text-font transition-colors duration-100", {
+const cardVariants = cva("relative overflow-hidden rounded-lg  text-font transition-colors duration-100 w-full max-w-sm", {
   variants: {
     variant: {
       Base: "bg-surface border-border",
-      Team: "bg-subSurface hover:bg-surface",
+      Team: "bg-surface",
       Player: "bg-surface border border-border",
       Tournament: "bg-gradient-to-br from-bg to-surface",
-      match: "bg-gradient-to-br from-subSurface to-surface",
-      Blog: "bg-surface border-border hover:shadow-md",
-      venue: "bg-gradient-to-br from-primary to-secondary border border-primary hover:scale-[1.01]",
+      match: "bg-gradient-to-br from-bg to-surface",
+      Blog: "bg-surface hover:shadow-md",
+      venue: "bg-gradient-to-br from-primary to-surface border border-primary hover:scale-[1.01]",
     },
     size: {
       sm: "p-3",
@@ -50,7 +50,7 @@ const CardTags = ({ children, className }: CardSubProps) => (
 );
 
 const CardTag = ({ children, className }: CardSubProps) => (
-  <div className={cn(className, "rounded-md bg-primary px-2 py-1 text-xs font-medium text-primary shadow")}>
+  <div className={cn(className, "")}>
     {children}
   </div>
 );
