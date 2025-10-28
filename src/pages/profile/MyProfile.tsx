@@ -22,19 +22,19 @@ const MyProfile = () => {
             <CardSkeleton.Content/>
             <CardSkeleton.Footer/>
           </CardSkeleton>
-         <Card variant="venue" size="sm">
+         <Card variant="Player" size="sm">
           <Card.Image src="/lightImg.jpeg" alt="Card image">
             <Card.Tags>
               <Card.Tag><Badge variant="success">abc</Badge></Card.Tag>
-              <Card.Tag><Badge variant="error">abc</Badge></Card.Tag>
+              <Card.Tag><Badge variant="info">abc</Badge></Card.Tag>
          
             </Card.Tags>
           </Card.Image>
           <Card.Content>
-            <Card.Title>
+            <Card.Title className="font-merriweather">
              nulla asperiores ipsum odit libero, optio accusantium quidem, explicabo error.
             </Card.Title>
-            <Card.Description>
+            <Card.Description className="font-inter">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem vel repellendus incidunt id dolores, iure alias consequatur quas molestiae vitae sapiente illo natus hic cum asperiores amet obcaecati et recusandae non maiores quasi est iste. Eos, a obcaecati, odit perspiciatis animi, non rem quasi dignissimos vitae aliquid reiciendis nesciunt numquam!
             </Card.Description>
           </Card.Content>

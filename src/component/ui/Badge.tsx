@@ -20,7 +20,7 @@ const badgeVariants = cva(
         ghost:
           "bg-transparent text-font border border-transparent hover:bg-surface",
         info:
-          "bg-blue-500/15 text-blue-500 border border-blue-500/30",
+          "bg-blue-500 text-blue-100 border border-blue-500/30",
       },
     },
     defaultVariants: {
