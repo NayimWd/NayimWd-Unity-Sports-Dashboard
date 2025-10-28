@@ -3,22 +3,22 @@ import cn from "../../utils/cn"
 import { ReactNode } from "react"
 
 const badgeVariants = cva(
-  "inline-flex items-center gap-1.5 rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors select-none",
+  "inline-flex items-center gap-1.5 rounded-md px-2.5 py-0.5 text-xs font-semibold transition-colors select-none",
   {
     variants: {
       variant: {
         default:
           "bg-surface text-font border-transparent hover:opacity-90",
         success:
-          "bg-green-400/30 text-green-500 border border-green-400",
+          "bg-green-500 text-green-100",
         warning:
-          "bg-yellow-500/20 text-yellow-500 border border-yellow-500/30",
+          "bg-yellow-500 text-yellow-100",
         error:
-          "bg-red-500/30 text-red-500 border border-red-500/40",
+          "bg-red-500 text-red-100",
         outline:
-          "bg-transparent text-font border-border hover:bg-surface",
+          "bg-transparent text-font border border-border hover:bg-surface",
         ghost:
-          "bg-transparent text-font border-transparent hover:bg-surface",
+          "bg-transparent text-font border border-transparent hover:bg-surface",
         info:
           "bg-blue-500/15 text-blue-500 border border-blue-500/30",
       },
