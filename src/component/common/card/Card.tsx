@@ -5,13 +5,16 @@ import cn from "../../../utils/cn";
 const cardVariants = cva("relative overflow-hidden rounded-lg  text-font transition-colors duration-100 w-full max-w-sm", {
   variants: {
     variant: {
-      Base: "bg-surface border-border",
-      Team: "bg-surface",
-      Player: "bg-surface border border-border",
-      Tournament: "bg-gradient-to-br from-bg to-surface",
-      match: "bg-gradient-to-br from-bg to-surface",
-      Blog: "bg-surface hover:shadow-md",
-      venue: "bg-gradient-to-br from-primary to-surface border border-primary hover:scale-[1.01]",
+      Base: "bg-surface border border-border shadow-sm hover:shadow-md hover:border-subSurface",
+      Team: "bg-surface border border-border shadow-sm hover:shadow-lg hover:border-blue-400",
+      Player: "bg-surface border border-border shadow-md hover:shadow-xl hover:border-blue-400",
+      Tournament:
+        "bg-gradient-to-br from-bg via-surface to-subSurface border border-border shadow-lg hover:shadow-2xl",
+      match:
+        "bg-gradient-to-br from-subSurface to-surface border border-surface shadow-md hover:shadow-xl hover:border-blue-500",
+      Blog: "bg-surface border border-border shadow-sm hover:shadow-lg hover:border-muted",
+      venue:
+        "bg-gradient-to-br from-blue-200 to-blue-400 border border-surface shadow-lg hover:shadow-2xl text-white",
     },
     size: {
       sm: "p-3",
@@ -44,7 +47,7 @@ interface CardSubProps {
 };
 
 const CardTags = ({ children, className }: CardSubProps) => (
-  <div className={cn(className, "absolute top-3 left-3 right-3 z-10 flex items-center justify-between gap-2")}>
+  <div className={cn("absolute top-4 left-4 right-4 z-10 flex items-center justify-between gap-2", className)}>
     {children}
   </div>
 );
@@ -78,17 +81,17 @@ const CardContent = ({ children, className }: CardSubProps) => (
 );
 
 const CardTitle = ({ children, className }: CardSubProps) => (
-  <h3 className={cn("text-lg font-semibold leading-tight", className)}>
+  <h3 className={cn("text-lg font-semibold leading-tight tracking-tight text-font", className)}>
     {children}
   </h3>
 );
 
 const CardDescription = ({ children, className }: CardSubProps) => (
-  <p className={cn("text-sm text-muted-foreground line-clamp-3", className)}>{children}</p>
+  <p className={cn("text-sm leading-relaxed text-subtext line-clamp-3", className)}>{children}</p>
 );
 
 const CardFooter = ({ children, className }: CardSubProps) => (
-  <div className={cn("p-4 border-t border-border flex items-center justify-between", className)}>
+  <div className={cn("p-4 border-t border-border flex items-center justify-between gap-3", className)}>
     {children}
   </div>
 );
