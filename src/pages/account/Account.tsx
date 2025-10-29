@@ -1,6 +1,10 @@
+import PageLayout from "../../component/layout/PageLayout"
+
 const Account = () => {
   return (
-    <div>My account Account</div>
+    <PageLayout>
+      <h1>account</h1>
+    </PageLayout>
   )
 }
 

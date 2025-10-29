@@ -32,7 +32,7 @@ const CopyButton = ({ textCopy }: buttonProps) => {
                 onClick={handleCopy}
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
-                className={cn("p-2 rounded transition-colors hover:bg-surface text-muted-foreground")}
+                className={cn("p-2 rounded transition-colors hover:bg-surface text-muted")}
             >
                 {
                     copied ? (

@@ -60,7 +60,7 @@ const DashBoardLayout: React.FC = () => {
           />
         )}
         {/* main content */}
-        <main className="ml-0 md:ml-64 mt-16 sm:mt-[74px] xl:mt-20 flex-1 overflow-y-auto min-h-screen px-4 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-8">
+        <main className="ml-0 md:ml-64 mt-16 sm:mt-[74px] xl:mt-20 flex-1 overflow-y-auto min-h-screen px-2 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-8">
           <div className="w-full max-w-7xl mx-auto">
             <ScrollToTop />
             <Outlet />
