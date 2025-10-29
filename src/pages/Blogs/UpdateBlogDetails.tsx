@@ -13,6 +13,7 @@ import DropdownInput from "../../component/common/input/DropdownInput";
 import Buttons from "../../component/common/Buttons";
 import { PenLine } from "lucide-react";
 import { useEffect } from "react";
+import { fontStyle } from "../../utils/ClassUtils";
 
 type blogType = z.infer<typeof updateBlogSchema>;
 
@@ -85,12 +86,12 @@ const UpdateBlogDetails = () => {
 
   return (
     <div className="w-full">
-      <h1 className=" text-center text-2xl sm:text-3xl md:text-4xl mt-5 font-semibold text-font font-merriweather">Edit Blogs Details</h1>
-      <div className="paddingX w-full max-w-5xl mx-auto bg-surface  py-12 px-6 rounded shadow-sm">
+      <h1 className={`${fontStyle.pageTitle} text-center sm:text-3xl md:text-4xl my-5 font-semibold text-font font-merriweather`}>Edit Blogs Details</h1>
+      <div className=" w-full max-w-7xl mx-auto bg-surface  py-12 px-3 rounded-lg shadow">
         <FormContainer
           methods={methods} 
           onSubmit={handleSubmit}
-          className=" w-full space-y-6 paddingX">
+          className=" w-full space-y-6 px-0 lg:px-5 rounded-lg">
           <TextInput name="title" label="Title" placeholder="Write Title" />
           <TextAreaInput label="Blog" placeholder="Write Your Blog" name="content" height="min-h-[300px]" />
           <div className="flex justify-between items-center flex-wrap gap-5">

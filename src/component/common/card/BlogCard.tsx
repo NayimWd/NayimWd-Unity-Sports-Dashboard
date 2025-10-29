@@ -32,11 +32,11 @@ const BlogCard = ({ _id, title, photo, author, tags, createdAt }: BlogCardProps)
       <div>
         <div className="flex justify-between items-center mb-5">
           <p className={`${fontStyle.cardDesc} text-primary`}>{formatDate(createdAt)}</p>
-          <Link to={`/dashboard/blog/details/${_id}`}>
+          <Link to={`/dashboard/blogs/details/${_id}`}>
             <Buttons variant="primary" size="sm" className="rounded-sm" iconRight={<MoveRight size={8} />}> Details </Buttons>
           </Link>
         </div>
-        <Link to={`/dashboard/blog/details/${_id}`}>
+        <Link to={`/dashboard/blogs/details/${_id}`}>
         <h3 id="title" className={`${fontStyle.cardTitle} text-font`}> {title.slice(0, 100)}... </h3>
         </Link>
         <div className="flex justify-between flex-wrap items-center w-full mt-5 text-primary">
@@ -44,7 +44,7 @@ const BlogCard = ({ _id, title, photo, author, tags, createdAt }: BlogCardProps)
           <p className={fontStyle.secondaryText}>{tags}</p>
         </div>
       </div>
-      <div onClick={handleShare} className="absolute top-6 right-6 z-50">
+      <div onClick={handleShare} className="absolute top-6 bg-inherit rounded right-6 z-50">
         <CopyButton textCopy="Share" />
       </div>
     </Card>

@@ -69,9 +69,9 @@ const PointTable = () => {
   }
 
   return (
-    <div>
+    <div className="">
       <h1 className={`${fontStyle.pageTitle} text-font space-y-2`}>Point Table</h1>
-      <div className="w-full bg-surface paddingTable my-5  overflow-x-auto py-8 rounded">
+      <div className="w-full bg-surface paddingTable my-5 shadow-xl overflow-x-auto py-8 rounded-xl">
         {/* <p className="text-center text-font font-medium text-lg">Of</p> */}
         <div className={`${fontStyle.SectionHeading} flex items-center justify-center gap-4 flex-wrap mt-5`}>
           <p className="text-font text-xl text-center">

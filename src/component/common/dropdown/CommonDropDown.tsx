@@ -26,7 +26,7 @@ const CommonDropDown = forwardRef<HTMLDivElement, DropdownMenuProps>(
                 className={cn(
                     dropdownStyle({ open: isOpen }),
                     "z-[200]",
-                    "bg-bg border border-subBorder rounded-xl shadow-lg backdrop-blur-md w-56",
+                    "bg-bg border border-muted rounded-lg shadow-lg backdrop-blur-md w-56",
                     className
                 )}
                 role="menu"
@@ -46,7 +46,7 @@ const CommonDropDown = forwardRef<HTMLDivElement, DropdownMenuProps>(
                 </div>
 
                 {/* Link Items */}
-                <div className="space-y-1 px-2 pb-2 ">
+                <div className="space-y-1 px-2 pb-2 mb-1.5 mt-3">
                     {links.map((link, i) => (
                         <Link
                             key={i}

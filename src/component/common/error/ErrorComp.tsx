@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Buttons from '../Buttons';
 import { RefreshCcw, House } from 'lucide-react';
 
@@ -17,19 +17,19 @@ const ErrorComp = ({error}: ErrorProps) => {
     navigate("/dashboard");
   };
   return (
-    <div className="flex flex-col items-center justify-center h-screen text-center p-4 bg-bg">
-      <h2 className="text-3xl font-bold text-toastErrorText mb-3">Something went wrong</h2>
-      <p className="text-gray-600 dark:text-gray-300 mb-5">
+    <div className="flex flex-col items-center justify-center h-screen text-center px-4 bg-bg overflow-x-hidden">
+      <h2 className="text-3xl font-bold text-toastErrorText mb-3 font-merriweather">Something went wrong</h2>
+      <p className="text-gray-600 dark:text-gray-300 mb-5 font-inter">
         An unexpected error occurred. Please try again.
       </p>
 
       {error && (
-        <pre className="w-full bg-red-100 dark:bg-red-950 text-red-500 text-sm p-5 rounded  max-w-xl overflow-auto mb-5">
+        <pre className="hidden w-full bg-red-100 dark:bg-red-950 text-red-500 text-sm p-5 rounded  max-w-xl overflow-auto mb-5">
           {error.message}
         </pre>
       )}
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center justify-center flex-wrap gap-4">
         <Buttons
         variant="primary"
         iconRight={<RefreshCcw size={16}/>}
@@ -38,6 +38,7 @@ const ErrorComp = ({error}: ErrorProps) => {
         >
           Refresh Page
         </Buttons>
+        <Link to="/dashboard">
         <Buttons
         variant="secondary"
         iconRight={<House size={16}/>}
@@ -46,6 +47,7 @@ const ErrorComp = ({error}: ErrorProps) => {
         >
           Go to Home
         </Buttons>
+        </Link>
       </div>
     </div>
   )

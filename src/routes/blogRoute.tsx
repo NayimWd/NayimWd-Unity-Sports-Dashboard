@@ -21,7 +21,7 @@ export const blogRoutes: RouteObject[] = [
         )
       },
       {
-        path: "blog/details/:blogId",
+        path: "blogs/details/:blogId",
         element: (
           <ErrorBoundaryWrapper>
             <SuspenseWrapper>

@@ -104,7 +104,7 @@ const Blogs = () => {
   return (
     <div className="w-full">
       <h1 className={`${fontStyle.pageTitle} text-font`}> Tournament Blogs </h1>
-      <div className="w-full bg-surface paddingTable my-5 overflow-x-auto py-8 rounded">
+      <div className="w-full bg-surface paddingTable my-5 overflow-x-auto py-8 rounded-lg shadow">
         <FormContainer
           methods={form}
           onSubmit={handleSubmit}
