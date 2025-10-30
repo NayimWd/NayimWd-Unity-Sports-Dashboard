@@ -38,28 +38,30 @@ module.exports = {
         inter: ["Inter", "sans-serif"],
         merriweather: ["Merriweather", "serif"],
       },
-      screens: {
-        xs: "480px",
-        sm: "640px",
-        md: "768px",
-        lg: "1024px",
-        xl: "1280px",
-        "2xl": "1536px",
-      },
       container: {
         center: true,
         padding: {
-          default: "15px",
+          DEFAULT: "1rem",
+        
+        },
+        screens: {
+          xs: "475px",
+          sm: "640px",
+          md: "768px",
+          lg: "1024px",
+          xl: "1280px",
+          "2xl": "1440px",
+          "3xl": "1680px",
         },
       },
       keyframes: {
         fadeIn: {
-          '0%': { opacity: 0 },
-          '100%': { opacity: 1 },
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
         },
       },
       animation: {
-        fadeIn: 'fadeIn 0.25s ease-out',
+        fadeIn: "fadeIn 0.25s ease-out",
       },
     },
   },

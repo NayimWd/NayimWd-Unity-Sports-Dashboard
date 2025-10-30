@@ -29,7 +29,7 @@ const SidebarProfile = () => {
         }
     }
     return (
-        <div className="flex w-full items-center justify-between gap-2 px-3 py-6 rounded-md bg-bg mb-16">
+        <div className="flex w-full items-center justify-between gap-2 px-3 py-6 rounded-t-md bg-bg">
             <div className="flex items-center gap-2">
                 <img className="w-14 h-14 rounded-full  object-cover object-center" src={user?.photo} alt="user photo" aria-label="photo" loading="lazy" />
                 <div className="flex flex-col font-inter">
@@ -38,7 +38,7 @@ const SidebarProfile = () => {
                 </div>
             </div>
             <Tooltip position="left" content="Sign out">
-            <LogOut className="text-toastErrorText" onClick={handleLogout} size={24} aria-label="logout button" role="button" />
+                <LogOut className="text-toastErrorText" onClick={handleLogout} size={24} aria-label="logout button" role="button" />
             </Tooltip>
         </div>
     )
