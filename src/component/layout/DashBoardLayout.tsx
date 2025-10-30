@@ -37,31 +37,20 @@ const DashBoardLayout: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-bg flex flex-col">
-      {/* navbar */}
       <Header handleToggle={setIsOpen} />
-      {/* main content wrapper */}
+
       <div className="flex flex-1 overflow-hidden relative">
-        {/*sidebar*/}
-        <div
-          className={`
-        fixed md:static z-30 md:z-auto top-0 left-0 h-full 
-        transition-all duration-300 ease-in-out
-        ${isOpen ? "w-64" : "w-0"}
-        overflow-hidden
-      `}
-        >
-          <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
-        </div>
-        {/* Backdrop for mobile when sidebar is open */}
+        <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
+
         {isOpen && (
           <div
-            className="fixed inset-0 bg-opacity-50 md:hidden z-20"
+            className="fixed inset-0 bg-black/20 md:hidden z-20"
             onClick={() => setIsOpen(false)}
           />
         )}
-        {/* main content */}
-        <main className="ml-0 md:ml-64 mt-16 sm:mt-[74px] xl:mt-20 flex-1 overflow-y-auto min-h-screen px-2 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-8">
-          <div className="w-full max-w-7xl mx-auto">
+
+        <main className="flex-1 overflow-y-auto md:pl-64">
+          <div className="container">
             <ScrollToTop />
             <Outlet />
           </div>

@@ -10,6 +10,7 @@ import { useBlogDetailsQuery, useUpdateBlogPhotoMutation } from "../../features/
 import Buttons from "../../component/common/Buttons";
 import { Edit2 } from "lucide-react";
 import toast from "react-hot-toast";
+import { fontStyle } from "../../utils/ClassUtils";
 
 type updateBologPhotoType = z.infer<typeof updateBlogPhotoSchema>;
 
@@ -55,9 +56,10 @@ const UpdateBlogPhoto = () => {
 
   return (
     <div className="w-full">
-      <h1 className=" text-center text-2xl sm:text-3xl md:text-4xl mt-5 font-semibold text-font font-merriweather">Edit Blogs Photo</h1>
-      <div className="paddingX w-full max-w-5xl mx-auto bg-surface  py-12 px-6 rounded shadow-sm">
+      <h1 className={`${fontStyle.pageTitle} text-center sm:text-3xl md:text-4xl my-5 font-semibold text-font font-merriweather`}>Edit Blogs Photo</h1>
+      <div className="w-full max-w-5xl mx-auto bg-surface  py-12 px-6 rounded-lg shadow">
         <div>
+          <h2 className="text-font font-semibold font-inter">Current Photo:</h2>
           <img src={Array.isArray(blog?.photo) ? blog?.photo[0] : blog?.photo} alt="blog photo" loading="lazy"
             className="w-full h-[420px] object-scale-down object-center transition-transform duration-300 hover:scale-105"
           />

@@ -28,18 +28,21 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
   return (
     <aside
       ref={sidebarRef}
-      className={` bg-gradientN-bg  fixed mt-16 lg:mt-20  z-40 h-full w-64 overflow-x-hidden  border-r border-border md:translate-x-0 transition-transform ${isOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+      className={`
+    bg-gradientN-bg fixed mt-6 top-0 left-0 z-40 h-full w-64 border-r border-border
+    transition-transform duration-300 ease-in-out 
+    ${isOpen ? "translate-x-0" : "-translate-x-full"}
+    md:translate-x-0
+  `}
     >
-      <div className="relative h-full px-2 pt-5 pb-48 overflow-y-scroll scrollbar-hide">
+      <div className="relative h-full px-2 pt-20 pb-48 overflow-y-scroll scrollbar-hide">
         {navLinks[userRole].map((link, index) => (
           <SidebarItem key={index} link={link} />
         ))}
       </div>
-      <div className="w-full absolute bottom-0 left-0 py-2 rounded-md shadow">
 
+      <div className="absolute bottom-0 left-0 w-full py-2 rounded-md shadow">
         <SidebarProfile />
-
       </div>
     </aside>
   );

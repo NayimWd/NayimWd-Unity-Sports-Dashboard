@@ -50,9 +50,9 @@ const Header = ({ handleToggle }: HeaderProps) => {
   useClickOutSide(dropdownRef, () => setIsOpen(false))
 
   return (
-    <nav className="fixed w-full   top-0 z-[9999] overflow-visible bg-gradient-bg border-b border-b-border  drop-shadow ">
-      <div className="p-3 md:p-4 lg:p-5 opacity-100">
-        <div className="flex items-center justify-between">
+    <nav className="sticky top-0 z-50 w-full bg-gradient-bg border-b border-border drop-shadow">
+      <div className="container py-3 md:py-4 lg:py-5 opacity-100">
+        <div className=" flex items-center justify-between">
           <div className="flex items-center justify-start rtl:justify-end">
             <button className="mr-2 shadow bg-bg dark:shadow-xl xs:mr-3 text-font inline-flex items-center focus:outline focus:outline-surface p-2 rounded-md md:hidden">
               <ChartNoAxesGantt
