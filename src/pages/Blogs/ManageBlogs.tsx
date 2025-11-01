@@ -20,6 +20,7 @@ import { formatDate } from "../../utils/timeFormat";
 import ConfirmModal from "../../component/ui/modal/ConfirmModal";
 import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
 import toast from "react-hot-toast";
+import PageLayout from "../../component/layout/PageLayout";
 
 type FilterBlogsType = z.infer<typeof filterBlogSchema>;
 
@@ -182,7 +183,7 @@ const ManageBlogs = () => {
   }, [isLoading, isError, blogs, headerData]);
 
   return (
-    <div>
+    <PageLayout>
       <h1 className={`${fontStyle.pageTitle} text-font`}>Manage Tournament Blogs</h1>
       <div className="w-full bg-surface paddingTable my-5 overflow-x-auto py-8 rounded">
         <FormContainer
@@ -236,7 +237,7 @@ const ManageBlogs = () => {
         title="Are you sure?"
         description="You can control Publish status"
       />
-    </div>
+    </PageLayout>
   );
 };
 

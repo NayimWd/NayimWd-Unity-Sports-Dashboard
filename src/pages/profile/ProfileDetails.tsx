@@ -1,6 +1,15 @@
+import PageLayout from "../../component/layout/PageLayout"
+import SectionLayout from "../../component/layout/SectionLayout"
+import { fontStyle } from "../../utils/ClassUtils"
+
 const ProfileDetails = () => {
   return (
-    <div>ProfileDetails</div>
+    <PageLayout>
+      <h1 className={`${fontStyle.pageTitle}`}>My Profile</h1>
+      <SectionLayout>
+        Edit
+      </SectionLayout>
+    </PageLayout>
   )
 }
 

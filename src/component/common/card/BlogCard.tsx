@@ -25,26 +25,26 @@ const BlogCard = ({ _id, title, photo, author, tags, createdAt }: BlogCardProps)
   }
 
   return (
-    <Card size="md" variant="Blog" className="relative text-font w-full overflow-hidden flex flex-col gap-4 ">
+    <Card size="md" variant="Blog" className="relative text-font w-full h-full overflow-hidden flex flex-col gap-4 ">
       <div>
         <img src={photo[0]} alt="Blog" className="w-full h-56 object-cover object-center rounded" loading="lazy" />
       </div>
       <div>
-        <div className="flex justify-between items-center mb-5">
-          <p className={`${fontStyle.cardDesc} text-primary`}>{formatDate(createdAt)}</p>
+        <div className="flex justify-between items-center mb-5 mt-auto">
+          <p className={`${fontStyle.cardDesc} text-primary line-clamp-3`}>{formatDate(createdAt)}</p>
           <Link to={`/dashboard/blogs/details/${_id}`}>
             <Buttons variant="primary" size="sm" className="rounded-sm" iconRight={<MoveRight size={8} />}> Details </Buttons>
           </Link>
         </div>
         <Link to={`/dashboard/blogs/details/${_id}`}>
-        <h3 id="title" className={`${fontStyle.cardTitle} text-font`}> {title.slice(0, 100)}... </h3>
+        <h3 id="title" className={`${fontStyle.cardTitle} text-font line-clamp-2`}> {title.slice(0, 100)}... </h3>
         </Link>
         <div className="flex justify-between flex-wrap items-center w-full mt-5 text-primary">
           <p className={`${fontStyle.secondaryText} `}>{author}</p>
           <p className={fontStyle.secondaryText}>{tags}</p>
         </div>
       </div>
-      <div onClick={handleShare} className="absolute top-6 bg-inherit rounded right-6 z-50">
+      <div onClick={handleShare} className="absolute top-6 bg-inherit rounded right-6 z-20">
         <CopyButton textCopy="Share" />
       </div>
     </Card>
