@@ -14,6 +14,7 @@ import { Filter, Search } from "lucide-react";
 import DropdownInput from "../../component/common/input/DropdownInput";
 import Buttons from "../../component/common/Buttons";
 import EmptyData from "../../component/ui/EmptyData";
+import PageLayout from "../../component/layout/PageLayout";
 
 type FilterAllBlogsType = z.infer<typeof filterAllBlogsSchema>
 
@@ -102,7 +103,7 @@ const Blogs = () => {
 }
 
   return (
-    <div className="w-full">
+    <PageLayout>
       <h1 className={`${fontStyle.pageTitle} text-font`}> Tournament Blogs </h1>
       <div className="w-full bg-surface paddingTable my-5 overflow-x-auto py-8 rounded-lg shadow">
         <FormContainer
@@ -129,7 +130,7 @@ const Blogs = () => {
           </div>
         </FormContainer>
       </div>
-      <div className="mt-5 grid gap-5 grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
+      <div className="w-full mx-auto mt-5 grid gap-6 justify-items-center grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
         {content}
       </div>
       <div className="w-full flex justify-center">
@@ -145,7 +146,7 @@ const Blogs = () => {
           }
         />
       </div>
-    </div>
+    </PageLayout>
   )
 }
 

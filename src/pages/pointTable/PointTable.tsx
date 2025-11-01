@@ -6,6 +6,7 @@ import TableEmpty from "../../component/common/Table/TableEmpty";
 import { useLatestTournamentQuery } from "../../features/tournament/tournamentApi";
 import { useGetPointTableQuery } from "../../features/pointTable/pointTableApi";
 import { fontStyle } from "../../utils/ClassUtils";
+import PageLayout from "../../component/layout/PageLayout";
 
 const PointTable = () => {
   // fetch latest tournament 
@@ -69,7 +70,7 @@ const PointTable = () => {
   }
 
   return (
-    <div className="">
+    <PageLayout>
       <h1 className={`${fontStyle.pageTitle} text-font space-y-2`}>Point Table</h1>
       <div className="w-full bg-surface paddingTable my-5 shadow-xl overflow-x-auto py-8 rounded-xl">
         {/* <p className="text-center text-font font-medium text-lg">Of</p> */}
@@ -87,7 +88,7 @@ const PointTable = () => {
           }
         </Table>
       </div>
-    </div>
+    </PageLayout>
   )
 }
 

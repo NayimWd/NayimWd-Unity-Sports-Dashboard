@@ -29,8 +29,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
     <aside
       ref={sidebarRef}
       className={`
-    bg-gradientN-bg fixed mt-6 top-0 left-0 z-40 h-full w-64 border-r border-border
-    transition-transform duration-300 ease-in-out 
+    bg-gradientN-bg fixed mt-6 top-0 left-0 z-40 h-full w-64 border-r border-border transition-transform duration-300 ease-in-out shadow-xl md:shadow-sm backdrop-blur-sm md:backdrop-blur-0
     ${isOpen ? "translate-x-0" : "-translate-x-full"}
     md:translate-x-0
   `}
@@ -41,7 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
         ))}
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full py-2 rounded-md shadow">
+      <div className="absolute bottom-4 left-0 w-full py-2 rounded-md shadow-md">
         <SidebarProfile />
       </div>
     </aside>
