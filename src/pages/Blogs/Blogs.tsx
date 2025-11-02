@@ -15,6 +15,8 @@ import DropdownInput from "../../component/common/input/DropdownInput";
 import Buttons from "../../component/common/Buttons";
 import EmptyData from "../../component/ui/EmptyData";
 import PageLayout from "../../component/layout/PageLayout";
+import BackButton from "../../utils/BackButton";
+import { useGoBack } from "../../hooks/useGoBack";
 
 type FilterAllBlogsType = z.infer<typeof filterAllBlogsSchema>
 
@@ -104,7 +106,8 @@ const Blogs = () => {
 
   return (
     <PageLayout>
-      <h1 className={`${fontStyle.pageTitle} text-font`}> Tournament Blogs </h1>
+      <BackButton onClick={useGoBack()}>Go Back</BackButton>
+      <h1 className={`${fontStyle.pageTitle} text-font text-center mt-5`}> Tournament Blogs </h1>
       <div className="w-full bg-surface paddingTable my-5 overflow-x-auto py-8 rounded-lg shadow">
         <FormContainer
           methods={form}
