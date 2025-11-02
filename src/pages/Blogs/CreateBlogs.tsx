@@ -14,6 +14,7 @@ import { useCreateBlogMutation } from "../../features/blog/blogApi"
 import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils"
 import toast from "react-hot-toast"
 import { useNavigate } from "react-router-dom"
+import PageLayout from "../../component/layout/PageLayout"
 
 type updateBlogType = z.infer<typeof blogSchema>;
 
@@ -62,13 +63,13 @@ const CreateBlogs = () => {
 
 
   return (
-    <div className="w-full">
+    <PageLayout>
       <h1 className="paddingX text-center text-2xl sm:text-3xl md:text-4xl my-5 font-semibold text-font font-merriweather">Create Blogs</h1>
-      <div className="paddingX w-full max-w-5xl mx-auto bg-surface  py-12 px-6 rounded shadow-sm my-10">
+      <div className="w-full max-w-5xl mx-auto bg-surface  py-12 px-6 rounded-lg shadow-sm my-10">
         <FormContainer
           methods={methods}
           onSubmit={handleSubmit}
-          className=" w-full space-y-6 paddingX">
+          className=" w-full space-y-6 lg:px-10">
           <PhotoArrayInput label="Image" name="photo" />
           <TextInput name="title" label="Title" placeholder="Write Title" />
           <TextAreaInput label="Blog" placeholder="Write Your Blog" name="content" height="min-h-[300px]" />
@@ -79,7 +80,7 @@ const CreateBlogs = () => {
           <Buttons disabled={isLoading} iconRight={<Plus size={16} />} variant="primary" className=" rounded">Create</Buttons>
         </FormContainer>
       </div>
-    </div>
+    </PageLayout>
   )
 }
 

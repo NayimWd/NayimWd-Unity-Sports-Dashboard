@@ -7,6 +7,9 @@ import { useLatestTournamentQuery } from "../../features/tournament/tournamentAp
 import { useGetPointTableQuery } from "../../features/pointTable/pointTableApi";
 import { fontStyle } from "../../utils/ClassUtils";
 import PageLayout from "../../component/layout/PageLayout";
+import SectionLayout from "../../component/layout/SectionLayout";
+import BackButton from "../../utils/BackButton";
+import { useGoBack } from "../../hooks/useGoBack";
 
 const PointTable = () => {
   // fetch latest tournament 
@@ -14,8 +17,8 @@ const PointTable = () => {
 
   // fetch point table data based on tournament id
   const { data: pointTable, isLoading: loading } = useGetPointTableQuery(latestTournament?.data._id ?? "", {
-    skip: !latestTournament?.data?._id, // Skip the query if tournament id is not available
-    refetchOnMountOrArgChange: true, // Refetch when the component mounts or the arg change
+    skip: !latestTournament?.data?._id, // skip query if tournament id is not available
+    refetchOnMountOrArgChange: true, // refetch when component mounts or any arg change
   })
 
 
@@ -71,14 +74,17 @@ const PointTable = () => {
 
   return (
     <PageLayout>
-      <h1 className={`${fontStyle.pageTitle} text-font space-y-2`}>Point Table</h1>
-      <div className="w-full bg-surface paddingTable my-5 shadow-xl overflow-x-auto py-8 rounded-xl">
-        {/* <p className="text-center text-font font-medium text-lg">Of</p> */}
-        <div className={`${fontStyle.SectionHeading} flex items-center justify-center gap-4 flex-wrap mt-5`}>
-          <p className="text-font text-xl text-center">
-            {pointTable?.data?.tournament?.tournamentName || "Loading"} </p>
-          <img className="size-12 rounded " src={pointTable?.data?.tournament?.photo} alt="tournamentLogo" loading="lazy" />
-        </div>
+      <BackButton className="mb-5" onClick={useGoBack()}>Go Back</BackButton>
+      <h1 className={`${fontStyle.pageTitle} text-font text-center my-3`}>Point Table</h1>
+      <SectionLayout variant="surface">
+        {loading ? <span className="bg-bg h-5 w-14" />
+          :
+          <div className={`${fontStyle.SectionHeading} flex items-center justify-center gap-4 flex-wrap mt-5`}>
+            <p className="text-font text-xl text-center">
+              {pointTable?.data?.tournament?.tournamentName} </p>
+            <img className="size-12 rounded " src={pointTable?.data?.tournament?.photo} alt="tournamentLogo" loading="lazy" />
+          </div>
+        }
         <Table className="">
           <TableHeader
             headers={headerData}
@@ -87,7 +93,7 @@ const PointTable = () => {
             content
           }
         </Table>
-      </div>
+      </SectionLayout>
     </PageLayout>
   )
 }

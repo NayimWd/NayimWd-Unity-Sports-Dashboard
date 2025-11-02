@@ -21,6 +21,8 @@ import ConfirmModal from "../../component/ui/modal/ConfirmModal";
 import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
 import toast from "react-hot-toast";
 import PageLayout from "../../component/layout/PageLayout";
+import BackButton from "../../utils/BackButton";
+import { useGoBack } from "../../hooks/useGoBack";
 
 type FilterBlogsType = z.infer<typeof filterBlogSchema>;
 
@@ -184,8 +186,9 @@ const ManageBlogs = () => {
 
   return (
     <PageLayout>
-      <h1 className={`${fontStyle.pageTitle} text-font`}>Manage Tournament Blogs</h1>
-      <div className="w-full bg-surface paddingTable my-5 overflow-x-auto py-8 rounded">
+      <BackButton className="mb-5" onClick={useGoBack()}>Go Back</BackButton>
+      <h1 className={`${fontStyle.pageTitle} text-font text-center`}>Manage Tournament Blogs</h1>
+      <div className="w-full bg-surface paddingTable my-5 overflow-x-auto py-8 rounded-lg">
         <FormContainer
           methods={form}
           onSubmit={onSubmit}

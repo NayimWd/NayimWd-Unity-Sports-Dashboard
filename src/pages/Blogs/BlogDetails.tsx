@@ -19,6 +19,9 @@ import EmptyData from "../../component/ui/EmptyData";
 import { useRef, useState } from "react";
 import useClickOutSide from "../../hooks/useClickOutSide";
 import CommonDropDown from "../../component/common/dropdown/CommonDropDown";
+import BackButton from "../../utils/BackButton";
+import { useGoBack } from "../../hooks/useGoBack";
+import PageLayout from "../../component/layout/PageLayout";
 
 
 const BlogDetails = () => {
@@ -87,7 +90,8 @@ const BlogDetails = () => {
   useClickOutSide(editDropdownRef, () => setOpenLink(false))
 
   return (
-    <div className="w-full">
+    <PageLayout>
+      <BackButton className="mb-5" onClick={useGoBack()}>Go Back</BackButton>
       <ScrollToTop />
       <Banner pageText="Blog Details" navText="Blog" navLink="Details" />
 
@@ -164,7 +168,7 @@ const BlogDetails = () => {
           {content}
         </div>
       </section>
-    </div>
+    </PageLayout>
   )
 }
 

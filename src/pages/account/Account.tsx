@@ -1,6 +1,7 @@
 import Buttons from "../../component/common/Buttons"
 import PageLayout from "../../component/layout/PageLayout"
 import SectionLayout from "../../component/layout/SectionLayout"
+import Badge from "../../component/ui/Badge"
 import { useCurrentUserQuery } from "../../features/auth/authApi"
 import { useGoBack } from "../../hooks/useGoBack"
 import BackButton from "../../utils/BackButton"
@@ -18,7 +19,7 @@ const Account = () => {
     content = <AccountSkeleton />
   } else {
     content = (
-      <SectionLayout className="flex flex-col items-center text-center">
+      <SectionLayout className="flex flex-col gap-1 md:gap-0 items-center text-center">
         <h1 className={`${fontStyle.pageTitle} text-font`}>My Account</h1>
 
         {/* photo */}
@@ -70,8 +71,11 @@ const Account = () => {
 
         {/* buttons */}
         <div className="flex flex-wrap justify-center gap-3 mt-8">
-          <Buttons variant="primary" size="sm">Edit Profile</Buttons>
-          <Buttons variant="secondary" size="sm">Change Password</Buttons>
+          <Buttons className="rounded" variant="primary" size="sm">Edit Profile</Buttons>
+          <div className="relative">
+          <Buttons className="rounded" variant="secondary" size="sm">Change Password</Buttons>
+          <Badge className="absolute right-5 -top-5" variant="info">Beta</Badge>
+          </div>
         </div>
       </SectionLayout>
     )
