@@ -23,7 +23,7 @@ const sectionVariants = cva(
                 strong: "border border-border",
             },
             density: {
-                normal: "p-4 sm:p-5 lg:p-6 space-y-3 sm:space-y-4 lg:space-y-5",
+                normal: "px-4 sm:px-5 lg:px-6 py-10 space-y-3 sm:space-y-4 lg:space-y-5",
                 dense: "p-3 space-y-2",
                 relaxed: "p-7 space-y-6",
             },

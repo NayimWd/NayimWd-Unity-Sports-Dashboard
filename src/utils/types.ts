@@ -32,6 +32,7 @@ export interface IUser {
   phoneNumber: string;
   role: string;
   photo: string;
+  createdAt: string;
 }
 
 
