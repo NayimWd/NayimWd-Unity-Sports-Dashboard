@@ -8,7 +8,7 @@ interface pageLayoutProps {
 
 const PageLayout = ({children, className}: pageLayoutProps) => {
   return (
-    <main className={cn("min-h-screen flex flex-col py-4 sm:py-6 xl:py-8", className)}>
+    <main className={cn("min-h-screen flex flex-col py-4 sm:py-6 xl:py-7", className)}>
         {children}
     </main>
   )

@@ -29,8 +29,9 @@ const authApi = apiSlice.injectEndpoints({
       query: () => ({
         url: "auth/current_user",
       }),
-      transformResponse: (respoinse: ApiResponse<IUser>) => respoinse.data,
-      keepUnusedDataFor: 0,
+      transformResponse: (response: ApiResponse<IUser>) => response.data,
+      keepUnusedDataFor: 70,
+      providesTags: ["User"],
 
       // life cycle handler
       async onQueryStarted(_, {dispatch, queryFulfilled}) {

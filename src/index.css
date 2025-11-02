@@ -83,7 +83,11 @@ input:-webkit-autofill:focus {
 }
 
 /* animation */
-button, a, input, select, textarea {
+button,
+a,
+input,
+select,
+textarea {
   @apply transition-colors duration-200;
 }
 /* tip tap color */
