@@ -16,6 +16,6 @@ export const useAuthInit = () => {
         }
     }, [user, isSuccess, dispatch]);
 
-    return null; // For prevent accidental UI rendering
+    return null; // this is of prevent accidental ui render
 };
 

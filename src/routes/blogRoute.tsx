@@ -2,6 +2,8 @@ import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 import SuspenseWrapper from "../utils/SuspenseWrapper";
 import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
+import PageSkeleton from "../component/common/loader/PageSkeleton";
+import FormSkeleton from "../component/common/loader/FormSkeleton";
 const Blogs = lazy(() => import("../pages/Blogs/Blogs"));
 const BlogDetails = lazy(() => import("../pages/Blogs/BlogDetails"));
 const CreateBlog = lazy(() => import("../pages/Blogs/CreateBlogs"));
@@ -14,7 +16,7 @@ export const blogRoutes: RouteObject[] = [
         path: "blogs",
         element: (
           <ErrorBoundaryWrapper>
-            <SuspenseWrapper>
+            <SuspenseWrapper CustomLoader={<PageSkeleton/>}>
               <Blogs />
             </SuspenseWrapper>
           </ErrorBoundaryWrapper>
@@ -24,7 +26,7 @@ export const blogRoutes: RouteObject[] = [
         path: "blogs/details/:blogId",
         element: (
           <ErrorBoundaryWrapper>
-            <SuspenseWrapper>
+            <SuspenseWrapper CustomLoader={<PageSkeleton/>}>
               <BlogDetails />
             </SuspenseWrapper>
           </ErrorBoundaryWrapper>
@@ -34,7 +36,7 @@ export const blogRoutes: RouteObject[] = [
         path: "blog/create",
         element: (
           <ErrorBoundaryWrapper>
-            <SuspenseWrapper>
+            <SuspenseWrapper CustomLoader={<FormSkeleton/>}>
               <CreateBlog />
             </SuspenseWrapper>
           </ErrorBoundaryWrapper>
@@ -44,7 +46,7 @@ export const blogRoutes: RouteObject[] = [
         path: "blog/update/:blogId",
         element: (
           <ErrorBoundaryWrapper>
-            <SuspenseWrapper>
+            <SuspenseWrapper CustomLoader={<FormSkeleton/>}>
               <UpdateBlogDetails/>
             </SuspenseWrapper>
           </ErrorBoundaryWrapper>
@@ -54,7 +56,7 @@ export const blogRoutes: RouteObject[] = [
         path: "blog/updatePhoto/:blogId",
         element: (
           <ErrorBoundaryWrapper>
-            <SuspenseWrapper>
+            <SuspenseWrapper CustomLoader={<FormSkeleton/>}>
               <UpdatePhoto/>
             </SuspenseWrapper>
           </ErrorBoundaryWrapper>
@@ -64,7 +66,7 @@ export const blogRoutes: RouteObject[] = [
         path: "blogs/manage",
         element: (
           <ErrorBoundaryWrapper>
-            <SuspenseWrapper>
+            <SuspenseWrapper CustomLoader={<PageSkeleton/>}>
               <ManageBlogs/>
             </SuspenseWrapper>
           </ErrorBoundaryWrapper>
