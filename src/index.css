@@ -129,7 +129,7 @@ textarea {
 }
 
 .formWrapper {
-  @apply flex flex-col gap-5 w-full max-w-md mx-auto p-3 sm:p-4  md:p-6 z-10;
+  @apply flex flex-col gap-5 w-full max-w-lg mx-auto p-3 sm:p-4  md:p-6 z-10;
 }
 
 .formContainer {

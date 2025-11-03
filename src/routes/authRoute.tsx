@@ -3,9 +3,10 @@ import { lazy } from "react";
 import SuspenseWrapper from "../utils/SuspenseWrapper";
 import PublicRoute from "./PublicRoute";
 import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
+import LoginSkeleton from "../component/common/loader/LoginSkeleton";
+import RegisterSkeleton from "../component/common/loader/RegisterSkeleton";
 const Login = lazy(() => import("../pages/auth/Login"));
 const Registration = lazy(() => import("../pages/auth/Registration"));
-
 
 export const authRoutes: RouteObject[] = [
   {
@@ -13,7 +14,7 @@ export const authRoutes: RouteObject[] = [
     element: (
       <ErrorBoundaryWrapper>
         <PublicRoute>
-          <SuspenseWrapper>
+          <SuspenseWrapper CustomLoader={<LoginSkeleton />}>
             <Login />
           </SuspenseWrapper>
         </PublicRoute>
@@ -24,7 +25,7 @@ export const authRoutes: RouteObject[] = [
     path: "/SignUp",
     element: (<ErrorBoundaryWrapper>
       <PublicRoute>
-        <SuspenseWrapper>
+        <SuspenseWrapper CustomLoader={<RegisterSkeleton />}>
           <Registration />
         </SuspenseWrapper>
       </PublicRoute>

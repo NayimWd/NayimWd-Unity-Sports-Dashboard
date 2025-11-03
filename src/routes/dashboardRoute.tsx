@@ -4,7 +4,6 @@ import { blogRoutes } from "./blogRoute";
 import { accountRoutes } from "./accountRoute";
 import { profileRoutes } from "./profileRoute";
 
-
 export const dashboardRoutes: RouteObject[] = [
     ...pointTableRoutes,
     ...blogRoutes,

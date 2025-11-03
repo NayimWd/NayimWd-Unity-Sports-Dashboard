@@ -6,6 +6,8 @@ import RedirectRoute from "./RedirectRoute";
 import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
 import { authRoutes } from "./authRoute";
 import { dashboardRoutes } from "./dashboardRoute";
+import PageSkeleton from "../component/common/loader/PageSkeleton";
+import DashboardSkeleton from "../component/common/loader/DashboardSkeleton";
 const NotFound = lazy(() => import("../pages/NotFound"));
 const Layout = lazy(() => import("../component/layout/DashBoardLayout"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
@@ -22,7 +24,7 @@ export const router = createBrowserRouter([
     element: (
       <ErrorBoundaryWrapper>
         <ProtectedRoute>
-          <SuspenseWrapper>
+          <SuspenseWrapper CustomLoader={<DashboardSkeleton />}>
             <Layout />
           </SuspenseWrapper>
         </ProtectedRoute>
@@ -33,7 +35,7 @@ export const router = createBrowserRouter([
         index: true,
         element: (
           <ErrorBoundaryWrapper>
-            <SuspenseWrapper>
+            <SuspenseWrapper CustomLoader={<PageSkeleton />}>
               <Dashboard />
             </SuspenseWrapper>
           </ErrorBoundaryWrapper>
@@ -47,7 +49,7 @@ export const router = createBrowserRouter([
   {
     path: "*",
     element: (
-      <SuspenseWrapper>
+      <SuspenseWrapper CustomLoader={<PageSkeleton />}>
         <NotFound />
       </SuspenseWrapper>),
   },
