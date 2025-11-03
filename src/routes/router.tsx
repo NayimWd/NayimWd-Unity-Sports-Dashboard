@@ -49,8 +49,10 @@ export const router = createBrowserRouter([
   {
     path: "*",
     element: (
+      <ErrorBoundaryWrapper>
       <SuspenseWrapper CustomLoader={<PageSkeleton />}>
         <NotFound />
-      </SuspenseWrapper>),
+      </SuspenseWrapper>
+      </ErrorBoundaryWrapper>),
   },
 ]);

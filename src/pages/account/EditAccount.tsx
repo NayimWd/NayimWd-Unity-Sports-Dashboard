@@ -43,31 +43,21 @@ const EditAccount = () => {
             <div className="my-6 w-full border-t border-border"></div>
 
             {/* navigation actions */}
+
             <div className="flex flex-col w-full max-w-xs gap-3">
-                <Link to="/dashboard/editAccount/name">
-                    <Buttons className="rounded w-full" variant="primary" size="sm">
-                        Edit Name
-                    </Buttons>
-                </Link>
-
-                <Link to="/dashboard/editAccount/phone">
-                    <Buttons className="rounded w-full" variant="primary" size="sm">
-                        Edit Phone Number
-                    </Buttons>
-                </Link>
-
                 <Link to="/dashboard/editAccount/photo">
                     <Buttons className="rounded w-full" variant="primary" size="sm">
                         Update Profile Photo
                     </Buttons>
                 </Link>
+                <Link to="/dashboard/editAccount/details">
+                    <Buttons className="rounded w-full" variant="primary" size="sm">
+                        Edit Details
+                    </Buttons>
+                </Link>
+
 
                 {/* disabled */}
-                <Tooltip content="Locked for security" position="top">
-                    <Buttons className="rounded w-full" variant="secondary" size="sm" disabled>
-                        Change Email (Locked)
-                    </Buttons>
-                </Tooltip>
 
                 <Tooltip content="Locked for project roles" position="top">
                     <Buttons className="rounded w-full" variant="secondary" size="sm" disabled>
@@ -75,6 +65,11 @@ const EditAccount = () => {
                     </Buttons>
                 </Tooltip>
 
+                <Tooltip content="Locked for security" position="top">
+                    <Buttons className="rounded w-full" variant="secondary" size="sm" disabled>
+                        Change Email (Locked)
+                    </Buttons>
+                </Tooltip>
                 <Tooltip position="top" content="InProgress">
                     <Buttons className="rounded w-full" variant="secondary" size="sm">
                         Change Password (Beta)
