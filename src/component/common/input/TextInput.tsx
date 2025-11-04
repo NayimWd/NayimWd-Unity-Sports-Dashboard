@@ -9,9 +9,10 @@ interface TextInputProps {
   placeholder: string;
   icon?: React.ReactNode;
   autoComplete?: string;
+  defaultValue?: string;
 }
 
-const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", icon, autoComplete }: TextInputProps) => {
+const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", icon, autoComplete, defaultValue }: TextInputProps) => {
   // importing useFormContext to get the form methods
   const { register, watch, formState, trigger } = useFormContext();
   const { errors } = formState;
@@ -48,6 +49,7 @@ const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", ico
           icon={icon}
           autoComplete={autoComplete}
           variant={variant}
+          defaultValue={defaultValue}
           {...register(name)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
