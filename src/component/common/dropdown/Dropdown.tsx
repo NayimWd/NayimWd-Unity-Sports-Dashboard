@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useContext, useRef, useState } from "react";
 import useClickOutSide from "../../../hooks/useClickOutSide";
 import cn from "../../../utils/cn";
+import { Link } from "react-router-dom";
 
 interface DropDownContextProps {
     open: boolean;
@@ -37,7 +38,7 @@ const Dropdown = ({ children, align = "left" }: DropDownProps) => {
 
     return (
         <DropDownContext.Provider value={{ open, toggle, align, close }}>
-            <div ref={ref}>
+            <div ref={ref} className="relative inline-block text-left">
                 {children}
             </div>
         </DropDownContext.Provider>
@@ -50,11 +51,13 @@ interface TriggerProps {
 }
 
 function DropdownTrigger({ children, className }: TriggerProps) {
-    const { toggle } = useDropdownContext();
+    const { toggle, open } = useDropdownContext();
 
-    <button
-        className={cn("px-3 py-2 bg-surface border border-border rounded-md", className)}
+    return <button
+        aria-haspopup="menu"
+        aria-expanded={open}
         onClick={toggle}
+        className={cn("px-3 py-2 bg-surface border border-border rounded-md", className)}
     >
         {children}
     </button>
@@ -71,6 +74,9 @@ function DropdownMenu({ children, className }: MenuProps) {
 
     return open ? (
         <div
+            role="menu"
+            tabIndex={-1}
+            data-open={open}
             className={cn(
                 `absolute mt-2 min-w-[160px] rounded-md border border-border bg-surface shadow-lg`,
                 align === "right" ? "right-0" : "left-0",
@@ -83,7 +89,75 @@ function DropdownMenu({ children, className }: MenuProps) {
 };
 
 
+interface DropdownItemProps {
+    children: ReactNode;
+    onClick?: () => void;
+    href?: string;
+    className?: string;
+}
 
+function DropdownItem({ children, onClick, href, className }: DropdownItemProps) {
+    const { close } = useDropdownContext();
+
+    const handleClick = () => {
+        if (onClick) {
+            onClick()
+        }
+        close();
+    }
+
+    if (href) {
+        return (
+            <Link
+                to={href}
+                role="menuitem"
+                tabIndex={0}
+                onClick={handleClick}
+                className={cn(
+                    "block px-3 py-2 text-sm hover:bg-subtle rounded-md w-full text-left transition-colors",
+                    className
+                )}
+            >
+                {children}
+            </Link>
+        );
+    }
+
+
+    return (
+        <button
+            role="menuitem"
+            tabIndex={0}
+            onClick={handleClick}
+            className={cn(
+                "block px-3 py-2 text-sm hover:bg-subtle rounded-md w-full text-left transition-colors",
+                className
+            )}
+        >
+            {children}
+        </button>
+    );
+
+}
+
+function DropdownSeparator() {
+    return <div className="border-t border-border my-1" />;
+};
+
+interface FooterProps {
+    children: ReactNode;
+    className?: string;
+}
+
+function DropdownFooter({ children, className }: FooterProps) {
+    return <div className={cn("px-3 py-2 text-sm opacity-75", className)}>{children}</div>;
+};
+
+Dropdown.Trigger = DropdownTrigger;
+Dropdown.Menu = DropdownMenu;
+Dropdown.Item = DropdownItem;
+Dropdown.Separator = DropdownSeparator;
+Dropdown.Footer = DropdownFooter;
 
 
 export default Dropdown;
