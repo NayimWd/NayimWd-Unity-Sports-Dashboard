@@ -11,7 +11,7 @@ import Table from "../../component/common/Table/Table";
 import TableHeader from "../../component/common/Table/TableHeader";
 import DropdownInput from "../../component/common/input/DropdownInput";
 import FormContainer from "../../component/common/Form/FormContainer";
-import { filterBlogSchema } from "../../utils/Schema";
+import { filterBlogSchema } from "../../utils/schema/Schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TextInput from "../../component/common/input/TextInput";

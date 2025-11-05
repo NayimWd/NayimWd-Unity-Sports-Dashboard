@@ -1,4 +1,4 @@
-import { ApiResponse, Tournament } from "../../utils/types";
+import { ApiResponse, Tournament } from "../../utils/types/types";
 import { apiSlice } from "../api/apiSlice";
 
 export const tournamentApi = apiSlice.injectEndpoints({
