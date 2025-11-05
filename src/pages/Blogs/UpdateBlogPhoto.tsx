@@ -2,7 +2,7 @@ import { z } from "zod";
 import { useNavigate, useParams } from "react-router-dom";
 import FormContainer from "../../component/common/Form/FormContainer";
 import PhotoArrayInput from "../../component/common/input/PhotoArrayInput";
-import { updateBlogPhotoSchema } from "../../utils/Schema";
+import { updateBlogPhotoSchema } from "../../utils/schema/Schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";

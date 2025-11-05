@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ThemeType } from "../../utils/types";
+import { ThemeType } from "../../utils/types/types";
 
 // create theme interface by theme type
 interface ITheme {

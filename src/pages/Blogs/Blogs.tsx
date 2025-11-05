@@ -5,7 +5,7 @@ import BlogSkeleton from "../../component/common/skeleton/BlogSkeleton";
 import TablePagination from "../../component/common/Table/TablePagination";
 import { useGetBlogsQuery } from "../../features/blog/blogApi"
 import { fontStyle } from "../../utils/ClassUtils";
-import { filterAllBlogsSchema } from "../../utils/Schema";
+import { filterAllBlogsSchema } from "../../utils/schema/Schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormContainer from "../../component/common/Form/FormContainer";

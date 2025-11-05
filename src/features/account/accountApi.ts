@@ -1,4 +1,4 @@
-import { ApiResponse, IUser } from "../../utils/types";
+import { ApiResponse, IUser } from "../../utils/types/types";
 import { apiSlice } from "../api/apiSlice";
 
 const authApi = apiSlice.injectEndpoints({

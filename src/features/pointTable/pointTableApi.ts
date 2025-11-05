@@ -1,4 +1,4 @@
-import { ApiResponse, PointTableData } from "../../utils/types";
+import { ApiResponse, PointTableData } from "../../utils/types/types";
 import { apiSlice } from "../api/apiSlice";
 
 export const pointTableApi = apiSlice.injectEndpoints({

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useBlogDetailsQuery, useUpdateBlogMutation } from "../../features/blog/blogApi";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { updateBlogSchema } from "../../utils/Schema";
+import { updateBlogSchema } from "../../utils/schema/Schema";
 import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
 import toast from "react-hot-toast";
 import FormContainer from "../../component/common/Form/FormContainer";

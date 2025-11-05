@@ -8,7 +8,7 @@ import Buttons from "../../component/common/Buttons";
 import TextInput from "../../component/common/input/TextInput";
 import EmailInput from "../../component/common/input/EmailInput";
 import DropdownInput from "../../component/common/input/DropdownInput";
-import { registrationSchema } from "../../utils/Schema";
+import { registrationSchema } from "../../utils/schema/Schema";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignUpMutation } from "../../features/auth/authApi";
 import PhotoInput from "../../component/common/input/PhotoInputProps";

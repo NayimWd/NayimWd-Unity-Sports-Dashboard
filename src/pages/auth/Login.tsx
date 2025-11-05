@@ -1,6 +1,6 @@
 import z from "zod";
 import { useForm } from "react-hook-form";
-import { loginSchema } from "../../utils/Schema";
+import { loginSchema } from "../../utils/schema/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormContainer from "../../component/common/Form/FormContainer";
 import EmailInput from "../../component/common/input/EmailInput";

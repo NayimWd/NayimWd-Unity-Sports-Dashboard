@@ -1,4 +1,4 @@
-import { ApiResponse, BlogDetails, Blogs } from "../../utils/types";
+import { ApiResponse, BlogDetails, Blogs } from "../../utils/types/types";
 import { apiSlice } from "../api/apiSlice";
 
 const blogApi = apiSlice.injectEndpoints({

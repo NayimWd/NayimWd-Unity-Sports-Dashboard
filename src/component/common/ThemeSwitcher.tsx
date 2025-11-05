@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 // import { RootState } from "../../app/store/store";
-import { ThemeType } from "../../utils/types";
+import { ThemeType } from "../../utils/types/types";
 import { setTheme } from "../../features/theme/themeSlice";
 import { Moon, Sun } from 'lucide-react';
 import { RootState } from "../../app/store/store";

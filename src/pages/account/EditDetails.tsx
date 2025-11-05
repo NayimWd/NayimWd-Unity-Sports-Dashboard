@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form"
+import {z} from "zod";
 import FormContainer from "../../component/common/Form/FormContainer"
 import TextInput from "../../component/common/input/TextInput"
 import PageLayout from "../../component/layout/PageLayout"
@@ -8,6 +9,14 @@ import BackButton from "../../utils/BackButton"
 import { fontStyle } from "../../utils/ClassUtils"
 import Buttons from "../../component/common/Buttons"
 import { PenLine } from "lucide-react"
+
+
+const accountUpdateSchema = z.object({
+  Name: z.string(),
+  PhoneNumber: z.string()
+});
+
+type detailsType = z.infer<typeof accountUpdateSchema>
 
 
 const EditDetails = () => {

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Header from "../common/Header";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store/store";
-import { ThemeType } from "../../utils/types";
+import { ThemeType } from "../../utils/types/types";
 import useToggle from "../../hooks/useToggle";
 import Sidebar from "../common/Sidebar";
 import { Outlet } from "react-router-dom";
