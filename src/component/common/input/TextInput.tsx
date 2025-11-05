@@ -6,7 +6,7 @@ import { BadgeAlert } from "lucide-react";
 interface TextInputProps {
   name: string;
   label: string;
-  placeholder: string;
+  placeholder?: string;
   icon?: React.ReactNode;
   autoComplete?: string;
   defaultValue?: string;

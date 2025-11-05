@@ -47,7 +47,7 @@ const TextAreaInput = ({ name, label, height = " min-h-[150px]", className, plac
         },
         blockquote: {
           HTMLAttributes: {
-            class: "border-l-4 pl-4 italic text-muted-foreground my-2",
+            class: "border-l-4 pl-4 italic text-muted my-2",
           },
         },
         codeBlock: {
@@ -95,7 +95,7 @@ const TextAreaInput = ({ name, label, height = " min-h-[150px]", className, plac
     "px-2 py-1 rounded text-sm font-medium border border-border text-font transition";
 
   const getButtonClass = (isActive: boolean) =>
-    `${buttonBase} ${isActive ? "bg-primary" : "bg-white dark:bg-surface"}`;
+    `${buttonBase} ${isActive ? "bg-primary text-white" : "bg-white dark:bg-surface"}`;
 
   return (
     <div className="relative space-y-2">

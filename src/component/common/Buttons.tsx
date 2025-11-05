@@ -30,9 +30,9 @@ const Buttons = ({
         aria-busy={loading}
         aria-disabled={loading || props.disabled}
       >
-        {/* ✅ Loading overrides everything */}
+        {/*  Loading overrides everything */}
         {loading ? (
-          <span className="animate-spin rounded-full border-2 border-white border-t-transparent h-4 w-4" />
+          <span className="animate-spin rounded-full border-2 border-font border-t-transparent h-4 w-4" />
         ) : (
           <span className="flex items-center justify-center gap-2">
             {iconLeft && <span className="inline-flex">{iconLeft}</span>}
@@ -51,14 +51,14 @@ const buttonvariants = cva("", {
   variants: {
     variant: {
       primary: "bg-primary hover:bg-primaryHover text-white",
-      secondary: "bg-subSurface hover:brightness-90 text-font",
+      secondary: "bg-subSurface hover:brightness-90 text-white",
       danger: "bg-toastErrorText hover:bg-[#c41d1d] text-white",
-      outline: "border border-border text-font dark:text-border dark:hover:text-font  hover:bg-subSurface",
-      ghost: "bg-transparent text-gray-700 dark:hover:text-font hover:bg-subSurface",
+      outline: "border border-border text-white dark:text-border dark:hover:text-white  hover:bg-subSurface",
+      ghost: "bg-transparent text-gray-700 dark:hover:text-white hover:bg-subSurface",
       warning: "bg-secondary hover:brightness-90 text-white",
       gradient: "bg-gradient-primary text-white hover:opacity-90 bg-no-repeat bg-cover",
-      gradientS: "bg-gradient-secondary to-l text-font hover:opacity-90 bg-no-repeat bg-cover",
-      gradientD: "bg-gradient-bg text-font hover:opacity-90 to-r bg-no-repeat bg-cover",
+      gradientS: "bg-gradient-secondary to-l text-white hover:opacity-90 bg-no-repeat bg-cover",
+      gradientD: "bg-gradient-bg text-white hover:opacity-90 to-r bg-no-repeat bg-cover",
     },
     size: {
       sm: "px-2 py-1.5 text-sm",

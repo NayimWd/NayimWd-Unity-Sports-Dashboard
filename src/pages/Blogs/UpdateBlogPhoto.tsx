@@ -11,6 +11,8 @@ import Buttons from "../../component/common/Buttons";
 import { Edit2 } from "lucide-react";
 import toast from "react-hot-toast";
 import { fontStyle } from "../../utils/ClassUtils";
+import BackButton from "../../utils/BackButton";
+import { useGoBack } from "../../hooks/useGoBack";
 
 type updateBologPhotoType = z.infer<typeof updateBlogPhotoSchema>;
 
@@ -56,6 +58,7 @@ const UpdateBlogPhoto = () => {
 
   return (
     <div className="w-full">
+      <BackButton onClick={useGoBack()}>Go Back</BackButton>
       <h1 className={`${fontStyle.pageTitle} text-center sm:text-3xl md:text-4xl my-5 font-semibold text-font font-merriweather`}>Edit Blogs Photo</h1>
       <div className="w-full max-w-5xl mx-auto bg-surface  py-12 px-6 rounded-lg shadow">
         <div>

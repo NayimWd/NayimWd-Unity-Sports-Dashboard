@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { useManageBlogsQuery, useUpdatePublishStatusMutation } from "../../features/blog/blogApi";
 import TablePagination from "../../component/common/Table/TablePagination";
 import { fontStyle } from "../../utils/ClassUtils";
@@ -15,14 +15,15 @@ import { filterBlogSchema } from "../../utils/schema/Schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TextInput from "../../component/common/input/TextInput";
-import { Filter, Search } from "lucide-react";
-import { formatDate } from "../../utils/timeFormat";
+import { Edit2, Edit3, Filter, Search } from "lucide-react";
 import ConfirmModal from "../../component/ui/modal/ConfirmModal";
 import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
 import toast from "react-hot-toast";
 import PageLayout from "../../component/layout/PageLayout";
 import BackButton from "../../utils/BackButton";
 import { useGoBack } from "../../hooks/useGoBack";
+import useClickOutSide from "../../hooks/useClickOutSide";
+import CommonDropDown from "../../component/common/dropdown/CommonDropDown";
 
 type FilterBlogsType = z.infer<typeof filterBlogSchema>;
 
@@ -82,7 +83,7 @@ const ManageBlogs = () => {
   const totalPages = blogs?.pagination?.totalPages ?? 1;
 
   // filter data 
-  const headerData = useMemo(() => ["Photo", "Title", "Status", "Date", "Action"], []);
+  const headerData = useMemo(() => ["Photo", "Title", "Status", "Update", "Action"], []);
 
   const tagsOptions = [
     { label: "news", value: "news" },
@@ -138,8 +139,17 @@ const ManageBlogs = () => {
     setCurrentPage(1);
   };
 
+
+  // edit button functionality
+  // state and ref for edit dropdown
+  const [openLink, setOpenLink] = useState(false);
+  const dropDownRef = useRef<HTMLDivElement>(null!);
+  // toggle dropdown
+  useClickOutSide(dropDownRef, () => setOpenLink(false))
+
   // blog table for manage
   const content = useMemo(() => {
+
     if (isLoading) {
       return [...Array(5)].map((_, index) => (
         <TableSkeleton key={index} columns={headerData.length} />
@@ -164,7 +174,21 @@ const ManageBlogs = () => {
           </div>,
           blog.title?.length > 55 ? blog.title.slice(0, 55) + "..." : blog.title,
           blog.isPublished ? "Published" : "Not Published",
-          formatDate(blog?.createdAt).slice(0, 11),
+
+          <div className="relative">
+            <Buttons onClick={() => setOpenLink(!openLink)} className="rounded" iconLeft={<Edit3 size={14} />} size="sm">Edit</Buttons>
+            <div className="absolute" >
+              <CommonDropDown
+              ref={dropDownRef}
+                isOpen={openLink}
+                onClose={() => setOpenLink(false)}
+                links={[
+                  { label: "Edit Details", href: `/dashboard/blog/update/${blog?._id}`, icon: <Edit2 size={14} /> },
+                  { label: "Edit Photo", href: `/dashboard/blog/updatePhoto/${blog?._id}`, icon: <Edit3 size={14} /> },
+                ]}
+              />
+            </div>
+          </div>,
           <Buttons
             onClick={() => {
               setOpen(true);
@@ -183,6 +207,8 @@ const ManageBlogs = () => {
       />
     ));
   }, [isLoading, isError, blogs, headerData]);
+
+
 
   return (
     <PageLayout>
