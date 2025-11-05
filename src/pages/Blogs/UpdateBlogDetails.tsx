@@ -14,6 +14,9 @@ import Buttons from "../../component/common/Buttons";
 import { PenLine } from "lucide-react";
 import { useEffect } from "react";
 import { fontStyle } from "../../utils/ClassUtils";
+import BackButton from "../../utils/BackButton";
+import { useGoBack } from "../../hooks/useGoBack";
+import PageLayout from "../../component/layout/PageLayout";
 
 type blogType = z.infer<typeof updateBlogSchema>;
 
@@ -85,7 +88,8 @@ const UpdateBlogDetails = () => {
   }
 
   return (
-    <div className="w-full">
+    <PageLayout>
+      <BackButton onClick={useGoBack()}>Go Back</BackButton>
       <h1 className={`${fontStyle.pageTitle} text-center sm:text-3xl md:text-4xl my-5 font-semibold text-font font-merriweather`}>Edit Blogs Details</h1>
       <div className=" w-full max-w-7xl mx-auto bg-surface  py-12 px-3 rounded-lg shadow">
         <FormContainer
@@ -100,7 +104,7 @@ const UpdateBlogDetails = () => {
           <Buttons disabled={isLoading} iconRight={<PenLine size={16} />} variant="primary" className="w-full md:w-32 rounded">Update</Buttons>
         </FormContainer>
       </div>
-    </div>
+    </PageLayout>
   )
 }
 

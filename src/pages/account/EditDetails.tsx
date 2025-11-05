@@ -9,20 +9,19 @@ import BackButton from "../../utils/BackButton"
 import { fontStyle } from "../../utils/ClassUtils"
 import Buttons from "../../component/common/Buttons"
 import { PenLine } from "lucide-react"
+import { accountUpdateSchema } from "../../utils/schema/accountSchema";
+import { useCurrentUserQuery } from "../../features/auth/authApi";
 
-
-const accountUpdateSchema = z.object({
-  Name: z.string(),
-  PhoneNumber: z.string()
-});
 
 type detailsType = z.infer<typeof accountUpdateSchema>
 
 
 const EditDetails = () => {
+  //get current user 
+  const {data} = useCurrentUserQuery()
 
 
-  const method = useForm({
+  const method = useForm<detailsType>({
 
   });
 
@@ -41,8 +40,8 @@ const EditDetails = () => {
             onSubmit={handleEdit}
             className="w-full max-w-[768px] space-y-6 px-0 lg:px-5 rounded-lg"
           >
-            <TextInput  label="Edit Name" name="Name" placeholder="Edit Name" />
-            <TextInput label="Phone Number" name="Phone Number" placeholder="Edit Phone Number" />
+            <TextInput  label="Edit Name" name="Name" placeholder="Edit Name" defaultValue={data?.name}/>
+            <TextInput label="Phone Number" name="Phone Number" placeholder="Edit Phone Number" defaultValue={data?.phoneNumber}/>
             <Buttons disabled={false} iconRight={<PenLine size={16} />} variant="primary" className="w-full md:w-32 rounded">Update</Buttons>
           </FormContainer>
         </div>

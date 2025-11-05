@@ -25,7 +25,7 @@ const CommonDropDown = forwardRef<HTMLDivElement, DropdownMenuProps>(
                 ref={ref}
                 className={cn(
                     dropdownStyle({ open: isOpen }),
-                    "z-[200]",
+                    "z-[50]",
                     "bg-bg border border-muted rounded-lg shadow-lg backdrop-blur-md w-56",
                     className
                 )}

@@ -15,6 +15,8 @@ import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils"
 import toast from "react-hot-toast"
 import { useNavigate } from "react-router-dom"
 import PageLayout from "../../component/layout/PageLayout"
+import BackButton from "../../utils/BackButton"
+import { useGoBack } from "../../hooks/useGoBack"
 
 type updateBlogType = z.infer<typeof blogSchema>;
 
@@ -64,6 +66,7 @@ const CreateBlogs = () => {
 
   return (
     <PageLayout>
+      <BackButton onClick={useGoBack()}>Go Back</BackButton>
       <h1 className="paddingX text-center text-2xl sm:text-3xl md:text-4xl my-5 font-semibold text-font font-merriweather">Create Blogs</h1>
       <div className="w-full max-w-5xl mx-auto bg-surface  py-12 px-6 rounded-lg shadow-sm my-10">
         <FormContainer
