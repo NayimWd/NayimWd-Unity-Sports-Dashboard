@@ -96,7 +96,7 @@ const UpdateBlogDetails = () => {
           methods={methods} 
           onSubmit={handleSubmit}
           className=" w-full space-y-6 px-0 lg:px-5 rounded-lg">
-          <TextInput name="title" label="Title" placeholder="Write Title" />
+          <TextInput name="title" label="Title" placeholder="Write Title" defaultValue={blog?.title}/>
           <TextAreaInput label="Blog" placeholder="Write Your Blog" name="content" height="min-h-[300px]" />
           <div className="flex justify-between items-center flex-wrap gap-5">
             <DropdownInput label="Tags" name="tags" placeholder="Select an option" options={tags} />

@@ -1,30 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 type ClickOutSideHandler = (event: MouseEvent | TouchEvent) => void;
 
 const useClickOutSide = (
-  ref: React.RefObject<HTMLElement>,
+  ref: React.RefObject<HTMLElement | null>,
   handler: ClickOutSideHandler
 ) => {
+  const handlerRef = useRef(handler);
+  handlerRef.current = handler;
+
   useEffect(() => {
-    const listner = (e: MouseEvent | TouchEvent) => {
-      const element = ref?.current;
+    const listener = (e: MouseEvent | TouchEvent) => {
+      const el = ref.current;
+      if (!el || el.contains(e.target as Node)) return;
 
-      if (!element || element.contains(e.target as Node)) {
-        return;
-      }
-
-      handler(e);
+      handlerRef.current(e);
     };
 
-    document.addEventListener("mousedown", listner);
-    document.addEventListener("touchstart", listner);
+    document.addEventListener("pointerdown", listener);
 
     return () => {
-      document.removeEventListener("mousedown", listner);
-      document.removeEventListener("touchstart", listner);
+      document.removeEventListener("pointerdown", listener);
     };
-  }, [ref, handler]);
+  }, [ref]);
 };
 
 export default useClickOutSide;

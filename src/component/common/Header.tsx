@@ -26,7 +26,7 @@ const Header = ({ handleToggle }: HeaderProps) => {
 
   // state
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null!);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const links = [
     { label: "Profile", href: "/dashboard/profile", icon: <User2 size={14} /> },
@@ -83,7 +83,7 @@ const Header = ({ handleToggle }: HeaderProps) => {
                   <div ref={dropdownRef}>
                     <ProfileDropdown
                       isOpen={isOpen}
-                      onClose={() => setIsOpen(false)}
+                      onClose={() => setIsOpen((prev) => !prev)}
                       user={user}
                       onLogout={handleLogout}
                       links={links}

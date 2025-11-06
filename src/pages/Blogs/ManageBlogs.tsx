@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo } from "react";
 import { useManageBlogsQuery, useUpdatePublishStatusMutation } from "../../features/blog/blogApi";
 import TablePagination from "../../component/common/Table/TablePagination";
 import { fontStyle } from "../../utils/ClassUtils";
@@ -22,8 +22,9 @@ import toast from "react-hot-toast";
 import PageLayout from "../../component/layout/PageLayout";
 import BackButton from "../../utils/BackButton";
 import { useGoBack } from "../../hooks/useGoBack";
-import useClickOutSide from "../../hooks/useClickOutSide";
-import CommonDropDown from "../../component/common/dropdown/CommonDropDown";
+import Dropdown from "../../component/common/dropdown/Dropdown";
+
+
 
 type FilterBlogsType = z.infer<typeof filterBlogSchema>;
 
@@ -142,10 +143,7 @@ const ManageBlogs = () => {
 
   // edit button functionality
   // state and ref for edit dropdown
-  const [openLink, setOpenLink] = useState(false);
-  const dropDownRef = useRef<HTMLDivElement>(null!);
-  // toggle dropdown
-  useClickOutSide(dropDownRef, () => setOpenLink(false))
+
 
   // blog table for manage
   const content = useMemo(() => {
@@ -175,19 +173,20 @@ const ManageBlogs = () => {
           blog.title?.length > 55 ? blog.title.slice(0, 55) + "..." : blog.title,
           blog.isPublished ? "Published" : "Not Published",
 
-          <div className="relative">
-            <Buttons onClick={() => setOpenLink(!openLink)} className="rounded" iconLeft={<Edit3 size={14} />} size="sm">Edit</Buttons>
-            <div className="absolute" >
-              <CommonDropDown
-              ref={dropDownRef}
-                isOpen={openLink}
-                onClose={() => setOpenLink(false)}
-                links={[
-                  { label: "Edit Details", href: `/dashboard/blog/update/${blog?._id}`, icon: <Edit2 size={14} /> },
-                  { label: "Edit Photo", href: `/dashboard/blog/updatePhoto/${blog?._id}`, icon: <Edit3 size={14} /> },
-                ]}
-              />
-            </div>
+          <div >
+            <Dropdown className="">
+              <Dropdown.Trigger>
+                <Edit2 size="14" /> Edit
+              </Dropdown.Trigger>
+              <Dropdown.Menu>
+                <Dropdown.Item href={`/dashboard/blog/update/${blog?._id}`}>
+                 <Edit3 size={14}/> Edit Details
+                </Dropdown.Item>
+                <Dropdown.Item href={`/dashboard/blog/updatePhoto/${blog?._id}`}>
+                 <Edit2 size={14}/> Edit Photo
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </div>,
           <Buttons
             onClick={() => {
