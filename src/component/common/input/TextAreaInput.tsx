@@ -15,6 +15,7 @@ interface TextAreaProps {
   placeholder?: string,
   height?: string,
   className?: string
+
 }
 
 const TextAreaInput = ({ name, label, height = " min-h-[150px]", className, placeholder }: TextAreaProps) => {
