@@ -27,6 +27,8 @@ const UpdateBlogDetails = () => {
   // get default content by blogId
   const { data: blog } = useBlogDetailsQuery(blogId);
 
+
+
   useEffect(() => {
     if (blog) {
       methods.reset({
@@ -35,7 +37,7 @@ const UpdateBlogDetails = () => {
         tags: blog.tags,
       })
     }
-  }, [])
+  }, [blog])
 
   // post blog api throw apiSlice
   const [updateBlog, { isLoading }] = useUpdateBlogMutation();
@@ -44,10 +46,11 @@ const UpdateBlogDetails = () => {
   // navigate
   const navigate = useNavigate();
 
-  const methods = useForm<blogType>({
+    const methods = useForm<blogType>({
     resolver: zodResolver(updateBlogSchema),
     mode: "onSubmit"
   })
+
 
   let tags = [
     { label: "news", value: "news" },
@@ -80,7 +83,7 @@ const UpdateBlogDetails = () => {
       SuccessToast({ msg: "Blog Update Successfully" })
       // methods.reset();
       navigate("/dashboard/blogs")
- 
+
     } catch (error) {
       toast.dismiss(loadingId);
       ErrorToast({ msg: "Blog Update Failed!" })
@@ -93,10 +96,10 @@ const UpdateBlogDetails = () => {
       <h1 className={`${fontStyle.pageTitle} text-center sm:text-3xl md:text-4xl my-5 font-semibold text-font font-merriweather`}>Edit Blogs Details</h1>
       <div className=" w-full max-w-7xl mx-auto bg-surface  py-12 px-3 rounded-lg shadow">
         <FormContainer
-          methods={methods} 
+          methods={methods}
           onSubmit={handleSubmit}
           className=" w-full space-y-6 px-0 lg:px-5 rounded-lg">
-          <TextInput name="title" label="Title" placeholder="Write Title" defaultValue={blog?.title}/>
+          <TextInput name="title" label="Title" placeholder="Write Title" />
           <TextAreaInput label="Blog" placeholder="Write Your Blog" name="content" height="min-h-[300px]" />
           <div className="flex justify-between items-center flex-wrap gap-5">
             <DropdownInput label="Tags" name="tags" placeholder="Select an option" options={tags} />
