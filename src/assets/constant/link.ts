@@ -13,17 +13,13 @@ import {
   School,
   FileStack,
   CalendarPlus,
-  CalendarPlus2,
   CalendarRange,
   SquareSigma,
   GalleryHorizontalEnd,
-  PenLine,
   ChartLine,
   Newspaper,
   BookPlus,
   Notebook,
-
-  // Telescope,
   User2,
   Boxes,
   Settings,
@@ -114,11 +110,6 @@ export const navLinks = {
           icon: CalendarPlus,
           label: "Create 1st round",
         },
-        {
-          path: "/dashboard/schedule/qualifier/create",
-          icon: CalendarPlus2,
-          label: "Create qualifier round",
-        },
       ],
     },
     {
@@ -132,14 +123,9 @@ export const navLinks = {
           label: "All Match",
         },
         {
-          path: "/match/create",
+          path: "/dashboard/match/create",
           icon: SquarePen,
           label: "Create Qualifire Match",
-        },
-        {
-          path: "/innings/create",
-          icon: SquarePen,
-          label: "Create Innings",
         },
       ],
     },
@@ -184,7 +170,7 @@ export const navLinks = {
           path: "/dashboard/blogs/manage",
           icon: Settings,
           label: "Manage Blogs",
-        }
+        },
       ],
     },
   ],
@@ -223,9 +209,9 @@ export const navLinks = {
           label: "My Team",
         },
         {
-          path: "/dashboard/team/create",
-          icon: PenLine,
-          label: "Create Team",
+          path: "/dashboard/team/manage",
+          icon: Settings,
+          label: "Manage Team",
         },
       ],
     },
@@ -258,16 +244,10 @@ export const navLinks = {
       children: [],
     },
     {
-      path: "",
+      path: "/dashboard/match",
       icon: SquareSigma,
       label: "Match",
-      children: [
-        {
-          path: "/dashboard/match",
-          icon: GalleryHorizontalEnd,
-          label: "All Match",
-        },
-      ],
+      children: [],
     },
     {
       path: "/dashboard/pointTable",

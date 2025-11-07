@@ -15,7 +15,7 @@ import { filterBlogSchema } from "../../utils/schema/Schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TextInput from "../../component/common/input/TextInput";
-import { Edit2, Edit3, Filter, Search } from "lucide-react";
+import { BookOpenText, Edit2, Edit3, Filter, Search } from "lucide-react";
 import ConfirmModal from "../../component/ui/modal/ConfirmModal";
 import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
 import toast from "react-hot-toast";
@@ -179,6 +179,9 @@ const ManageBlogs = () => {
                 <Edit2 size="14" /> Edit
               </Dropdown.Trigger>
               <Dropdown.Menu>
+                <Dropdown.Item href={`/dashboard/blogs/details/${blog?._id}`}>
+                 <BookOpenText size={14}/> Read Details
+                </Dropdown.Item>
                 <Dropdown.Item href={`/dashboard/blog/update/${blog?._id}`}>
                  <Edit3 size={14}/> Edit Details
                 </Dropdown.Item>
