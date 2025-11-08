@@ -26,7 +26,7 @@ const EditDetails = () => {
   });
 
   const handleEdit = () => {
-
+    
   }
 
   return (
