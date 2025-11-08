@@ -36,6 +36,10 @@ export interface IUser {
 }
 
 
+
+
+
+
 // tournament type
 export interface Tournament {
   _id: string;
