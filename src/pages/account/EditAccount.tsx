@@ -7,10 +7,13 @@ import BackButton from "../../utils/BackButton";
 import { useGoBack } from "../../hooks/useGoBack";
 import Tooltip from "../../component/ui/Tooltip";
 import { Link } from "react-router-dom";
+import { useEditAccountDetailsMutation } from "../../features/account/accountApi";
 
 const EditAccount = () => {
 
     const { data: account } = useCurrentUserQuery();
+
+    const {} = useEditAccountDetailsMutation();
 
     let content = (
         <SectionLayout className="flex flex-col items-center text-center gap-1 md:gap-0">
