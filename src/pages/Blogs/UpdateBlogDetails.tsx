@@ -27,8 +27,6 @@ const UpdateBlogDetails = () => {
   // get default content by blogId
   const { data: blog } = useBlogDetailsQuery(blogId);
 
-
-
   useEffect(() => {
     if (blog) {
       methods.reset({

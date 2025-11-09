@@ -2,11 +2,10 @@ import { z } from "zod";
 
 export const accountUpdateSchema = z
   .object({
-    Name: z.string(),
-    PhoneNumber: z.string(),
-    email: z.string(),
+    name: z.string(),
+    phoneNumber: z.string(),
   })
-  .refine((data) => data.Name || data.PhoneNumber || data.email, {
+  .refine((data) => data.name || data.phoneNumber, {
     message: "At least one field must be provided",
     path: ["_form"],
   });
