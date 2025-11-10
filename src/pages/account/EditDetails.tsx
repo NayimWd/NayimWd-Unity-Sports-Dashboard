@@ -18,10 +18,7 @@ import { LoadingToast } from "../../utils/toastUtils";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-
-
 type detailsType = z.infer<typeof accountUpdateSchema>
-
 
 const EditDetails = () => {
   //get current user 
