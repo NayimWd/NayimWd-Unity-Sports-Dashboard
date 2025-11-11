@@ -34,7 +34,7 @@ const ProfileDropdown = forwardRef<HTMLDivElement, DropdownMenuProps>(
         ref={ref}
         className={cn(dropdownStyle({ open: isOpen }), className, "z-[200]")}
         role="menu"
-        aria-hidden={!isOpen}
+        
 
       >
         {/* User info */}

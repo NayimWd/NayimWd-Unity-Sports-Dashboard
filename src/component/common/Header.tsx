@@ -29,8 +29,8 @@ const Header = ({ handleToggle }: HeaderProps) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const links = [
-    { label: "Profile", href: "/dashboard/profile", icon: <User2 size={14} /> },
-    { label: "Settings", href: "/dashboard/settings", icon: <Settings size={14} /> },
+    { label: "Account", href: "/dashboard/myAccount", icon: <User2 size={14} /> },
+    { label: "Profile", href: "/dashboard/profile", icon: <Settings size={14} /> },
   ]
 
 
