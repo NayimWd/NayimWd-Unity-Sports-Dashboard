@@ -51,7 +51,7 @@ const buttonvariants = cva("", {
   variants: {
     variant: {
       primary: "bg-primary hover:bg-primaryHover text-white",
-      secondary: "bg-subSurface hover:brightness-90 text-white",
+      secondary: "bg-subSurface hover:brightness-90 text-font",
       danger: "bg-toastErrorText hover:bg-[#c41d1d] text-white",
       outline: "border border-border text-white dark:text-border dark:hover:text-white  hover:bg-subSurface",
       ghost: "bg-transparent text-gray-700 dark:hover:text-white hover:bg-subSurface",

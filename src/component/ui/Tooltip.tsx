@@ -27,9 +27,9 @@ const Tooltip = ({ content, children, className, position = "top" }: TooltipProp
                     positionClasses[position]
                 )}
             >
-                <div className="relative rounded bg-border px-3 py-1.5 text-xs leading-tight text-white shadow-lg w-20  max-w-xs text-center">
+                <div className="relative rounded bg-inputBorder px-3 py-1.5 text-xs leading-tight text-font shadow-lg w-20  max-w-xs text-center">
                     {content}
-                    {/* Arrow removed for modern look */}
+
                 </div>
             </div>
         </div>

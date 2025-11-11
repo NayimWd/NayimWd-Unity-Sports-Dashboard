@@ -70,7 +70,7 @@ const Account = () => {
         <Buttons className="rounded" variant="primary" size="sm">Edit Account</Buttons>
         </Link>
         <Tooltip position="top" content="Inprogress">
-          <Buttons className="rounded" variant="secondary" size="sm">Change Password </Buttons>
+          <Buttons className="rounded" variant="danger" size="sm">Change Password </Buttons>
         </Tooltip>
       </div>
     </SectionLayout>
