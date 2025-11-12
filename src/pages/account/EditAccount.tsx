@@ -13,7 +13,7 @@ const EditAccount = () => {
 
     const { data: account } = useCurrentUserQuery();
 
-    const {} = useEditAccountDetailsMutation();
+    const { } = useEditAccountDetailsMutation();
 
     let content = (
         <SectionLayout className="flex flex-col items-center text-center gap-1 md:gap-0">
@@ -71,11 +71,6 @@ const EditAccount = () => {
                 <Tooltip content="Locked for security" position="top">
                     <Buttons className="rounded w-full" variant="secondary" size="sm" disabled>
                         Change Email (Locked)
-                    </Buttons>
-                </Tooltip>
-                <Tooltip position="top" content="InProgress">
-                    <Buttons className="rounded w-full" variant="secondary" size="sm">
-                        Change Password (Beta)
                     </Buttons>
                 </Tooltip>
             </div>

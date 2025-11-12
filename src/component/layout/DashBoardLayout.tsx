@@ -9,9 +9,10 @@ import { Outlet } from "react-router-dom";
 import ScrollToTop from "../../utils/scrollToTop";
 
 const DashBoardLayout: React.FC = () => {
-
   // theme
   const theme = useSelector((state: RootState) => state.theme.mode);
+  // toggle
+  const [isOpen, setIsOpen] = useToggle({ defaultValue: false });
 
   useEffect(() => {
     const applyTheme = (mode: ThemeType) => {
@@ -32,8 +33,6 @@ const DashBoardLayout: React.FC = () => {
     applyTheme(theme);
   }, [theme]);
 
-  // toggle
-  const [isOpen, setIsOpen] = useToggle({ defaultValue: false });
 
   return (
     <div className="min-h-screen bg-bg flex flex-col">
