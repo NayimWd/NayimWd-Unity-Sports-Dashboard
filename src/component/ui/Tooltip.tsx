@@ -27,7 +27,7 @@ const Tooltip = ({ content, children, className, position = "top" }: TooltipProp
                     positionClasses[position]
                 )}
             >
-                <div className="relative rounded bg-inputBorder px-3 py-1.5 text-xs leading-tight text-font shadow-lg w-20  max-w-xs text-center">
+                <div className="relative rounded bg-slate-800 dark:bg-border px-3 py-1.5 text-xs leading-tight text-white shadow-lg w-20  max-w-xs text-center">
                     {content}
 
                 </div>
@@ -36,4 +36,4 @@ const Tooltip = ({ content, children, className, position = "top" }: TooltipProp
     );
 };
 
-export default Tooltip
+export default Tooltip;

@@ -60,15 +60,6 @@ const UpdateBlogDetails = () => {
   const handleSubmit = async (data: blogType) => {
     const loadingId = LoadingToast({ msg: "Updating Blog Details..." });
     try {
-      const formData = new FormData();
-      formData.append("title", data.title ?? "");
-      formData.append("tags", data.tags ?? "");
-      formData.append("content", data.content ?? "");
-
-      // Log contents for debugging
-      for (const [key, value] of formData.entries()) {
-        console.log(`${key}:`, value);
-      }
       await updateBlog({
         blogId,
         data: {

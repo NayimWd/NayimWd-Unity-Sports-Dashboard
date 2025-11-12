@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import Buttons from "../../component/common/Buttons"
 import PageLayout from "../../component/layout/PageLayout"
 import SectionLayout from "../../component/layout/SectionLayout"
-import Tooltip from "../../component/ui/Tooltip"
 import { useCurrentUserQuery } from "../../features/auth/authApi"
 import { useGoBack } from "../../hooks/useGoBack"
 import BackButton from "../../utils/BackButton"
@@ -67,11 +66,12 @@ const Account = () => {
       {/* buttons */}
       <div className="flex flex-wrap justify-center gap-3 mt-8">
         <Link to="/dashboard/editAccount">
-        <Buttons className="rounded" variant="primary" size="sm">Edit Account</Buttons>
+          <Buttons className="rounded" variant="primary" size="sm">Edit Account</Buttons>
         </Link>
-        <Tooltip position="top" content="Inprogress">
+        <Link to="/dashboard/editAccount/changePassword">
           <Buttons className="rounded" variant="danger" size="sm">Change Password </Buttons>
-        </Tooltip>
+        </Link>
+
       </div>
     </SectionLayout>
   )

@@ -20,21 +20,21 @@ input:-webkit-autofill:focus {
 .light {
   /* Base Colors */
   --bg: #f6f7fb;
-  --surface: #ffffff; 
-  --subSurface: #dfe3ec; 
-  --border: #e2e8f0; 
-  --inputBorder: #d1d5db; 
+  --surface: #ffffff;
+  --subSurface: #dfe3ec;
+  --border: #e2e8f0;
+  --inputBorder: #d1d5db;
 
   /* Text Colors */
-  --font: #1e293b; 
+  --font: #1e293b;
   --subtext: #4b5563;
-  --muted: #9ca3af; 
+  --muted: #9ca3af;
 
   /* Accent Colors */
-  --primary: #007bff; 
+  --primary: #007bff;
   --primaryHover: #005bbb;
-  --secondary: #ffb300; 
-  --disabledText: #9ca3af; 
+  --secondary: #ffb300;
+  --disabledText: #9ca3af;
 
   /* Toast Notifications */
   --toastSuccessBg: #e8f5e9;
@@ -54,20 +54,20 @@ input:-webkit-autofill:focus {
   /* Base Colors */
   --bg: #0a192f;
   --surface: #1b263b;
-  --subSurface: #2c3e50; 
-  --border: #3a4a5e; 
-  --inputBorder: #4a5d72; 
+  --subSurface: #2c3e50;
+  --border: #3a4a5e;
+  --inputBorder: #4a5d72;
 
   /* Text Colors */
-  --font: #c7d1e0; 
-  --subtext: #a0a8b6; 
-  --muted: #6c7a89; 
+  --font: #c7d1e0;
+  --subtext: #a0a8b6;
+  --muted: #6c7a89;
 
   /* Accent Colors */
-  --primary: #1e88e5; 
-  --primaryHover: #165a9e; 
-  --secondary: #ff9100; 
-  --disabledText: #778899; 
+  --primary: #1e88e5;
+  --primaryHover: #165a9e;
+  --secondary: #ff9100;
+  --disabledText: #778899;
 
   /* Toast Notifications */
   --toastSuccessBg: #0d3b20;

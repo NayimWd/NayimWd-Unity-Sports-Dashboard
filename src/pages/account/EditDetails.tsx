@@ -45,11 +45,6 @@ const EditDetails = () => {
   const handleEdit = async (data: detailsType) => {
     const toastId = LoadingToast({ msg: "Updating Account Details..." });
     try {
-      const formData = new FormData();
-
-      formData.append("name", data.name);
-      formData.append("phoneNumber", data.phoneNumber);
-
       await editAccountDetails({
         name: data.name,
         phoneNumber: data.phoneNumber,
@@ -77,7 +72,7 @@ const EditDetails = () => {
           >
             <TextInput label="Edit Name" name="name" placeholder="Edit Name" defaultValue={user?.name} />
             <TextInput label="Phone Number" name="phoneNumber" placeholder="Edit Phone Number" defaultValue={user?.phoneNumber} />
-            <Buttons iconLeft={<PenLine size={16} />} disabled={isLoading}>Update</Buttons>
+            <Buttons className="rounded" iconLeft={<PenLine size={16} />} disabled={isLoading}>Update</Buttons>
           </FormContainer>
         </div>
       </SectionLayout>
