@@ -10,6 +10,7 @@ import { clearCredenTials } from "../../features/auth/authSlice";
 import { ErrorToast, SuccessToast } from "../../utils/toastUtils";
 import useClickOutSide from "../../hooks/useClickOutSide";
 import { RootState } from "../../app/store/store";
+import { apiSlice } from "../../features/api/apiSlice";
 
 interface HeaderProps {
   handleToggle?: () => void;
@@ -39,6 +40,7 @@ const Header = ({ handleToggle }: HeaderProps) => {
     try {
       await signOut({}).unwrap()
       dispatch(clearCredenTials())
+      dispatch(apiSlice.util.resetApiState())
       navigate("/login")
       SuccessToast({ msg: "Logout Successfull" })
     } catch (error) {
