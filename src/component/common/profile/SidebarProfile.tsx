@@ -6,6 +6,7 @@ import { clearCredenTials } from "../../../features/auth/authSlice";
 import { ErrorToast, SuccessToast } from "../../../utils/toastUtils";
 import { RootState } from "../../../app/store/store";
 import Tooltip from "../../ui/Tooltip";
+import { apiSlice } from "../../../features/api/apiSlice";
 
 
 const SidebarProfile = () => {
@@ -22,6 +23,7 @@ const SidebarProfile = () => {
         try {
             await signOut({}).unwrap()
             dispatch(clearCredenTials())
+            dispatch(apiSlice.util.resetApiState())
             navigate("/login")
             SuccessToast({ msg: "Logout Successfull" })
         } catch (error) {

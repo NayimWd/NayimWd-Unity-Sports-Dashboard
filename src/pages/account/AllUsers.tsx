@@ -1,4 +1,4 @@
-import { Edit2, Eye, Filter, Search } from "lucide-react"
+import {  Edit2, Edit3, Filter, Search } from "lucide-react"
 import FormContainer from "../../component/common/Form/FormContainer"
 import TextInput from "../../component/common/input/TextInput"
 import PageLayout from "../../component/layout/PageLayout"
@@ -17,6 +17,8 @@ import TableRow from "../../component/common/Table/TableRow"
 import Table from "../../component/common/Table/Table"
 import TableHeader from "../../component/common/Table/TableHeader"
 import TablePagination from "../../component/common/Table/TablePagination"
+import Dropdown from "../../component/common/dropdown/Dropdown"
+
 
 const AllUsers = () => {
     // pagination
@@ -127,24 +129,21 @@ const AllUsers = () => {
                     user.email,
                     user.phoneNumber ?? "N/A",
                     user.role,
-                    <div className="flex gap-2">
-                        <Buttons
-                            size="sm"
-                            variant="secondary"
-                            className="rounded"
-                            iconLeft={<Eye size={14} />}
-                        >
-                            View
-                        </Buttons>
+                    <div className="flex gap-2 relative">
+                        <Dropdown className="">
+                            <Dropdown.Trigger>
+                                <Edit2 size="14" /> Role
+                            </Dropdown.Trigger>
+                            <Dropdown.Menu className="absolute -left-10">
+                                <Dropdown.Item >
+                                    <Edit3 size={14} /> Make Admin
+                                </Dropdown.Item>
+                                <Dropdown.Item>
+                                    <Edit2 size={14} /> Make Staff
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
 
-                        <Buttons
-                            size="sm"
-                            className="rounded"
-                            variant="primary"
-                            iconLeft={<Edit2 size={14} />}
-                        >
-                            Edit
-                        </Buttons>
                     </div>,
                 ]}
             />
