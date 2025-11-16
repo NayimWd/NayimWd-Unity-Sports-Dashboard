@@ -1,4 +1,9 @@
-import { ApiResponse, IUser } from "../../utils/types/types";
+import {
+  ApiResponse,
+  IAllUsersData,
+  IUser,
+  IUserQueryParams,
+} from "../../utils/types/types";
 import { apiSlice } from "../api/apiSlice";
 import { setCredentials, clearCredenTials, setAuthLoaded } from "./authSlice";
 
@@ -34,7 +39,7 @@ const authApi = apiSlice.injectEndpoints({
       providesTags: ["User"],
 
       // life cycle handler
-      async onQueryStarted(_, {dispatch, queryFulfilled}) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           dispatch(setCredentials(data));
@@ -43,7 +48,25 @@ const authApi = apiSlice.injectEndpoints({
         } finally {
           dispatch(setAuthLoaded(true));
         }
-      }
+      },
+    }),
+    AllUser: builder.query<ApiResponse<IAllUsersData>, IUserQueryParams>({
+      query: (params) => {
+        const queryString = new URLSearchParams();
+
+        if (params.page) queryString.append("page", params.page.toString());
+        if (params.limit) queryString.append("limit", params.limit.toString());
+        if (params.name) queryString.append("name", params.name);
+        if (params.email) queryString.append("email", params.email);
+        if (params.role) queryString.append("role", params.role);
+        if (params.sortField) queryString.append("sortField", params.sortField);
+        if (params.sortOrder) queryString.append("sortOrder", params.sortOrder);
+
+        return {
+          url: `auth/all_users?${queryString}`,
+          method: "GET",
+        };
+      },
     }),
   }),
 });
@@ -53,4 +76,5 @@ export const {
   useSignInMutation,
   useSignOutMutation,
   useCurrentUserQuery,
+  useAllUserQuery,
 } = authApi;
