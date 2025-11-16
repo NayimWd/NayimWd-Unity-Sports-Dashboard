@@ -33,12 +33,32 @@ export interface IUser {
   role: string;
   photo: string;
   createdAt: string;
+  updatedAt?: string;
 }
 
+export interface IUserPagination {
+  totalUsers: number;
+  currentPage: number;
+  totalPages: number;
+}
 
+export interface IAllUsersData {
+  All_users: number;
+  users: IUser[];
+  pagination: IUserPagination;
+}
 
+export interface IUserQueryParams {
+  page?: number;
+  limit?: number;
+  name?: string;
+  email?: string;
+  role?: string;
 
-
+  // sort
+  sortField?: string; // exmp: "name", "email", "role" etc sorting
+  sortOrder?: "asc" | "desc";
+}
 
 // tournament type
 export interface Tournament {
@@ -69,11 +89,11 @@ export interface PointTableData {
   pointTable: PointTableRow[];
   tournament: Tournament;
 }
-  // ------------------------------------------------------------------- //
- // --------------------------- Blogs ----------------------------------//
+// ------------------------------------------------------------------- //
+// --------------------------- Blogs ----------------------------------//
 // ------------------------------------------------------------------- //
 export interface Blog {
-   _id: string;
+  _id: string;
   title: string;
   author: string;
   createdAt: string;
@@ -82,7 +102,7 @@ export interface Blog {
 }
 
 export interface Blogs {
-  blogs: [],
+  blogs: [];
   pagination: PaginationMeta;
 }
 
@@ -95,4 +115,3 @@ export interface BlogDetails {
   photo: [string];
   tags: string;
 }
-

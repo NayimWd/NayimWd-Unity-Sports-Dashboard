@@ -10,6 +10,7 @@ const EditAccount = lazy(() => import("../pages/account/EditAccount"));
 const EditPhoto = lazy(() => import("../pages/account/EditPhoto"));
 const EditDetails = lazy(() => import("../pages/account/EditDetails"));
 const ChangePassword = lazy(() => import("../pages/account/ChangePassword"));
+const AllUsers = lazy(()=> import("../pages/account/AllUsers"));
 
 export const accountRoutes: RouteObject[] = [
     {
@@ -19,6 +20,18 @@ export const accountRoutes: RouteObject[] = [
                 <ProtectedRoute>
                     <SuspenseWrapper CustomLoader={<AccountSkeleton />}>
                         <Account />
+                    </SuspenseWrapper>
+                </ProtectedRoute>
+            </ErrorBoundaryWrapper>
+        ),
+    },
+    {
+        path: "users",
+        element: (
+            <ErrorBoundaryWrapper>
+                <ProtectedRoute>
+                    <SuspenseWrapper>
+                        <AllUsers />
                     </SuspenseWrapper>
                 </ProtectedRoute>
             </ErrorBoundaryWrapper>
