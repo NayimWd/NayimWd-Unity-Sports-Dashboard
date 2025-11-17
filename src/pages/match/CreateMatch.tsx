@@ -1,7 +1,9 @@
+import PageLayout from "../../component/layout/PageLayout"
+
 const CreateMatch = () => {
     // qualifier round
   return (
-    <div>CreateMatch</div>
+    <PageLayout>CreateMatch</PageLayout>
   )
 }
 

@@ -1,6 +1,7 @@
+import PageLayout from "../../component/layout/PageLayout"
 
 export const CreatePlayingSquad = () => {
   return (
-    <div>CreatePlayingSquad</div>
+    <PageLayout>CreatePlayingSquad</PageLayout>
   )
 }

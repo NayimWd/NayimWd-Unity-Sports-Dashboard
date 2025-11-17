@@ -1,5 +1,7 @@
+import PageLayout from "../../component/layout/PageLayout"
+
 export const CreateMatchResult = () => {
   return (
-    <div>CreateMatchResult</div>
+    <PageLayout>CreateMatchResult</PageLayout>
   )
 }

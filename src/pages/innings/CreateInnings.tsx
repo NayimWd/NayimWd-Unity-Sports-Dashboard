@@ -1,7 +1,8 @@
+import PageLayout from "../../component/layout/PageLayout"
 
 const CreateInnings = () => {
   return (
-    <div>CreateInnings</div>
+    <PageLayout>CreateInnings</PageLayout>
   )
 }
 

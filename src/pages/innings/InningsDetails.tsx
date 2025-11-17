@@ -1,6 +1,8 @@
+import PageLayout from "../../component/layout/PageLayout"
+
 const InningsDetails = () => {
   return (
-    <div>InningsDetails</div>
+    <PageLayout>InningsDetails</PageLayout>
   )
 }
 
