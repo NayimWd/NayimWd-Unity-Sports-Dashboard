@@ -36,7 +36,7 @@ const authApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: ApiResponse<IUser>) => response.data,
       keepUnusedDataFor: 70,
-      providesTags: ["User"],
+      providesTags: ["AuthUser"],
 
       // life cycle handler
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
@@ -67,7 +67,18 @@ const authApi = apiSlice.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: (result) =>
+        result?.data.users
+          ? [
+              ...result.data.users.map((u) => ({
+                type: "User" as const,
+                id: u._id,
+              })),
+              { type: "UserList", id: "LIST" },
+            ]
+          : [{ type: "UserList", id: "LIST" }],
     }),
+    
   }),
 });
 
