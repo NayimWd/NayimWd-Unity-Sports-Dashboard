@@ -1,4 +1,4 @@
-import {  Edit2, Edit3, Filter, Search } from "lucide-react"
+import { Edit2, Edit3, Filter, Search } from "lucide-react"
 import FormContainer from "../../component/common/Form/FormContainer"
 import TextInput from "../../component/common/input/TextInput"
 import PageLayout from "../../component/layout/PageLayout"
@@ -7,7 +7,6 @@ import { fontStyle } from "../../utils/ClassUtils"
 import DropdownInput from "../../component/common/input/DropdownInput"
 import Buttons from "../../component/common/Buttons"
 import { useMemo, useState } from "react"
-import { useAllUserQuery } from "../../features/auth/authApi"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { filterUserSchema, FilterUserType } from "../../utils/types/accountType"
@@ -18,6 +17,11 @@ import Table from "../../component/common/Table/Table"
 import TableHeader from "../../component/common/Table/TableHeader"
 import TablePagination from "../../component/common/Table/TablePagination"
 import Dropdown from "../../component/common/dropdown/Dropdown"
+import { useAllUserQuery } from "../../features/auth/authApi"
+import ConfirmModal from "../../component/ui/modal/ConfirmModal"
+import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils"
+import { useChangeRoleMutation } from "../../features/account/accountApi"
+import toast from "react-hot-toast"
 
 
 const AllUsers = () => {
@@ -25,6 +29,11 @@ const AllUsers = () => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [filters, setFilters] = useState<Record<string, any>>({});
+    const [open, setOpen] = useState(false);
+    const [userRole, setUserRole] = useState({
+        userId: "",
+        role: ""
+    })
 
     // fetch data from apiSlice
     const { data, isLoading, isError } = useAllUserQuery({
@@ -33,6 +42,8 @@ const AllUsers = () => {
         ...filters,
     });
 
+    // change role mutaion
+    const [changeRole, { isLoading: roleChangeLoader, }] = useChangeRoleMutation();
 
     const totalPages = data?.data?.pagination?.totalPages ?? 1;
 
@@ -98,6 +109,32 @@ const AllUsers = () => {
         setCurrentPage(1);
     };
 
+
+    const handleRole = async () => {
+        if (!userRole.userId && !userRole.role) return;
+        const loadingId = LoadingToast({ msg: `Changing user role to ${userRole.role}...` });
+        try {
+            const { userId, role } = userRole;
+            await changeRole({
+                userId,
+                data: {role}
+            }).unwrap();
+            toast.dismiss(loadingId);
+            SuccessToast({ msg: `Changed role to ${userRole.role}!` });
+            setUserRole({ userId: "", role: "" });
+            setOpen(false);
+        } catch (error) {
+            toast.dismiss(loadingId);
+            ErrorToast({ msg: "Change role failed!" });
+            setUserRole({ userId: "", role: "" });
+            setOpen(false);
+        } finally {
+            toast.dismiss(loadingId);
+            setOpen(false);
+        }
+
+    }
+
     // table content
     const content = useMemo(() => {
         if (isLoading) {
@@ -135,10 +172,10 @@ const AllUsers = () => {
                                 <Edit2 size="14" /> Role
                             </Dropdown.Trigger>
                             <Dropdown.Menu className="absolute -left-10">
-                                <Dropdown.Item >
+                                <Dropdown.Item onClick={() => { setUserRole({ userId: (user as any)._id, role: "admin" }), setOpen(true) }}>
                                     <Edit3 size={14} /> Make Admin
                                 </Dropdown.Item>
-                                <Dropdown.Item>
+                                <Dropdown.Item onClick={() => { setUserRole({ userId: (user as any)._id, role: "staff" }), setOpen(true) }}>
                                     <Edit2 size={14} /> Make Staff
                                 </Dropdown.Item>
                             </Dropdown.Menu>
@@ -230,7 +267,14 @@ const AllUsers = () => {
                     }}
                 />
             </div>
-
+            <ConfirmModal
+                isOpen={open}
+                onOpenChange={setOpen}
+                onConfirm={handleRole}
+                title="Are you sure?"
+                description="Change user role"
+                loading={roleChangeLoader}
+            />
         </PageLayout>
     )
 };

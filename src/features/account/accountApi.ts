@@ -1,15 +1,15 @@
 import { ApiResponse, IUser } from "../../utils/types/types";
 import { apiSlice } from "../api/apiSlice";
 
-const authApi = apiSlice.injectEndpoints({
+const accountApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     myAccount: builder.query<IUser, void>({
       query: () => ({
         url: "auth/current_user",
       }),
       transformResponse: (response: ApiResponse<IUser>) => response.data,
-      keepUnusedDataFor: 40,
-      providesTags: ["User"],
+      keepUnusedDataFor: 300,
+      providesTags: ["AuthUser"],
     }),
     editAccountDetails: builder.mutation({
       query: (data) => ({
@@ -17,7 +17,7 @@ const authApi = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["AuthUser"],
     }),
     editAccountPhoto: builder.mutation({
       query: (data) => ({
@@ -25,7 +25,7 @@ const authApi = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["AuthUser"],
     }),
     changePassword: builder.mutation({
       query: (data) => ({
@@ -33,6 +33,15 @@ const authApi = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["AuthUser"],
+    }),
+    changeRole: builder.mutation({
+      query: ({ userId, data }) => ({
+        url: `auth/change_role/${userId}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: (_r, _e, { userId }) => [{ type: "User", id: userId }],
     }),
   }),
 });
@@ -42,4 +51,5 @@ export const {
   useEditAccountDetailsMutation,
   useEditAccountPhotoMutation,
   useChangePasswordMutation,
-} = authApi;
+  useChangeRoleMutation,
+} = accountApi;
