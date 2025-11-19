@@ -58,9 +58,11 @@ const CardTag = ({ children, className }: CardSubProps) => (
   </div>
 );
 
-interface CardImgProps extends CardSubProps {
+interface CardImgProps {
+  children?: ReactNode,
   src: string;
   alt?: string;
+  className?: string;
 };
 
 const CardImage = ({ src, alt = "", children, className }: CardImgProps) => (
