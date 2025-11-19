@@ -1,6 +1,8 @@
+import PageLayout from "../../component/layout/PageLayout"
+
 const CreateTeam = () => {
   return (
-    <div>CreateTeam</div>
+    <PageLayout>CreateTeam</PageLayout>
   )
 }
 
