@@ -1,6 +1,12 @@
 import PageLayout from "../../component/layout/PageLayout"
+import { useGetTeamsQuery } from "../../features/team/teamApi"
 
 const Teams = () => {
+
+ const {data} = useGetTeamsQuery();
+
+ console.log(data)
+
   return (
     <PageLayout>
       Teams
@@ -8,4 +14,4 @@ const Teams = () => {
   )
 }
 
-export default Teams
+export default Teams;
