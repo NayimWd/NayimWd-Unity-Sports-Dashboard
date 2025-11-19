@@ -1,10 +1,15 @@
 const TeamSkeleton = () => {
   return (
-    <div className="w-full max-w-xs rounded-2xl shadow-sm border border-border bg-surface animate-pulse p-4 space-y-3 text-center">
-  <div className="w-16 h-16 bg-subSurface rounded-full mx-auto"></div>
-  <div className="h-5 bg-muted rounded w-3/4 mx-auto"></div>
-  <div className="h-4 bg-muted rounded w-1/2 mx-auto"></div>
-</div>
+    <div className="relative overflow-hidden rounded-lg border border-border bg-surface w-full max-w-sm animate-pulse">
+
+      {/* Image Skeleton */}
+      <div className="h-40 w-full bg-subSurface rounded-none rounded-t-lg" />
+
+      <div className="p-4 flex flex-col gap-3">
+        <div className="h-5 w-2/3 bg-subSurface rounded-md" />
+        <div className="h-3 w-1/2 bg-subSurface rounded-md" />
+      </div>
+    </div>
   )
 }
 

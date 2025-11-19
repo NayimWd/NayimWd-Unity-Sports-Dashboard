@@ -1,6 +1,6 @@
 export interface ITeam {
   _id: string;
-  playerCount: number;
+  playerCount?: number;
   teamName: string;
   teamLogo: string;
 }
