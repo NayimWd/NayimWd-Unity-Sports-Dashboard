@@ -84,9 +84,9 @@ const Teams = () => {
       </>
     )
   } else if (isError) {
-    content = <EmptyData message="Something Went Wrong! No Blogs Found" />;
+    content = <EmptyData message="Something Went Wrong! No Team Found" />;
   } else if (!teams?.teams || teams.teams.length === 0) {
-    content = <EmptyData message="No Blogs Found" />;
+    content = <EmptyData message="No Team Found" />;
   } else {
     content = teams.teams.map((team) => (
       <TeamCard

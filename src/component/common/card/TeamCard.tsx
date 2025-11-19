@@ -14,23 +14,23 @@ const TeamCard = ({ _id, teamLogo, teamName }: ITeam) => {
     >
       {/* IMAGE */}
       <Card.Image src={teamLogo} alt={teamName} className="h-40">
-        {/* Gradient Overlay */}
+        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80 opacity-70 group-hover:opacity-80 transition-all"></div>
 
-        {/* Badge bottom-left */}
+        {/* Badge */}
         <div className="absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-md bg-primary text-white shadow">
           Team
         </div>
       </Card.Image>
 
-      {/* CONTENT */}
+      {/* content */}
       <Card.Content className="pt-3">
-        {/* Team Name */}
+        {/* team name */}
         <Card.Title className="text-font group-hover:text-primary transition-colors duration-200 line-clamp-1">
           {teamName}
         </Card.Title>
 
-        {/* Optional Stats Line */}
+        {/* future idea */}
         {/* <div className="flex items-center gap-3 mt-1 text-xs text-subtext">
           <span>🏆 12 Wins</span>
           <span>•</span>
