@@ -1,8 +1,11 @@
+import PageLayout from "../../component/layout/PageLayout"
+
 const MyTeam = () => {
-  return (
-    // add / remove player 
-    <div>MyTeam</div>
+  return ( 
+    <PageLayout>
+      MyTeam
+    </PageLayout>
   )
 }
 
-export default MyTeam
+export default MyTeam;

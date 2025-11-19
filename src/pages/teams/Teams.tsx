@@ -1,7 +1,10 @@
+import PageLayout from "../../component/layout/PageLayout"
 
 const Teams = () => {
   return (
-    <div>Teams</div>
+    <PageLayout>
+      Teams
+    </PageLayout>
   )
 }
 

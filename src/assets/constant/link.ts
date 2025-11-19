@@ -51,12 +51,6 @@ export const navLinks = {
       ],
     },
     {
-      path: "/dashboard/profile",
-      icon: ShieldUser,
-      label: "Profile",
-      children: [],
-    },
-    {
       path: "/dashboard/team",
       icon: BookType,
       label: "Team",
@@ -125,7 +119,7 @@ export const navLinks = {
         {
           path: "/dashboard/match/create",
           icon: SquarePen,
-          label: "Create Qualifire Match",
+          label: "Create Match",
         },
       ],
     },
