@@ -4,11 +4,23 @@ import { apiSlice } from "../api/apiSlice";
 
 const teamApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getTeams: builder.query<IAllTeams, void>({
-      query: () => ({
-        url: "team/all_teams",
+    getTeams: builder.query<IAllTeams, 
+    {
+      page: number; limit: number; search: string; sort: string
+    }>({
+      query: ({page, limit, search, sort}) => {
+        const queryParams = [
+          `page=${page}`,
+          `limit=${limit}`,
+          search ? `search=${search}` : "",
+          sort ? `sort=${sort}` : ""
+        ]
+        .filter(Boolean)
+        .join("&")
+       return { url: `team/all_teams?${queryParams}`,
         method: "GET",
-      }),
+        }
+      },
       transformResponse: (response: ApiResponse<any>): IAllTeams => {
         const { teams, currentPage, totalPages, totalTeams } = response.data;
 
@@ -23,6 +35,11 @@ const teamApi = apiSlice.injectEndpoints({
         };
       },
     }),
+    getTeamDetails: builder.query({
+      query: () => ({
+        url: ""
+      })
+    })
   }),
 });
 
