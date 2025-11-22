@@ -6,8 +6,6 @@ import EmptyData from "../../component/ui/EmptyData";
 import Card from "../../component/common/card/Card";
 import PlayerCard from "../../component/common/card/PlayerCard";
 
-
-
 const TeamDetails = () => {
   const { teamId } = useParams<{ teamId: string }>();
   const { data: teamDetails, isLoading, isError } = useGetTeamDetailsQuery(teamId as string);
