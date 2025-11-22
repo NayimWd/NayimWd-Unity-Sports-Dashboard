@@ -85,7 +85,7 @@ const Teams = () => {
     )
   } else if (isError) {
     content = <EmptyData message="Something Went Wrong! No Team Found" />;
-  } else if (!teams?.teams || teams.teams.length === 0) {
+  } else if (!teams?.teams || teams.totalTeams === 0) {
     content = <EmptyData message="No Team Found" />;
   } else {
     content = teams.teams.map((team) => (
