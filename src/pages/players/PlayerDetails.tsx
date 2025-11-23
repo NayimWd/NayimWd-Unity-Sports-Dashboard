@@ -4,7 +4,6 @@ import { useGetPlayerDetailsQuery } from "../../features/player/playerApi";
 import PlayerDetailsSkeleton from "../../component/common/skeleton/PlayerDetailsSkeleton";
 import BackButton from "../../utils/BackButton";
 import { useGoBack } from "../../hooks/useGoBack";
-import SectionLayout from "../../component/layout/SectionLayout";
 import { fontStyle } from "../../utils/ClassUtils";
 import Badge from "../../component/ui/Badge";
 import Card from "../../component/common/card/Card";
@@ -42,102 +41,94 @@ const PlayerDetails = () => {
   return (
     <PageLayout>
       <BackButton onClick={goBack}>Back</BackButton>
-      {/* hero section  */}
-      <SectionLayout className="mt-6 relative">
+
+      {/* Hero Banner */}
+      <div className="relative mt-6 rounded-xl overflow-hidden shadow-md bg-card">
         <img
           src={teamDetails?.teamLogo}
-          alt={`image ${teamDetails?.teamName}`}
-          className="w-full h-48 object-cover bg-center rounded-xl opacity-90"
-          loading="lazy"
-          role="img"
+          alt={teamDetails?.teamName}
+          className="w-full h-56 object-cover opacity-85"
         />
-        <div className="absolute inset-0 bg-black/40 rounded-xl">
-          {/* player profile */}
-          <div className="absolute -bottom-10 left-6 flex items-center gap-4">
-            <img
-              src={playerDetails?.photo}
-              alt={`photo ${playerDetails?.name}`}
-              onError={(e) => (e.currentTarget.src = fallBackImg)}
-              loading="lazy"
-              role="img"
-              className="h-24 w-24 rounded-full object-cover border-4 border-white shadow-xl"
-            />
 
-            {/* name, role */}
-            <h1 className={`${fontStyle.SectionHeading} font-bold text-white drop-shadow-lg`}>{playerDetails?.name}</h1>
-            <p className="text-white ">{playerDetails?.role}</p>
-          </div>
-        </div>
-      </SectionLayout>
-      <div className="mt-16 flex flex-wrap items-center gap-3">
-        {
-          isCaptain && <Badge variant="success">Captain</Badge>
-        }
-        {
-          status && <Badge variant="success">{status}</Badge>
-        }
-        {
-          playerProfile?.player_role && <Badge variant="success">{playerProfile.player_role}</Badge>
-        }
-      </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
 
-      <div className="flex flex-wrap gap-10">
-        {/* Player info card */}
-        <Card className="mt-8 p-5 rounded-xl shadow-md drop-shadow-md">
-          <h2 className="text-xl text-font font-semibold mb-4">Basic Information</h2>
-          <div className="grid grid-cols-2 gap-5">
-            <div>
-              <p className="text-sm text-muted">Full Name</p>
-              <p className="font-medium">{playerDetails?.name}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted">Player Role</p>
-              <p className="font-medium">{playerProfile?.player_role}</p>
-            </div>
-
-            <div>
-              <p className="text-sm text-muted">Batting Style</p>
-              <p className="font-medium">{playerProfile?.batingStyle}</p>
-            </div>
-
-            <div>
-              <p className="text-sm text-muted">Bowling Arm</p>
-              <p className="font-medium">{playerProfile?.bowlingArm}</p>
-            </div>
-
-            <div>
-              <p className="text-sm text-muted">Bowling Style</p>
-              <p className="font-medium">{playerProfile?.bowlingStyle}</p>
-            </div>
-
-            <div>
-              <p className="text-sm text-muted">Date of Birth</p>
-              <p className="font-medium">
-                {playerProfile?.DateOfBirth
-                  ? new Date(playerProfile.DateOfBirth).toLocaleDateString()
-                  : "N/A"}
-              </p>
-            </div>
-          </div>
-        </Card>
-        {/* team info card */}
-        <Card className="mt-8 p-5 rounded-xl flex items-center gap-5 shadow-md">
+        {/* Avatar + Name */}
+        <div className="absolute bottom-6 left-6 flex items-end gap-4">
           <img
-            src={teamDetails?.teamLogo}
-            alt={teamDetails?.teamName}
-            loading="lazy"
-            className="h-16 w-16 rounded-lg border object-cover bg-white"
+            src={playerDetails?.photo}
             onError={(e) => (e.currentTarget.src = fallBackImg)}
+            alt={playerDetails?.name}
+            className="h-28 w-28 rounded-full border-4 border-white shadow-xl object-cover"
           />
 
           <div>
-            <p className="text-sm text-muted">Team</p>
-            <p className="font-semibold text-lg">{teamDetails?.teamName}</p>
+            <h1 className={`${fontStyle.SectionHeading} text-white drop-shadow-lg`}>
+              {playerDetails?.name}
+            </h1>
+            {playerProfile?.player_role && (
+              <p className="text-white/90 text-sm">{playerProfile.player_role}</p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Chips Section */}
+      <div className="mt-14 flex flex-wrap gap-3">
+        {isCaptain && <Badge variant="success">Captain</Badge>}
+        {status && <Badge variant="default">{status}</Badge>}
+        {playerProfile?.player_role && (
+          <Badge variant="warning">{playerProfile.player_role}</Badge>
+        )}
+      </div>
+
+      <section className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Basic Info Card */}
+        <Card className="p-6 rounded-xl shadow-sm border border-border/50 bg-card/40 backdrop-blur-sm">
+          <h2 className="text-lg font-semibold text-font mb-5">
+            Basic Information
+          </h2>
+
+          <div className="grid grid-cols-2 gap-y-4 text-sm">
+            <Info label="Full Name" value={playerDetails?.name} />
+            <Info label="Player Role" value={playerProfile?.player_role} />
+            <Info label="Batting Style" value={playerProfile?.batingStyle} />
+            <Info label="Bowling Arm" value={playerProfile?.bowlingArm} />
+            <Info label="Bowling Style" value={playerProfile?.bowlingStyle} />
+            <Info
+              label="Date of Birth"
+              value={
+                playerProfile?.DateOfBirth
+                  ? new Date(playerProfile.DateOfBirth).toLocaleDateString()
+                  : "N/A"
+              }
+            />
           </div>
         </Card>
-      </div>
+
+        {/* Team Card (focus-block) */}
+        <Card className="p-6 rounded-xl shadow-sm border border-border/50 bg-card/40 backdrop-blur-sm lg:col-span-2 flex items-center gap-4">
+          <img
+            src={teamDetails?.teamLogo}
+            onError={(e) => (e.currentTarget.src = fallBackImg)}
+            alt={teamDetails?.teamName}
+            className="h-20 w-20 rounded-lg border bg-white object-cover"
+          />
+
+          <div>
+            <p className="text-sm text-muted mb-1">Team</p>
+            <p className="font-semibold text-xl">{teamDetails?.teamName}</p>
+          </div>
+        </Card>
+      </section>
     </PageLayout>
-  )
+  );
 };
+
+const Info = ({ label, value }: { label: string; value?: string }) => (
+  <div>
+    <p className="text-muted text-xs">{label}</p>
+    <p className="font-medium text-sm">{value || "N/A"}</p>
+  </div>
+);
 
 export default PlayerDetails;
