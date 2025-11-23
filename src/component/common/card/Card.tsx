@@ -2,6 +2,8 @@ import { cva, VariantProps } from "class-variance-authority";
 import { ReactNode } from "react";
 import cn from "../../../utils/cn";
 
+const fallbackImg = "/lightImg.jpeg";
+
 const cardVariants = cva("relative overflow-hidden rounded-lg  text-font transition-colors duration-100 w-full max-w-sm", {
   variants: {
     variant: {
@@ -14,7 +16,7 @@ const cardVariants = cva("relative overflow-hidden rounded-lg  text-font transit
         "bg-gradient-to-br from-subSurface to-surface border border-surface shadow-md hover:shadow-xl hover:border-blue-500",
       Blog: "bg-surface border border-border shadow-sm hover:shadow-lg hover:border-muted",
       venue:
-        "bg-gradient-to-br from-blue-200 to-blue-400 border border-surface shadow-lg hover:shadow-2xl text-white",
+        "bg-surface border border-surface shadow-lg hover:shadow-2xl text-font",
     },
     size: {
       sm: "p-3",
@@ -70,6 +72,9 @@ const CardImage = ({ src, alt = "", children, className }: CardImgProps) => (
     <img
       src={src}
       alt={alt}
+      onError={(e) => (e.currentTarget.src = fallbackImg)}
+      loading="lazy"
+      role="photo"
       className="h-48 w-full object-cover transition-transform duration-300 hover:scale-105"
     />
     {children}

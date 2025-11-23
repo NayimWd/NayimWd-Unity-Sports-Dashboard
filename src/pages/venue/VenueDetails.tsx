@@ -4,6 +4,6 @@ const VenueDetails = () => {
   return (
     <PageLayout>VenueDetails</PageLayout>
   )
-}
+};
 
-export default VenueDetails
+export default VenueDetails;
