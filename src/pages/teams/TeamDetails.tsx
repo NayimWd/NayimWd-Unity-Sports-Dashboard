@@ -29,7 +29,8 @@ const TeamDetails = () => {
         <img
           src={teamLogo}
           alt={teamName}
-          className="h-56 w-full object-contain bg-center opacity-80"
+          className="h-56 w-full object-cover bg-center opacity-80"
+          loading="lazy"
         />
         <h1 className={`${fontStyle.SectionHeading} absolute bottom-4 left-6 text-font drop-shadow-lg`}>
           {teamName}
