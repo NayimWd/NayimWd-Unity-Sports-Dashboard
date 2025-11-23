@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import PageLayout from "../../component/layout/PageLayout"
 import { useGetPlayerDetailsQuery } from "../../features/player/playerApi";
-import PlayerDetailsSkeleton from "../../component/common/skeleton/PlayerDetailsSkeleton";
 import BackButton from "../../utils/BackButton";
 import { useGoBack } from "../../hooks/useGoBack";
 import { fontStyle } from "../../utils/ClassUtils";
@@ -15,7 +14,7 @@ const PlayerDetails = () => {
   const { playerId } = useParams();
   const goBack = useGoBack();
 
-  const { data, isLoading, isError } = useGetPlayerDetailsQuery(
+  const { data, isError } = useGetPlayerDetailsQuery(
     playerId as string
   );
   // destructuring data
@@ -25,8 +24,7 @@ const PlayerDetails = () => {
   const status = data?.player.status;
   const isCaptain = data?.player.isCaptain;
 
-  // show skeleton if loading
-  if (isLoading) return <PlayerDetailsSkeleton />
+ 
 
   // handle error 
   if (isError || !playerDetails?._id) {

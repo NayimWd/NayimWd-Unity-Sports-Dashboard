@@ -12,12 +12,12 @@ const TeamCard = ({ _id, teamLogo, teamName }: ITeam) => {
       size="md"
       className="cursor-pointer overflow-hidden group transition-all"
     >
-      {/* IMAGE */}
+      {/* image */}
       <Card.Image src={teamLogo} alt={teamName} className="h-40">
-        {/* Gradient overlay */}
+        {/* gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80 opacity-70 group-hover:opacity-80 transition-all"></div>
 
-        {/* Badge */}
+        {/* badge */}
         <div className="absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-md bg-primary text-white shadow">
           Team
         </div>

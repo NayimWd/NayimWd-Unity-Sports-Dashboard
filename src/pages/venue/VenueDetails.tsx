@@ -1,6 +1,8 @@
+import PageLayout from "../../component/layout/PageLayout"
+
 const VenueDetails = () => {
   return (
-    <div>VenueDetails</div>
+    <PageLayout>VenueDetails</PageLayout>
   )
 }
 
