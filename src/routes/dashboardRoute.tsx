@@ -4,6 +4,7 @@ import { blogRoutes } from "./blogRoute";
 import { accountRoutes } from "./accountRoute";
 import { profileRoutes } from "./profileRoute";
 import { teamRoutes } from "./teamRoute";
+import { playerRoutes } from "./PlayerRoutes";
 
 export const dashboardRoutes: RouteObject[] = [
     ...pointTableRoutes,
@@ -11,4 +12,5 @@ export const dashboardRoutes: RouteObject[] = [
     ...accountRoutes,
     ...profileRoutes,
     ...teamRoutes,
+    ...playerRoutes,
 ]
