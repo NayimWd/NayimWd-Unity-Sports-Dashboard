@@ -23,6 +23,7 @@ import {
   User2,
   Boxes,
   Settings,
+  BrickWall
 } from "lucide-react";
 
 export const navLinks = {
@@ -136,6 +137,11 @@ export const navLinks = {
         {
           path: "/dashboard/venue",
           icon: School,
+          label: "All Venue",
+        },
+        {
+          path: "/dashboard/venue/manage",
+          icon: BrickWall,
           label: "All Venue",
         },
         {

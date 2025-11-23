@@ -1,5 +1,4 @@
 import { ReactElement, Suspense } from "react";
-// import Loader from "../component/common/loader/Loader";
 import PageSkeleton from "../component/common/loader/PageSkeleton";
 
 
