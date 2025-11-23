@@ -81,7 +81,7 @@ const PlayerDetails = () => {
 
       <section className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Basic Info Card */}
-        <Card className="p-6 rounded-xl shadow-sm border border-border/50 bg-card/40 backdrop-blur-sm">
+        <Card className="p-6 rounded-xl shadow-sm border border-border bg-card backdrop-blur-sm bg-surface">
           <h2 className="text-lg font-semibold text-font mb-5">
             Basic Information
           </h2>
@@ -104,7 +104,7 @@ const PlayerDetails = () => {
         </Card>
 
         {/* Team Card (focus-block) */}
-        <Card className="p-6 rounded-xl shadow-sm border border-border/50 bg-card/40 backdrop-blur-sm lg:col-span-2 flex items-center gap-4">
+        <Card className="p-6 rounded-xl shadow-sm border border-border bg-card backdrop-blur-sm bg-surface lg:col-span-2 flex items-center gap-4">
           <img
             src={teamDetails?.teamLogo}
             onError={(e) => (e.currentTarget.src = fallBackImg)}
