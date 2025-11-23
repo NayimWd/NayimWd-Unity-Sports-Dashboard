@@ -5,6 +5,8 @@ import TeamDetailsSkeleton from "../../component/common/skeleton/TeamDetailsSkel
 import EmptyData from "../../component/ui/EmptyData";
 import Card from "../../component/common/card/Card";
 import PlayerCard from "../../component/common/card/PlayerCard";
+import { fontStyle } from "../../utils/ClassUtils";
+import BackButton from "../../utils/BackButton";
 
 const TeamDetails = () => {
   const { teamId } = useParams<{ teamId: string }>();
@@ -21,15 +23,15 @@ const TeamDetails = () => {
 
   return (
     <PageLayout>
-
+      <BackButton link="/dashboard/team">Teams</BackButton>
       {/* Top Banner */}
-      <div className="relative rounded-lg overflow-hidden border border-border shadow-sm">
+      <div className="relative mt-5 rounded-lg overflow-hidden border border-border shadow-sm">
         <img
           src={teamLogo}
           alt={teamName}
-          className="h-44 w-full object-cover opacity-80"
+          className="h-56 w-full object-contain bg-center opacity-80"
         />
-        <h1 className="absolute bottom-4 left-6 text-3xl font-bold text-white drop-shadow-lg">
+        <h1 className={`${fontStyle.SectionHeading} absolute bottom-4 left-6 text-font drop-shadow-lg`}>
           {teamName}
         </h1>
       </div>

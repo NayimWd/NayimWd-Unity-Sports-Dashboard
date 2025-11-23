@@ -47,7 +47,7 @@ interface CardSubProps {
 };
 
 const CardTags = ({ children, className }: CardSubProps) => (
-  <div className={cn("absolute top-4 left-4 right-4 z-10 flex items-center justify-between gap-2", className)}>
+  <div className={cn("absolute top-2 left-2 right-2 z-10 flex items-center justify-between gap-2", className)}>
     {children}
   </div>
 );
@@ -66,7 +66,7 @@ interface CardImgProps {
 };
 
 const CardImage = ({ src, alt = "", children, className }: CardImgProps) => (
-  <div className={cn("relative w-full overflow-hidden rounded-t-lg", className)}>
+  <div className={cn("relative w-full overflow-hidden rounded-t-md", className)}>
     <img
       src={src}
       alt={alt}
