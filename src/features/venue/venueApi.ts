@@ -1,5 +1,5 @@
 import { ApiResponse } from "../../utils/types/types";
-import { IVenue } from "../../utils/types/venueType";
+import { IVenue, IVenueDetails } from "../../utils/types/venueType";
 import { apiSlice } from "../api/apiSlice";
 
 const venueApi = apiSlice.injectEndpoints({
@@ -10,8 +10,15 @@ const venueApi = apiSlice.injectEndpoints({
                 method: "GET"
             }),
             transformResponse: (response: ApiResponse<IVenue>) => response,
+        }),
+        getVenueDetails: builder.query<ApiResponse<IVenueDetails>, string>({
+            query: (venueId)=> ({
+                url: `venue/details/${venueId}`,
+                method: "GET"
+            }),
+            transformResponse: (response: ApiResponse<IVenueDetails>) => response,
         })
-    })
+    }),
 });
 
-export const {useGetVenueQuery} = venueApi;
+export const {useGetVenueQuery, useGetVenueDetailsQuery} = venueApi;

@@ -1,5 +1,4 @@
 import VenueCard from "../../component/common/card/VenueCard";
-import VenueCardSkeleton from "../../component/common/skeleton/VenueCardSkeleton";
 import PageLayout from "../../component/layout/PageLayout"
 import { useGetVenueQuery } from "../../features/venue/venueApi"
 import { useGoBack } from "../../hooks/useGoBack";
@@ -8,20 +7,8 @@ import { fontStyle } from "../../utils/ClassUtils";
 
 const Venues = () => {
   const goBack = useGoBack();
-  const { data, isLoading, isError, refetch } = useGetVenueQuery();
+  const { data, isError, refetch } = useGetVenueQuery();
 
-  // handle loading 
-  if (isLoading)
-    return (
-      <PageLayout>
-        <BackButton onClick={goBack}>Back</BackButton>
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <VenueCardSkeleton key={i} />
-          ))}
-        </div>
-      </PageLayout>
-    );
 
 
   // handle error 

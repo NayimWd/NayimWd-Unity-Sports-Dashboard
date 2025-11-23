@@ -2,6 +2,7 @@ import { RouteObject } from "react-router-dom";
 import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
 import SuspenseWrapper from "../utils/SuspenseWrapper";
 import { lazy } from "react";
+import VenueDetailsSkeleton from "../component/common/skeleton/VenuedetailsSkeleton";
 const Venue = lazy(() => import("../pages/venue/Venues"));
 const VenueDetails = lazy(() => import("../pages/venue/VenueDetails"));
 const ManageVenue = lazy(() => import("../pages/venue/ManageVenue"));
@@ -54,7 +55,7 @@ export const venueRoutes: RouteObject[] = [
         path: "venue/edit/:venueId",
         element: (
             <ErrorBoundaryWrapper>
-                <SuspenseWrapper>
+                <SuspenseWrapper CustomLoader={<VenueDetailsSkeleton/>}>
                     <UpdateVenue />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
