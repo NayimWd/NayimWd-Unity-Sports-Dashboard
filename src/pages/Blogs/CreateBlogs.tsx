@@ -32,6 +32,7 @@ const CreateBlogs = () => {
     mode: "onSubmit"
   })
 
+
   let tags = [
     { label: "news", value: "news" },
     { label: "highlight", value: "highlight" },
