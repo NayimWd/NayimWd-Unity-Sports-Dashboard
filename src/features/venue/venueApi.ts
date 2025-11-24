@@ -34,7 +34,37 @@ const venueApi = apiSlice.injectEndpoints({
         },
       ],
     }),
+    createVenue: builder.mutation({
+      query: (data) => ({
+        url: `venue/create`,
+        method: "POST",
+        body: data
+      }),
+      invalidatesTags: [{type: "Venue", id: "LIST"}]
+    }),
+    updateVenueDetails: builder.mutation({
+      query: ({venueId, data}) => ({
+        url: `venue/details/${venueId}`,
+        method: "PATCH",
+        body: data
+      }),
+      invalidatesTags: (_result, _error, { venueId }) => [
+        { type: "Venue", id: venueId },
+        { type: "Venue", id: "LIST" },
+      ],
+    }),
+    updateVenuePhoto: builder.mutation({
+      query: ({venueId, data}) => ({
+        url: `venue/updatePhoto/${venueId}`,
+        method: "PATCH",
+        body: data
+      }),
+      invalidatesTags: (_result, _error, {venueId}) => [
+        {type: "Venue", id: venueId},
+        {type: "Venue", id: "LIST"},
+      ]
+    })
   }),
 });
 
-export const { useGetVenueQuery, useGetVenueDetailsQuery } = venueApi;
+export const { useGetVenueQuery, useGetVenueDetailsQuery, useCreateVenueMutation, useUpdateVenueDetailsMutation, useUpdateVenuePhotoMutation } = venueApi;

@@ -142,7 +142,7 @@ export const navLinks = {
         {
           path: "/dashboard/venue/manage",
           icon: BrickWall,
-          label: "All Venue",
+          label: "Manage Venue",
         },
         {
           path: "/dashboard/venue/create",

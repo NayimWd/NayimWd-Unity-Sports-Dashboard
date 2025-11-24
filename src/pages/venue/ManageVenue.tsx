@@ -1,7 +1,10 @@
+import PageLayout from "../../component/layout/PageLayout"
 
 const ManageVenue = () => {
   return (
-    <div>ManageVenue</div>
+    <PageLayout>
+      ManageVenue
+      </PageLayout>
   )
 }
 
