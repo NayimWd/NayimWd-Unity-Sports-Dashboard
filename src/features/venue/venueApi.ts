@@ -44,7 +44,7 @@ const venueApi = apiSlice.injectEndpoints({
     }),
     updateVenueDetails: builder.mutation({
       query: ({venueId, data}) => ({
-        url: `venue/details/${venueId}`,
+        url: `venue/update/${venueId}`,
         method: "PATCH",
         body: data
       }),
@@ -54,7 +54,7 @@ const venueApi = apiSlice.injectEndpoints({
       ],
     }),
     updateVenuePhoto: builder.mutation({
-      query: ({venueId, data}) => ({
+      query: ({venueId, data}) =>({
         url: `venue/updatePhoto/${venueId}`,
         method: "PATCH",
         body: data
