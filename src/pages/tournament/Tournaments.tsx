@@ -1,7 +1,9 @@
+import PageLayout from "../../component/layout/PageLayout";
+
 const Tournaments = () => {
   return (
-    <div>Tournaments</div>
+    <PageLayout>Tournaments</PageLayout>
   )
 }
 
-export default Tournaments
+export default Tournaments;
