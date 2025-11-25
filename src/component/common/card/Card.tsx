@@ -11,7 +11,7 @@ const cardVariants = cva("relative overflow-hidden rounded-lg  text-font transit
       Team: "bg-surface border border-border shadow-sm hover:shadow-lg hover:border-blue-400",
       Player: "bg-surface border border-border shadow-md hover:shadow-xl hover:border-blue-400",
       Tournament:
-        "bg-gradient-to-br from-bg via-surface to-subSurface border border-border shadow-lg hover:shadow-2xl",
+        "bg-gradient-to-br from-bg via-surface to-subSurface border border-border shadow-lg hover:shadow-lg",
       match:
         "bg-gradient-to-br from-subSurface to-surface border border-surface shadow-md hover:shadow-xl hover:border-blue-500",
       Blog: "bg-surface border border-border shadow-sm hover:shadow-lg hover:border-muted",
@@ -67,7 +67,7 @@ interface CardImgProps {
   className?: string;
 };
 
-const CardImage = ({ src, alt = "", children, className }: CardImgProps) => (
+const CardImage = ({ src, alt = "img", children, className }: CardImgProps) => (
   <div className={cn("relative w-full overflow-hidden rounded-t-md", className)}>
     <img
       src={src}
@@ -88,9 +88,9 @@ const CardContent = ({ children, className }: CardSubProps) => (
 );
 
 const CardTitle = ({ children, className }: CardSubProps) => (
-  <h3 className={cn("text-lg font-semibold leading-tight tracking-tight text-font", className)}>
+  <h2 className={cn("text-lg font-semibold leading-tight tracking-tight text-font", className)}>
     {children}
-  </h3>
+  </h2>
 );
 
 const CardDescription = ({ children, className }: CardSubProps) => (
