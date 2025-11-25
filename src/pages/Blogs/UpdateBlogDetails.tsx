@@ -82,7 +82,7 @@ const UpdateBlogDetails = () => {
   return (
     <PageLayout>
       <BackButton onClick={useGoBack()}>Go Back</BackButton>
-      <h1 className={`${fontStyle.pageTitle} text-center sm:text-3xl md:text-4xl my-5 font-semibold text-font font-merriweather`}>Edit Blogs Details</h1>
+      <h1 className={`${fontStyle.pageTitle} text-center text-font font-merriweather`}>Edit Blogs Details</h1>
       <div className=" w-full max-w-7xl mx-auto bg-surface  py-12 px-3 rounded-lg shadow">
         <FormContainer
           methods={methods}
