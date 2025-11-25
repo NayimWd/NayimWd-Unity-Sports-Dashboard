@@ -9,7 +9,7 @@ import TableSkeleton from "../../component/common/Table/TableSkeleton";
 import TableEmpty from "../../component/common/Table/TableEmpty";
 import TableRow from "../../component/common/Table/TableRow";
 import Dropdown from "../../component/common/dropdown/Dropdown";
-import { Edit2, Edit3 } from "lucide-react";
+import { Book, Edit2, Edit3 } from "lucide-react";
 import SectionLayout from "../../component/layout/SectionLayout";
 
 
@@ -51,6 +51,9 @@ const ManageVenue = () => {
                   <Edit2 size="14" /> Edit
                 </Dropdown.Trigger>
                 <Dropdown.Menu>
+                  <Dropdown.Item href={`/dashboard/venue/${venue._id}`}>
+                    <Book size={14} /> Read Details
+                  </Dropdown.Item>
                   <Dropdown.Item href={`/dashboard/venue/editDetails/${venue._id}`}>
                     <Edit3 size={14} /> Edit Details
                   </Dropdown.Item>

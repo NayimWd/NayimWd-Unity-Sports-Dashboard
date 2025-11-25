@@ -52,6 +52,7 @@ const EditVenueDetails = () => {
     const toastId = LoadingToast({ msg: "Updating venue Details" });
 
     try {
+      // update venue deatils
       await updateVenueDetails({
         venueId,
         data: {
@@ -60,7 +61,7 @@ const EditVenueDetails = () => {
           location: data.location,
           features: data.features
         }
-      });
+      }).unwrap();
 
       toast.dismiss(toastId),
         SuccessToast({ msg: "Venue Update Successfully!" })

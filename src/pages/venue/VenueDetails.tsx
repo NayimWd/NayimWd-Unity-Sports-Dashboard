@@ -46,7 +46,7 @@ const VenueDetails = () => {
           alt={venue.name}
           loading="lazy"
           onError={(e) => (e.currentTarget.src = fallbackImg)}
-          className="w-full h-52 sm:h-64 object-cover rounded-xl opacity-95"
+          className="w-full h-52 sm:h-64 object-cover bg-center rounded-xl opacity-95 aspect-auto"
         />
 
         {/*  gradient overlay */}

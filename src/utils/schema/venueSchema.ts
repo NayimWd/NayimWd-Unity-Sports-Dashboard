@@ -48,3 +48,11 @@ export const updateVenueDetailsSchema = z
   });
 
 export type TUpdateVenueDtails = z.infer<typeof updateVenueDetailsSchema>;
+
+export const updateVenuePhotoSchema = z.object({
+  photo: z.custom<File>((v) => v instanceof File && v.size > 0, {
+    message: "At least one photo is required",
+  }),
+});
+
+export type TUpdateVenuePhoto = z.infer<typeof updateVenuePhotoSchema>;
