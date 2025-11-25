@@ -2,13 +2,13 @@ import { RouteObject } from "react-router-dom";
 import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
 import SuspenseWrapper from "../utils/SuspenseWrapper";
 import { lazy } from "react";
-import VenueDetailsSkeleton from "../component/common/skeleton/VenuedetailsSkeleton";
 import FormSkeleton from "../component/common/loader/FormSkeleton";
 const Venue = lazy(() => import("../pages/venue/Venues"));
 const VenueDetails = lazy(() => import("../pages/venue/VenueDetails"));
 const ManageVenue = lazy(() => import("../pages/venue/ManageVenue"));
 const CreateVenue = lazy(() => import("../pages/venue/Createvenue"));
-const UpdateVenue = lazy(() => import("../pages/venue/UpdateVenue"));
+const EditVenueDetails = lazy(() => import("../pages/venue/EditVenueDetails"));
+const EditVenuePhoto = lazy(() => import("../pages/venue/EditVenuePhoto"));
 
 
 export const venueRoutes: RouteObject[] = [
@@ -46,18 +46,28 @@ export const venueRoutes: RouteObject[] = [
         path: "venue/create",
         element: (
             <ErrorBoundaryWrapper>
-                <SuspenseWrapper CustomLoader={<FormSkeleton/>}>
+                <SuspenseWrapper CustomLoader={<FormSkeleton />}>
                     <CreateVenue />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )
     },
     {
-        path: "venue/edit/:venueId",
+        path: "venue/editDetails/:venueId",
         element: (
             <ErrorBoundaryWrapper>
-                <SuspenseWrapper CustomLoader={<VenueDetailsSkeleton/>}>
-                    <UpdateVenue />
+                <SuspenseWrapper CustomLoader={<FormSkeleton />}>
+                    <EditVenueDetails />
+                </SuspenseWrapper>
+            </ErrorBoundaryWrapper>
+        )
+    },
+    {
+        path: "venue/editPhoto/:venueId",
+        element: (
+            <ErrorBoundaryWrapper>
+                <SuspenseWrapper CustomLoader={<FormSkeleton />}>
+                    <EditVenuePhoto />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )
