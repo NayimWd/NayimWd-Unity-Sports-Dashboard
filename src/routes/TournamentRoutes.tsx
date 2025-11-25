@@ -13,6 +13,7 @@ const CreateResult = lazy(() => import("../pages/tournament/CreateResult"))
 
 export const tournamentRoutes: RouteObject[] = [
     {
+        path: "tournaments",
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
@@ -22,6 +23,7 @@ export const tournamentRoutes: RouteObject[] = [
         )
     },
     {
+        path: "tournaments/details/:id",
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
@@ -31,6 +33,7 @@ export const tournamentRoutes: RouteObject[] = [
         )
     },
     {
+        path: "tournaments/create",
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
@@ -40,6 +43,7 @@ export const tournamentRoutes: RouteObject[] = [
         )
     },
     {
+        path: "tournaments/updateDetails/:id",
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
@@ -49,6 +53,7 @@ export const tournamentRoutes: RouteObject[] = [
         )
     },
     {
+        path: "tournaments/updateDate/:id",
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
@@ -58,6 +63,7 @@ export const tournamentRoutes: RouteObject[] = [
         )
     },
     {
+        path: "tournaments/updatePhoto/:id",
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
@@ -67,6 +73,7 @@ export const tournamentRoutes: RouteObject[] = [
         )
     },
     {
+        path: "tournaments/createResult/:id",
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
