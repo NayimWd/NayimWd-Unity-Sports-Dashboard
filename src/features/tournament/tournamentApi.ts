@@ -1,4 +1,7 @@
-import { ITournaments } from "../../utils/types/tournamentTypes";
+import {
+  ITournamentData,
+  ITournaments,
+} from "../../utils/types/tournamentTypes";
 import { ApiResponse, Tournament } from "../../utils/types/types";
 import { apiSlice } from "../api/apiSlice";
 
@@ -25,8 +28,21 @@ export const tournamentApi = apiSlice.injectEndpoints({
             ]
           : [{ type: "Tournament", id: "LIST" }],
     }),
+    getTournamentDetails: builder.query<ApiResponse<ITournamentData>, string>({
+      query: (tournamentId) => ({
+        url: `tournament/tournamentDetails/${tournamentId}`,
+        method: "GET",
+      }),
+      transformResponse: (response: ApiResponse<ITournamentData>) => response,
+      providesTags: (_result, _error, tournamentId) => [
+        { type: "Tournament", id: tournamentId },
+      ],
+    }),
   }),
 });
 
-export const { useLatestTournamentQuery, useGetAllTournamentQuery } =
-  tournamentApi;
+export const {
+  useLatestTournamentQuery,
+  useGetAllTournamentQuery,
+  useGetTournamentDetailsQuery,
+} = tournamentApi;
