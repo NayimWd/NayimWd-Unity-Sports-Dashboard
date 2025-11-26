@@ -68,11 +68,6 @@ export const navLinks = {
           label: "ALL Tournament",
         },
         {
-          path: "/dashboard/currentTournament",
-          icon: Component,
-          label: "Running Tournament",
-        },
-        {
           path: "/dashboard/tournament/create",
           icon: Plus,
           label: "Create Tournament",
