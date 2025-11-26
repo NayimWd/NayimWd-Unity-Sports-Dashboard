@@ -41,7 +41,7 @@ const TournamentDetails = () => {
           className="w-full h-[360px] rounded-2xl object-cover shadow-md"
         />
 
-        <div className="absolute bottom-4 left-6 flex flex-col space-y-3">
+        <div className="absolute bottom-4 sm:left-6 flex flex-col space-y-3">
           <h1 className="text-3xl font-bold text-white drop-shadow-lg bg-black/40 p-5 rounded">
             {t?.tournamentName}
           </h1>
