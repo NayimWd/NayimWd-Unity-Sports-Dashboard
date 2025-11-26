@@ -4,7 +4,6 @@ import {
   Layers,
   CalendarDays,
   FileText,
-  Trophy,
   SquarePen,
   Component,
   Users,
@@ -23,7 +22,8 @@ import {
   User2,
   Boxes,
   Settings,
-  BrickWall
+  BrickWall,
+  NotepadText,
 } from "lucide-react";
 
 export const navLinks = {
@@ -73,9 +73,9 @@ export const navLinks = {
           label: "Create Tournament",
         },
         {
-          path: "/dashboard/tournamentResult",
-          icon: Trophy,
-          label: "Tournament Result",
+          path: "/dashboard/tournament/manage",
+          icon: NotepadText,
+          label: "Manage",
         },
       ],
     },
@@ -211,26 +211,10 @@ export const navLinks = {
       ],
     },
     {
-      path: "",
+      path: "/dashboard/tournament",
       icon: Layers,
       label: "Tournament",
-      children: [
-        {
-          path: "/dashboard/tournament",
-          icon: FileText,
-          label: "ALL Tournament",
-        },
-        {
-          path: "/dashboard/currentTournament",
-          icon: Component,
-          label: "Running Tournament",
-        },
-        {
-          path: "/dashboard/tournamentResult",
-          icon: Trophy,
-          label: "Tournament Result",
-        },
-      ],
+      children: [],
     },
     {
       path: "/dashboard/schedule",
@@ -312,11 +296,6 @@ export const navLinks = {
           path: "/dashboard/currentTournament",
           icon: Component,
           label: "Running Tournament",
-        },
-        {
-          path: "/dashboard/tournamentResult",
-          icon: Trophy,
-          label: "Tournament Result",
         },
       ],
     },
