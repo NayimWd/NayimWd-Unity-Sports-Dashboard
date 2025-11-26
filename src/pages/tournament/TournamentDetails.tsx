@@ -26,7 +26,7 @@ const TournamentDetails = () => {
       </PageLayout>
     );
   }
-
+ 
   return (
     <PageLayout>
       <BackButton onClick={goBack} className="mb-4">
