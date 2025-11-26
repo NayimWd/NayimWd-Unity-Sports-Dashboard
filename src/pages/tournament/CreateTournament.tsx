@@ -1,7 +1,9 @@
+import PageLayout from "../../component/layout/PageLayout"
 
 const CreateTournament = () => {
+  
   return (
-    <div>CreateTournament</div>
+    <PageLayout>CreateTournament</PageLayout>
   )
 }
 
