@@ -65,13 +65,13 @@ const DateInput = ({
               {open && (
                 <div
                   ref={calenderRef}
-                  className="absolute -top-[800%] left-4 z-50  bg-surface border border-inputBorder rounded-md shadow-md"
+                  className="absolute top-[110%] left-0 bg-surface border rounded-md shadow-lg z-50"
                 >
                   <DayPicker
                     mode="single"
                     selected={field.value}
                     onSelect={(date) => {
-                      field.onChange(date);
+                      if (date) field.onChange(date);
                       setOpen(false);
                     }}
                     className="p-2 bg-bg rounded-lg border-border text-font"
@@ -79,7 +79,6 @@ const DateInput = ({
                       selected: "bg-primary text-white",
                       today: "border border-primary",
                     }}
-                    fromDate={new Date(1900, 0, 1)}
                   />
                 </div>
               )}

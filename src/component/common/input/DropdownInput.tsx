@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 
 interface DropdownOptions {
   label: string;
-  value: string;
+  value: string | number;
 }
 
 interface DropdownInputProps {

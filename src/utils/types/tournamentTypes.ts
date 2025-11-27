@@ -34,5 +34,4 @@ export interface ITournamentData {
   matchOver: number;
   seat: number;
   teamCount: number;
-  __v: number;
 }

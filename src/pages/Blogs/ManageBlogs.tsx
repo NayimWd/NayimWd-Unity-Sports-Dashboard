@@ -201,7 +201,7 @@ const ManageBlogs = () => {
             }}
             className="rounded"
             size="sm"
-            variant='warning'
+            variant='primary'
           >
             {blog?.isPublished ? "Unpublish" : "Publish"}
           </Buttons>
