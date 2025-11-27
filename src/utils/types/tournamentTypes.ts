@@ -5,6 +5,8 @@ export interface ITournamentMini {
     tournamentType: string;
     status: string;
     photo: string;
+    startDate?: string;
+    endDate?: string;
 };
 
 export interface ITournaments {
