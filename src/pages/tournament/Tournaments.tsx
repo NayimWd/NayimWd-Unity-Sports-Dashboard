@@ -71,7 +71,7 @@ const Tournaments = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 justify-items-center py-10">
-          {tournaments.map(({ _id, tournamentName, tournamentType, status, photo, entryFee }) => (
+          {tournaments.map(({ _id, tournamentName, tournamentType, status, photo, entryFee, startDate, endDate }) => (
             <TournamentCard key={_id}
               _id={_id}
               tournamentName={tournamentName}
@@ -79,6 +79,8 @@ const Tournaments = () => {
               status={status}
               entryFee={entryFee}
               photo={photo}
+              startDate={startDate ? startDate : ""}
+              endDate={endDate ? endDate : ""}
             />
           ))}
         </div>
