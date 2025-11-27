@@ -5,6 +5,7 @@ import BackButton from "../../utils/BackButton";
 import { useGetTournamentDetailsQuery } from "../../features/tournament/tournamentApi";
 import SectionLayout from "../../component/layout/SectionLayout";
 import Buttons from "../../component/common/Buttons";
+import SafeHtmlRender from "../../component/common/input/inputUtils/SafeHtmlRender";
 
 const statusColors: Record<string, string> = {
   ongoing: "bg-green-600/10 text-green-600 border-green-600/20",
@@ -103,9 +104,9 @@ const TournamentDetails = () => {
         {/* desc */}
         <div className="mt-10">
           <h2 className="text-xl font-semibold mb-3 text-font">About Tournament</h2>
-          <p className="text-subtext leading-relaxed whitespace-pre-line">
-            {t?.description}
-          </p>
+          <article className="text-subtext leading-relaxed whitespace-pre-line">
+            {<SafeHtmlRender html={t?.description} />}
+          </article>
         </div>
       </SectionLayout>
     </PageLayout>

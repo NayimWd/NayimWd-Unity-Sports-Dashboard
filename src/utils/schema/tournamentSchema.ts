@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-// Regex to enforce the DD-MM-YYYY date format
-const DDMMYYYY_REGEX = /^\d{2}-\d{2}-\d{4}$/;
 
 export const createTournamentSchema = z.object({
   tournamentName: z.string({
@@ -38,23 +36,11 @@ export const createTournamentSchema = z.object({
     required_error: "Match Over threshold is required",
   }).int({ message: "Match Over must be an integer." }).positive({ message: "Match Over value must be positive." }),
   
-  registrationDeadline: z.string({
-    required_error: "Registration deadline is required",
-  }).refine((val) => DDMMYYYY_REGEX.test(val), {
-    message: "Registration deadline must be in the format DD-MM-YYYY.",
-  }),
+  registrationDeadline: z.date(),
   
-  startDate: z.string({
-    required_error: "Tournament start date is required",
-  }).refine((val) => DDMMYYYY_REGEX.test(val), {
-    message: "Start date must be in the format DD-MM-YYYY.",
-  }),
+  startDate: z.date(),
   
-  endDate: z.string({
-    required_error: "Tournament end date is required",
-  }).refine((val) => DDMMYYYY_REGEX.test(val), {
-    message: "End date must be in the format DD-MM-YYYY.",
-  }),
+  endDate: z.date(),
   
   entryFee: z.number({
     required_error: "Entry Fee is required",

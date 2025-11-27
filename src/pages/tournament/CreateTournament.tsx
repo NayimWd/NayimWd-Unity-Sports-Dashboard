@@ -13,14 +13,20 @@ import PhotoInput from "../../component/common/input/PhotoInputProps";
 import DateInput from "../../component/common/input/DateInput";
 import DropdownInput from "../../component/common/input/DropdownInput";
 import TextAreaInput from "../../component/common/input/TextAreaInput";
-import { extractFormData } from "../../utils/extractFormData";
 import Buttons from "../../component/common/Buttons";
 import { Edit2 } from "lucide-react";
 import SectionLayout from "../../component/layout/SectionLayout";
+import { useCreateTournamentMutation } from "../../features/tournament/tournamentApi";
+import { formatDDMMYYYY } from "../../utils/timeFormat";
+import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
+import toast from "react-hot-toast";
 
 const CreateTournament = () => {
   const goBack = useGoBack();
   const navigate = useNavigate();
+
+  // api endpoint 
+  const [createTournament, { isLoading }] = useCreateTournamentMutation();
 
   const method = useForm<TCreateTournament>({
     resolver: zodResolver(createTournamentSchema),
@@ -28,10 +34,47 @@ const CreateTournament = () => {
   });
 
   const handleSubmit = async (data: TCreateTournament) => {
+    const toastId = LoadingToast({ msg: "Creating Tournament..." })
     try {
-      const formData = extractFormData(data);
-      console.log(formData);
-    } catch (error) { }
+      const formData = new FormData();
+
+      // Append photo (File)
+      if (data.photo instanceof File) {
+        formData.append("photo", data.photo);
+      }
+
+      // Basic info
+      formData.append("tournamentName", data.tournamentName);
+      formData.append("tournamentType", data.tournamentType);
+      formData.append("format", String(data.format)); // number to string
+      formData.append("ballType", data.ballType);
+      formData.append("matchOver", String(data.matchOver));
+
+      // Dates in DD-MM-YYYY format
+      formData.append("startDate", formatDDMMYYYY(data.startDate));
+      formData.append("endDate", formatDDMMYYYY(data.endDate));
+      formData.append("registrationDeadline", formatDDMMYYYY(data.registrationDeadline));
+
+      // Fees & prizes
+      formData.append("entryFee", String(data.entryFee));
+      formData.append("champion", data.champion);
+      formData.append("runnerUp", data.runnerUp);
+      if (data.thirdPlace) formData.append("thirdPlace", data.thirdPlace);
+
+      // Description
+      formData.append("description", data.description);
+
+      await createTournament(formData).unwrap();
+
+      toast.dismiss(toastId);
+      SuccessToast({ msg: "Tournament Created Successfully" })
+      method.reset();
+      navigate("/dashboard/tournament")
+
+    } catch (error) {
+      toast.dismiss(toastId);
+      ErrorToast({ msg: "Tournament Created Failed!" })
+    }
   };
 
   return (
@@ -106,7 +149,7 @@ const CreateTournament = () => {
                 label="Starting Date"
                 name="startDate"
                 placeholder="Pick start date"
-                
+
               />
               <DateInput
                 label="End Date"
@@ -168,6 +211,7 @@ const CreateTournament = () => {
               className="px-8 py-2 rounded-md"
               iconLeft={<Edit2 />}
               variant="primary"
+              disabled={isLoading}
             >
               Create Tournament
             </Buttons>

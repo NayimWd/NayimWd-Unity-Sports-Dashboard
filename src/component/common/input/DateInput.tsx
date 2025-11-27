@@ -32,65 +32,76 @@ const DateInput = ({
 
   const error = errors[name]?.message as string | undefined;
   const isTouched = touchedFields[name];
-
   const [open, setOpen] = useState(false);
-
-  // close the date picker when clicking outside
   const calenderRef = useRef<HTMLDivElement>(null!);
 
-  useClickOutSide(calenderRef, () => {
-    setOpen(false);
-  });
+  useClickOutSide(calenderRef, () => setOpen(false));
 
   return (
     <div className="">
       <label className="block text-font font-medium mb-1">{label}</label>
+
       <div className="relative">
         <Controller
-          control={control}
           name={name}
-          render={({ field }) => (
-            <>
-              <input
-                readOnly
-                onClick={() => setOpen(!open)}
-                value={field.value ? format(field.value, "dd/MM/yyyy") : ""}
-                placeholder={placeholder}
-                className={cn(
-                  inputVariants({ variant: error ? "error" : "default" }),
-                  "w-full pr-10 cursor-pointer text-font",
-                  className
+          control={control}
+          render={({ field }) => {
+            const safeDate =
+              field.value instanceof Date
+                ? field.value
+                : field.value
+                ? new Date(field.value)
+                : undefined;
+
+            return (
+              <>
+                <input
+                  readOnly
+                  onClick={() => setOpen(!open)}
+                  value={safeDate ? format(safeDate, "dd/MM/yyyy") : ""}
+                  placeholder={placeholder}
+                  className={cn(
+                    inputVariants({ variant: error ? "error" : "default" }),
+                    "w-full pr-10 cursor-pointer text-font",
+                    className
+                  )}
+                />
+
+                {open && (
+                  <div
+                    ref={calenderRef}
+                    className="absolute top-[110%] left-0 bg-surface border rounded-md shadow-lg z-50"
+                  >
+                    <DayPicker
+                      mode="single"
+                      selected={safeDate}
+                      onSelect={(d) => {
+                        field.onChange(d ?? null);
+                        setOpen(false);
+                      }}
+                      className="p-2 bg-bg rounded-lg border-border text-font"
+                      modifiersClassNames={{
+                        selected: "bg-primary text-white",
+                        today: "border border-primary",
+                      }}
+                    />
+                  </div>
                 )}
-              />
-              {open && (
-                <div
-                  ref={calenderRef}
-                  className="absolute top-[110%] left-0 bg-surface border rounded-md shadow-lg z-50"
-                >
-                  <DayPicker
-                    mode="single"
-                    selected={field.value}
-                    onSelect={(date) => {
-                      if (date) field.onChange(date);
-                      setOpen(false);
-                    }}
-                    className="p-2 bg-bg rounded-lg border-border text-font"
-                    modifiersClassNames={{
-                      selected: "bg-primary text-white",
-                      today: "border border-primary",
-                    }}
-                  />
-                </div>
-              )}
-            </>
-          )}
+              </>
+            );
+          }}
         />
+
         <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted pointer-events-none">
           {icon ?? <CalendarIcon size={16} />}
         </span>
       </div>
-       {(error && isTouched) && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14}/> {error}</p>
-        }
+
+      {error && isTouched && (
+        <p className="errorText flex items-center gap-1 text-red-500 text-xs pt-1">
+          <BadgeAlert size={14} /> {error}
+        </p>
+      )}
     </div>
   );
 };

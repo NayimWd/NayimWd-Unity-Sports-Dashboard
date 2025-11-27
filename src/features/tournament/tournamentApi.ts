@@ -38,9 +38,9 @@ export const tournamentApi = apiSlice.injectEndpoints({
         { type: "Tournament", id: tournamentId },
       ],
     }),
-    createTournamt: builder.mutation({
+    createTournament: builder.mutation({
       query: (data) => ({
-        url: ``,
+        url: `tournament/create`,
         method: "POST",
         body: data
       }),
@@ -53,5 +53,5 @@ export const {
   useLatestTournamentQuery,
   useGetAllTournamentQuery,
   useGetTournamentDetailsQuery,
-  useCreateTournamtMutation,
+  useCreateTournamentMutation,
 } = tournamentApi;
