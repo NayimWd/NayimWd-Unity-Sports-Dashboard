@@ -10,9 +10,10 @@ interface TextInputProps {
   icon?: React.ReactNode;
   autoComplete?: string;
   defaultValue?: string;
+  type?: "text" | "number";
 }
 
-const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", icon, autoComplete, defaultValue }: TextInputProps) => {
+const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", icon, autoComplete, defaultValue, type="text" }: TextInputProps) => {
   // importing useFormContext to get the form methods
   const { register, watch, formState, trigger } = useFormContext();
   const { errors } = formState;
@@ -34,7 +35,7 @@ const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", ico
     if (focused) {
       trigger(name);
     }
-  }, [value, name, focused]);
+  }, [value, focused]);
 
   return (
     <div className="relative space-y-1">
@@ -50,7 +51,9 @@ const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", ico
           autoComplete={autoComplete}
           variant={variant}
           defaultValue={defaultValue}
-          {...register(name)}
+          {...register(name, {
+          valueAsNumber: type === "number",
+        })}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />

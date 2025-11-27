@@ -9,16 +9,23 @@ interface BaseInputProps
   placeholder?: string
   defaultValue?: string;
 }
+
 const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
-  ({ icon, className, variant, defaultValue, ...props }, ref) => {
+  ({ icon, className, variant, ...props }, ref) => {
     return (
       <div className="relative">
-        {icon && <span className="absolute text-font left-3 top-1/2 transform -translate-y-1/2 mr-10">{icon}</span>}
+        {icon && (
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-font">
+            {icon}
+          </span>
+        )}
         <input
           ref={ref}
-          {...props}
-          className={cn(inputStyles({ variant, className }), icon ? "pl-9" : "")}
-          defaultValue={defaultValue}
+          className={cn(
+            inputStyles({ variant }),
+            icon ? "pl-9" : "",
+            className
+          )}
           {...props}
         />
       </div>
