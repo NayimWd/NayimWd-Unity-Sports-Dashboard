@@ -2,6 +2,7 @@ import { RouteObject } from "react-router-dom";
 import SuspenseWrapper from "../utils/SuspenseWrapper";
 import { lazy } from "react";
 import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
+import CreateTournamentSkeleton from "../component/common/skeleton/TournamentFormSkeleton";
 const Tournaments = lazy(() => import("../pages/tournament/Tournaments"));
 const TournamentDetails = lazy(() => import("../pages/tournament/TournamentDetails"));
 const CreateTournament = lazy(() => import("../pages/tournament/CreateTournament"));
@@ -37,7 +38,7 @@ export const tournamentRoutes: RouteObject[] = [
         path: "tournament/create",
         element: (
             <ErrorBoundaryWrapper>
-                <SuspenseWrapper>
+                <SuspenseWrapper CustomLoader={<CreateTournamentSkeleton/>}>
                     <CreateTournament />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>

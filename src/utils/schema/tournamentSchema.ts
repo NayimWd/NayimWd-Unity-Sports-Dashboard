@@ -3,7 +3,7 @@ import { updateBlogPhotoSchema } from "./Schema";
 
 
 
-// for comparing dates {for future}
+// for comparing dates {for future validation}
 // const parseDateString = (dateString: string): Date | null => {
 //   const parts = dateString.split('-');
   
@@ -141,3 +141,5 @@ export const updateTournamentStatus = z.object({
 });
 
 export type TUpdateTournamentStatus = z.infer<typeof updateTournamentStatus>;
+
+
