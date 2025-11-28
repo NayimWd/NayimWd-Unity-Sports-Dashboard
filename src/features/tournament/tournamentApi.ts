@@ -42,10 +42,64 @@ export const tournamentApi = apiSlice.injectEndpoints({
       query: (data) => ({
         url: `tournament/create`,
         method: "POST",
-        body: data
+        body: data,
       }),
-      invalidatesTags: [{type: "Tournament", id: "LIST"}]
-    })
+      invalidatesTags: [{ type: "Tournament", id: "LIST" }],
+    }),
+    updateTournamentDetails: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `tournament/update_details/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: "Tournament", id: id },
+        { type: "Tournament", id: "LIST" },
+      ],
+    }),
+    updateTournamentDate: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `tournament/update_date/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: "Tournament", id: id },
+        { type: "Tournament", id: "LIST" },
+      ],
+    }),
+    updateTournamentPhoto: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `tournament/update_photo/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: "Tournament", id: id },
+        { type: "Tournament", id: "LIST" },
+      ],
+    }),
+    updateTournamentStatus: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `tournament/update_status/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: "Tournament", id: id },
+        { type: "Tournament", id: "LIST" },
+      ],
+    }),
+    createTournamentResult: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `tournament/create_result/${id}`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: "Tournament", id: id },
+      ],
+    }),
   }),
 });
 
@@ -54,4 +108,9 @@ export const {
   useGetAllTournamentQuery,
   useGetTournamentDetailsQuery,
   useCreateTournamentMutation,
+  useUpdateTournamentDetailsMutation,
+  useUpdateTournamentDateMutation,
+  useUpdateTournamentPhotoMutation,
+  useUpdateTournamentStatusMutation,
+  useCreateTournamentResultMutation
 } = tournamentApi;

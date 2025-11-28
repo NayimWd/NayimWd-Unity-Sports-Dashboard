@@ -3,6 +3,7 @@ import SuspenseWrapper from "../utils/SuspenseWrapper";
 import { lazy } from "react";
 import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
 import CreateTournamentSkeleton from "../component/common/skeleton/TournamentFormSkeleton";
+import TableSkeleton from "../component/common/Table/TableSkeleton";
 const Tournaments = lazy(() => import("../pages/tournament/Tournaments"));
 const TournamentDetails = lazy(() => import("../pages/tournament/TournamentDetails"));
 const CreateTournament = lazy(() => import("../pages/tournament/CreateTournament"));
@@ -10,7 +11,7 @@ const UpdateDetails = lazy(() => import("../pages/tournament/updateDetails"))
 const UpdateTournamentDate = lazy(() => import("../pages/tournament/updateTournamentDate"))
 const UpdatePhoto = lazy(() => import("../pages/tournament/updatePhoto"))
 const CreateResult = lazy(() => import("../pages/tournament/CreateResult"))
-const ManageTournament = lazy(()=> import("../pages/tournament/ManageTournament"));
+const ManageTournament = lazy(() => import("../pages/tournament/ManageTournament"));
 
 
 export const tournamentRoutes: RouteObject[] = [
@@ -38,7 +39,7 @@ export const tournamentRoutes: RouteObject[] = [
         path: "tournament/create",
         element: (
             <ErrorBoundaryWrapper>
-                <SuspenseWrapper CustomLoader={<CreateTournamentSkeleton/>}>
+                <SuspenseWrapper CustomLoader={<CreateTournamentSkeleton />}>
                     <CreateTournament />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
@@ -86,6 +87,16 @@ export const tournamentRoutes: RouteObject[] = [
     },
     {
         path: "tournament/manage",
+        element: (
+            <ErrorBoundaryWrapper>
+                <SuspenseWrapper CustomLoader={<TableSkeleton columns={5} />}>
+                    <ManageTournament />
+                </SuspenseWrapper>
+            </ErrorBoundaryWrapper>
+        )
+    },
+    {
+        path: "tournament/result/:id",
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
