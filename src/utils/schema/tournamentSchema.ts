@@ -143,3 +143,10 @@ export const updateTournamentStatus = z.object({
 export type TUpdateTournamentStatus = z.infer<typeof updateTournamentStatus>;
 
 
+export const createTournamentResultSchema = z.object({
+  manOfTheTournament: z.string().min(2, "Enter name of the man of the match"),
+  awardFor: z.string().min(2, "Enter performance category"),
+}).strict();
+
+export type TCreateTournamentResult = z.infer<typeof createTournamentResultSchema>;
+
