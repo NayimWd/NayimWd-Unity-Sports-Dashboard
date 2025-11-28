@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import PageLayout from "../../component/layout/PageLayout";
 import { useGoBack } from "../../hooks/useGoBack";
 import BackButton from "../../utils/BackButton";
@@ -61,12 +61,14 @@ const TournamentDetails = () => {
 
           {/* vew result button */}
           {t?.status === "completed" && (
+            <Link to={`/dashboard/tournament/result/${t._id}`}>
             <Buttons
               variant="primary"
               className="rounded-md px-5 py-2"
             >
               View Tournament Result
             </Buttons>
+            </Link>
           )}
         </div>
 

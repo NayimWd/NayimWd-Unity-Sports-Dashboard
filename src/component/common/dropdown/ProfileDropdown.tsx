@@ -34,8 +34,7 @@ const ProfileDropdown = forwardRef<HTMLDivElement, DropdownMenuProps>(
         ref={ref}
         className={cn(dropdownStyle({ open: isOpen }), className, "z-[200]")}
         role="menu"
-        
-
+        aria-hidden={!isOpen}
       >
         {/* User info */}
         <div className="p-4 border-b border-inputBorder">
@@ -44,14 +43,14 @@ const ProfileDropdown = forwardRef<HTMLDivElement, DropdownMenuProps>(
         </div>
 
         {/* Link Items */}
-        <div className="px-1 py-2">
+        <div className="px-1 py-2" role="none">
           {links.map((link, i) => (
             <Link
               key={i}
               to={link.href ?? "#"}
               className="block w-full px-4 py-2 text-sm text-foreground hover:bg-subSurface rounded transition"
             >
-              <div onClick={onClose} className="flex items-center justify-between text-subtext">
+              <div onClick={onClose} className="flex items-center justify-between text-subtext" role="navigation">
                 <span>{link.label}</span>
                 {link.icon && <span>{link.icon}</span>}
               </div>
@@ -62,11 +61,12 @@ const ProfileDropdown = forwardRef<HTMLDivElement, DropdownMenuProps>(
           <button
             onClick={onLogout}
             className="w-full flex items-center justify-between text-left px-4 py-2 text-sm text-toastErrorText hover:bg-red-200 rounded transition"
+            role="menuitem"
           >
             Logout <LogOut size={16} />
           </button>
         </div>
-        <div className="absolute top-0 right-0 p-2">
+        <div className="absolute top-0 right-0 p-2" aria-label="Close menu">
           <X onClick={onClose} className="text-font bg-subSurface p-1.5 rounded-full cursor-pointer hover:bg-surface hover:scale-105 shadow" size={28} />
         </div>
       </div>

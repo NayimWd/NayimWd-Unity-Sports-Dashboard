@@ -36,4 +36,51 @@ export interface ITournamentData {
   matchOver: number;
   seat: number;
   teamCount: number;
+};
+
+// tournament result 
+export interface ITournamentTeamResult {
+  _id: string;
+  teamName: string;
+  teamLogo: string;
+}
+
+// mom of tournament
+export interface IManOfTheTournament {
+  _id: string;
+  name: string;
+  photo: string | null;
+}
+
+// team results
+export interface ITournamentAwards {
+  champion: ITournamentTeamResult;
+  runnerUp: ITournamentTeamResult;
+  thirdPlace: ITournamentTeamResult;
+}
+
+// Core Result document
+export interface ITournamentResult {
+  _id: string;
+  awardFor: string;                 
+  tournamentId: string;           
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  result: ITournamentAwards;       
+  manOfTheTournament: IManOfTheTournament;
+  photo: string | null;           
+}
+
+//  tournament summary
+export interface ITournamentSummary {
+  _id: string;
+  tournamentName: string;
+  photo: string;
+}
+
+// final response
+export interface ITournamentFinalResult {
+  result: ITournamentResult;
+  tournament: ITournamentSummary;
 }

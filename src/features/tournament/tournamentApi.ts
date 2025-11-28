@@ -1,5 +1,6 @@
 import {
   ITournamentData,
+  ITournamentFinalResult,
   ITournaments,
 } from "../../utils/types/tournamentTypes";
 import { ApiResponse, Tournament } from "../../utils/types/types";
@@ -37,6 +38,13 @@ export const tournamentApi = apiSlice.injectEndpoints({
       providesTags: (_result, _error, tournamentId) => [
         { type: "Tournament", id: tournamentId },
       ],
+    }),
+    getTournamentResult: builder.query<ApiResponse<ITournamentFinalResult>, string>({
+      query: (tournamentId) => ({
+        url: `tournament/results/${tournamentId}`,
+        method: "GET",
+      }),
+      transformResponse: (response: ApiResponse<ITournamentFinalResult>) => response
     }),
     createTournament: builder.mutation({
       query: (data) => ({
@@ -107,6 +115,7 @@ export const {
   useLatestTournamentQuery,
   useGetAllTournamentQuery,
   useGetTournamentDetailsQuery,
+  useGetTournamentResultQuery,
   useCreateTournamentMutation,
   useUpdateTournamentDetailsMutation,
   useUpdateTournamentDateMutation,
