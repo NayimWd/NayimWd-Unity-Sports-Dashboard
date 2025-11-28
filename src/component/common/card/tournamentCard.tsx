@@ -61,4 +61,4 @@ const TournamentCard = ({ tournamentName, tournamentType, entryFee, status, phot
     )
 }
 
-export default TournamentCard
+export default TournamentCard;
