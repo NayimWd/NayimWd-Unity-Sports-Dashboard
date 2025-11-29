@@ -14,3 +14,9 @@ export const formatDDMMYYYY = (date: Date | string) => {
   const y = date.getFullYear();
   return `${d}-${m}-${y}`;
 };
+
+export const parseDMY = (value?: string) => {
+  if (!value) return undefined;
+  const [d, m, y] = value.split("-");
+  return new Date(`${y}-${m}-${d}`);
+};
