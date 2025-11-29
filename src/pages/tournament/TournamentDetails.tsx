@@ -6,6 +6,7 @@ import { useGetTournamentDetailsQuery } from "../../features/tournament/tourname
 import SectionLayout from "../../component/layout/SectionLayout";
 import Buttons from "../../component/common/Buttons";
 import SafeHtmlRender from "../../component/common/input/inputUtils/SafeHtmlRender";
+import { fontStyle } from "../../utils/ClassUtils";
 
 const statusColors: Record<string, string> = {
   ongoing: "bg-green-600/10 text-green-600 border-green-600/20",
@@ -43,7 +44,7 @@ const TournamentDetails = () => {
         />
 
         <div className="absolute bottom-4 sm:left-6 flex flex-col space-y-3">
-          <h1 className="text-3xl font-bold text-white drop-shadow-lg bg-black/40 p-5 rounded">
+          <h1 className={`${fontStyle.SectionHeading} font-bold text-white drop-shadow-lg bg-black/40 p-2 rounded`}>
             {t?.tournamentName}
           </h1>
         </div>
@@ -76,7 +77,7 @@ const TournamentDetails = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
           <InfoCard label="Tournament Type" value={t?.tournamentType} />
           <InfoCard label="Ball Type" value={t?.ballType} />
-          <InfoCard label="Format (overs)" value={`${t?.format} overs`} />
+          <InfoCard label="Format (Teams)" value={`${t?.format} Teams`} />
           <InfoCard label="Match Overs" value={`${t?.matchOver} overs`} />
           <InfoCard label="Entry Fee" value={`${t?.entryFee} BDT`} />
           <InfoCard label="Seats" value={t?.seat} />

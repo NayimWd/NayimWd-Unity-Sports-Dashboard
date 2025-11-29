@@ -3,7 +3,6 @@ import SuspenseWrapper from "../utils/SuspenseWrapper";
 import { lazy } from "react";
 import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
 import CreateTournamentSkeleton from "../component/common/skeleton/TournamentFormSkeleton";
-import TableSkeleton from "../component/common/Table/TableSkeleton";
 const Tournaments = lazy(() => import("../pages/tournament/Tournaments"));
 const TournamentDetails = lazy(() => import("../pages/tournament/TournamentDetails"));
 const CreateTournament = lazy(() => import("../pages/tournament/CreateTournament"));
@@ -91,7 +90,7 @@ export const tournamentRoutes: RouteObject[] = [
         path: "tournament/manage",
         element: (
             <ErrorBoundaryWrapper>
-                <SuspenseWrapper CustomLoader={<TableSkeleton columns={5} />}>
+                <SuspenseWrapper>
                     <ManageTournament />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>

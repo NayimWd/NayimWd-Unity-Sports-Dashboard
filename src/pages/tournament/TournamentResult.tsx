@@ -36,7 +36,7 @@ const TournamentResult = () => {
 
           {/* tournament photo (if exist) */}
           {tournament?.photo && (
-            <div className="rounded-xl bg-bg p-5 overflow-hidden shadow-lg relative">
+            <div className="rounded-xl bg-bg p-2 overflow-hidden shadow-lg relative">
               <img
                 src={tournament.photo}
                 alt="Tournament Poster"
