@@ -14,7 +14,7 @@ import DateInput from "../../component/common/input/DateInput";
 import DropdownInput from "../../component/common/input/DropdownInput";
 import TextAreaInput from "../../component/common/input/TextAreaInput";
 import Buttons from "../../component/common/Buttons";
-import { Edit2 } from "lucide-react";
+import { SquarePen } from "lucide-react";
 import SectionLayout from "../../component/layout/SectionLayout";
 import { useCreateTournamentMutation } from "../../features/tournament/tournamentApi";
 import { formatDDMMYYYY } from "../../utils/timeFormat";
@@ -209,7 +209,7 @@ const CreateTournament = () => {
           <div className="pt-6 flex justify-center">
             <Buttons
               className="px-8 py-2 rounded-md"
-              iconLeft={<Edit2 />}
+              iconLeft={<SquarePen />}
               variant="primary"
               disabled={isLoading}
             >

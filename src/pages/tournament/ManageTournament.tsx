@@ -12,6 +12,8 @@ import TableEmpty from "../../component/common/Table/TableEmpty";
 import TableRow from "../../component/common/Table/TableRow";
 import { BookOpenText, Calendar, Edit, Edit2, Edit3, ImagePlus } from "lucide-react";
 import Dropdown from "../../component/common/dropdown/Dropdown";
+import Buttons from "../../component/common/Buttons";
+import { Link } from "react-router-dom";
 
 const statusOptions = [
   { label: "All", value: undefined },
@@ -32,6 +34,8 @@ const ManageTournament = () => {
 
   //header data
   const headerData = ["Photo", "Tournament Name", "Format", "status", "Action"];
+
+ 
 
   let content = null;
 
@@ -56,12 +60,18 @@ const ManageTournament = () => {
           t.tournamentName,
           t.tournamentType,
           t.status,
+          t.status === "completed"
+          ?
+          <Link to={`/dashboard/tournament/details/${t?._id}`}>
+          <Buttons className="rounded py-2 px-3" iconLeft={<BookOpenText size={14}/>} size="sm" variant="primary">view</Buttons>
+          </Link>
+          :
           <div >
-            <Dropdown>
-              <Dropdown.Trigger>
+            <Dropdown className="bg-primary rounded-md">
+              <Dropdown.Trigger className="bg-primary text-white">
                 <Edit2 size="14" /> Edit
               </Dropdown.Trigger>
-              <Dropdown.Menu className="-left-44 -top-20">
+              <Dropdown.Menu className="-left-[168px] -top-20">
                 <Dropdown.Item href={`/dashboard/tournament/details/${t?._id}`}>
                   <BookOpenText size={14} /> Read Details
                 </Dropdown.Item>
@@ -79,7 +89,8 @@ const ManageTournament = () => {
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-          </div>,
+          </div>
+            
         ]}
       />
     ))

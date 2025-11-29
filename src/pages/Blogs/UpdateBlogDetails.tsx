@@ -71,7 +71,7 @@ const UpdateBlogDetails = () => {
       })
       toast.dismiss(loadingId);
       SuccessToast({ msg: "Blog Update Successfully" })
-      // methods.reset();
+      methods.reset();
       navigate("/dashboard/blogs")
 
     } catch (error) {
