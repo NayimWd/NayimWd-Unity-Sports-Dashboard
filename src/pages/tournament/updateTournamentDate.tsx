@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 import { TUpdateTournamentDate, updateTournamentDateSchema } from "../../utils/schema/tournamentSchema";
 import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
 import DateInput from "../../component/common/input/DateInput";
-import { formatDDMMYYYY } from "../../utils/timeFormat";
+import { formatDDMMYYYY, parseDMY } from "../../utils/timeFormat";
 
 const UpdateTournamentDate = () => {
   const goBack = useGoBack();
@@ -38,15 +38,15 @@ const UpdateTournamentDate = () => {
   })
 
   // set default date
-  // useEffect(() => {
-  //   if (tournament) {
-  //     methods.reset({
-  //       startDate: tournament.startDate,
-  //       endDate: tournament.endDate,
-  //       registrationDeadline: tournament.endDate,
-  //     })
-  //   };
-  // }, [tournament])
+  useEffect(() => {
+    if (tournament) {
+      methods.reset({
+        startDate: parseDMY(tournament.startDate),
+        endDate: parseDMY(tournament.endDate),
+        registrationDeadline: parseDMY(tournament.registrationDeadline),
+      })
+    };
+  }, [tournament])
 
   const handleSubmit = async (data: TUpdateTournamentDate) => {
     const loadingId = LoadingToast({ msg: "Updating Tournament details" });
@@ -75,8 +75,8 @@ const UpdateTournamentDate = () => {
 
       toast.dismiss(loadingId);
       SuccessToast({ msg: "Blog Update Successfully" })
-      // methods.reset();
-      // navigate(`/dashboard/tournament/manage`)
+      methods.reset();
+      navigate(`/dashboard/tournament/manage`)
 
     } catch (error) {
       toast.dismiss(loadingId);
