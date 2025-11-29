@@ -39,7 +39,7 @@ const UpdateDetails = () => {
     mode: "onSubmit"
   });
 
-
+ // set default value for from 
   useEffect(() => {
     if (tournament) {
       methods.reset({
@@ -64,8 +64,8 @@ const UpdateDetails = () => {
     try {
       await updateTournamentDetails({
         id,
-        data
-      });
+        data: data
+      }).unwrap();
 
       toast.dismiss(loadingId);
       SuccessToast({ msg: "Blog Update Successfully" })
