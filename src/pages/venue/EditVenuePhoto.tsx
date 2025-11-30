@@ -28,7 +28,8 @@ const EditVenuePhoto = () => {
   const [updateVenuePhoto, { isLoading }] = useUpdateVenuePhotoMutation();
 
   const method = useForm<TUpdateVenuePhoto>({
-    resolver: zodResolver(updateVenuePhotoSchema)
+    resolver: zodResolver(updateVenuePhotoSchema),
+    mode: "onSubmit"
   });
 
   // submit function 
