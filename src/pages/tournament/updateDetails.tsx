@@ -70,7 +70,7 @@ const UpdateDetails = () => {
       toast.dismiss(loadingId);
       SuccessToast({ msg: "Blog Update Successfully" })
       methods.reset();
-      navigate(`/dashboard/tournament/details/${id}`)
+      navigate(`/dashboard/tournament/manage`)
 
     } catch (error) {
       toast.dismiss(loadingId);

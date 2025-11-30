@@ -38,7 +38,7 @@ const UpdateBlogPhoto = () => {
 
   // function 
   const handleSubmit = async (data: updateBologPhotoType) => {
-    const loadingId = LoadingToast({ msg: "Updating Blog Photo..." });
+    const loadingId = LoadingToast({ msg: "Wait few momment! Uploading...", duration: 12000 });
     try {
       const formData = new FormData();
       if (data.photo && Array.isArray(data.photo) && data.photo.length > 0) {

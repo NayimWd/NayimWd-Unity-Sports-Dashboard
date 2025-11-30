@@ -1,28 +1,9 @@
 import {  z,  } from "zod";
-import { updateBlogPhotoSchema } from "./Schema";
 
 
 
-// for comparing dates {for future validation}
-// const parseDateString = (dateString: string): Date | null => {
-//   const parts = dateString.split('-');
-  
-//   if (parts.length === 3) {
-//     // getting indevidual date month and year
-//     const day = parseInt(parts[0], 10);
-//     const month = parseInt(parts[1], 10) - 1; 
-//     const year = parseInt(parts[2], 10);
-    
-//     // Create the Date object
-//     const date = new Date(year, month, day);
-    
-//     // Verify date parts match (handles cases like '32-01-2025' failing)
-//     if (date.getFullYear() === year && date.getMonth() === month && date.getDate() === day) {
-//         return date;
-//     }
-//   }
-//   return null;
-// };
+// for comparing dates - deadline cannot be after start date, start time should after current date, end date should later of start date or same date {for future validation}
+
 
 // create tournament 
 export const createTournamentSchema = z.object({
@@ -115,12 +96,12 @@ export type TUpdateTournamentDetails = z.infer<typeof tournamentDetailsUpdateSch
 
 // update photo
 export const updateTournamentPhotoSchema = z.object({
-  photo: z.custom<File>((v)=> v instanceof File && v.size > 0, {
-    message: "photo is required for update photo"
-  })
-}).strict();
+ photo: z.custom<File>((v) => v instanceof File, {
+    message: "A photo file is required.",
+  }),
+})
 
-export type TUpdateTournamentPhoto = z.infer<typeof updateBlogPhotoSchema>;
+export type TUpdateTournamentPhoto = z.infer<typeof updateTournamentPhotoSchema>;
 
 // udpate date 
 export const updateTournamentDateSchema = z.object({
