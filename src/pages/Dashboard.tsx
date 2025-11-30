@@ -1,6 +1,4 @@
-
 import PageLayout from "../component/layout/PageLayout";
-
 
 const Dashboard = () => {
 

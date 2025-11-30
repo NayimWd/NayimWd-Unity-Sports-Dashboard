@@ -62,7 +62,7 @@ const UpdatePhoto = () => {
   return (
     <PageLayout>
       <BackButton onClick={goBack}>Back</BackButton>
-      <h1 className={`${fontStyle.pageTitle} text-center sm:text-3xl md:text-4xl my-5 font-semibold text-font font-merriweather`}>Edit Blogs Photo</h1>
+      <h1 className={`${fontStyle.pageTitle} text-center  font-semibold text-font font-merriweather`}>Edit Photo</h1>
       <div>
         <h2 className="text-font font-semibold font-inter">Current Photo:</h2>
         <img src={tournament?.photo} alt="blog photo" loading="lazy"

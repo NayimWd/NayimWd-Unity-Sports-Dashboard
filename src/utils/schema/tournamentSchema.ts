@@ -117,11 +117,11 @@ export const updateTournamentDateSchema = z.object({
 export type TUpdateTournamentDate = z.infer<typeof updateTournamentDateSchema>;
 
 // update status 
-export const updateTournamentStatus = z.object({
+export const updateTournamentStatusSchema = z.object({
   status: z.enum(["upcoming", "ongoing", "completed"], {message: "Select from this options"})
 });
 
-export type TUpdateTournamentStatus = z.infer<typeof updateTournamentStatus>;
+export type TUpdateTournamentStatus = z.infer<typeof updateTournamentStatusSchema>;
 
 
 export const createTournamentResultSchema = z.object({

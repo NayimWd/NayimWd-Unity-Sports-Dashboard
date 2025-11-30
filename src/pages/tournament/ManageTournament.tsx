@@ -10,7 +10,7 @@ import TableHeader from "../../component/common/Table/TableHeader";
 import TableSkeleton from "../../component/common/Table/TableSkeleton";
 import TableEmpty from "../../component/common/Table/TableEmpty";
 import TableRow from "../../component/common/Table/TableRow";
-import { BookOpenText, Calendar, Edit, Edit2, Edit3, ImagePlus } from "lucide-react";
+import { BookOpenText, Calendar, Edit, Edit2, Edit3, ImagePlus, TrendingUp } from "lucide-react";
 import Dropdown from "../../component/common/dropdown/Dropdown";
 import Buttons from "../../component/common/Buttons";
 import { Link } from "react-router-dom";
@@ -83,6 +83,9 @@ const ManageTournament = () => {
                 </Dropdown.Item>
                 <Dropdown.Item href={`/dashboard/tournament/updateDate/${t?._id}`}>
                   <Calendar size={14} /> Edit Date
+                </Dropdown.Item>
+                <Dropdown.Item href={`/dashboard/tournament/updateStatus/${t?._id}`}>
+                  <TrendingUp size={14} /> Edit Status
                 </Dropdown.Item>
                 <Dropdown.Item href={`/dashboard/tournament/createResult/${t?._id}`}>
                   <Edit size={14} /> Create Result

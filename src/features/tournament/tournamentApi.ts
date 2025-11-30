@@ -62,7 +62,6 @@ export const tournamentApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (_result, _error, { id }) => [
         { type: "Tournament", id: id },
-        { type: "Tournament", id: "LIST" },
       ],
     }),
     updateTournamentDate: builder.mutation({
@@ -73,7 +72,6 @@ export const tournamentApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (_result, _error, { id }) => [
         { type: "Tournament", id: id },
-        { type: "Tournament", id: "LIST" },
       ],
     }),
     updateTournamentPhoto: builder.mutation({
@@ -84,7 +82,6 @@ export const tournamentApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (_result, _error, { id }) => [
         { type: "Tournament", id: id },
-        { type: "Tournament", id: "LIST" },
       ],
     }),
     updateTournamentStatus: builder.mutation({
@@ -95,7 +92,6 @@ export const tournamentApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (_result, _error, { id }) => [
         { type: "Tournament", id: id },
-        { type: "Tournament", id: "LIST" },
       ],
     }),
     createTournamentResult: builder.mutation({

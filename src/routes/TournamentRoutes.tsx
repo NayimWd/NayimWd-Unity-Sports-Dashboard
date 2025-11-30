@@ -12,7 +12,7 @@ const UpdatePhoto = lazy(() => import("../pages/tournament/updatePhoto"))
 const CreateResult = lazy(() => import("../pages/tournament/CreateResult"))
 const ManageTournament = lazy(() => import("../pages/tournament/ManageTournament"));
 const TournamentResult = lazy(()=> import("../pages/tournament/TournamentResult"));
-
+const UpdateStatus = lazy(()=> import("../pages/tournament/UpdateStatus"));
 
 
 export const tournamentRoutes: RouteObject[] = [
@@ -50,7 +50,7 @@ export const tournamentRoutes: RouteObject[] = [
         path: "tournament/updateDetails/:id",
         element: (
             <ErrorBoundaryWrapper>
-                <SuspenseWrapper>
+                <SuspenseWrapper >
                     <UpdateDetails />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
@@ -72,6 +72,16 @@ export const tournamentRoutes: RouteObject[] = [
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
                     <UpdatePhoto />
+                </SuspenseWrapper>
+            </ErrorBoundaryWrapper>
+        )
+    },
+    {
+        path: "tournament/updateStatus/:id",
+        element: (
+            <ErrorBoundaryWrapper>
+                <SuspenseWrapper>
+                    <UpdateStatus />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )
