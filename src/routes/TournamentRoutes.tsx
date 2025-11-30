@@ -15,7 +15,7 @@ const TournamentResult = lazy(()=> import("../pages/tournament/TournamentResult"
 const UpdateStatus = lazy(()=> import("../pages/tournament/UpdateStatus"));
 
 
-export const tournamentRoutes: RouteObject[] = [
+export const tournamentsRoutes: RouteObject[] = [
     {
         path: "tournament",
         element: (
