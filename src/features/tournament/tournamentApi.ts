@@ -9,7 +9,11 @@ import { apiSlice } from "../api/apiSlice";
 export const tournamentApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     latestTournament: builder.query<ApiResponse<Tournament>, void>({
-      query: () => `tournament/latest`,
+      query: () => ({
+        url: `tournament/latest`,
+        method: "GET"
+      }),
+      keepUnusedDataFor: 600
     }),
     getAllTournament: builder.query<ApiResponse<ITournaments>, string | void>({
       query: (status) => {

@@ -64,6 +64,7 @@ export interface IUserQueryParams {
 export interface Tournament {
   _id: string;
   tournamentName: string;
+  status: string,
   photo: string;
 }
 // -------------------------------------------------------------------- //
