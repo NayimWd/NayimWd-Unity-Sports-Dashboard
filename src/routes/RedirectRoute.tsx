@@ -6,7 +6,7 @@ const RedirectRoute = () => {
     // location 
     const location = useLocation();
 
-    const { isAuthenticated, user, authLoaded } = useSelector((state: RootState) => state.auth);
+    const { isAuthenticated, user, authLoaded } = useSelector((state: RootState) => state?.auth);
 
      // Wait for auth to load before redirecting
   if (!authLoaded) {

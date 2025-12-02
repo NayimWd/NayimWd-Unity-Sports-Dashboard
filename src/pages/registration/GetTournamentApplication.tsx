@@ -68,7 +68,7 @@ const TournamentApplications = () => {
                                 <Settings size="14" /> Controll
                             </Dropdown.Trigger>
                             <Dropdown.Menu className="-left-[168px] -top-3">
-                                <Dropdown.Item href={`/dashboard/tournament/details/${application?._id}`}>
+                                <Dropdown.Item href={`/dashboard/application/details/${application?._id}`}>
                                     <BookOpenText size={14} /> Read Details
                                 </Dropdown.Item>
                                 {
