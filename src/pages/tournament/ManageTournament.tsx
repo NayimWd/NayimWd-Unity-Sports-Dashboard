@@ -31,6 +31,7 @@ const ManageTournament = () => {
 
   const tournaments = data?.data.tournaments ?? [];
 
+  
 
   //header data
   const headerData = ["Photo", "Tournament Name", "Format", "status", "Action"];
@@ -98,10 +99,6 @@ const ManageTournament = () => {
       />
     ))
   }
-
-
-
-
 
   return (
     <PageLayout>
