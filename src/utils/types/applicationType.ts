@@ -5,6 +5,7 @@
 
 interface ITeamIdMini {
     teamName: string,
+    teamLogo: string,
     _id: string
 }
 
