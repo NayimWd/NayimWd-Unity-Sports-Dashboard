@@ -116,3 +116,14 @@ export interface BlogDetails {
   photo: [string];
   tags: string;
 }
+
+
+// dashboard summary
+export interface ISummary { 
+playerCount: number,
+runningPlayerCount: number,
+teamCount: number,
+tournamentCount: number,
+umpireCount: number,
+venueCount: number
+}
