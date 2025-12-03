@@ -17,11 +17,11 @@ const ResultSummary = ({ result, tournament }: SummaryProps) => {
       
       {/* Tournament Info */}
      
-      <div className="relative h-32 overflow-hidden bg-gradient-primary">
+      <div className="relative h-48 overflow-hidden bg-black/30">
         <img 
           src={tournament.photo} 
           alt={tournament.name}
-          className="w-full h-full object-cover opacity-15"
+          className="w-full h-full object-cover bg-center opacity-80 dark:opacity-25"
         />
         <div className="absolute inset-0 flex items-center justify-between px-6">
           <div className="flex items-center gap-3">
