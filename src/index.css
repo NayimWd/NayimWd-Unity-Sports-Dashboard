@@ -18,68 +18,58 @@ input:-webkit-autofill:focus {
 
 /* Light Mode */
 .light {
-  /* Base Colors */
   --bg: #f6f7fb;
   --surface: #ffffff;
-  --subSurface: #dfe3ec;
-  --border: #e2e8f0;
-  --inputBorder: #d1d5db;
+  --subSurface: #e1e7f0;
+  --border: #dce4f0;
+  --inputBorder: #cfd6e2;
 
-  /* Text Colors */
   --font: #1e293b;
   --subtext: #4b5563;
-  --muted: #9ca3af;
+  --muted: #8f9ca8;
 
-  /* Accent Colors */
-  --primary: #007bff;
-  --primaryHover: #005bbb;
-  --secondary: #ffb300;
+  --primary: #0066ff;
+  --primaryHover: #004bb5;
+  --secondary: #ffb800;
   --disabledText: #9ca3af;
 
-  /* Toast Notifications */
-  --toastSuccessBg: #e8f5e9;
+  --toastSuccessBg: #e6f9ed;
   --toastSuccessText: #2e7d32;
   --toastErrorBg: #ffebee;
   --toastErrorText: #c62828;
 
-  /* Gradients */
-  --gradient-primary: linear-gradient(90deg, #007bff, #004c99);
-  --gradient-secondary: linear-gradient(120deg, #f1f5f9, #dce4ec);
+  --gradient-primary: linear-gradient(90deg, #0066ff, #004bb5);
+  --gradient-secondary: linear-gradient(120deg, #f0f5fa, #dce4ec);
   --gradient-bg: linear-gradient(180deg, #f8fafc, #dde7f0);
   --gradientN-bg: linear-gradient(90deg, #f8fafc, #dde7f0);
 }
 
 /* Dark Mode */
 .dark {
-  /* Base Colors */
-  --bg: #0a192f;
-  --surface: #1b263b;
-  --subSurface: #2c3e50;
-  --border: #3a4a5e;
-  --inputBorder: #4a5d72;
+  --bg: #0b1a36;
+  --surface: #1d2944;
+  --subSurface: #2e415a;
+  --border: #3b4e69;
+  --inputBorder: #4b607b;
 
-  /* Text Colors */
   --font: #c7d1e0;
-  --subtext: #a0a8b6;
-  --muted: #6c7a89;
+  --subtext: #a3adbb;
+  --muted: #6f7d8b;
 
-  /* Accent Colors */
-  --primary: #1e88e5;
-  --primaryHover: #165a9e;
-  --secondary: #ff9100;
-  --disabledText: #778899;
+  --primary: #1e90ff;
+  --primaryHover: #1565c0;
+  --secondary: #ffa600;
+  --disabledText: #7a8899;
 
-  /* Toast Notifications */
-  --toastSuccessBg: #0d3b20;
+  --toastSuccessBg: #0f4423;
   --toastSuccessText: #43a047;
-  --toastErrorBg: #4e0d0d;
+  --toastErrorBg: #5c1010;
   --toastErrorText: #e53935;
 
-  /* Gradients */
-  --gradient-primary: linear-gradient(90deg, #1976d2, #0d47a1);
-  --gradient-secondary: linear-gradient(120deg, #2c3e50, #1e2a38);
-  --gradient-bg: linear-gradient(180deg, #0a192f, #1b263b);
-  --gradientN-bg: linear-gradient(90deg, #0a192f, #1b263b);
+  --gradient-primary: linear-gradient(90deg, #1e90ff, #0d4aa1);
+  --gradient-secondary: linear-gradient(120deg, #2e415a, #1f2b3c);
+  --gradient-bg: linear-gradient(180deg, #0b1a36, #1d2944);
+  --gradientN-bg: linear-gradient(90deg, #0b1a36, #1d2944);
 }
 
 /* animation */
