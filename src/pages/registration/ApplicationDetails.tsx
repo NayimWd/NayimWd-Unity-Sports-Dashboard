@@ -4,7 +4,6 @@ import PageLayout from "../../component/layout/PageLayout";
 import BackButton from "../../utils/BackButton";
 import { useGetApplicationDetailsQuery } from "../../features/registration/registrationApi";
 import { CalendarDays, ShieldCheck, UserCircle } from "lucide-react";
-import EmptyData from "../../component/ui/EmptyData";
 
 const ApplicationDetails = () => {
   const goBack = useGoBack();
@@ -43,15 +42,6 @@ const ApplicationDetails = () => {
   }
 
 
-  // ---------- empty case ----------
-  if (!isLoading || !isError || !applications._id) {
-    return (
-      <PageLayout>
-        <BackButton onClick={goBack}>Back</BackButton>
-        <EmptyData message="No application found" />
-      </PageLayout>
-    );
-  }
 
   const {
     teamId,
