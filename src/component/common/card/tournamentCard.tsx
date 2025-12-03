@@ -16,7 +16,7 @@ interface TournamentCardProps {
 const TournamentCard = ({ tournamentName, tournamentType, entryFee, status, photo, _id, startDate, endDate }: TournamentCardProps) => {
 
     return (
-        <Card variant="Tournament">
+        <Card className="flex flex-col h-full" variant="Tournament">
             {/* Image */}
             <Card.Image src={photo} alt={`${tournamentName} image`}>
                 {/* status pills */}
@@ -32,9 +32,9 @@ const TournamentCard = ({ tournamentName, tournamentType, entryFee, status, phot
         `}>
                         {status}
                     </Card.Tag>
-                        <div className="hidden absolute top-0 right-0 bg-black/80 px-1 text-sm rounded text-muted">
-                            <p>{startDate} - {endDate}</p>
-                        </div>
+                    <div className="hidden absolute top-0 right-0 bg-black/80 px-1 text-sm rounded text-muted">
+                        <p>{startDate} - {endDate}</p>
+                    </div>
                 </Card.Tags>
             </Card.Image>
             {/* card content */}
@@ -46,17 +46,19 @@ const TournamentCard = ({ tournamentName, tournamentType, entryFee, status, phot
                     <span className="capitalize">Tournament : {tournamentType}</span>
                     <span>Entry Fee : ${entryFee}</span>
                 </div>
-               
+
             </Card.Content>
             {/* card footer */}
-            <Link to={`/dashboard/tournament/details/${_id}`}>
-            <Buttons
-                variant="outline"
-                className="w-full mt-2"
-            >
-                View Details
-            </Buttons>
-            </Link>
+            <div className="mt-auto">
+                <Link to={`/dashboard/tournament/details/${_id}`}>
+                    <Buttons
+                        variant="outline"
+                        className="w-full  mt-2"
+                    >
+                        View Details
+                    </Buttons>
+                </Link>
+            </div>
         </Card>
     )
 }

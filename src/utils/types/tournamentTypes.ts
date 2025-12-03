@@ -84,3 +84,17 @@ export interface ITournamentFinalResult {
   result: ITournamentResult;
   tournament: ITournamentSummary;
 }
+
+
+// result summary 
+export interface ITournamentGlimps {
+  endDate: string,
+  photo: string,
+  tournamentName: string,
+  _id: string
+} 
+
+export interface ILatestTournamentResult {
+  tournament: ITournamentGlimps,
+  result: ITournamentResult
+}

@@ -1,6 +1,7 @@
+import ResultSummary from "../component/common/banner/ResultSummary";
 import SummaryCard from "../component/common/card/SummaryCard";
 import PageLayout from "../component/layout/PageLayout";
-import { useGetSummaryQuery } from "../features/dashboard/summaryApi";
+import { useGetLatestResultQuery, useGetSummaryQuery } from "../features/dashboard/summaryApi";
 import { fontStyle } from "../utils/ClassUtils";
 
 
@@ -16,9 +17,15 @@ const statItems = [
 const Dashboard = () => {
 
   const { data, isLoading } = useGetSummaryQuery();
+  const {data: results} = useGetLatestResultQuery(undefined);
 
   const summary = data?.data ?? null;
+ 
 
+  const result = results?.data.result;
+  const tournament = results?.data.tournament;
+
+  
   return (
     <PageLayout>
       <section>
@@ -56,6 +63,10 @@ const Dashboard = () => {
             ))}
           </div>
         )}
+      </section>
+      {/* result card */}
+      <section className="my-10 md:my-12 lg:my-20">
+        <ResultSummary result={result as any} tournament={tournament as any}/>
       </section>
     </PageLayout>
   );
