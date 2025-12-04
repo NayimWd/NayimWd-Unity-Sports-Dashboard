@@ -9,15 +9,26 @@ const CreateMatchResult = lazy(() => import("../pages/match/CreateMatchResult"))
 const UpdateUmpire = lazy(() => import("../pages/match/UpdateUmpire"));
 const UpdateTeam = lazy(() => import("../pages/match/UpdateTeam"));
 const UpdateMatchResult = lazy(() => import("../pages/match/UpdateMatchResult"));
+const ManageMatch = lazy(() => import("../pages/match/ManageMatch"));
 
 
 export const matchRoutes: RouteObject[] = [
     {
-        path: "matches/:tournamentId",
+        path: "match",
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
                     <Matches />
+                </SuspenseWrapper>
+            </ErrorBoundaryWrapper>
+        )
+    },
+    {
+        path: "match/manage",
+        element: (
+            <ErrorBoundaryWrapper>
+                <SuspenseWrapper>
+                    <ManageMatch />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )
@@ -33,7 +44,7 @@ export const matchRoutes: RouteObject[] = [
         )
     },
     {
-        path: "matches/create",
+        path: "match/create",
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
@@ -43,7 +54,7 @@ export const matchRoutes: RouteObject[] = [
         )
     },
     {
-        path: "matches/createResult/:matchId",
+        path: "match/createResult/:matchId",
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
@@ -53,7 +64,7 @@ export const matchRoutes: RouteObject[] = [
         )
     },
     {
-        path: "matches/updateResult/:matchId",
+        path: "match/updateResult/:matchId",
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
@@ -63,7 +74,7 @@ export const matchRoutes: RouteObject[] = [
         )
     },
     {
-        path: "matches/updateUmpire/:matchId",
+        path: "match/updateUmpire/:matchId",
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
@@ -73,7 +84,7 @@ export const matchRoutes: RouteObject[] = [
         )
     },
     {
-        path: "matches/updateTeam/:matchId",
+        path: "match/updateTeam/:matchId",
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
@@ -81,6 +92,6 @@ export const matchRoutes: RouteObject[] = [
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )
-    },
+    }
 
 ]

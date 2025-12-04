@@ -120,7 +120,7 @@ export default TournamentDetails;
 
 
 // card, reusable
-const InfoCard = ({
+export const InfoCard = ({
   label,
   value,
 }: {
