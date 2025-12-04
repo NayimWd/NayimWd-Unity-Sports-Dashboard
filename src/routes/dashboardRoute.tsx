@@ -8,7 +8,7 @@ import { playerRoutes } from "./PlayerRoutes";
 import { venueRoutes } from "./venueRoute";
 import { tournamentsRoutes } from "./TournamentRoutes";
 import { applicationRoutes } from "./appLicationRoute";
-
+import { matchRoutes } from "./matchRoute";
 
 
 export const dashboardRoutes: RouteObject[] = [
@@ -20,5 +20,6 @@ export const dashboardRoutes: RouteObject[] = [
     ...playerRoutes,
     ...venueRoutes,
     ...tournamentsRoutes,
-    ...applicationRoutes
+    ...applicationRoutes,
+    ...matchRoutes
 ]
