@@ -1,5 +1,3 @@
-
-
 const UpdateTeam = () => {
   return (
     <div>UpdateTeam</div>

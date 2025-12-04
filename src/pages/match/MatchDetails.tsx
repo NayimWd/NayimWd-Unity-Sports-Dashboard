@@ -1,6 +1,7 @@
-
-export const MatchDetails = () => {
+ const MatchDetails = () => {
   return (
     <div>MatchDetails</div>
   )
 }
+
+export default MatchDetails;
