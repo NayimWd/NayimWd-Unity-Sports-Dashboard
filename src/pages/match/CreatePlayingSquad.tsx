@@ -1,7 +1,9 @@
 import PageLayout from "../../component/layout/PageLayout"
 
-export const CreatePlayingSquad = () => {
+ const CreatePlayingSquad = () => {
   return (
     <PageLayout>CreatePlayingSquad</PageLayout>
   )
 }
+
+export default CreatePlayingSquad;

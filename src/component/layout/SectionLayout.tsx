@@ -3,7 +3,7 @@ import React from 'react';
 import cn from '../../utils/cn';
 
 const sectionVariants = cva(
-    "rounded-lg w-full transition-colors duration-200 my-4 md:my-5 lg:my-6",
+    "rounded-xl w-full transition-colors duration-200 my-4 md:my-5 lg:my-6",
     {
         variants: {
             variant: {
