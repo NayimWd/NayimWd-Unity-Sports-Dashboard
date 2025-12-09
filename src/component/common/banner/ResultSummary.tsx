@@ -26,13 +26,13 @@ const ResultSummary = ({ result, tournament }: SummaryProps) => {
         <div className="absolute inset-0 flex items-center justify-between px-6">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-              <Trophy className="w-6 h-6 text-white" />
+              <Trophy className="w-6 h-6 text-subtext" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-white">
+              <h2 className="text-xl font-bold text-font">
                 {tournament.name}
               </h2>
-              <div className="flex items-center gap-2 text-white/90 text-sm mt-1">
+              <div className="flex items-center gap-2 text-subtext text-sm mt-1">
                 <Calendar className="w-3.5 h-3.5" />
                 <span>Concluded {tournament.endDate}</span>
               </div>
