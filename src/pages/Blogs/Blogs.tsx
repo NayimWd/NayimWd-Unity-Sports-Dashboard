@@ -26,7 +26,7 @@ const Blogs = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState<FilterAllBlogsType>({});
   // fetch blog
-  const { data: blogs, isLoading, isError } = useGetBlogsQuery({ page: currentPage, limit: pageSize, ...filters });
+  const { data: blogs, isLoading, isError } = useGetBlogsQuery({ page: currentPage, limit: pageSize, ...filters }, {refetchOnMountOrArgChange: true});
   // set page size 
   const totalPages = blogs?.pagination?.totalPages ?? 1;
 

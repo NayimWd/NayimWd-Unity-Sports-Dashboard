@@ -39,7 +39,7 @@ export const loginSchema = z.object({
 
 // blog schema
 export const blogSchema = z.object({
-  title: z.string().min(10).max(100),
+  title: z.string().min(10).max(350),
   content: z.string().min(30).max(5000),
   tags: z
     .string()
@@ -71,7 +71,7 @@ export const updateBlogPhotoSchema = z.object({
 // update blog
 export const updateBlogSchema = z
   .object({
-    title: z.string().min(10).max(100).optional(),
+    title: z.string().min(10).max(350).optional(),
     content: z.string().min(30).max(5000).optional(),
     tags: z
       .string()

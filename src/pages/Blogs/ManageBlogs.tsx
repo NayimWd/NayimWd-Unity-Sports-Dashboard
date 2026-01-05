@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { useManageBlogsQuery, useUpdatePublishStatusMutation } from "../../features/blog/blogApi";
 import TablePagination from "../../component/common/Table/TablePagination";
 import { fontStyle } from "../../utils/ClassUtils";
@@ -74,17 +74,21 @@ const ManageBlogs = () => {
   const [filters, setFilters] = useState<Record<string, any>>({});
 
   // manage api slice
-  const { data: blogs, isLoading, isError } = useManageBlogsQuery({
+  const { data: blogs, isLoading, isFetching, isError } = useManageBlogsQuery({
     page: currentPage,
     limit: pageSize,
     ...filters,
-  });
+  },
+{
+    refetchOnMountOrArgChange: true,
+  }
+);
 
   // pagination page number
   const totalPages = blogs?.pagination?.totalPages ?? 1;
 
   // filter data 
-  const headerData = useMemo(() => ["Photo", "Title", "Status", "Update", "Action"], []);
+  const headerData = ["Photo", "Title", "Status", "Update", "Action"];
 
   const tagsOptions = [
     { label: "news", value: "news" },
@@ -142,23 +146,24 @@ const ManageBlogs = () => {
 
 
   // edit button functionality
+
   // state and ref for edit dropdown
 
 
-  // blog table for manage
-  const content = useMemo(() => {
+  // blog table for manage blog
 
-    if (isLoading) {
-      return [...Array(5)].map((_, index) => (
-        <TableSkeleton key={index} columns={headerData.length} />
-      ));
-    }
+  let content = null;
 
-    if (isError || !blogs?.blogs?.length) {
-      return <TableEmpty colSpan={headerData.length} message="No Blogs Found!" />;
-    }
 
-    return blogs.blogs.map((blog: any) => (
+
+  if (isLoading || isFetching) {
+    content = [...Array(5)].map((_, index) => (
+      <TableSkeleton key={index} columns={headerData.length} />
+    ));
+  }else if (isError || !blogs?.blogs?.length) {
+    content = <TableEmpty colSpan={headerData.length} message="No Blogs Found!" />;
+  } else {
+    content = blogs.blogs.map((blog: any) => (
       <TableRow
         key={blog._id}
         rowData={[
@@ -180,13 +185,13 @@ const ManageBlogs = () => {
               </Dropdown.Trigger>
               <Dropdown.Menu>
                 <Dropdown.Item href={`/dashboard/blogs/details/${blog?._id}`}>
-                 <BookOpenText size={14}/> Read Details
+                  <BookOpenText size={14} /> Read Details
                 </Dropdown.Item>
                 <Dropdown.Item href={`/dashboard/blog/update/${blog?._id}`}>
-                 <Edit3 size={14}/> Edit Details
+                  <Edit3 size={14} /> Edit Details
                 </Dropdown.Item>
                 <Dropdown.Item href={`/dashboard/blog/updatePhoto/${blog?._id}`}>
-                 <Edit2 size={14}/> Edit Photo
+                  <Edit2 size={14} /> Edit Photo
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
@@ -207,9 +212,8 @@ const ManageBlogs = () => {
           </Buttons>
         ]}
       />
-    ));
-  }, [isLoading, isError, blogs, headerData]);
-
+    ))
+  };
 
 
   return (

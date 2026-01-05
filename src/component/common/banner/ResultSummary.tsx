@@ -129,7 +129,7 @@ const ResultSummary = ({ result, tournament }: SummaryProps) => {
             <h3 className="text-sm font-semibold text-muted uppercase tracking-wider mb-4">
               Tournament MVP
             </h3>
-            <div className="p-5 rounded-xl bg-gradient-secondary border border-border">
+            <div className="py-5 px-3 sm:px-5 rounded-xl bg-gradient-secondary border border-border">
               <div className="flex flex-col sm:flex-row  items-center sm:items-start gap-4 ">
                 <div className="relative md:mt-0">
                   <img 
@@ -142,7 +142,7 @@ const ResultSummary = ({ result, tournament }: SummaryProps) => {
                   </div>
                 </div>
                 <div className="flex-1 pt-1">
-                  <p className="text-xs font-semibold text-muted text-font/70 mb-1">
+                  <p className="text-xs text-center sm:text-start font-semibold text-muted text-font/70 mb-1">
                     {result.awardFor}
                   </p>
                   <h4 className="text-xl font-bold text-font mb-2">

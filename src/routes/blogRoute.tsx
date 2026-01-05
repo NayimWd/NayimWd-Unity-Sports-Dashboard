@@ -4,7 +4,6 @@ import SuspenseWrapper from "../utils/SuspenseWrapper";
 import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
 import PageSkeleton from "../component/common/loader/PageSkeleton";
 import FormSkeleton from "../component/common/loader/FormSkeleton";
-import TableSkeleton from "../component/common/Table/TableSkeleton";
 const Blogs = lazy(() => import("../pages/Blogs/Blogs"));
 const BlogDetails = lazy(() => import("../pages/Blogs/BlogDetails"));
 const CreateBlog = lazy(() => import("../pages/Blogs/CreateBlogs"));
@@ -67,7 +66,7 @@ export const blogRoutes: RouteObject[] = [
         path: "blogs/manage",
         element: (
           <ErrorBoundaryWrapper>
-            <SuspenseWrapper CustomLoader={<TableSkeleton columns={5}/>}>
+            <SuspenseWrapper>
               <ManageBlogs/>
             </SuspenseWrapper>
           </ErrorBoundaryWrapper>

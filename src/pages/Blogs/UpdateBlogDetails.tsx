@@ -26,7 +26,7 @@ const UpdateBlogDetails = () => {
   const { blogId } = useParams();
 
   // get default content by blogId
-  const { data: blog } = useBlogDetailsQuery(blogId);
+  const { data: blog } = useBlogDetailsQuery(blogId, {refetchOnMountOrArgChange: true});
 
   useEffect(() => {
     if (blog) {
@@ -72,7 +72,7 @@ const UpdateBlogDetails = () => {
       toast.dismiss(loadingId);
       SuccessToast({ msg: "Blog Update Successfully" })
       methods.reset();
-      navigate("/dashboard/blogs")
+      navigate("/dashboard/blogs/manage")
 
     } catch (error) {
       toast.dismiss(loadingId);
