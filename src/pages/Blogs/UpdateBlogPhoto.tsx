@@ -22,7 +22,7 @@ const UpdateBlogPhoto = () => {
   const { blogId } = useParams();
 
   // get blog photo from blog details
-  const { data: blog } = useBlogDetailsQuery(blogId);
+  const { data: blog } = useBlogDetailsQuery(blogId, {refetchOnMountOrArgChange: true});
 
   // update blog photo, api slice 
   const [updateBlogPhoto, { isLoading }] = useUpdateBlogPhotoMutation();

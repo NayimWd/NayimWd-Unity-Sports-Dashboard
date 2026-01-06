@@ -42,7 +42,7 @@ const BlogDetails = () => {
   }
 
   // fetch related blogs
-  const { data: relatedBlogs, isLoading: loadingRelatedBlog, error } = useGetRelatedBlogsQuery({ tags: blog?.tags ?? "", limit: 5 });
+  const { data: relatedBlogs, isLoading: loadingRelatedBlog, error } = useGetRelatedBlogsQuery({ tags: blog?.tags ?? "", limit: 5 }, { skip: !blog?._id });
 
   let content = null;
 
@@ -60,7 +60,7 @@ const BlogDetails = () => {
         <SectionError message="Fetch Related Video Failed! Something went wrong" />
       </div>
     );
-  } else if (!loadingRelatedBlog && !error && relatedBlogs?.blogs.length === 0) {
+  } else if (!loadingRelatedBlog && !error && relatedBlogs?.blogs?.length === 0) {
     content = (
       <div>
         <EmptyData message="No Related Blogs found!" />
