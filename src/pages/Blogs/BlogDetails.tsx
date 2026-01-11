@@ -9,9 +9,6 @@ import BlogSkeleton from "../../component/common/skeleton/BlogSkeleton";
 import SectionError from "../../component/common/error/SectionError";
 import BlogCard from "../../component/common/card/BlogCard";
 import SafeHtmlRender from "../../component/common/input/inputUtils/SafeHtmlRender";
-
-import { useSelector } from "react-redux";
-import { RootState } from "../../app/store/store";
 import ScrollToTop from "../../utils/scrollToTop";
 import Tooltip from "../../component/ui/Tooltip";
 import BlogDetailsSkeleton from "../../component/common/skeleton/BlogDetailsSkeleton";
@@ -22,18 +19,19 @@ import CommonDropDown from "../../component/common/dropdown/CommonDropDown";
 import BackButton from "../../utils/BackButton";
 import { useGoBack } from "../../hooks/useGoBack";
 import PageLayout from "../../component/layout/PageLayout";
+import { useAuthRole } from "../../hooks/useAuthRole";
 
+
+const {isAuthor} = useAuthRole();
 
 const BlogDetails = () => {
   // state and ref for edit dropdown
   const [openLink, setOpenLink] = useState(false);
   const editDropdownRef = useRef<HTMLDivElement>(null!);
 
-  // get user role 
-  const { user } = useSelector((state: RootState) => state.auth);
 
   const { blogId } = useParams();
-  const { data: blog, isLoading } = useBlogDetailsQuery(blogId)
+  const { data: blog, isLoading } = useBlogDetailsQuery(blogId, {refetchOnMountOrArgChange: isAuthor})
 
   // share function
   const currentUrl = useCurrentUrl();
@@ -99,7 +97,7 @@ const BlogDetails = () => {
         <BlogDetailsSkeleton />
       ) : (
         <div className="paddingX lg:px-10 w-full mx-auto bg-surface my-20 py-12 rounded-md shadow-sm space-y-10 relative">
-          {(user?.role === "admin" || user?.role === "staff") ? <div className="absolute top-5 right-5">
+          {isAuthor ? <div className="absolute top-5 right-5">
             <Tooltip position="left" content="Edit Blogs">
               <div onClick={() => setOpenLink(!openLink)} className="size-10 bg-bg rounded-full flex justify-center items-center cursor-pointer">
                 <EllipsisVertical className="text-font" size={22} />
