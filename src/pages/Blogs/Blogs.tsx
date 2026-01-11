@@ -17,16 +17,18 @@ import EmptyData from "../../component/ui/EmptyData";
 import PageLayout from "../../component/layout/PageLayout";
 import BackButton from "../../utils/BackButton";
 import { useGoBack } from "../../hooks/useGoBack";
+import { useAuthRole } from "../../hooks/useAuthRole";
 
 type FilterAllBlogsType = z.infer<typeof filterAllBlogsSchema>
 
+const {isAuthor, isAuthenticated} = useAuthRole();
 
 const Blogs = () => {
   const [pageSize, setPageSize] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState<FilterAllBlogsType>({});
   // fetch blog
-  const { data: blogs, isLoading, isError } = useGetBlogsQuery({ page: currentPage, limit: pageSize, ...filters }, {refetchOnMountOrArgChange: true});
+  const { data: blogs, isLoading, isError } = useGetBlogsQuery({ page: currentPage, limit: pageSize, ...filters }, {refetchOnMountOrArgChange: isAuthenticated && isAuthor});
   // set page size 
   const totalPages = blogs?.pagination?.totalPages ?? 1;
 
