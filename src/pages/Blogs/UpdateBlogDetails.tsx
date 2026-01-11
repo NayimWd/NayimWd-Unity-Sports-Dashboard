@@ -20,6 +20,8 @@ import PageLayout from "../../component/layout/PageLayout";
 
 type blogType = z.infer<typeof updateBlogSchema>;
 
+
+
 const UpdateBlogDetails = () => {
   const goBack = useGoBack();
   // get blog id
