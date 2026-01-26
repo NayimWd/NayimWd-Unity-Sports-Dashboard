@@ -16,6 +16,8 @@ export interface MatchSummary {
   teamA_stats: string;
   teamB_stats: string;
   margin: string;
+  matchDate: string;
+  matchTime: string;
 }
 
 // Single Match item
@@ -46,10 +48,4 @@ export interface MatchListData {
   total: number;
 }
 
-// Top level API envelope
-export interface MatchListResponse {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data: MatchListData;
-}
+
