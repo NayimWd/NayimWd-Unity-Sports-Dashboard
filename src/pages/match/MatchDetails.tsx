@@ -1,6 +1,8 @@
+import PageLayout from "../../component/layout/PageLayout";
+
  const MatchDetails = () => {
   return (
-    <div>MatchDetails</div>
+    <PageLayout>MatchDetails</PageLayout>
   )
 }
 
