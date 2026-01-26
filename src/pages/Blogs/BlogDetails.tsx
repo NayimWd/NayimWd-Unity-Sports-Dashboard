@@ -22,7 +22,7 @@ import PageLayout from "../../component/layout/PageLayout";
 import { useAuthRole } from "../../hooks/useAuthRole";
 
 
-const { isAuthor } = useAuthRole();
+const {isAuthor} = useAuthRole();
 
 const BlogDetails = () => {
   // state and ref for edit dropdown
@@ -31,7 +31,7 @@ const BlogDetails = () => {
 
 
   const { blogId } = useParams();
-  const { data: blog, isLoading } = useBlogDetailsQuery(blogId, { refetchOnMountOrArgChange: isAuthor })
+  const { data: blog, isLoading } = useBlogDetailsQuery(blogId, {refetchOnMountOrArgChange: isAuthor})
 
   // share function
   const currentUrl = useCurrentUrl();
