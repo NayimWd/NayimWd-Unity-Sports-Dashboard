@@ -1,4 +1,4 @@
-import { Calendar, Clock } from "lucide-react";
+import { Calendar, Clock, RadioTower } from "lucide-react";
 import cn from "../../../utils/cn"
 import { TournamentMatch } from "../../../utils/types/matchTypes"
 import Card from "./Card"
@@ -99,6 +99,9 @@ const MatchCard = ({ match, className }: MatchCardProps) => {
         {isCompleted ? (
           <div className="rounded-lg bg-surface border border-border p-3 space-y-1">
             <p className="text-sm font-semibold text-primary">
+             <span className="font-bold  mr-1">
+              {matchSummary?.winner ? matchSummary?.winner.teamName : ""}
+              </span>  
               {matchSummary?.margin}
             </p>
             <p className="text-xs text-subtext">
@@ -108,6 +111,10 @@ const MatchCard = ({ match, className }: MatchCardProps) => {
           </div>
         ) : (
           <div className="flex items-center gap-6 text-sm text-subtext">
+            <div className="flex items-center gap-1">
+              <RadioTower className="w-4 h-4" />
+              <span>{matchSummary?.report}</span>
+            </div>
             <div className="flex items-center gap-1">
               <Calendar className="w-4 h-4" />
               <span>{matchSummary?.matchDate}</span>

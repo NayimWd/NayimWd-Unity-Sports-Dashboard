@@ -34,7 +34,7 @@ export const matchRoutes: RouteObject[] = [
         )
     },
     {
-        path: "matches/details/:matchId",
+        path: "match/:matchId",
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
