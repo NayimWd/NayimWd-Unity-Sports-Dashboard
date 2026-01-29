@@ -12,11 +12,11 @@ const GetMatches = () => {
   const goBack = useGoBack();
 
   // get letest tournament id based on point table
-  const { data, isLoading, isFetching } = useLatestTournamentQuery();
+  const { data } = useLatestTournamentQuery();
 
   const tournamentId = data?.data._id;
   // fetch match
-  const { data: matches } = useGetMatchQuery({ tournamentId }, { skip: !tournamentId });
+  const { data: matches, isLoading, isFetching } = useGetMatchQuery({ tournamentId }, { skip: !tournamentId });
 
   if (isLoading || isFetching) {
     return (

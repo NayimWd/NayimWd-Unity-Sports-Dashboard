@@ -24,6 +24,7 @@ import {
   Settings,
   BrickWall,
   NotepadText,
+  List,
 } from "lucide-react";
 
 export const navLinks = {
@@ -111,6 +112,11 @@ export const navLinks = {
           path: "/dashboard/match",
           icon: GalleryHorizontalEnd,
           label: "All Match",
+        },
+        {
+          path: "/dashboard/match/manage",
+          icon: List,
+          label: "Match List",
         },
         {
           path: "/dashboard/match/create",
