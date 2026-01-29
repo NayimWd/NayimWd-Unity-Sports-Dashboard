@@ -22,9 +22,9 @@ const MatchDetails = () => {
 
   const { matchId } = useParams();
 
-  const { data, isLoading } = useGetMatchDetailsQuery(matchId, { skip: !matchId });
+  const { data, isLoading } = useGetMatchDetailsQuery(matchId as string, { skip: !matchId });
 
-  const details = data?.data;
+  const details = data;
 
   if (isLoading) {
     return (
@@ -132,7 +132,7 @@ const MatchDetails = () => {
             <div className="flex items-center gap-2 bg-bg p-4 rounded-lg">
                 <RadioTower className="w-5 h-5 text-primary" />
               <p className="font-semibold text-primary">
-               {MatchResult.report ? MatchResult.report : ""}
+               {MatchResult?.report ? MatchResult.report : ""}
               </p>
             </div>
           )

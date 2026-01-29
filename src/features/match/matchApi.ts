@@ -1,4 +1,4 @@
-import { MatchListData, TournamentMatch } from "../../utils/types/matchTypes";
+import { IMatchDetailsResponse, MatchListData } from "../../utils/types/matchTypes";
 import { ApiResponse } from "../../utils/types/types";
 import { apiSlice } from "../api/apiSlice";
 
@@ -22,11 +22,12 @@ const matchApi = apiSlice.injectEndpoints({
             ]
           : [{ type: "Match", id: "LIST" }],
     }),
-    getMatchDetails: builder.query({
+    getMatchDetails: builder.query<IMatchDetailsResponse, string>({
       query: ( matchId ) => ({
         url: `/match/details/${matchId}`,
         method: "GET",
       }),
+      transformResponse: (response: ApiResponse<IMatchDetailsResponse>) => response.data
     }),
   }),
 });
