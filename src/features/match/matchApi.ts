@@ -1,15 +1,35 @@
+import { IMatchDetailsResponse, MatchListData } from "../../utils/types/matchTypes";
+import { ApiResponse } from "../../utils/types/types";
 import { apiSlice } from "../api/apiSlice";
 
 const matchApi = apiSlice.injectEndpoints({
-    endpoints: (builder) => ({
-        getMatch: builder.query({
-            query: ({tournamentId}) => ({
-                url: `match/all/${tournamentId}`,
-                method: "GET"
-            }),
-        }),
+  endpoints: (builder) => ({
+    getMatch: builder.query<MatchListData, any>({
+      query: ({ tournamentId }) => ({
+        url: `match/all/${tournamentId}`,
+        method: "GET",
+      }),
+      transformResponse: (response: ApiResponse<MatchListData>) =>
+        response.data,
+      providesTags: (result) =>
+        result
+          ? [
+              ...result?.match.map((m) => ({
+                type: "Match" as const,
+                id: m._id,
+              })),
+              { type: "Match", id: "LIST" },
+            ]
+          : [{ type: "Match", id: "LIST" }],
     }),
+    getMatchDetails: builder.query<IMatchDetailsResponse, string>({
+      query: ( matchId ) => ({
+        url: `/match/details/${matchId}`,
+        method: "GET",
+      }),
+      transformResponse: (response: ApiResponse<IMatchDetailsResponse>) => response.data
+    }),
+  }),
 });
 
-
-export const {useGetMatchQuery} = matchApi;
+export const { useGetMatchQuery, useGetMatchDetailsQuery } = matchApi;
