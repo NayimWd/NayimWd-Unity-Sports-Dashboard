@@ -9,6 +9,7 @@ import { venueRoutes } from "./venueRoute";
 import { tournamentsRoutes } from "./TournamentRoutes";
 import { applicationRoutes } from "./appLicationRoute";
 import { matchRoutes } from "./matchRoute";
+import { ScheduleRoute } from "./ScheduleRoute";
 
 
 export const dashboardRoutes: RouteObject[] = [
@@ -21,5 +22,6 @@ export const dashboardRoutes: RouteObject[] = [
     ...venueRoutes,
     ...tournamentsRoutes,
     ...applicationRoutes,
-    ...matchRoutes
+    ...matchRoutes,
+    ...ScheduleRoute,
 ]
