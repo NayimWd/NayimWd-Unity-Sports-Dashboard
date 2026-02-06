@@ -9,6 +9,7 @@ import { fontStyle } from "../../utils/ClassUtils";
 import cn from "../../utils/cn";
 import { Link } from "react-router-dom";
 import Buttons from "../../component/common/Buttons";
+import MatchCardSkeleton from "../../component/common/skeleton/MatchCardSkeleton";
 
 const Schedule = () => {
   const goBack = useGoBack();
@@ -18,7 +19,17 @@ const Schedule = () => {
 
   const tournamentId = tournament?.data._id;
 
-  const { data } = useGetSchedultQuery({ tournamentId }, { skip: !tournamentId });
+  const { data, isLoading, isFetching } = useGetSchedultQuery({ tournamentId }, { skip: !tournamentId });
+
+  if (isLoading || isFetching) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        {Array.from({ length: 6 }).map((_, idx) => (
+          <MatchCardSkeleton key={idx} />
+        ))}
+      </div>
+    )
+  };
 
   return (
     <PageLayout>
