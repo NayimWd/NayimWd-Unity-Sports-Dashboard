@@ -209,11 +209,7 @@ export const navLinks = {
           icon: Users,
           label: "My Team",
         },
-        {
-          path: "/dashboard/team/manage",
-          icon: Settings,
-          label: "Manage Team",
-        },
+
       ],
     },
     {

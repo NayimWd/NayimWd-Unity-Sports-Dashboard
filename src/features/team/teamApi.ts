@@ -1,4 +1,4 @@
-import { ITeamDetails } from "../../utils/types/teamType";
+import { IMyTeam, ITeamDetails } from "../../utils/types/teamType";
 import { IAllTeams } from "../../utils/types/teamType";
 import { ApiResponse } from "../../utils/types/types";
 import { apiSlice } from "../api/apiSlice";
@@ -46,7 +46,14 @@ const teamApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: ApiResponse<ITeamDetails>) => response.data,
     }),
+    getMyTeam: builder.query<IMyTeam, any>({
+      query: () => ({
+        url: `team/my_team`,
+        method: "GET"
+      }),
+      transformResponse: (response: ApiResponse<IMyTeam>) => response.data,
+    })
   }),
 });
 
-export const { useGetTeamsQuery, useGetTeamDetailsQuery } = teamApi;
+export const { useGetTeamsQuery, useGetTeamDetailsQuery, useGetMyTeamQuery } = teamApi;
