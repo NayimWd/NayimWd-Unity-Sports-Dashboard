@@ -3,6 +3,7 @@ import { RouteObject } from "react-router-dom";
 import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
 import SuspenseWrapper from "../utils/SuspenseWrapper";
 const Schedule = lazy(()=> import("../pages/schedule/Schedule"));
+const CreateSchedule = lazy(()=> import("../pages/schedule/CreateScheduleR1"));
 
 export const ScheduleRoute: RouteObject[] = [
     {
@@ -11,6 +12,17 @@ export const ScheduleRoute: RouteObject[] = [
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
                     <Schedule/>
+                </SuspenseWrapper>
+            </ErrorBoundaryWrapper>
+        )
+
+    },
+    {
+        path: "schedule/create",
+        element: (
+            <ErrorBoundaryWrapper>
+                <SuspenseWrapper>
+                    <CreateSchedule/>
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )

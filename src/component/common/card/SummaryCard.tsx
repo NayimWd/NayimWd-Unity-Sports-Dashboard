@@ -11,7 +11,7 @@ const SummaryCard = ({ label, value }: CardProps) => {
       className={cn(
         "group relative rounded-xl border bg-surface",
         "p-6 flex flex-col justify-between",
-        "overflow-hidden shadow-sm hover:shadow-lg",
+        "overflow-hidden shadow-sm hover:shadow",
         "transition-all duration-200 hover:-translate-y-[2px]",
         "border-border"
       )}

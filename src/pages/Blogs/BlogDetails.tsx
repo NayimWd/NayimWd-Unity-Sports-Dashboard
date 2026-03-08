@@ -22,9 +22,9 @@ import PageLayout from "../../component/layout/PageLayout";
 import { useAuthRole } from "../../hooks/useAuthRole";
 
 
-const {isAuthor} = useAuthRole();
 
 const BlogDetails = () => {
+  const {isAuthor} = useAuthRole();
   // state and ref for edit dropdown
   const [openLink, setOpenLink] = useState(false);
   const editDropdownRef = useRef<HTMLDivElement>(null!);
