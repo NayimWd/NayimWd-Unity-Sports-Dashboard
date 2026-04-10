@@ -28,7 +28,7 @@ const SidebarItem = ({ link }: { link: Link }) => {
             className="sidebarBtn my-1 relative"
           >
             <link.icon className="w-4 h-4" />
-            <span className="font-semibold font-merriweather">{link.label}</span>
+            <span className="font-semibold font-merriweather text-base">{link.label}</span>
             <span className="absolute right-0 p-1">
               {" "}
               {open ? (
@@ -46,10 +46,10 @@ const SidebarItem = ({ link }: { link: Link }) => {
                 <Link key={index} to={child.path}>
                   <button
                     key={index}
-                    className="sidebarBtn"
+                    className="sidebarBtn text-base hover:bg-primaryHover"
                   >
                     <child.icon className="w-4 h-4" />
-                    <span className="font-semibold font-merriweather">{child.label}</span>
+                    <span className="font-semibold font-merriweather text-base">{child.label}</span>
                   </button>
                 </Link>
               ))}
@@ -60,7 +60,7 @@ const SidebarItem = ({ link }: { link: Link }) => {
         <Link to={link.path}>
           <div className="sidebarBtn">
             <link.icon className="w-4 h-4 " />
-            <span className="font-semibold font-merriweather">{link.label}</span>
+            <span className="font-semibold font-merriweather text-base">{link.label}</span>
           </div>
         </Link>
       )}

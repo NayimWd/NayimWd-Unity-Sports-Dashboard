@@ -97,9 +97,9 @@ export const navLinks = {
           label: "Schedule",
         },
         {
-          path: "/dashboard/schedule/firstRound/create",
+          path: "/dashboard/schedule/create",
           icon: CalendarPlus,
-          label: "Create 1st round",
+          label: "Create Schedule",
         },
       ],
     },
@@ -183,7 +183,7 @@ export const navLinks = {
       children: [],
     },
     {
-      path: "/dashboard/account",
+      path: "/dashboard/myAccount",
       icon: Users,
       label: "Account",
       children: [],
@@ -200,7 +200,7 @@ export const navLinks = {
       label: "Team",
       children: [
         {
-          path: "/dashboard/teams",
+          path: "/dashboard/team",
           icon: Boxes,
           label: "Teams",
         },
@@ -209,11 +209,7 @@ export const navLinks = {
           icon: Users,
           label: "My Team",
         },
-        {
-          path: "/dashboard/team/manage",
-          icon: Settings,
-          label: "Manage Team",
-        },
+
       ],
     },
     {
@@ -246,7 +242,7 @@ export const navLinks = {
       children: [],
     },
     {
-      path: "/dashboard/blog",
+      path: "/dashboard/blogs",
       icon: Newspaper,
       label: "Blog",
       children: [],
@@ -335,7 +331,7 @@ export const navLinks = {
       children: [],
     },
     {
-      path: "/dashboard/blog",
+      path: "/dashboard/blogs",
       icon: Newspaper,
       label: "Blog",
       children: [],

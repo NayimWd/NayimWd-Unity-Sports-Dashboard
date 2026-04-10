@@ -7,6 +7,17 @@ export interface ITeam {
   teamLogo: string;
 }
 
+
+export interface IMyTeam {
+  _id: string;
+  teamName: string;
+  teamLogo: string;
+  playerCount: number;
+  managerId: string;
+  createdAt: string;
+  updatedAt: string; 
+}
+
 export interface ITeamPagination {
   currentPage: number;
   totalPages: number;

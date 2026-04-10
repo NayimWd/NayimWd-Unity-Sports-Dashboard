@@ -7,6 +7,8 @@ import SectionLayout from "../../component/layout/SectionLayout";
 import Buttons from "../../component/common/Buttons";
 import SafeHtmlRender from "../../component/common/input/inputUtils/SafeHtmlRender";
 import { fontStyle } from "../../utils/ClassUtils";
+import { useCurrentUserQuery } from "../../features/auth/authApi";
+import { Rocket } from "lucide-react";
 
 const statusColors: Record<string, string> = {
   ongoing: "bg-green-600/10 text-green-600 border-green-600/20",
@@ -18,6 +20,9 @@ const TournamentDetails = () => {
   const goBack = useGoBack();
   const { id } = useParams();
 
+  // access current user
+  const { data: user } = useCurrentUserQuery();
+
   const { data, isLoading } = useGetTournamentDetailsQuery(id as string);
   const t = data?.data;
 
@@ -28,7 +33,7 @@ const TournamentDetails = () => {
       </PageLayout>
     );
   }
- 
+
   return (
     <PageLayout>
       <BackButton onClick={goBack} className="mb-4">
@@ -53,22 +58,34 @@ const TournamentDetails = () => {
       <SectionLayout>
         {/* info header */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-          <span
-            className={`px-4 py-1 rounded-lg border text-sm font-semibold capitalize ${statusColors[t?.status ?? "ongoing"]
-              }`}
-          >
-            {t?.status}
-          </span>
+          <div className="w-full flex justify-between items-center">
+            <span
+              className={`px-4 py-1 rounded-lg border text-sm font-semibold capitalize ${statusColors[t?.status ?? "ongoing"]
+                }`}
+            >
+              {t?.status}
+            </span>
+            <div>
+              {
 
+                t?.status === "upcoming" && user?.role === "manager" ?
+
+                  <Buttons iconRight={<Rocket size={16} />} size="sm" className="rounded px-5" variant="primary">Apply  </Buttons>
+                  :
+                  ""
+
+              }
+            </div>
+          </div>
           {/* vew result button */}
           {t?.status === "completed" && (
             <Link to={`/dashboard/tournament/result/${t._id}`}>
-            <Buttons
-              variant="primary"
-              className="rounded-md px-5 py-2"
-            >
-              View Tournament Result
-            </Buttons>
+              <Buttons
+                variant="primary"
+                className="rounded-md px-5 py-2"
+              >
+                View Tournament Result
+              </Buttons>
             </Link>
           )}
         </div>
