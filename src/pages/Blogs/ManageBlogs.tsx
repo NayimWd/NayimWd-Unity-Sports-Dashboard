@@ -145,10 +145,6 @@ const ManageBlogs = () => {
   };
 
 
-  // edit button functionality
-
-  // state and ref for edit dropdown
-
 
   // blog table for manage blog
 

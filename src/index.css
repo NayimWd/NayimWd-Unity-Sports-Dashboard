@@ -7,6 +7,10 @@
   display: none;
 }
 
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
 /* input background color */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -88,7 +92,7 @@ textarea {
 }
 
 .sidebarBtn {
-  @apply w-full tracking-tight flex items-center px-3 py-1.5 gap-2 dark:hover:bg-surface hover:bg-primary hover:text-white cursor-pointer rounded text-primary text-left sm:text-lg;
+  @apply w-full tracking-tight flex items-center px-3 py-1.5 gap-2 dark:hover:bg-bg hover:bg-primary hover:text-white cursor-pointer rounded-lg text-primary text-left sm:text-lg;
 }
 
 .errorText {

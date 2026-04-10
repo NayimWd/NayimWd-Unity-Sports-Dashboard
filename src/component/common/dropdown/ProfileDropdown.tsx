@@ -77,7 +77,7 @@ const ProfileDropdown = forwardRef<HTMLDivElement, DropdownMenuProps>(
 export default ProfileDropdown;
 
 const dropdownStyle = cva(
-  "absolute right-0 mt-2 w-48 bg-bg border border-subBorder rounded shadow-xl z-50 transform transition-all duration-200 ease-in-out origin-top",
+  "absolute right-0 mt-2 w-48 bg-bg border border-gray-500 rounded shadow-xl z-50 transform transition-all duration-200 ease-in-out origin-top",
   {
     variants: {
       open: {

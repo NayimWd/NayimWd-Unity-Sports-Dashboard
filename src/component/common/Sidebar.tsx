@@ -29,19 +29,33 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
     <aside
       ref={sidebarRef}
       className={`
-    bg-gradientN-bg fixed mt-6 top-0 left-0 z-40 h-full w-64 border-r border-border transition-transform duration-300 ease-in-out shadow-xl md:shadow-sm backdrop-blur-sm md:backdrop-blur-0
-    ${isOpen ? "translate-x-0" : "-translate-x-full"}
-    md:translate-x-0
-  `}
+        fixed top-0 left-0 z-40 h-full w-64
+        bg-surface border-r border-border
+        flex flex-col
+        transition-transform duration-300 ease-in-out
+        shadow-xl md:shadow-none
+        ${isOpen ? "translate-x-0" : "-translate-x-full"}
+        md:translate-x-0 md:mt-14
+      `}
     >
-      <div className="relative h-full px-2 pt-20 pb-48 overflow-y-scroll scrollbar-hide">
+      {/* Role badge */}
+      <div className="px-4 py-3 border-b border-border">
+        <span className="inline-flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-widest text-muted">
+          <span className="w-1.5 h-1.5 rounded-full bg-primary opacity-70" />
+          {userRole} panel
+        </span>
+      </div>
+
+      {/* Nav */}
+      <nav className="flex-1 overflow-y-auto py-3 px-2 scrollbar-hide">
         {navLinks[userRole].map((link, index) => (
           <SidebarItem key={index} link={link} />
         ))}
-      </div>
+      </nav>
 
-      <div className="absolute bottom-4 left-0 w-full py-2 rounded-md shadow-md">
-        <SidebarProfile />
+      {/* Footer */}
+      <div className="relative">
+      <SidebarProfile />
       </div>
     </aside>
   );

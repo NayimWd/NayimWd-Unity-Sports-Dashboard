@@ -1,4 +1,4 @@
-export const CreateScheduleR2 = () => {
+ const CreateScheduleR2 = () => {
 
     // For qualifier round, Create match 1st then create Schedule with match ID
 
@@ -6,3 +6,5 @@ export const CreateScheduleR2 = () => {
     <div>CreateScheduleR2</div>
   )
 }
+
+export default CreateScheduleR2;

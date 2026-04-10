@@ -5,7 +5,7 @@ import TableSkeleton from "../../component/common/Table/TableSkeleton";
 import TableEmpty from "../../component/common/Table/TableEmpty";
 import { useLatestTournamentQuery } from "../../features/tournament/tournamentApi";
 import { useGetPointTableQuery } from "../../features/pointTable/pointTableApi";
-import { fontStyle } from "../../utils/ClassUtils";
+
 
 
 const PointSummary = () => {
@@ -70,26 +70,32 @@ const PointSummary = () => {
   }
 
   return (
-    <div>
-    
-        {loading ? <span className="bg-bg h-5 w-14" />
-          :
-          <div className={`${fontStyle.SectionHeading} flex items-center justify-center gap-4 flex-wrap`}>
-            <p className="text-font text-xl text-center">
-              {pointTable?.data?.tournament?.tournamentName} </p>
-            <img className="size-12 rounded " src={pointTable?.data?.tournament?.photo} alt="tournamentLogo" loading="lazy" />
-          </div>
-        }
-        <Table className="">
-          <TableHeader
-            headers={headerData}
-          />
-          {
-            content
-          }
-        </Table>
-   
+   <div className="rounded-2xl border border-border overflow-hidden bg-surface">
+
+    {/* Table header */}
+    <div className="flex items-center justify-between px-5 py-4 border-b border-border">
+      {loading ? (
+        <div className="h-4 w-40 rounded bg-subSurface animate-pulse" />
+      ) : (
+        <div className="flex items-center gap-3">
+          <img className="w-8 h-8 rounded-lg object-cover border border-border"
+            src={pointTable?.data?.tournament?.photo} alt="" />
+          <p className="text-sm font-medium text-font">
+            {pointTable?.data?.tournament?.tournamentName}
+          </p>
+        </div>
+      )}
+      <span className="text-xs text-muted bg-subSurface border border-border px-3 py-1 rounded-full">
+        Point Table
+      </span>
     </div>
+
+    <Table>
+      <TableHeader headers={headerData} />
+      {content}
+    </Table>
+
+  </div>
   )
 }
 
