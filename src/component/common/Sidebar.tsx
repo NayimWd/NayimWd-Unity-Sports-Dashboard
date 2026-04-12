@@ -47,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto py-3 px-2 scrollbar-hide">
+      <nav className="flex-1 overflow-y-auto py-3 px-2 mb-32 scrollbar-hide">
         {navLinks[userRole].map((link, index) => (
           <SidebarItem key={index} link={link} />
         ))}

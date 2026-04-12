@@ -49,4 +49,14 @@ export const ScheduleRoute: RouteObject[] = [
             </ErrorBoundaryWrapper>
         )
     },
+    {
+        path: "schedule/manage",
+        element: (
+            <ErrorBoundaryWrapper>
+                <SuspenseWrapper>
+                    <CreateScheduleR2/>
+                </SuspenseWrapper>
+            </ErrorBoundaryWrapper>
+        )
+    },
 ]

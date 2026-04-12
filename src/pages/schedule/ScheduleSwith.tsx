@@ -4,8 +4,8 @@ import PageLayout from "../../component/layout/PageLayout"
 import SectionLayout from "../../component/layout/SectionLayout";
 import { useGoBack } from "../../hooks/useGoBack"
 import BackButton from "../../utils/BackButton"
-import { fontStyle } from "../../utils/ClassUtils";
 import { Link } from "react-router-dom";
+import PageHeader from "../../component/ui/PageHeader";
 
 
 type RoundType = "round1" | "qualifier";
@@ -21,15 +21,11 @@ const ScheduleSwith = () => {
     return (
         <PageLayout>
             <BackButton onClick={goBack}>Back</BackButton>
-            <div className="text-center mt-10 mb-11">
-                <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-2">
-                    · Match Setup ·
-                </p>
-                <h1 className={`${fontStyle.pageTitle} text-font`}>Choose match round</h1>
-                <p className="text-sm text-gray-400 mt-1">
-                    Select the round type to configure the schedule
-                </p>
-            </div>
+            <PageHeader
+            topTitle="· Schedule Setup ·"
+            title="Choose match round"
+            subtitle="Select the round type to configure the schedule"
+            />
             <SectionLayout>
                 {/* Round cards */}
                 <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto w-full">
