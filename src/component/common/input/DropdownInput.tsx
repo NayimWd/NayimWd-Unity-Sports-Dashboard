@@ -5,7 +5,9 @@ interface DropdownInputProps {
   name: string;
   label: string;
   placeholder?: string;
-  options: { label: string | number; value: string | number }[];
+  options: { 
+    label: string | number;
+    value: string | number  }[];
 }
 
 const DropdownInput = ({ name, label, placeholder, options }: DropdownInputProps) => {

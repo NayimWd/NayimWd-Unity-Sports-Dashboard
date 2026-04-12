@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useGoBack } from "../../hooks/useGoBack";
-import PageLayout from "../../component/layout/PageLayout";
-import BackButton from "../../utils/BackButton";
-import SectionLayout from "../../component/layout/SectionLayout";
-import { Link } from "react-router-dom";
 import Buttons from "../../component/common/Buttons";
+import PageLayout from "../../component/layout/PageLayout"
+import SectionLayout from "../../component/layout/SectionLayout";
+import { useGoBack } from "../../hooks/useGoBack"
+import BackButton from "../../utils/BackButton"
+import { Link } from "react-router-dom";
 import PageHeader from "../../component/ui/PageHeader";
+
 
 type RoundType = "round1" | "qualifier";
 
@@ -14,19 +15,16 @@ const rounds = [
     { id: "qualifier" as RoundType, label: "Qualifier", badge: "QL", meta: "Elimination" },
 ];
 
-
-const CreateMatch = () => {
+const ScheduleSwith = () => {
     const goBack = useGoBack();
-    const [selected, setSelected] = useState<RoundType>("round1")
-
+    const [selected, setSelected] = useState<RoundType>("round1");
     return (
         <PageLayout>
             <BackButton onClick={goBack}>Back</BackButton>
-
             <PageHeader
-                topTitle="· Match Setup ·"
-                title="Choose match round"
-                subtitle="Select the round type to configure the schedule"
+            topTitle="· Schedule Setup ·"
+            title="Choose match round"
+            subtitle="Select the round type to configure the schedule"
             />
             <SectionLayout>
                 {/* Round cards */}
@@ -76,8 +74,8 @@ const CreateMatch = () => {
 
                 {/* CTA */}
                 <div className="flex justify-center mt-8">
-                    <Link to={`${selected === "round1" ? `/dashboard/match/create/R1` :
-                        `/dashboard/match/create/R2`}`}>
+                    <Link to={`${selected === "round1" ? `/dashboard/schedule/R1/create` :
+                        `/dashboard/schedule/R2/create`}`}>
                         <Buttons variant="primary" size="md" className="px-7 rounded-lg flex items-center gap-2">
                             Continue <span>→</span>
                         </Buttons>
@@ -88,4 +86,4 @@ const CreateMatch = () => {
     )
 }
 
-export default CreateMatch
+export default ScheduleSwith

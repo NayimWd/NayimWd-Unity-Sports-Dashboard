@@ -5,15 +5,16 @@ import SectionLayout from "../component/layout/SectionLayout";
 import { useGetLatestResultQuery, useGetSummaryQuery } from "../features/dashboard/summaryApi";
 import { fontStyle } from "../utils/ClassUtils";
 import PointSummary from "./pointTable/PointSummary";
+import { Trophy, Users, User, Clock, Star, Building2 } from "lucide-react";
 
 
 const statItems = [
-  { key: "tournamentCount", label: "Tournaments" },
-  { key: "teamCount", label: "Teams" },
-  { key: "playerCount", label: "Players" },
-  { key: "runningPlayerCount", label: "Active Players" },
-  { key: "umpireCount", label: "Umpires" },
-  { key: "venueCount", label: "Venues" },
+  { key: "tournamentCount", label: "Tournaments", icon: Trophy, color: "text-primary", bg: "bg-primary/10" },
+  { key: "teamCount", label: "Teams", icon: Users, color: "text-green-600", bg: "bg-green-500/10" },
+  { key: "playerCount", label: "Players", icon: User, color: "text-purple-600", bg: "bg-purple-500/10" },
+  { key: "runningPlayerCount", label: "Active Players", icon: Clock, color: "text-orange-500", bg: "bg-orange-500/10" },
+  { key: "umpireCount", label: "Umpires", icon: Star, color: "text-red-500", bg: "bg-red-500/10" },
+  { key: "venueCount", label: "Venues", icon: Building2, color: "text-teal-600", bg: "bg-teal-500/10" },
 ];
 
 const Dashboard = () => {
@@ -30,37 +31,45 @@ const Dashboard = () => {
 
   return (
     <PageLayout>
-      <section>
-        <h1 className={`${fontStyle.pageTitle} font-bold text-font mb-6`}>Dashboard</h1>
-        {/* Loading skeleton */}
+      {/* ── Page header ── */}
+      <div className="flex items-start justify-between mb-7">
+        <div>
+          <h1 className={`${fontStyle.pageTitle} text-font font-medium`}>Dashboard</h1>
+          <p className="text-sm text-muted mt-0.5">Sports Club Management — Season 2026</p>
+        </div>
+        <span className="text-xs text-muted bg-subSurface border border-border px-3 py-1.5 rounded-full">
+          Live
+        </span>
+      </div>
+      <section className="mb-8">
+        <p className={`${fontStyle.SectionHeading} text-font mb-5`}>Overview</p>
+
+        {/* Skeleton */}
         {isLoading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {Array(6)
-              .fill(null)
-              .map((_, i) => (
-                <div
-                  key={i}
-                  className="h-28 rounded-xl bg-muted animate-pulse"
-                />
-              ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {Array(6).fill(null).map((_, i) => (
+              <div key={i} className="h-28 rounded-xl bg-subSurface animate-pulse" />
+            ))}
           </div>
         )}
 
-        {/* Empty/Fallback */}
+        {/* Empty */}
         {!isLoading && !summary && (
-          <div className="border border-muted rounded-xl p-6 text-center text-muted-foreground">
-            No summary data found.
+          <div className="border border-border rounded-xl p-8 text-center text-muted text-sm">
+            No summary data available.
           </div>
         )}
 
-        {/* Stats */}
+        {/* Grid */}
         {!isLoading && summary && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {statItems.map((item) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {statItems.map(({ key, label, icon: Icon, color, bg }) => (
               <SummaryCard
-                key={item.key}
-                label={item.label}
-                value={(summary as any)[item.key] ?? 0}
+                key={key}
+                label={label}
+                value={(summary as any)[key] ?? 0}
+                icon={<Icon className={`w-4 h-4 ${color}`} />}
+                iconBg={bg}
               />
             ))}
           </div>

@@ -1,5 +1,5 @@
 import ThemeSwitcher from "./ThemeSwitcher";
-import { ChartNoAxesGantt, LayoutDashboard, Settings, User2 } from "lucide-react";
+import { ChartNoAxesGantt, Settings, User2 } from "lucide-react";
 import Buttons from "./Buttons";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignOutMutation } from "../../features/auth/authApi";
@@ -52,55 +52,94 @@ const Header = ({ handleToggle }: HeaderProps) => {
   useClickOutSide(dropdownRef, () => setIsOpen(false))
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-gradient-bg border-b border-border drop-shadow">
-      <div className="container py-3 md:py-4 lg:py-5 opacity-100">
-        <div className=" flex items-center justify-between">
-          <div className="flex items-center justify-start rtl:justify-end">
-            <button className="mr-2 shadow bg-bg dark:shadow-xl xs:mr-3 text-font inline-flex items-center focus:outline focus:outline-surface p-2 rounded-md md:hidden">
-              <ChartNoAxesGantt
-                onClick={handleToggle}
-                className="h-8 w-10 text-black dark:text-white"
-                aria-label="Toggle Menu"
-              />
+    <nav className="sticky top-0 z-50 w-full py-4 h-16 bg-surface border-b border-border flex items-center">
+      <div className="container">
+        <div className="flex items-center justify-between">
+
+          {/* ── Left ── */}
+          <div className="flex items-center gap-2.5">
+            {/* Mobile menu toggle */}
+            <button
+              onClick={handleToggle}
+              className="md:hidden w-[34px] h-[34px] rounded-lg border border-border bg-subSurface
+                         flex items-center justify-center text-subtext
+                         hover:bg-bg hover:border-inputBorder transition-colors"
+              aria-label="Toggle menu"
+            >
+              <ChartNoAxesGantt size={16} />
             </button>
-            <div className="flex items-center me-2 md:me-24">
-              <LayoutDashboard className="hidden md:block md:h-10 md:w-10 me-3 text-xl text-primary" />
-              <span className="hidden sm:block self-center tracking-wider  uppercase text-[clamp(1.25rem,2vw,2.6rem)] text-primary font-bold whitespace-nowrap font-inter">
-                Dashboard
-              </span>
+
+            {/* Brand */}
+            <div className="flex items-center gap-2">
+              <div className="w-[30px] h-[30px] rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                  <path d="M7.5 1.5l2 4 4.5.7-3.25 3.1.75 4.4L7.5 11.5l-4 2.2.75-4.4L1 6.2l4.5-.7z"
+                    fill="white" />
+                </svg>
+              </div>
+              <div className="hidden sm:block">
+                <p className="text-base md:text-lg font-medium text-font leading-tight tracking-tight">
+                  Unity Sports
+                </p>
+                <p className="text-[12px] text-muted leading-tight">Club Management</p>
+              </div>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+
+          {/* ── Right ── */}
+          <div className="flex items-center gap-2">
             <ThemeSwitcher />
-            <div className="relative">
-              {user?._id ? (
-                <>
-                  <img
-                    className="size-11 rounded-full object-cover cursor-pointer hover:outline outline-primary"
-                    src={user.photo}
-                    alt="User Avatar"
-                    onClick={() => setIsOpen(!isOpen)}
-                    loading="lazy"
-                  />
-                  <div ref={dropdownRef}>
-                    <ProfileDropdown
-                      isOpen={isOpen}
-                      onClose={() => setIsOpen((prev) => !prev)}
-                      user={user}
-                      onLogout={handleLogout}
-                      links={links}
+
+            <div className="w-px h-5 bg-border mx-1" />
+
+            {user?._id ? (
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setIsOpen(prev => !prev)}
+                  className="flex items-center gap-2 pl-1 pr-2.5 py-1 rounded-lg border border-border
+                             bg-subSurface hover:bg-bg hover:border-inputBorder
+                             transition-colors duration-150"
+                  aria-expanded={isOpen}
+                  aria-haspopup="true"
+                >
+                  {user.photo ? (
+                    <img
+                      src={user.photo}
+                      alt={user.name}
+                      className="w-7 h-7 rounded-md object-cover flex-shrink-0"
+                      loading="lazy"
                     />
+                  ) : (
+                    <div className="w-7 h-7 rounded-md bg-primary flex items-center justify-center
+                                    text-[11px] font-medium text-white flex-shrink-0">
+                      {user.name?.charAt(0).toUpperCase()}
+                    </div>
+                  )}
+                  <div className="hidden sm:block text-left">
+                    <p className="text-xs font-medium text-font leading-tight">{user.name}</p>
+                    <p className="text-[10px] text-muted leading-tight capitalize">{user.role ?? "Member"}</p>
                   </div>
-                </>
-              ) : (
-                <Link to="/login">
-                  <Buttons className="rounded" size="md">
-                    Login
-                  </Buttons>
-                </Link>
-              )}
-            </div>
+                  <svg className="text-muted ml-0.5" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.3"
+                      strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+
+                <ProfileDropdown
+                  isOpen={isOpen}
+                  onClose={() => setIsOpen(false)}
+                  user={user}
+                  onLogout={handleLogout}
+                  links={links}
+                />
+              </div>
+            ) : (
+              <Link to="/login">
+                <Buttons size="sm">Login</Buttons>
+              </Link>
+            )}
           </div>
+
         </div>
       </div>
     </nav>

@@ -21,9 +21,9 @@ import { useAuthRole } from "../../hooks/useAuthRole";
 
 type FilterAllBlogsType = z.infer<typeof filterAllBlogsSchema>
 
-const {isAuthor, isAuthenticated} = useAuthRole();
 
 const Blogs = () => {
+  const {isAuthor, isAuthenticated} = useAuthRole();
   const [pageSize, setPageSize] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState<FilterAllBlogsType>({});

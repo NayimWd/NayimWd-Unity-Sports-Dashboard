@@ -6,6 +6,7 @@ const Teams = lazy(() => import("../pages/teams/Teams"));
 const TeamDetails = lazy(() => import("../pages/teams/TeamDetails"));
 const MyTeam = lazy(() => import("../pages/teams/MyTeam"));
 const CreateTeam = lazy(() => import("../pages/teams/CreateTeam"));
+const ManageTeam = lazy(()=> import("../pages/teams/ManageTeam"));
 
 
 export const teamRoutes: RouteObject[] = [
@@ -49,4 +50,14 @@ export const teamRoutes: RouteObject[] = [
             </ErrorBoundaryWrapper>
         )
     },
+    {
+        path: "team/manage/:teamId",
+        element: (
+            <ErrorBoundaryWrapper>
+                <SuspenseWrapper>
+                    <ManageTeam/>
+                </SuspenseWrapper>
+            </ErrorBoundaryWrapper>
+        )
+    }
 ]

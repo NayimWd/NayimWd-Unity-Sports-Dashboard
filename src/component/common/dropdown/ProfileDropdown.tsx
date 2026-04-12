@@ -34,7 +34,7 @@ const ProfileDropdown = forwardRef<HTMLDivElement, DropdownMenuProps>(
         ref={ref}
         className={cn(dropdownStyle({ open: isOpen }), className, "z-[200]")}
         role="menu"
-        aria-hidden={!isOpen}
+       
       >
         {/* User info */}
         <div className="p-4 border-b border-inputBorder">
@@ -67,7 +67,7 @@ const ProfileDropdown = forwardRef<HTMLDivElement, DropdownMenuProps>(
           </button>
         </div>
         <div className="absolute top-0 right-0 p-2" aria-label="Close menu">
-          <X onClick={onClose} className="text-font bg-subSurface p-1.5 rounded-full cursor-pointer hover:bg-surface hover:scale-105 shadow" size={28} />
+          <X onClick={onClose} className="text-font bg-subSurface p-1.5 rounded-md cursor-pointer hover:bg-surface hover:scale-105 " size={28} />
         </div>
       </div>
     );
@@ -77,7 +77,7 @@ const ProfileDropdown = forwardRef<HTMLDivElement, DropdownMenuProps>(
 export default ProfileDropdown;
 
 const dropdownStyle = cva(
-  "absolute right-0 mt-2 w-48 bg-bg border border-subBorder rounded shadow-xl z-50 transform transition-all duration-200 ease-in-out origin-top",
+  "absolute right-0 mt-2 w-48 bg-bg border border-gray-500 rounded-lg shadow-xl z-50 transform transition-all duration-200 ease-in-out origin-top",
   {
     variants: {
       open: {

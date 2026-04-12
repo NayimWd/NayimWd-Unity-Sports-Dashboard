@@ -16,6 +16,7 @@ interface ModalProps {
   isLoading?: boolean;
   variant?: "default" | "info" | "danger" | "success";
   size?: "sm" | "md" | "lg" | "xl";
+   hideFooter?: boolean;
 }
 
 const RedixModal = ({
@@ -30,6 +31,7 @@ const RedixModal = ({
   isLoading = false,
   variant = "default",
   size = "md",
+  hideFooter
 }: ModalProps) => {
   return (
     <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
@@ -61,7 +63,7 @@ const RedixModal = ({
           {children}
 
           {/* Footer */}
-          <div className="mt-6 flex justify-end gap-3">
+         { !hideFooter && <div className="mt-6 flex justify-end gap-3">
             <Dialog.Close asChild>
               <button className="px-4 py-2 text-sm rounded-md border border-border text-font hover:bg-subSurface transition">
                 {cancelText}
@@ -77,7 +79,7 @@ const RedixModal = ({
             >
               {isLoading ? "Processing..." : confirmText}
             </button>
-          </div>
+          </div>}
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

@@ -3,25 +3,24 @@ import cn from "../../../utils/cn";
 interface CardProps {
   label: string;
   value: number;
+  icon?: React.ReactNode;
+  iconBg?: string;
 }
 
-const SummaryCard = ({ label, value }: CardProps) => {
+const SummaryCard = ({ label, value, icon, iconBg }: CardProps) => {
   return (
-    <div
-      className={cn(
-        "group relative rounded-xl border bg-surface",
-        "p-6 flex flex-col justify-between",
-        "overflow-hidden shadow-sm hover:shadow-lg",
-        "transition-all duration-200 hover:-translate-y-[2px]",
-        "border-border"
+    <div className={cn(
+      "group  relative rounded-xl border border-border bg-surface",
+      "p-5 flex flex-col justify-between overflow-hidden",
+      "transition-all duration-200 hover:-translate-y-[2px] hover:border-inputBorder"
+    )}>
+      {icon && (
+        <div className={cn("w-8 h-8 rounded-lg flex items-center justify-center mb-3", iconBg)}>
+          {icon}
+        </div>
       )}
-    >
-      <div className="text-sm font-medium text-muted">{label}</div>
-      <div className="mt-3 text-3xl tracking-tight font-semibold text-font">
-        {value}
-      </div>
-
-      <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+      <p className="text-xs text-muted mb-1.5">{label}</p>
+      <p className="text-[26px] font-medium leading-none text-font tracking-tight">{value}</p>
     </div>
   );
 };
