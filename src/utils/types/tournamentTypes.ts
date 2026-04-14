@@ -108,5 +108,6 @@ export interface ILatestTournamentResult {
 export interface ITournamentSearch {
   _id: string,
   tournamentName: string,
+  status: string
 };
 

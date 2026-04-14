@@ -21,6 +21,7 @@ import TextInput from "../../component/common/input/TextInput";
 import { matchNumbers, matchRound } from "./formHelper/formUtils";
 import PickerModal from "../../component/ui/modal/PickerModal";
 import DateInput from "../../component/common/input/DateInput";
+import StepIndicator from "../../component/stepper/StepIndicator";
 
 // interface
 interface PickerItem {
@@ -49,7 +50,7 @@ const normalizeMatch = (m: IMatchSearch): PickerItem => ({
   _id: m._id, name: `Match ${m.matchNumber} — ${m.status}`,
 });
 
-// set step map for RHF trigger
+// set step map for RHF trigger(stepper)
 const stepFields: Record<number, (keyof ScheduleRQFormData)[]> = {
   1: ["tournamentId"],
   2: ["venueId", "round", "matchNumber", "matchDate", "matchTime"],
@@ -151,36 +152,7 @@ const CreateScheduleR2 = () => {
 
       <SectionLayout>
         {/* step button */}
-        <div className="flex items-center justify-center gap-2 mb-10 max-w-sm mx-auto">
-          {STEPS.map((label, i) => {
-            const n = i + 1;
-            const done = step > n;
-            const current = step === n;
-            return (
-              <div key={n} className="flex items-center gap-2 flex-1">
-                <div className="flex flex-col items-center gap-1 flex-shrink-0">
-                  <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium transition-colors
-                    ${done ? "bg-primary text-white"
-                      : current ? "bg-primary/10 text-primary border border-primary"
-                        : "bg-subSurface text-muted border border-border"}`}>
-                    {done ? (
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.5"
-                          strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    ) : n}
-                  </div>
-                  <span className={`text-[10px] whitespace-nowrap ${current ? "text-primary" : "text-muted"}`}>
-                    {label}
-                  </span>
-                </div>
-                {n < STEPS.length && (
-                  <div className={`h-px flex-1 mb-4 transition-colors ${done ? "bg-primary" : "bg-border"}`} />
-                )}
-              </div>
-            );
-          })}
-        </div>
+        <StepIndicator steps={STEPS} current={step} />
 
         {/* form */}
         <FormContainer

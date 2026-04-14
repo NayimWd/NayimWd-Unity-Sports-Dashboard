@@ -88,4 +88,4 @@ const CreateMatch = () => {
     )
 }
 
-export default CreateMatch
+export default CreateMatch;

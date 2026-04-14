@@ -156,3 +156,11 @@ export interface IMatchSearch {
   matchNumber: string,
   status: string,
 }
+
+// umpire list interface for create qualifier round match 
+export interface IUmpireSearch {
+  _id: string;
+  name: string;
+  role: string;
+}
+
