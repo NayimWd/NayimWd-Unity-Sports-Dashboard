@@ -150,3 +150,9 @@ export interface IMatchDetailsResponse {
   matchInfo: IMatchInfo | null;
   MatchResult: IMatchResult | null;
 }
+
+export interface IMatchSearch {
+  _id: string,
+  matchNumber: string,
+  status: string,
+}

@@ -37,7 +37,7 @@ const RedixModal = ({
     <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40" />
-        <Dialog.Content className={baseModal({ variant, size })}>
+        <Dialog.Content aria-describedby={description ? "modal-description" : undefined} className={baseModal({ variant, size })}>
           {/* Header */}
           <div className="flex justify-between items-start mb-4">
             {title && (
@@ -54,7 +54,7 @@ const RedixModal = ({
 
           {/* Description */}
           {description && (
-            <Dialog.Description className="text-sm text-subtext mb-4">
+            <Dialog.Description aria-describedby={description ? "modal-description" : undefined} className="text-sm text-subtext mb-4">
               {description}
             </Dialog.Description>
           )}

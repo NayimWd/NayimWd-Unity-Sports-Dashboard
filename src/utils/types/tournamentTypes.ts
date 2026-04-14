@@ -85,6 +85,12 @@ export interface ITournamentFinalResult {
   tournament: ITournamentSummary;
 }
 
+// search response
+export interface ISearch {
+  _id: string;
+  tournamentName: string;
+}
+
 
 // result summary 
 export interface ITournamentGlimps {
@@ -98,3 +104,9 @@ export interface ILatestTournamentResult {
   tournament: ITournamentGlimps,
   result: ITournamentResult
 }
+
+export interface ITournamentSearch {
+  _id: string,
+  tournamentName: string,
+};
+

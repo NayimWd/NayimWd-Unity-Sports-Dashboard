@@ -52,7 +52,8 @@ const teamApi = apiSlice.injectEndpoints({
         method: "GET"
       }),
       transformResponse: (response: ApiResponse<IMyTeam>) => response.data,
-    })
+    }),
+   
   }),
 });
 

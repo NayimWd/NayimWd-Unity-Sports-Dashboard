@@ -11,9 +11,9 @@ export const tournamentApi = apiSlice.injectEndpoints({
     latestTournament: builder.query<ApiResponse<Tournament>, void>({
       query: () => ({
         url: `tournament/latest`,
-        method: "GET"
+        method: "GET",
       }),
-      keepUnusedDataFor: 600
+      keepUnusedDataFor: 600,
     }),
     getAllTournament: builder.query<ApiResponse<ITournaments>, string | void>({
       query: (status) => {
@@ -43,12 +43,23 @@ export const tournamentApi = apiSlice.injectEndpoints({
         { type: "Tournament", id: tournamentId },
       ],
     }),
-    getTournamentResult: builder.query<ApiResponse<ITournamentFinalResult>, string>({
+    getTournamentResult: builder.query<
+      ApiResponse<ITournamentFinalResult>,
+      string
+    >({
       query: (tournamentId) => ({
         url: `tournament/results/${tournamentId}`,
         method: "GET",
       }),
-      transformResponse: (response: ApiResponse<ITournamentFinalResult>) => response
+      transformResponse: (response: ApiResponse<ITournamentFinalResult>) =>
+        response,
+    }),
+    searchTournament: builder.query({
+      query: () => ({
+        url: "tournament/search",
+        method: "GET",
+      }),
+  
     }),
     createTournament: builder.mutation({
       query: (data) => ({
@@ -108,6 +119,12 @@ export const tournamentApi = apiSlice.injectEndpoints({
         { type: "Tournament", id: id },
       ],
     }),
+    approvedTeam: builder.query({
+      query: ({tournamentId}) => ({
+        url: `/tournament/approved_teams/${tournamentId}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -121,5 +138,7 @@ export const {
   useUpdateTournamentDateMutation,
   useUpdateTournamentPhotoMutation,
   useUpdateTournamentStatusMutation,
-  useCreateTournamentResultMutation
+  useCreateTournamentResultMutation,
+  useSearchTournamentQuery,
+  useApprovedTeamQuery,
 } = tournamentApi;

@@ -10,7 +10,7 @@ import useClickOutSide from "../../../hooks/useClickOutSide";
 
 interface DateInputProps
   extends InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof inputVariants> {
+  VariantProps<typeof inputVariants> {
   name: string;
   label: string;
   className?: string;
@@ -46,19 +46,16 @@ const DateInput = ({
           name={name}
           control={control}
           render={({ field }) => {
-            const safeDate =
-              field.value instanceof Date
-                ? field.value
-                : field.value
-                ? new Date(field.value)
-                : undefined;
+            const safeDate = field.value
+              ? new Date(field.value.split("-").reverse().join("-"))
+              : undefined;
 
             return (
               <>
                 <input
                   readOnly
                   onClick={() => setOpen(!open)}
-                  value={safeDate ? format(safeDate, "dd/MM/yyyy") : ""}
+                  value={safeDate ? format(safeDate, "dd-MM-yyyy") : ""}
                   placeholder={placeholder}
                   className={cn(
                     inputVariants({ variant: error ? "error" : "default" }),
@@ -76,7 +73,7 @@ const DateInput = ({
                       mode="single"
                       selected={safeDate}
                       onSelect={(d) => {
-                        field.onChange(d ?? null);
+                        field.onChange(d ? format(d, "dd-MM-yyyy") : null);
                         setOpen(false);
                       }}
                       className="p-2 bg-bg rounded-lg border-border text-font"

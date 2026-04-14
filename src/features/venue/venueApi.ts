@@ -63,8 +63,14 @@ const venueApi = apiSlice.injectEndpoints({
         {type: "Venue", id: venueId},
         {type: "Venue", id: "LIST"},
       ]
+    }),
+    venueSearch: builder.query({
+      query: () => ({
+        url: `venue/search`,
+        method: "GET"
+      })
     })
   }),
 });
 
-export const { useGetVenueQuery, useGetVenueDetailsQuery, useCreateVenueMutation, useUpdateVenueDetailsMutation, useUpdateVenuePhotoMutation } = venueApi;
+export const { useGetVenueQuery, useGetVenueDetailsQuery, useCreateVenueMutation, useUpdateVenueDetailsMutation, useUpdateVenuePhotoMutation, useVenueSearchQuery } = venueApi;
