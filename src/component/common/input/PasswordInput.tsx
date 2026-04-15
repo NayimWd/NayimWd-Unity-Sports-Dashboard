@@ -29,15 +29,18 @@ const PasswordInput = ({
   // dynamic border color
   let variant: "primary" | "success" | "error" = "primary";
 
-  if (focused && value) {
-    variant = error ? "error" : "success";
+  // set the input variant based on the error and focus state
+  if (error) {
+    variant = "error";
+  } else if (value) {
+    variant = "success";
   }
 
   useEffect(() => {
     if (focused) {
       trigger(name);
     }
-  }, [focused, value, name]);
+  }, [ name, value]);
 
   return (
     <div className=" space-y-2 relative">

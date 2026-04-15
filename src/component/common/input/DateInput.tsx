@@ -27,13 +27,15 @@ const DateInput = ({
 }: DateInputProps) => {
   const {
     control,
-    formState: { errors, touchedFields },
+    formState: { errors },
+    trigger
   } = useFormContext();
 
   const error = errors[name]?.message as string | undefined;
-  const isTouched = touchedFields[name];
   const [open, setOpen] = useState(false);
   const calenderRef = useRef<HTMLDivElement>(null!);
+
+
 
   useClickOutSide(calenderRef, () => setOpen(false));
 
@@ -46,6 +48,11 @@ const DateInput = ({
           name={name}
           control={control}
           render={({ field }) => {
+            const value = field.value;
+
+            let variant: "default" | "success" | "error" = "default";
+            if (error) variant = "error";
+            else if (value) variant = "success";
             const safeDate = field.value
               ? new Date(field.value.split("-").reverse().join("-"))
               : undefined;
@@ -58,7 +65,7 @@ const DateInput = ({
                   value={safeDate ? format(safeDate, "dd-MM-yyyy") : ""}
                   placeholder={placeholder}
                   className={cn(
-                    inputVariants({ variant: error ? "error" : "default" }),
+                    inputVariants({ variant }),
                     "w-full pr-10 cursor-pointer text-font",
                     className
                   )}
@@ -74,6 +81,7 @@ const DateInput = ({
                       selected={safeDate}
                       onSelect={(d) => {
                         field.onChange(d ? format(d, "dd-MM-yyyy") : null);
+                        trigger(name);
                         setOpen(false);
                       }}
                       className="p-2 bg-bg rounded-lg border-border text-font"
@@ -94,7 +102,7 @@ const DateInput = ({
         </span>
       </div>
 
-      {error && isTouched && (
+      {error && (
         <p className="errorText flex items-center gap-1 text-red-500 text-xs pt-1">
           <BadgeAlert size={14} /> {error}
         </p>
@@ -112,6 +120,7 @@ const inputVariants = cva(
       variant: {
         default: "border-inputBorder focus:ring-primary",
         error: "border-toastErrorText focus:ring-toastErrorText",
+        success: "border-green-500 focus:ring-green-500",
         disabled: "opacity-50 cursor-not-allowed",
       },
     },

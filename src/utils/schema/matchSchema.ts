@@ -11,10 +11,8 @@ const baseMatchSchema = z.object({
 });
 
 export const createMatchR1Schema = baseMatchSchema.extend({
-  previousMatches: z.object({
     teamA: z.string().min(1, "Team A is required"),
     teamB: z.string().min(1, "Team B is required"),
-  }),
 });
 
 export const createMatchRQSchema = baseMatchSchema.extend({

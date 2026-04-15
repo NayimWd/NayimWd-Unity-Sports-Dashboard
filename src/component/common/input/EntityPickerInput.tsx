@@ -1,4 +1,4 @@
-import { useFormContext, Controller } from "react-hook-form";
+import { useFormContext, Controller, get } from "react-hook-form";
 import { BadgeAlert, ChevronRight, X } from "lucide-react";
 import cn from "../../../utils/cn";
 
@@ -28,7 +28,7 @@ const EntityPickerInput = ({
   onClear,
 }: EntityPickerInputProps) => {
   const { control, formState } = useFormContext();
-  const error = formState.errors[name]?.message as string | undefined;
+  const error = get(formState.errors, name)?.message as string | undefined;
 
   return (
     <div className="space-y-1">
@@ -47,7 +47,9 @@ const EntityPickerInput = ({
               "bg-surface border rounded-md cursor-pointer",
               "text-sm transition-all duration-150",
               "hover:border-primary/50",
-              error ? "border-toastErrorText" : "border-inputBorder"
+              error ? "border-toastErrorText"
+                : selected ? "border-green-500"
+                  : "border-inputBorder"
             )}
           >
             {selected ? (

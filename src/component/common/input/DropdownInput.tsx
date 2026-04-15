@@ -1,21 +1,27 @@
 import { Controller, useFormContext } from "react-hook-form";
 import { BadgeAlert, ChevronDown } from "lucide-react";
+// import { useState } from "react";
 
 interface DropdownInputProps {
   name: string;
   label: string;
   placeholder?: string;
-  options: { 
+  options: {
     label: string | number;
-    value: string | number  }[];
+    value: string | number
+  }[];
 }
 
 const DropdownInput = ({ name, label, placeholder, options }: DropdownInputProps) => {
-  const { control, formState } = useFormContext();
+  const { control, formState, watch, trigger } = useFormContext();
   const error = formState.errors[name]?.message as string | undefined;
+  const value = watch(name);
 
-  const variant: "primary" | "error" = error ? "error" : "primary";
+  // const [focused, setFocused] = useState(false);
 
+  let variant: "primary" | "success" | "error" = "primary";
+  if (error) variant = "error";
+  else if (value) variant = "success";
 
   return (
     <div className="space-y-1">
@@ -27,22 +33,16 @@ const DropdownInput = ({ name, label, placeholder, options }: DropdownInputProps
         render={({ field }) => (
           <div className="relative">
             <select
-              className={`w-full cursor-pointer h-10 px-3 py-2 text-font bg-surface rounded-md appearance-none text-sm transition-all duration-150 ease-in-out focus:outline-none border focus:ring-2 p-1 
-    ${variant === "error"
-                  ? "border-toastErrorText focus:ring-toastErrorText"
-                  : "border-inputBorder focus:ring-primary"
-                }    
-  `}
+              className={`w-full cursor-pointer h-10 px-3 py-2 text-font bg-surface rounded-md appearance-none text-sm transition-all duration-150 ease-in-out focus:outline-none border focus:ring-2 p-1
+                ${variant === "error" ? "border-toastErrorText focus:ring-toastErrorText"
+                  : variant === "success" ? "border-green-500 focus:ring-green-500"
+                    : "border-inputBorder focus:ring-primary"}
+              `}
               value={field.value ?? ""}
               onChange={(e) => {
                 const val = e.target.value;
-
-                // Convert number-like values into real numbers
-                if (!isNaN(Number(val))) {
-                  field.onChange(Number(val));
-                } else {
-                  field.onChange(val);
-                }
+                field.onChange(!isNaN(Number(val)) ? Number(val) : val);
+                trigger(name);
               }}
             >
               {placeholder && (
@@ -75,3 +75,4 @@ const DropdownInput = ({ name, label, placeholder, options }: DropdownInputProps
 };
 
 export default DropdownInput;
+

@@ -20,6 +20,7 @@ import { matchNumbers, matchRound } from "./formHelper/formUtils";
 import PickerModal from "../../component/ui/modal/PickerModal";
 import DateInput from "../../component/common/input/DateInput";
 import StepIndicator from "../../component/stepper/StepIndicator";
+import StepNavigation from "../../component/stepper/stepNavigation";
 
 
 // interface
@@ -32,6 +33,13 @@ interface PickerItem {
 type ActivePicker = "tournament" | "venue" | "teamA" | "teamB" | null;
 
 type SelectedMap = Record<Exclude<ActivePicker, null>, PickerItem | null>;
+// pickerKey - rhf field name
+const pickerKeyToField: Record<Exclude<ActivePicker, null>, keyof ScheduleR1FormData> = {
+  tournament: "tournamentId",
+  venue: "venueId",
+  teamA: "teamA",
+  teamB: "teamB"
+};
 
 // normalize data for maintain api data shape
 const normalizeTournament = (t: ITournamentSearch): PickerItem => ({
@@ -39,12 +47,13 @@ const normalizeTournament = (t: ITournamentSearch): PickerItem => ({
 });
 
 const normalizeVenue = (v: IVenueSearch): PickerItem => ({
-  _id: v._id, name: `${v.city} ${v.city}`
+  _id: v._id, name: `${v.name} ${v.city}`,
 });
 
 const normalizeTeam = (t: ITeamSearch): PickerItem => ({
   _id: t._id, name: t.teamName,
 });
+
 
 // set step map for RHF trigger(stepper)
 const stepFields: Record<number, (keyof ScheduleR1FormData)[]> = {
@@ -63,8 +72,10 @@ const CreateScheduleR1 = () => {
   const [activePicker, setActivePicker] = useState<ActivePicker>(null);
   const [tId, setTId] = useState<string>("");
   const [selected, setSelected] = useState<SelectedMap>({
-    tournament: null, venue: null,
-    teamA: null, teamB: null,
+    tournament: null,
+    venue: null,
+    teamA: null,
+    teamB: null,
   });
 
   const methods = useForm<ScheduleR1FormData>({
@@ -87,21 +98,24 @@ const CreateScheduleR1 = () => {
   const teams = (teamRes?.data ?? []).map(normalizeTeam);
 
   // for pick options from list to extract id
-  const handleSelect = (field: string, item: PickerItem) => {
-    setValue(field as keyof ScheduleR1FormData, item._id, { shouldValidate: true });
-    setSelected((prev) => ({ ...prev, [field]: item }));
-    if (field === "tournamentId") setTId(item._id);
+  const handleSelect = (pickerKey: Exclude<ActivePicker, null>, item: PickerItem) => {
+    const rhfField = pickerKeyToField[pickerKey];
+    setValue(rhfField as keyof ScheduleR1FormData, item._id, { shouldValidate: true });
+    setSelected((prev) => ({ ...prev, [pickerKey]: item }));
+    if (pickerKey === "tournament") setTId(item._id);
+    setActivePicker(null);
   };
 
   // clear form handler
-  const handleClear = (field: string) => {
-    setValue(field as keyof ScheduleR1FormData, "" as any, { shouldValidate: false });
-    setSelected(prev => ({ ...prev, [field]: null }));
-    if (field === "tournamentId") {
+  const handleClear = (PickerKey: Exclude<ActivePicker, null>) => {
+    const rhfField = pickerKeyToField[PickerKey];
+    setValue(rhfField as keyof ScheduleR1FormData, "" as any, { shouldValidate: false });
+    setSelected(prev => ({ ...prev, [PickerKey]: null }));
+    if (PickerKey === "tournament") {
       setTId("");
       // clear dependent fields
-      (["teamA", "teamB", "matchA", "matchB"] as const).forEach(f => {
-        setValue(f, null);
+      (["teamA", "teamB"] as const).forEach(f => {
+        setValue(pickerKeyToField[f] as any, "");
         setSelected(prev => ({ ...prev, [f]: null }));
       });
     }
@@ -120,12 +134,12 @@ const CreateScheduleR1 = () => {
 
   const pickerConfig: Record<
     Exclude<ActivePicker, null>,
-    { title: string; items: PickerItem[]; field: string; isLoading: boolean }
+    { title: string; items: PickerItem[]; isLoading: boolean }
   > = {
-    tournament: { title: "Select Tournament", items: tournaments, field: "tournamentId", isLoading: tLoading },
-    venue: { title: "Select Venue", items: venues, field: "venueId", isLoading: vLoading },
-    teamA: { title: "Select Team A", items: teams, field: "teamA", isLoading: tmLoading },
-    teamB: { title: "Select Team B", items: teams, field: "teamB", isLoading: tmLoading },
+    tournament: { title: "Select Tournament", items: tournaments, isLoading: tLoading },
+    venue: { title: "Select Venue", items: venues, isLoading: vLoading },
+    teamA: { title: "Select Team A", items: teams, isLoading: tmLoading },
+    teamB: { title: "Select Team B", items: teams, isLoading: tmLoading },
   };
 
   const active = activePicker ? pickerConfig[activePicker] : null;
@@ -140,7 +154,7 @@ const CreateScheduleR1 = () => {
       />
       <SectionLayout>
         {/* step button */}
-        <StepIndicator steps={STEPS} current={step}/>
+        <StepIndicator steps={STEPS} current={step} />
         <FormContainer
           methods={methods}
           onSubmit={onSubmit}
@@ -155,7 +169,7 @@ const CreateScheduleR1 = () => {
                 placeholder="Select a tournament"
                 selected={selected.tournament}
                 onPick={() => setActivePicker("tournament")}
-                onClear={() => handleClear("tournamentId")}
+                onClear={() => handleClear("tournament")}
               />
             </div>
           )}
@@ -195,7 +209,7 @@ const CreateScheduleR1 = () => {
                 placeholder="Select a venue"
                 selected={selected.venue}
                 onPick={() => setActivePicker("venue")}
-                onClear={() => handleClear("venueId")}
+                onClear={() => handleClear("venue")}
               />
             </div>
           )}
@@ -225,49 +239,25 @@ const CreateScheduleR1 = () => {
           )}
 
           {/* ── Navigation ── */}
-          <div className="flex items-center justify-between mt-8 pt-6 border-t border-border">
-            {step > 1 ? (
-              <button
-                type="button"
-                onClick={() => setStep(s => s - 1)}
-                className="px-4 py-2 text-sm text-subtext border border-border rounded-lg
-                           hover:bg-subSurface transition-colors"
-              >
-                ← Back
-              </button>
-            ) : <div />}
-
-            {step < 3 ? (
-              <button
-                type="button"
-                onClick={handleNext}
-                className="px-5 py-2 text-sm font-medium text-white bg-primary
-                           hover:bg-primaryHover rounded-lg transition-colors"
-              >
-                Next →
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className="px-5 py-2 text-sm font-medium text-white bg-primary
-                           hover:bg-primaryHover rounded-lg transition-colors"
-              >
-                Create Schedule
-              </button>
-            )}
-          </div>
+          <StepNavigation
+            step={step}
+            totalSteps={3}
+            onNext={handleNext}
+            onBack={() => setStep(s => s - 1)}
+            submitLabel="Create Match"
+          />
         </FormContainer>
       </SectionLayout>
 
       {/* picker modal */}
-      {active && (
+      {active && activePicker && (
         <PickerModal
           isOpen={!!activePicker}
           onOpenChange={(open) => { if (!open) setActivePicker(null); }}
           title={active.title}
           items={active.items}
           selectedId={selected[activePicker!]?._id}
-          onSelect={(item) => handleSelect(active.field, item)}
+          onSelect={(item) => handleSelect(activePicker, item)}
           isLoading={active.isLoading}
         />
       )}

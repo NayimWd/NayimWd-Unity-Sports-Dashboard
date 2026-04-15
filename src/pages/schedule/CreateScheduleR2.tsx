@@ -9,10 +9,9 @@ import FormContainer from "../../component/common/Form/FormContainer";
 import PageHeader from "../../component/ui/PageHeader";
 import { ITournamentSearch } from "../../utils/types/tournamentTypes";
 import { IVenueSearch } from "../../utils/types/venueType";
-import { ITeamSearch } from "../../utils/types/teamType";
 import { IMatchSearch } from "../../utils/types/matchTypes";
 import { ScheduleRQFormData, scheduleSchemaRQ } from "../../utils/schema/scheduleSchema";
-import { useApprovedTeamQuery, useSearchTournamentQuery } from "../../features/tournament/tournamentApi";
+import { useSearchTournamentQuery } from "../../features/tournament/tournamentApi";
 import { useVenueSearchQuery } from "../../features/venue/venueApi";
 import { useMatchOverviewQuery } from "../../features/match/matchApi";
 import EntityPickerInput from "../../component/common/input/EntityPickerInput";
@@ -22,6 +21,7 @@ import { matchNumbers, matchRound } from "./formHelper/formUtils";
 import PickerModal from "../../component/ui/modal/PickerModal";
 import DateInput from "../../component/common/input/DateInput";
 import StepIndicator from "../../component/stepper/StepIndicator";
+import StepNavigation from "../../component/stepper/stepNavigation";
 
 // interface
 interface PickerItem {
@@ -30,9 +30,16 @@ interface PickerItem {
   photo?: string;
 }
 
-type ActivePicker = "tournament" | "venue" | "teamA" | "teamB" | "matchA" | "matchB" | null;
+type ActivePicker = "tournament" | "venue" | "matchA" | "matchB" | null;
 
 type SelectedMap = Record<Exclude<ActivePicker, null>, PickerItem | null>;
+
+const pickerKeyToField: Record<Exclude<ActivePicker, null>, keyof ScheduleRQFormData> = {
+  tournament: "tournamentId",
+  venue: "venueId",
+  matchA: "matchA",
+  matchB: "matchB",
+};
 
 // normalize data for maintain api data shape
 const normalizeTournament = (t: ITournamentSearch): PickerItem => ({
@@ -40,14 +47,11 @@ const normalizeTournament = (t: ITournamentSearch): PickerItem => ({
 });
 
 const normalizeVenue = (v: IVenueSearch): PickerItem => ({
-  _id: v._id, name: `${v.city} ${v.city}`
+  _id: v._id, name: `${v.name} ${v.city}`
 });
 
-const normalizeTeam = (t: ITeamSearch): PickerItem => ({
-  _id: t._id, name: t.teamName,
-});
 const normalizeMatch = (m: IMatchSearch): PickerItem => ({
-  _id: m._id, name: `Match ${m.matchNumber} — ${m.status}`,
+  _id: m._id, name: `${m.matchNumber} - ${m.status}`,
 });
 
 // set step map for RHF trigger(stepper)
@@ -67,9 +71,10 @@ const CreateScheduleR2 = () => {
   const [activePicker, setActivePicker] = useState<ActivePicker>(null);
   const [tId, setTId] = useState<string>("");
   const [selected, setSelected] = useState<SelectedMap>({
-    tournament: null, venue: null,
-    teamA: null, teamB: null,
-    matchA: null, matchB: null,
+    tournament: null,
+    venue: null,
+    matchA: null,
+    matchB: null,
   });
 
   const methods = useForm<ScheduleRQFormData>({
@@ -81,9 +86,6 @@ const CreateScheduleR2 = () => {
   // fetch data with rtk query
   const { data: tournamentRes, isLoading: tLoading } = useSearchTournamentQuery("");
   const { data: venueRes, isLoading: vLoading } = useVenueSearchQuery(undefined);
-  const { data: teamRes, isLoading: tmLoading } = useApprovedTeamQuery(
-    { tournamentId: tId }, { skip: !tId }
-  );
   const { data: matchRes, isLoading: mLoading } = useMatchOverviewQuery(
     { tournamentId: tId }, { skip: !tId }
   );
@@ -91,29 +93,30 @@ const CreateScheduleR2 = () => {
   // normalize API data
   const tournaments = (tournamentRes?.data ?? []).map(normalizeTournament);
   const venues = (venueRes?.data ?? []).map(normalizeVenue);
-  const teams = (teamRes?.data ?? []).map(normalizeTeam);
   const matches = (matchRes?.data ?? []).map(normalizeMatch);
 
   // for pick options from list to extract id
-  const handleSelect = (field: string, item: PickerItem) => {
-    setValue(field as keyof ScheduleRQFormData, item._id, { shouldValidate: true });
-    setSelected((prev) => ({ ...prev, [field]: item }));
-    if (field === "tournamentId") setTId(item._id);
+  const handleSelect = (pickerKey: Exclude<ActivePicker, null>, item: PickerItem) => {
+    const rhfField = pickerKeyToField[pickerKey];
+    setValue(rhfField, item._id, { shouldValidate: true });
+    setSelected(prev => ({ ...prev, [pickerKey]: item }));
+    if (pickerKey === "tournament") setTId(item._id);
+    setActivePicker(null);
   };
 
   // clear form handler
-  const handleClear = (field: string) => {
-    setValue(field as keyof ScheduleRQFormData, "" as any, { shouldValidate: false });
-    setSelected(prev => ({ ...prev, [field]: null }));
-    if (field === "tournamentId") {
+  const handleClear = (pickerKey: Exclude<ActivePicker, null>) => {
+    const rhfField = pickerKeyToField[pickerKey];
+    setValue(rhfField, "" as any, { shouldValidate: false });
+    setSelected(prev => ({ ...prev, [pickerKey]: null }));
+    if (pickerKey === "tournament") {
       setTId("");
-      // clear dependent fields
-      (["teamA", "teamB", "matchA", "matchB"] as const).forEach(f => {
-        setValue(f, null);
+      (["matchA", "matchB"] as const).forEach(f => {
+        setValue(pickerKeyToField[f], null);
         setSelected(prev => ({ ...prev, [f]: null }));
       });
     }
-  }
+  };
 
   // next button trigger
   const handleNext = async () => {
@@ -129,14 +132,12 @@ const CreateScheduleR2 = () => {
 
   const pickerConfig: Record<
     Exclude<ActivePicker, null>,
-    { title: string; items: PickerItem[]; field: string; isLoading: boolean }
+    { title: string; items: PickerItem[]; isLoading: boolean }
   > = {
-    tournament: { title: "Select Tournament", items: tournaments, field: "tournamentId", isLoading: tLoading },
-    venue: { title: "Select Venue", items: venues, field: "venueId", isLoading: vLoading },
-    teamA: { title: "Select Team A", items: teams, field: "teamA", isLoading: tmLoading },
-    teamB: { title: "Select Team B", items: teams, field: "teamB", isLoading: tmLoading },
-    matchA: { title: "Select Match A", items: matches, field: "matchA", isLoading: mLoading },
-    matchB: { title: "Select Match B", items: matches, field: "matchB", isLoading: mLoading },
+    tournament: { title: "Select Tournament", items: tournaments, isLoading: tLoading },
+    venue: { title: "Select Venue", items: venues, isLoading: vLoading },
+    matchA: { title: "Select Match A", items: matches, isLoading: mLoading },
+    matchB: { title: "Select Match B", items: matches, isLoading: mLoading },
   };
 
   const active = activePicker ? pickerConfig[activePicker] : null;
@@ -169,7 +170,7 @@ const CreateScheduleR2 = () => {
                 placeholder="Select a tournament"
                 selected={selected.tournament}
                 onPick={() => setActivePicker("tournament")}
-                onClear={() => handleClear("tournamentId")}
+                onClear={() => handleClear("tournament")}
               />
             </div>
           )}
@@ -209,7 +210,7 @@ const CreateScheduleR2 = () => {
                 placeholder="Select a venue"
                 selected={selected.venue}
                 onPick={() => setActivePicker("venue")}
-                onClear={() => handleClear("venueId")}
+                onClear={() => handleClear("venue")}
               />
             </div>
           )}
@@ -234,70 +235,30 @@ const CreateScheduleR2 = () => {
                   onPick={() => setActivePicker("matchB")}
                   onClear={() => handleClear("matchB")}
                 />
-                <EntityPickerInput
-                  name="teamA"
-                  label="Team A (optional)"
-                  placeholder="Auto-resolved after R1"
-                  selected={selected.teamA}
-                  onPick={() => setActivePicker("teamA")}
-                  onClear={() => handleClear("teamA")}
-                />
-                <EntityPickerInput
-                  name="teamB"
-                  label="Team B (optional)"
-                  placeholder="Auto-resolved after R1"
-                  selected={selected.teamB}
-                  onPick={() => setActivePicker("teamB")}
-                  onClear={() => handleClear("teamB")}
-                />
               </div>
             </div>
           )}
 
           {/* ── Navigation ── */}
-          <div className="flex items-center justify-between mt-8 pt-6 border-t border-border">
-            {step > 1 ? (
-              <button
-                type="button"
-                onClick={() => setStep(s => s - 1)}
-                className="px-4 py-2 text-sm text-subtext border border-border rounded-lg
-                           hover:bg-subSurface transition-colors"
-              >
-                ← Back
-              </button>
-            ) : <div />}
-
-            {step < 3 ? (
-              <button
-                type="button"
-                onClick={handleNext}
-                className="px-5 py-2 text-sm font-medium text-white bg-primary
-                           hover:bg-primaryHover rounded-lg transition-colors"
-              >
-                Next →
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className="px-5 py-2 text-sm font-medium text-white bg-primary
-                           hover:bg-primaryHover rounded-lg transition-colors"
-              >
-                Create Schedule
-              </button>
-            )}
-          </div>
+          <StepNavigation
+            step={step}
+            totalSteps={3}
+            onNext={handleNext}
+            onBack={() => setStep(s => s - 1)}
+            submitLabel="Create Match"
+          />
         </FormContainer>
       </SectionLayout>
 
       {/* picker modal */}
-      {active && (
+      {active && activePicker && (
         <PickerModal
           isOpen={!!activePicker}
           onOpenChange={(open) => { if (!open) setActivePicker(null); }}
           title={active.title}
           items={active.items}
-          selectedId={selected[activePicker!]?._id}
-          onSelect={(item) => handleSelect(active.field, item)}
+          selectedId={selected[activePicker]?._id}
+          onSelect={(item) => handleSelect(activePicker, item)}
           isLoading={active.isLoading}
         />
       )}

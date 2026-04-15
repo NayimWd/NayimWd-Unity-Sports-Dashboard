@@ -18,6 +18,7 @@ import EntityPickerInput from "../../component/common/input/EntityPickerInput";
 import { matchNumbers } from "../schedule/formHelper/formUtils";
 import DropdownInput from "../../component/common/input/DropdownInput";
 import PickerModal from "../../component/ui/modal/PickerModal";
+import StepNavigation from "../../component/stepper/stepNavigation";
 
 // interface for list items to normalize
 interface PickerItem {
@@ -37,6 +38,7 @@ type ActivePicker =
   | "umpire3"
   | null;
 
+
 type SelectedMap = Record<Exclude<ActivePicker, null>, PickerItem | null>;
 
 // normalize for similar shape
@@ -44,11 +46,22 @@ const normalizeTournament = (t: ITournamentSearch): PickerItem => ({
   _id: t._id, name: t.tournamentName,
 });
 const normalizeTeam = (m: ITeamSearch): PickerItem => ({
-  _id: m._id, name: `Match ${m.teamName}`,
+  _id: m._id, name: m.teamName,
 });
 const normalizeUmpire = (u: IUmpireSearch): PickerItem => ({
-  _id: u._id, name: u.name, role: u.role
+  _id: u._id, name: u.name, role: u.role,
 });
+
+// pickerKey - rhf field name
+const pickerKeyToField: Record<Exclude<ActivePicker, null>, string> = {
+  tournament: "tournamentId",
+  teamA: "teamA",
+  teamB: "teamB",
+  umpire1: "umpire1",
+  umpire2: "umpire2",
+  umpire3: "umpire3",
+};
+
 
 // set step map for RHF trigger
 const stepFields: Record<number, string[]> = {
@@ -87,20 +100,23 @@ const CreateMatchR1 = () => {
   const matches = (teamRes?.data ?? []).map(normalizeTeam);
   const umpires = ((umpireRes as any)?.data?.umpires ?? []).map(normalizeUmpire);
 
-
-  const handleSelect = (field: string, item: PickerItem) => {
-    setValue(field as any, item._id, { shouldValidate: true });
-    setSelected(prev => ({ ...prev, [field]: item }));
-    if (field === "tournament") setTId(item._id);
+  // ui - show selected state, rhf - extract id
+  const handleSelect = (pickerKey: Exclude<ActivePicker, null>, item: PickerItem) => {
+    const rhfField = pickerKeyToField[pickerKey];
+    setValue(rhfField as any, item._id, { shouldValidate: true });
+    setSelected(prev => ({ ...prev, [pickerKey]: item }));
+    if (pickerKey === "tournament") setTId(item._id);
+    setActivePicker(null);
   };
 
-  const handleClear = (field: string) => {
-    setValue(field as any, "" as any, { shouldValidate: false });
-    setSelected(prev => ({ ...prev, [field]: null }));
-    if (field === "tournament") {
+  const handleClear = (pickerKey: Exclude<ActivePicker, null>) => {
+    const rhfField = pickerKeyToField[pickerKey];
+    setValue(rhfField as any, "" as any, { shouldValidate: false });
+    setSelected(prev => ({ ...prev, [pickerKey]: null }));
+    if (pickerKey === "tournament") {
       setTId("");
-      (["matchA", "matchB"] as const).forEach(f => {
-        setValue(`previousMatches.${f}` as any, "");
+      (["teamA", "teamB"] as const).forEach(f => {
+        setValue(pickerKeyToField[f] as any, "");
         setSelected(prev => ({ ...prev, [f]: null }));
       });
     }
@@ -113,7 +129,7 @@ const CreateMatchR1 = () => {
 
   const onSubmit = (data: CreateMatchR1FormData) => {
     console.log(data);
-    // fire RTK mutation here
+    // createMatch(payload);
   };
 
   const pickerConfig: Record<
@@ -137,17 +153,12 @@ const CreateMatchR1 = () => {
       <PageHeader
         topTitle="Match Setup"
         title="Create Round 1 Match"
-        subtitle="Set up a new qualifier round match"
+        subtitle="Set up a new round 1 match"
       />
 
       <SectionLayout>
-        {/* step indicator */}
-        <StepIndicator
-          steps={STEPS}
-          current={step}
-        />
+        <StepIndicator steps={STEPS} current={step} />
 
-        {/* form */}
         <FormContainer
           methods={methods}
           onSubmit={onSubmit}
@@ -226,52 +237,27 @@ const CreateMatchR1 = () => {
           )}
 
           {/* Navigation */}
-          <div className="flex items-center justify-between mt-8 pt-6 border-t border-border">
-            {step > 1 ? (
-              <button
-                type="button"
-                onClick={() => setStep(s => s - 1)}
-                className="px-4 py-2 text-sm text-subtext border border-border
-                           rounded-lg hover:bg-subSurface transition-colors"
-              >
-                ← Back
-              </button>
-            ) : <div />}
-
-            {step < 3 ? (
-              <button
-                type="button"
-                onClick={handleNext}
-                className="px-5 py-2 text-sm font-medium text-white bg-primary
-                           hover:bg-primaryHover rounded-lg transition-colors"
-              >
-                Next →
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className="px-5 py-2 text-sm font-medium text-white bg-primary
-                           hover:bg-primaryHover rounded-lg transition-colors"
-              >
-                Create Match
-              </button>
-            )}
-          </div>
+          <StepNavigation
+            step={step}
+            totalSteps={3}
+            onNext={handleNext}
+            onBack={() => setStep(s => s - 1)}
+            submitLabel="Create Match"
+          />
         </FormContainer>
-
       </SectionLayout>
 
-      {active && (
+      {active && activePicker && (
         <PickerModal
           isOpen={!!activePicker}
           onOpenChange={(open) => { if (!open) setActivePicker(null); }}
           title={active.title}
           items={active.items}
-          selectedId={selected[activePicker!]?._id}
-          onSelect={(item) => handleSelect(activePicker!, item)}
+          selectedId={selected[activePicker]?._id}
+          onSelect={(item) => handleSelect(activePicker, item)}
           isLoading={active.isLoading}
         />
-      )};
+      )}
     </PageLayout>
   )
 }

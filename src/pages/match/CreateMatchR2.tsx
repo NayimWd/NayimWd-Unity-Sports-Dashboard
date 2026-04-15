@@ -18,6 +18,7 @@ import EntityPickerInput from "../../component/common/input/EntityPickerInput";
 import DropdownInput from "../../component/common/input/DropdownInput";
 import { matchNumbers } from "../schedule/formHelper/formUtils";
 import PickerModal from "../../component/ui/modal/PickerModal";
+import StepNavigation from "../../component/stepper/stepNavigation";
 
 // interface for list items to normalize
 interface PickerItem {
@@ -47,6 +48,16 @@ const normalizeMatch = (m: IMatchSearch): PickerItem => ({
 const normalizeUmpire = (u: IUmpireSearch): PickerItem => ({
   _id: u._id, name: u.name,
 });
+
+// pickerKey → RHF field name
+const pickerKeyToField: Record<Exclude<ActivePicker, null>, string> = {
+  tournament: "tournamentId",
+  matchA: "previousMatches.matchA",
+  matchB: "previousMatches.matchB",
+  umpire1: "umpire1",
+  umpire2: "umpire2",
+  umpire3: "umpire3",
+};
 
 // set step map for RHF trigger
 const stepFields: Record<number, string[]> = {
@@ -86,19 +97,29 @@ const CreateMatchR2 = () => {
   const matches = (matchRes?.data ?? []).map(normalizeMatch);
   const umpires = ((umpireRes as any)?.data?.umpires ?? []).map(normalizeUmpire);
 
-  const handleSelect = (field: string, item: PickerItem) => {
-    setValue(field as any, item._id, { shouldValidate: true });
-    setSelected(prev => ({ ...prev, [field]: item }));
-    if (field === "tournament") setTId(item._id);
+  // ui - show selected state, rhf - extract id
+  const handleSelect = (pickerKey: Exclude<ActivePicker, null>, item: PickerItem) => {
+    const rhfField = pickerKeyToField[pickerKey];
+
+    setValue(rhfField as any, item._id, { shouldValidate: true }); // store _id in RHF
+    setSelected(prev => ({ ...prev, [pickerKey]: item }));          // store full item for UI
+
+    if (pickerKey === "tournament") setTId(item._id);
+
+    setActivePicker(null); // close modal
   };
 
-  const handleClear = (field: string) => {
-    setValue(field as any, "" as any, { shouldValidate: false });
-    setSelected(prev => ({ ...prev, [field]: null }));
-    if (field === "tournament") {
+
+  const handleClear = (pickerKey: Exclude<ActivePicker, null>) => {
+    const rhfField = pickerKeyToField[pickerKey];
+
+    setValue(rhfField as any, "" as any, { shouldValidate: false });
+    setSelected(prev => ({ ...prev, [pickerKey]: null }));
+
+    if (pickerKey === "tournament") {
       setTId("");
       (["matchA", "matchB"] as const).forEach(f => {
-        setValue(`previousMatches.${f}` as any, "");
+        setValue(pickerKeyToField[f] as any, "");
         setSelected(prev => ({ ...prev, [f]: null }));
       });
     }
@@ -110,23 +131,24 @@ const CreateMatchR2 = () => {
   };
 
   const onSubmit = (data: CreateMatchRQFormData) => {
-    console.log(data);
-    // fire RTK mutation here
+    console.log(data)
+    // createMatch(payload);
   };
 
   const pickerConfig: Record<
     Exclude<ActivePicker, null>,
-    { title: string; items: PickerItem[]; field: string; isLoading: boolean }
+    { title: string; items: PickerItem[]; isLoading: boolean }
   > = {
-    tournament: { title: "Select Tournament", items: tournaments, field: "tournamentId", isLoading: tLoading },
-    matchA: { title: "Select Match A", items: matches, field: "previousMatches.matchA", isLoading: mLoading },
-    matchB: { title: "Select Match B", items: matches, field: "previousMatches.matchB", isLoading: mLoading },
-    umpire1: { title: "Select Umpire 1", items: umpires, field: "umpire1", isLoading: uLoading },
-    umpire2: { title: "Select Umpire 2", items: umpires, field: "umpire2", isLoading: uLoading },
-    umpire3: { title: "Select Umpire 3", items: umpires, field: "umpire3", isLoading: uLoading },
+    tournament: { title: "Select Tournament", items: tournaments, isLoading: tLoading },
+    matchA: { title: "Select Match A", items: matches, isLoading: mLoading },
+    matchB: { title: "Select Match B", items: matches, isLoading: mLoading },
+    umpire1: { title: "Select Umpire 1", items: umpires, isLoading: uLoading },
+    umpire2: { title: "Select Umpire 2", items: umpires, isLoading: uLoading },
+    umpire3: { title: "Select Umpire 3", items: umpires, isLoading: uLoading },
   };
 
   const active = activePicker ? pickerConfig[activePicker] : null;
+
 
   return (
     <PageLayout>
@@ -138,13 +160,8 @@ const CreateMatchR2 = () => {
       />
 
       <SectionLayout>
-        {/* step indicator */}
-        <StepIndicator
-          steps={STEPS}
-          current={step}
-        />
+        <StepIndicator steps={STEPS} current={step} />
 
-        {/* form */}
         <FormContainer
           methods={methods}
           onSubmit={onSubmit}
@@ -156,7 +173,7 @@ const CreateMatchR2 = () => {
               name="tournamentId"
               label="Tournament"
               placeholder="Select a tournament"
-              selected={selected.tournament}
+              selected={selected.tournament}        // shows tournamentName
               onPick={() => setActivePicker("tournament")}
               onClear={() => handleClear("tournament")}
             />
@@ -176,7 +193,7 @@ const CreateMatchR2 = () => {
                   name="previousMatches.matchA"
                   label="Match A"
                   placeholder="Select Match A"
-                  selected={selected.matchA}
+                  selected={selected.matchA}        // shows "Match {matchNumber}"
                   onPick={() => setActivePicker("matchA")}
                   onClear={() => handleClear("matchA")}
                 />
@@ -184,7 +201,7 @@ const CreateMatchR2 = () => {
                   name="previousMatches.matchB"
                   label="Match B"
                   placeholder="Select Match B"
-                  selected={selected.matchB}
+                  selected={selected.matchB}        // shows "Match {matchNumber}"
                   onPick={() => setActivePicker("matchB")}
                   onClear={() => handleClear("matchB")}
                 />
@@ -199,7 +216,7 @@ const CreateMatchR2 = () => {
                 name="umpire1"
                 label="First Umpire"
                 placeholder="Select umpire"
-                selected={selected.umpire1}
+                selected={selected.umpire1}         // shows umpire name
                 onPick={() => setActivePicker("umpire1")}
                 onClear={() => handleClear("umpire1")}
               />
@@ -223,48 +240,24 @@ const CreateMatchR2 = () => {
           )}
 
           {/* Navigation */}
-          <div className="flex items-center justify-between mt-8 pt-6 border-t border-border">
-            {step > 1 ? (
-              <button
-                type="button"
-                onClick={() => setStep(s => s - 1)}
-                className="px-4 py-2 text-sm text-subtext border border-border
-                           rounded-lg hover:bg-subSurface transition-colors"
-              >
-                ← Back
-              </button>
-            ) : <div />}
-
-            {step < 3 ? (
-              <button
-                type="button"
-                onClick={handleNext}
-                className="px-5 py-2 text-sm font-medium text-white bg-primary
-                           hover:bg-primaryHover rounded-lg transition-colors"
-              >
-                Next →
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className="px-5 py-2 text-sm font-medium text-white bg-primary
-                           hover:bg-primaryHover rounded-lg transition-colors"
-              >
-                Create Match
-              </button>
-            )}
-          </div>
+          <StepNavigation
+            step={step}
+            totalSteps={3}
+            onNext={handleNext}
+            onBack={() => setStep(s => s - 1)}
+            submitLabel="Create Match"
+          />
         </FormContainer>
       </SectionLayout>
 
-      {active && (
+      {active && activePicker && (
         <PickerModal
           isOpen={!!activePicker}
           onOpenChange={(open) => { if (!open) setActivePicker(null); }}
           title={active.title}
           items={active.items}
-          selectedId={selected[activePicker!]?._id}
-          onSelect={(item) => handleSelect(activePicker!, item)}
+          selectedId={selected[activePicker]?._id}
+          onSelect={(item) => handleSelect(activePicker, item)} // pickerKey, not field
           isLoading={active.isLoading}
         />
       )}
