@@ -35,7 +35,7 @@ const authApi = apiSlice.injectEndpoints({
         url: "auth/current_user",
       }),
       transformResponse: (response: ApiResponse<IUser>) => response.data,
-      keepUnusedDataFor: 70,
+      keepUnusedDataFor: 300,
       providesTags: ["AuthUser"],
 
       // life cycle handler

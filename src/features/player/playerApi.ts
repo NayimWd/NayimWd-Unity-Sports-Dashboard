@@ -31,7 +31,19 @@ const playerApi = apiSlice.injectEndpoints({
                 }
             ]
     }),
+    getAvailablePlayer: builder.query({
+      query: () => ({
+        url: `player/available_players`,
+        method: "GET"
+      })
+    }),
+    getAvailablePlayerProfile: builder.query({
+      query: () => ({
+        url: `player/available_players_profile`,
+        method: "GET"
+      })
+    }),
   }),
 });
 
-export const { useGetPlayerDetailsQuery } = playerApi;
+export const { useGetPlayerDetailsQuery, useGetAvailablePlayerQuery, useGetAvailablePlayerProfileQuery } = playerApi;
