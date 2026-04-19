@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 
 const ManagerProfile = ({ data }: { data: any }) => (
-    <ProfileCard editTo="/dashboard/profile/edit">
+    <ProfileCard text="Account" editTo="/dashboard/myAccount">
         <div className="flex items-center gap-4">
             <ProfileAvatar photo={data.userId?.photo} name={data.userId?.name} />
             <div className="space-y-1.5">

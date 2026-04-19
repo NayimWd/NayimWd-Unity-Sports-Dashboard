@@ -2,7 +2,6 @@ import { RouteObject } from "react-router-dom";
 import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
 import SuspenseWrapper from "../utils/SuspenseWrapper";
 import { lazy } from "react";
-import FormSkeleton from "../component/common/loader/FormSkeleton";
 const Venue = lazy(() => import("../pages/venue/Venues"));
 const VenueDetails = lazy(() => import("../pages/venue/VenueDetails"));
 const ManageVenue = lazy(() => import("../pages/venue/ManageVenue"));
@@ -46,7 +45,7 @@ export const venueRoutes: RouteObject[] = [
         path: "venue/create",
         element: (
             <ErrorBoundaryWrapper>
-                <SuspenseWrapper CustomLoader={<FormSkeleton />}>
+                <SuspenseWrapper>
                     <CreateVenue />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
@@ -56,7 +55,7 @@ export const venueRoutes: RouteObject[] = [
         path: "venue/editDetails/:venueId",
         element: (
             <ErrorBoundaryWrapper>
-                <SuspenseWrapper CustomLoader={<FormSkeleton />}>
+                <SuspenseWrapper>
                     <EditVenueDetails />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
@@ -66,7 +65,7 @@ export const venueRoutes: RouteObject[] = [
         path: "venue/editPhoto/:venueId",
         element: (
             <ErrorBoundaryWrapper>
-                <SuspenseWrapper CustomLoader={<FormSkeleton />}>
+                <SuspenseWrapper>
                     <EditVenuePhoto />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>

@@ -6,9 +6,11 @@ import { Edit } from "lucide-react";
 const ProfileCard = ({
     children,
     editTo,
+    text
 }: {
     children: React.ReactNode;
     editTo: string;
+    text: string
 }) => (
     <Card className="border border-border rounded-2xl p-0 overflow-hidden max-w-2xl mx-auto">
         <div className="h-1 w-full bg-gradient-primary" />
@@ -22,7 +24,7 @@ const ProfileCard = ({
                         className="rounded-lg flex items-center gap-2"
                         iconLeft={<Edit size={13} />}
                     >
-                         Edit Profile
+                         {text ? text : "Edit Profile"}
                     </Buttons>
                 </Link>
             </div>

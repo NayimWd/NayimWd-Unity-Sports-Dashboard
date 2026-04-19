@@ -1,5 +1,5 @@
 import { ReactElement, Suspense } from "react";
-import PageSkeleton from "../component/common/loader/PageSkeleton";
+import Loader from "../component/common/loader/Loader";
 
 
 interface SuspenseWrapperProps {
@@ -11,7 +11,7 @@ const SuspenseWrapper: React.FC<SuspenseWrapperProps> = ({
   children,
   CustomLoader,
 }) => {
-  return <Suspense fallback={CustomLoader ?? <PageSkeleton/>}>{children}</Suspense>;
+  return <Suspense fallback={CustomLoader ?? <Loader/>}>{children}</Suspense>;
 };
 
 export default SuspenseWrapper;
