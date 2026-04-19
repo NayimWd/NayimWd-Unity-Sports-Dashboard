@@ -7,7 +7,6 @@ import { useLatestTournamentQuery } from "../../features/tournament/tournamentAp
 import { useGetPointTableQuery } from "../../features/pointTable/pointTableApi";
 import { fontStyle } from "../../utils/ClassUtils";
 import PageLayout from "../../component/layout/PageLayout";
-import SectionLayout from "../../component/layout/SectionLayout";
 import BackButton from "../../utils/BackButton";
 import { useGoBack } from "../../hooks/useGoBack";
 
@@ -76,24 +75,32 @@ const PointTable = () => {
     <PageLayout>
       <BackButton className="mb-5" onClick={useGoBack()}>Go Back</BackButton>
       <h1 className={`${fontStyle.pageTitle} text-font text-center my-3`}>Point Table</h1>
-      <SectionLayout variant="surface">
-        {loading ? <span className="bg-bg h-5 w-14" />
-          :
-          <div className={`${fontStyle.SectionHeading} flex items-center justify-center gap-4 flex-wrap mt-5`}>
-            <p className="text-font text-xl text-center">
-              {pointTable?.data?.tournament?.tournamentName} </p>
-            <img className="size-12 rounded " src={pointTable?.data?.tournament?.photo} alt="tournamentLogo" loading="lazy" />
-          </div>
-        }
-        <Table className="">
-          <TableHeader
-            headers={headerData}
-          />
-          {
-            content
-          }
-        </Table>
-      </SectionLayout>
+    <div className="rounded-2xl border border-border overflow-hidden bg-surface">
+
+    {/* Table header */}
+    <div className="flex items-center justify-between px-5 py-4 border-b border-border">
+      {loading ? (
+        <div className="h-4 w-40 rounded bg-subSurface animate-pulse" />
+      ) : (
+        <div className="flex items-center gap-3">
+          <img className="w-8 h-8 rounded-lg object-cover border border-border"
+            src={pointTable?.data?.tournament?.photo} alt="" />
+          <p className="text-sm font-medium text-font">
+            {pointTable?.data?.tournament?.tournamentName}
+          </p>
+        </div>
+      )}
+      <span className="text-xs text-muted bg-subSurface border border-border px-3 py-1 rounded-full">
+        Point Table
+      </span>
+    </div>
+
+    <Table>
+      <TableHeader headers={headerData} />
+      {content}
+    </Table>
+
+  </div>
     </PageLayout>
   )
 }

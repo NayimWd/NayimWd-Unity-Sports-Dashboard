@@ -39,7 +39,7 @@ const teamApi = apiSlice.injectEndpoints({
         };
       },
     }),
-    getTeamDetails: builder.query<ITeamDetails, string>({
+    getTeamDetails: builder.query<ITeamDetails, any>({
       query: (teamId) => ({
         url: `team/details/${teamId}`,
         method: "GET",
@@ -49,11 +49,18 @@ const teamApi = apiSlice.injectEndpoints({
     getMyTeam: builder.query<IMyTeam, any>({
       query: () => ({
         url: `team/my_team`,
-        method: "GET"
+        method: "GET",
       }),
       transformResponse: (response: ApiResponse<IMyTeam>) => response.data,
-    })
+    }),
+    PlayerList: builder.query({
+      query: (teamId) => ({
+        url: `team/player_list/${teamId}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetTeamsQuery, useGetTeamDetailsQuery, useGetMyTeamQuery } = teamApi;
+export const { useGetTeamsQuery, useGetTeamDetailsQuery, useGetMyTeamQuery, usePlayerListQuery } =
+  teamApi;

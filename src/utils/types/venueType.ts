@@ -14,3 +14,9 @@ export interface IVenue {
     total: number;
     venues: IVenueMini[];
 }
+
+export interface IVenueSearch {
+    _id: string,
+    name: string,
+    city: string,
+}

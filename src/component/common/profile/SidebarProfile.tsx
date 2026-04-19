@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { clearCredenTials } from "../../../features/auth/authSlice";
 import { ErrorToast, SuccessToast } from "../../../utils/toastUtils";
 import { RootState } from "../../../app/store/store";
-import Tooltip from "../../ui/Tooltip";
 import { apiSlice } from "../../../features/api/apiSlice";
 
 
@@ -31,18 +30,47 @@ const SidebarProfile = () => {
         }
     }
     return (
-        <div className="flex w-full items-center justify-between gap-2 px-3 py-6 rounded-t-md bg-bg">
-            <div className="flex items-center gap-2">
-                <img className="w-14 h-14 rounded-full  object-cover object-center" src={user?.photo} alt="user photo" aria-label="photo" loading="lazy" />
-                <div className="flex flex-col font-inter">
-                    <h3 className="text-font font-semibold"> {user?.name} </h3>
-                    <p className="text-sm text-subtext"> {user?.email.slice(0, 15)} </p>
-                </div>
-            </div>
-            <Tooltip position="left" content="Sign out">
-                <LogOut className="text-toastErrorText" onClick={handleLogout} size={24} aria-label="logout button" role="button" />
-            </Tooltip>
+        <div className="border-t w-full border-border p-3 absolute left-0 bottom-0 md:bottom-14">
+      <div className="flex items-center gap-2.5 px-2 py-2 rounded-xl w-[90%] bg-subSurface">
+
+        {/* Avatar */}
+        {user?.photo ? (
+          <img
+            src={user.photo}
+            alt={user?.name}
+            className="w-8 h-8 rounded-lg object-cover flex-shrink-0"
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center
+                          text-xs font-medium text-white flex-shrink-0">
+            {user?.name?.charAt(0).toUpperCase()}
+          </div>
+        )}
+
+        {/* Info */}
+        <div className="flex-1 min-w-0">
+          <p className="text-xs font-medium text-font truncate leading-tight">
+            {user?.name}
+          </p>
+          <p className="text-[10px] text-muted truncate leading-tight mt-0.5">
+            {user?.email}
+          </p>
         </div>
+
+        {/* Logout */}
+        <button
+          onClick={handleLogout}
+          className="w-7 h-7 rounded-lg flex items-center justify-center
+                     text-muted hover:text-toastErrorText hover:bg-toastErrorBg
+                     transition-colors duration-150 flex-shrink-0"
+          aria-label="Sign out"
+        >
+          <LogOut size={14} />
+        </button>
+
+      </div>
+    </div>
     )
 }
 

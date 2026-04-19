@@ -35,7 +35,7 @@ const authApi = apiSlice.injectEndpoints({
         url: "auth/current_user",
       }),
       transformResponse: (response: ApiResponse<IUser>) => response.data,
-      keepUnusedDataFor: 70,
+      keepUnusedDataFor: 300,
       providesTags: ["AuthUser"],
 
       // life cycle handler
@@ -78,7 +78,13 @@ const authApi = apiSlice.injectEndpoints({
             ]
           : [{ type: "UserList", id: "LIST" }],
     }),
-    
+    umpireList: builder.query<unknown, { search?: string } | void>({
+      query: ({ search } = {}) => ({
+        url: `auth/umpire_list`,
+        method: "GET",
+        params: search ? { name: search } : undefined,
+      }),
+    }),
   }),
 });
 
@@ -88,4 +94,5 @@ export const {
   useSignOutMutation,
   useCurrentUserQuery,
   useAllUserQuery,
+  useUmpireListQuery,
 } = authApi;

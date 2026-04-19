@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux"
-// import { RootState } from "../../app/store/store";
 import { ThemeType } from "../../utils/types/types";
 import { setTheme } from "../../features/theme/themeSlice";
 import { Moon, Sun } from 'lucide-react';
@@ -16,17 +15,18 @@ const ThemeSwitcher = () => {
   };
 
   return (
-    <div className="hover:outline hover:outline-2 outline-primary rounded-full">
-      {theme === "dark" ? <button onClick={() => handleThemeChange("light")} className="w-12 h-12 rounded-full  p-1 bg-bg flex justify-center items-center shadow
-      " aria-label="Toggle dark mode">
-        <Sun className="text-primary" />
-      </button>
-        :
-        <button onClick={() => handleThemeChange("dark")} className="w-12 h-12 rounded-full  p-1 bg-bg flex justify-center items-center shadow-sm " aria-label="Toggle light mode">
-          <Moon className="text-primary" />
-        </button>}
-
-    </div>
+    <button
+      onClick={() => handleThemeChange(theme === "dark" ? "light" : "dark")}
+      className="w-[34px] h-[34px] rounded-lg border border-border bg-subSurface
+                 flex items-center justify-center text-subtext
+                 hover:bg-bg hover:border-inputBorder hover:text-font
+                 transition-colors duration-150"
+      aria-label="Toggle theme"
+    >
+      {theme === "dark"
+        ? <Sun size={15} />
+        : <Moon size={15} />}
+    </button>
   )
 }
 

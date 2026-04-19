@@ -73,11 +73,11 @@ const CreateBlogs = () => {
         <FormContainer
           methods={methods}
           onSubmit={handleSubmit}
-          className=" w-full space-y-6 lg:px-10">
+          className=" w-full space-y-6 lg:px-10 overflow-x-hidden">
           <PhotoArrayInput label="Image" name="photo" />
           <TextInput name="title" label="Title" placeholder="Write Title" />
           <TextAreaInput label="Blog" placeholder="Write Your Blog" name="content" height="min-h-[300px]" />
-          <div className="flex justify-between items-center flex-wrap gap-5">
+          <div className="flex justify-between items-center flex-wrap gap-5 overflow-hidden">
             <DropdownInput label="Tags" name="tags" placeholder="Select an option" options={tags} />
             <ToggleInput label="Publish" name="isPublished" />
           </div>

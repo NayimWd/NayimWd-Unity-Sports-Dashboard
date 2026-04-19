@@ -24,12 +24,18 @@ const matchApi = apiSlice.injectEndpoints({
     }),
     getMatchDetails: builder.query<IMatchDetailsResponse, string>({
       query: ( matchId ) => ({
-        url: `/match/details/${matchId}`,
+        url: `match/details/${matchId}`,
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<IMatchDetailsResponse>) => response.data
     }),
+    matchOverview: builder.query({
+      query: ({tournamentId}) => ({
+        url: `match/overview/${tournamentId}`,
+        method: "GET"
+      })
+    })
   }),
 });
 
-export const { useGetMatchQuery, useGetMatchDetailsQuery } = matchApi;
+export const { useGetMatchQuery, useGetMatchDetailsQuery, useMatchOverviewQuery } = matchApi;

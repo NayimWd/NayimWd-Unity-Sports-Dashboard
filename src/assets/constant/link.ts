@@ -101,6 +101,11 @@ export const navLinks = {
           icon: CalendarPlus,
           label: "Create Schedule",
         },
+        {
+          path: "/dashboard/schedule/manage",
+          icon: SquarePen,
+          label: "Manage Schedule",
+        },
       ],
     },
     {
@@ -116,7 +121,7 @@ export const navLinks = {
         {
           path: "/dashboard/match/manage",
           icon: List,
-          label: "Match List",
+          label: "Manage Match",
         },
         {
           path: "/dashboard/match/create",

@@ -4,6 +4,8 @@ import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
 import SuspenseWrapper from "../utils/SuspenseWrapper";
 const Schedule = lazy(()=> import("../pages/schedule/Schedule"));
 const CreateSchedule = lazy(()=> import("../pages/schedule/CreateScheduleR1"));
+const CreateScheduleR2 = lazy(()=> import("../pages/schedule/CreateScheduleR2"));
+const ScheduleSwith = lazy(()=> import("../pages/schedule/ScheduleSwith"));
 
 export const ScheduleRoute: RouteObject[] = [
     {
@@ -22,9 +24,39 @@ export const ScheduleRoute: RouteObject[] = [
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
+                    <ScheduleSwith/>
+                </SuspenseWrapper>
+            </ErrorBoundaryWrapper>
+        )
+    },
+    {
+        path: "schedule/R1/create",
+        element: (
+            <ErrorBoundaryWrapper>
+                <SuspenseWrapper>
                     <CreateSchedule/>
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )
-    }
+    },
+    {
+        path: "schedule/R2/create",
+        element: (
+            <ErrorBoundaryWrapper>
+                <SuspenseWrapper>
+                    <CreateScheduleR2/>
+                </SuspenseWrapper>
+            </ErrorBoundaryWrapper>
+        )
+    },
+    {
+        path: "schedule/manage",
+        element: (
+            <ErrorBoundaryWrapper>
+                <SuspenseWrapper>
+                    <CreateScheduleR2/>
+                </SuspenseWrapper>
+            </ErrorBoundaryWrapper>
+        )
+    },
 ]

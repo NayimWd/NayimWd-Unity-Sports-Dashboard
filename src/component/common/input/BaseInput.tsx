@@ -36,13 +36,13 @@ const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
 export default BaseInput;
 
 const inputStyles = cva(
-  "w-full h-10 px-3 py-2 text-font placeholder-muted rounded-md border transition-all duration-150 ease-in-out focus:outline-none",
+  "w-full h-10 px-3 py-2 text-font placeholder-muted rounded-md border transition-all duration-150 ease-in-out focus:outline-none bg-surface",
   {
     variants: {
       variant: {
-        primary: "bg-surface border-inputBorder focus:ring-2 focus:ring-primary",
-        success: "bg-surface border-inputBorder focus:ring-2 focus:ring-green-500",
-        error: "bg-surface border-inputBorder focus:ring-2 focus:ring-red-500",
+        primary: "border-inputBorder focus:ring-2 focus:ring-primary",
+        success: "border border-green-500 focus:ring-2 focus:ring-green-500",
+        error: " border-red-500 focus:ring-2 focus:ring-red-500",
       }
     },
     defaultVariants: {

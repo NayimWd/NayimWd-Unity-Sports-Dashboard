@@ -13,7 +13,7 @@ interface TextInputProps {
   type?: "text" | "number";
 }
 
-const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", icon, autoComplete, defaultValue, type="text" }: TextInputProps) => {
+const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", icon, autoComplete, defaultValue, type = "text" }: TextInputProps) => {
   // importing useFormContext to get the form methods
   const { register, watch, formState, trigger } = useFormContext();
   const { errors } = formState;
@@ -26,16 +26,17 @@ const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", ico
   let variant: "primary" | "success" | "error" = "primary";
 
   // set the input variant based on the error and focus state
-  if (focused && value) {
-    variant = error ? "error" : "success";
+  if (error) {
+    variant = "error";
+  } else if (value) {
+    variant = "success";
   }
-
   useEffect(() => {
     // trigger validation when the input is focused and has a value
     if (focused) {
       trigger(name);
     }
-  }, [value, focused]);
+  }, [value]);
 
   return (
     <div className="relative space-y-1">
@@ -52,8 +53,8 @@ const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", ico
           variant={variant}
           defaultValue={defaultValue}
           {...register(name, {
-          valueAsNumber: type === "number",
-        })}
+            valueAsNumber: type === "number",
+          })}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
