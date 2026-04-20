@@ -45,6 +45,13 @@ const teamApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<ITeamDetails>) => response.data,
+      providesTags: (_result, _error, { teamId }) => [
+        {
+          type: "Team",
+          id: teamId,
+        },
+        { type: "Team", id: "LIST" },
+      ],
     }),
     getMyTeam: builder.query<IMyTeam, any>({
       query: () => ({
@@ -59,8 +66,96 @@ const teamApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    removePlayer: builder.mutation({
+      query: ({ teamId, playerId }) => ({
+        url: `team/removePlayer/${teamId}`,
+        method: "POST",
+        body: { playerId },
+      }),
+      invalidatesTags: (_result, _error, { playerId, teamId }) => [
+        { type: "teamPlayer", id: playerId },
+        { type: "teamPlayer", id: "LIST" },
+
+        {
+          type: "Team",
+          id: teamId,
+        },
+        { type: "Team", id: "LIST" },
+      ],
+    }),
+    addPlayer: builder.mutation({
+      query: ({ teamId, playerId }) => ({
+        url: `team/addPlayers/${teamId}`,
+        method: "POST",
+        body: { playerId },
+      }),
+      invalidatesTags: (_result, _error, { playerId, teamId }) => [
+        { type: "teamPlayer", id: playerId },
+        { type: "teamPlayer", id: "LIST" },
+
+        {
+          type: "Team",
+          id: teamId,
+        },
+        { type: "Team", id: "LIST" },
+      ],
+    }),
+    makeCaptain: builder.mutation({
+      query: ({ teamId, playerId }) => ({
+        url: `team/makeCaptain/${teamId}`,
+        method: "PATCH",
+        body: { playerId },
+      }),
+      invalidatesTags: (_result, _error, { playerId, teamId }) => [
+        { type: "teamPlayer", id: playerId },
+        { type: "teamPlayer", id: "LIST" },
+
+        {
+          type: "Team",
+          id: teamId,
+        },
+        { type: "Team", id: "LIST" },
+      ],
+    }),
+    updateTeamName: builder.mutation({
+      query: ({ teamId, teamName }) => ({
+        url: `team/update_name/${teamId}`,
+        method: "PATCH",
+        body: teamName,
+      }),
+      invalidatesTags: (_result, _error, { teamId }) => [
+        {
+          type: "Team",
+          id: teamId,
+        },
+        { type: "Team", id: "LIST" },
+      ],
+    }),
+    updateTeamLogo: builder.mutation({
+      query: ({ teamId, body }) => ({
+        url: `team/update_logo/${teamId}`,
+        method: "PATCH",
+        body: body,
+      }),
+      invalidatesTags: (_result, _error, { teamId }) => [
+        {
+          type: "Team",
+          id: teamId,
+        },
+        { type: "Team", id: "LIST" },
+      ],
+    }),
   }),
 });
 
-export const { useGetTeamsQuery, useGetTeamDetailsQuery, useGetMyTeamQuery, usePlayerListQuery } =
-  teamApi;
+export const {
+  useGetTeamsQuery,
+  useGetTeamDetailsQuery,
+  useGetMyTeamQuery,
+  usePlayerListQuery,
+  useRemovePlayerMutation,
+  useAddPlayerMutation,
+  useMakeCaptainMutation,
+  useUpdateTeamNameMutation,
+  useUpdateTeamLogoMutation,
+} = teamApi;

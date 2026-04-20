@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import {
-    UserPlus, UserMinus, Crown, Edit
+    UserPlus, Edit
 } from "lucide-react";
 import { useGoBack } from "../../hooks/useGoBack";
 import { useGetTeamDetailsQuery } from "../../features/team/teamApi";
@@ -12,31 +12,15 @@ const editOptions = [
         icon: UserPlus,
         label: "Add Player",
         description: "Add a new player to your squad",
-        to: "add-player",
+        to: "addPlayer",
         color: "text-primary",
         bg: "bg-primary/10",
-    },
-    {
-        icon: UserMinus,
-        label: "Remove Player",
-        description: "Remove a player from your squad",
-        to: "remove-player",
-        color: "text-toastErrorText",
-        bg: "bg-toastErrorBg",
-    },
-    {
-        icon: Crown,
-        label: "Manage Captain",
-        description: "Assign or remove team captain",
-        to: "captain",
-        color: "text-yellow-600",
-        bg: "bg-yellow-50 dark:bg-yellow-900/20",
     },
     {
         icon: Edit,
         label: "Edit Team Info",
         description: "Update team name and logo",
-        to: "info",
+        to: "changeInfo",
         color: "text-purple-600",
         bg: "bg-purple-50 dark:bg-purple-900/20",
     },
@@ -76,7 +60,7 @@ const EditTeam = () => {
                     {editOptions.map(({ icon: Icon, label, description, to, color, bg }) => (
                         <Link
                             key={to}
-                            to={`/dashboard/team/edit/${teamId}/${to}`}
+                            to={`/dashboard/team/${teamId}/${to}`}
                         >
                             <div className="flex items-start gap-4 p-4 rounded-xl border border-border
                               bg-surface hover:bg-subSurface hover:border-inputBorder

@@ -6,4 +6,4 @@ const UpdateTeamLogo = () => {
   )
 }
 
-export default UpdateTeamLogo
+export default UpdateTeamLogo;

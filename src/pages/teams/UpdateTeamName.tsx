@@ -5,4 +5,4 @@ const UpdateTeamName = () => {
   )
 }
 
-export default UpdateTeamName
+export default UpdateTeamName;

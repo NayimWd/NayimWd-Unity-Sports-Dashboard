@@ -13,7 +13,7 @@ const sizeClasses = {
   xl: "w-14 h-14",
 };
 
-const Loader = ({ size = "md", overlay = false, className }: LoaderProps) => {
+const Loader = ({ size = "xl", overlay = false, className }: LoaderProps) => {
   const loader = (
     <div className={cn("relative inline-flex", className)}>
       {/* Background */}
