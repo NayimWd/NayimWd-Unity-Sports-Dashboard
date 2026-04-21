@@ -66,7 +66,7 @@ const AddPlayerModal = ({ isOpen, onOpenChange, teamId }: AddPlayerModalProps) =
     <RedixModal
       isOpen={isOpen}
       onOpenChange={handleOpenChange}
-      title="Available Players"
+      title={`Available Players - ${players.length} `}
       size="md"
       hideFooter
     >

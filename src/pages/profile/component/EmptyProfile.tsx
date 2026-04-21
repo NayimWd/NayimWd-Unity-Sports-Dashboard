@@ -44,8 +44,9 @@ const EmptyProfile = ({
                         size="sm"
                         variant="primary"
                         className="rounded-lg mt-1 flex items-center gap-2"
+                        iconLeft={<Plus size={13} />}
                     >
-                        <Plus size={13} /> {cta}
+                         {cta}
                     </Buttons>
                 </Link>
             </div>

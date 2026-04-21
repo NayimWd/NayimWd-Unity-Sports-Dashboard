@@ -32,6 +32,16 @@ const profileApi = apiSlice.injectEndpoints({
       transformResponse: (response: ApiResponse<UmpireProfile>) =>
         response.data,
     }),
+    createPlayerProfile: builder.mutation({
+      query: (data)=> ({
+        url: "profile/create_player_profile",
+        method: "POST",
+        body: data
+      }),
+      invalidatesTags: () => [
+        {type: "PlayerProfile", id: "LIST"},
+      ]
+    })
   }),
 });
 
@@ -39,4 +49,5 @@ export const {
   useGetPlayerProfileQuery,
   useGetUmpireProfileQuery,
   useGetManagerProfileQuery,
+  useCreatePlayerProfileMutation,
 } = profileApi;

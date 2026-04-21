@@ -24,20 +24,34 @@ const Buttons = ({
   return (
     <>
       <button
-        className={cn(buttonvariants({ variant, size, className }))}
+        className={cn(
+          buttonvariants({ variant, size }),
+          "relative inline-flex items-center justify-center",
+          loading && "cursor-not-allowed",
+          className
+        )}
         {...props}
-        disabled={props.disabled}
+        disabled={loading || props.disabled}
         aria-busy={loading}
         aria-disabled={loading || props.disabled}
       >
-        {/*  Loading overrides everything */}
-        {loading ? (
-          <span className="animate-spin rounded-full border-2 border-font border-t-transparent h-4 w-4" />
-        ) : (
-          <span className="flex items-center justify-center gap-2">
-            {iconLeft && <span className="inline-flex">{iconLeft}</span>}
-            <span>{children}</span>
-            {iconRight && <span className="inline-flex">{iconRight}</span>}
+        {/* Keep content for width consistency */}
+        <span
+          className={cn(
+            "flex items-center justify-center gap-2 transition-opacity duration-200",
+            loading && "opacity-0"
+          )}
+        >
+          {iconLeft && <span className="inline-flex">{iconLeft}</span>}
+          <span>{children}</span>
+          {iconRight && <span className="inline-flex">{iconRight}</span>}
+        </span>
+
+        {/* Loading overlay */}
+        {loading && (
+          <span className="absolute inset-0 flex items-center justify-center gap-2">
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+            <span className="text-sm">Processing...</span>
           </span>
         )}
       </button>

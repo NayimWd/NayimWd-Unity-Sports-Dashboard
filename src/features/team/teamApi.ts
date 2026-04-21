@@ -86,6 +86,7 @@ const teamApi = apiSlice.injectEndpoints({
           id: teamId,
         },
         { type: "Team", id: "LIST" },
+        { type: "availableProfile", id: "LIST" },
       ],
     }),
     addPlayer: builder.mutation({
@@ -103,6 +104,7 @@ const teamApi = apiSlice.injectEndpoints({
           id: teamId,
         },
         { type: "Team", id: "LIST" },
+        { type: "availableProfile", id: "LIST" },
       ],
     }),
     makeCaptain: builder.mutation({
@@ -151,14 +153,22 @@ const teamApi = apiSlice.injectEndpoints({
       ],
     }),
     teamSummary: builder.query({
-      query: ({teamId}) => ({
+      query: ({ teamId }) => ({
         url: `team/summary/${teamId}`,
-        method: "GET"
+        method: "GET",
       }),
-      providesTags: (_result, _args, {teamId}) => [
-        {type: "TeamSummary", id: teamId},
-        {type: "TeamSummary", id: "LIST"},
-      ]
+      providesTags: (_result, _args, { teamId }) => [
+        { type: "TeamSummary", id: teamId },
+        { type: "TeamSummary", id: "LIST" },
+      ],
+    }),
+    createTeam: builder.mutation({
+      query: (data: FormData) => ({
+        url: `team/create`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: () => [{ type: "Team", id: "LIST" }, {type: "MyTeam", id: "LIST"}],
     }),
   }),
 });
@@ -173,5 +183,6 @@ export const {
   useMakeCaptainMutation,
   useUpdateTeamNameMutation,
   useUpdateTeamLogoMutation,
-  useTeamSummaryQuery
+  useTeamSummaryQuery,
+  useCreateTeamMutation,
 } = teamApi;

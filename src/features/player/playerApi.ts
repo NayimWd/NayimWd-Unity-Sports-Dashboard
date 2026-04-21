@@ -41,7 +41,10 @@ const playerApi = apiSlice.injectEndpoints({
       query: () => ({
         url: `player/available_players_profile`,
         method: "GET"
-      })
+      }),
+      providesTags: () => [
+        {type: "availableProfile", id: "LIST"}
+      ]
     }),
   }),
 });
