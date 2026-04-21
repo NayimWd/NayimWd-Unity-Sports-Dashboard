@@ -15,7 +15,6 @@ const PointSummary = () => {
   // fetch point table data based on tournament id
   const { data: pointTable, isLoading: loading } = useGetPointTableQuery(latestTournament?.data._id ?? "", {
     skip: !latestTournament?.data?._id, // skip query if tournament id is not available
-    refetchOnMountOrArgChange: true, // refetch when component mounts or any arg change
   })
 
 

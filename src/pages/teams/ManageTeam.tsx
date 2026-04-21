@@ -12,6 +12,8 @@ import { useState } from "react";
 import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
 import toast from "react-hot-toast";
 import ConfirmModal from "../../component/ui/modal/ConfirmModal";
+import { UserPlus } from "lucide-react";
+import AddPlayerModal from "./Addplayer";
 
 export interface PlayerAction {
   _id: string;
@@ -27,8 +29,10 @@ const ManageTeam = () => {
 
   const goBack = useGoBack();
 
+  const [addPlayerOpen, setAddPlayerOpen] = useState(false);
+
   const { data: currentUser } = useCurrentUserQuery();
-  const { data: player, isLoading: pLoading, } = useGetTeamDetailsQuery(teamId, { skip: !teamId});
+  const { data: player, isLoading: pLoading, } = useGetTeamDetailsQuery(teamId, { skip: !teamId });
 
   //  remove player and add captain mutation
   const [removePlayer, { isLoading: removing }] = useRemovePlayerMutation();
@@ -78,44 +82,73 @@ const ManageTeam = () => {
 
   };
 
+
+
   return (
     <PageLayout>
       <BackButton onClick={goBack}>Go Back</BackButton>
 
       <div className="max-w-3xl mx-auto mt-6 space-y-6 px-2 sm:px-0">
 
-        {/* Loading */}
+        {/* loading */}
         {pLoading && (
           <ManageTeamSkeleton />
         )}
 
         {!pLoading && team && (
           <>
-            {/* Team hero */}
+            {/* team hero */}
             <Hero
               team={team}
               isManager={isManager}
               teamId={teamId}
             />
 
-            {/* Captain */}
+            {!pLoading && isManager && (player?.team?.playerCount ?? 0) < 18 && (
+              <div className="rounded-2xl border border-border bg-surface overflow-hidden">
+                <div className="px-5 py-3 border-b border-border flex items-center gap-2">
+                  <UserPlus size={13} className="text-primary" />
+                  <p className="text-xs font-medium uppercase tracking-widest text-muted">
+                    Add Player
+                  </p>
+                </div>
+                <div className="p-4 flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-sm font-medium text-font">Expand your squad</p>
+                    <p className="text-xs text-muted mt-0.5">
+                      {player?.team?.playerCount ?? 0} / 18 players — {18 - (player?.team?.playerCount ?? 0)} spots remaining
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setAddPlayerOpen(true)}
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium
+                   bg-blue-500/10 text-primary hover:bg-blue-500/20
+                   border border-blue-500/20 transition-colors flex-shrink-0"
+                  >
+                    <UserPlus size={12} /> Browse Players
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* captain */}
             {captain && (
               <Captain
                 captain={captain}
               />
             )}
 
-            {/* Players */}
-            <Players players={players} 
+            {/* clayers */}
+            <Players players={players}
               isManager={isManager}
-               onMakeCaptain={(player: any) => openModal("captain", player)}
-               onRemove={(player) => openModal("remove", player)}
+              onMakeCaptain={(player: any) => openModal("captain", player)}
+              onRemove={(player) => openModal("remove", player)}
             />
           </>
         )}
 
       </div>
-      {/* Confirm modal */}
+      {/* confirm modal */}
       <ConfirmModal
         isOpen={!!modalType}
         onOpenChange={(open) => { if (!open) closeModal(); }}
@@ -128,6 +161,15 @@ const ManageTeam = () => {
         onConfirm={handleConfirm}
         loading={removing || makingCaptain}
       />
+      {/* add player modal */}
+      {
+        addPlayerOpen && <AddPlayerModal
+          isOpen={addPlayerOpen}
+          onOpenChange={setAddPlayerOpen}
+          teamId={teamId!}
+        />
+      }
+
     </PageLayout>
   )
 }

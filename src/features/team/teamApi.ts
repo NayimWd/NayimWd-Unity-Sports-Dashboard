@@ -38,6 +38,7 @@ const teamApi = apiSlice.injectEndpoints({
           },
         };
       },
+      providesTags: () => [{ type: "Team", id: "LIST" }],
     }),
     getTeamDetails: builder.query<ITeamDetails, any>({
       query: (teamId) => ({
@@ -59,12 +60,16 @@ const teamApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<IMyTeam>) => response.data,
+      providesTags: () => [{ type: "MyTeam", id: "LIST" }],
     }),
     PlayerList: builder.query({
       query: (teamId) => ({
         url: `team/player_list/${teamId}`,
         method: "GET",
       }),
+      providesTags: (_result, _args, { teamId }) => [
+        { type: "PlayerList", id: teamId },
+      ],
     }),
     removePlayer: builder.mutation({
       query: ({ teamId, playerId }) => ({
@@ -132,10 +137,10 @@ const teamApi = apiSlice.injectEndpoints({
       ],
     }),
     updateTeamLogo: builder.mutation({
-      query: ({ teamId, body }) => ({
+      query: ({ teamId, formData }) => ({
         url: `team/update_logo/${teamId}`,
         method: "PATCH",
-        body: body,
+        body: formData,
       }),
       invalidatesTags: (_result, _error, { teamId }) => [
         {
@@ -144,6 +149,16 @@ const teamApi = apiSlice.injectEndpoints({
         },
         { type: "Team", id: "LIST" },
       ],
+    }),
+    teamSummary: builder.query({
+      query: ({teamId}) => ({
+        url: `team/summary/${teamId}`,
+        method: "GET"
+      }),
+      providesTags: (_result, _args, {teamId}) => [
+        {type: "TeamSummary", id: teamId},
+        {type: "TeamSummary", id: "LIST"},
+      ]
     }),
   }),
 });
@@ -158,4 +173,5 @@ export const {
   useMakeCaptainMutation,
   useUpdateTeamNameMutation,
   useUpdateTeamLogoMutation,
+  useTeamSummaryQuery
 } = teamApi;

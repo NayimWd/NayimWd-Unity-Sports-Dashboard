@@ -14,6 +14,9 @@ export const tournamentApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
       keepUnusedDataFor: 600,
+      providesTags: () => [
+        {type: "LatestTournament", id: "LIST"}
+      ]
     }),
     getAllTournament: builder.query<ApiResponse<ITournaments>, string | void>({
       query: (status) => {
@@ -53,13 +56,16 @@ export const tournamentApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: ApiResponse<ITournamentFinalResult>) =>
         response,
+      providesTags: () => [
+        {type: "Tournament"}
+      ]
     }),
     searchTournament: builder.query({
       query: () => ({
         url: "tournament/search",
         method: "GET",
       }),
-  
+      
     }),
     createTournament: builder.mutation({
       query: (data) => ({
@@ -124,6 +130,9 @@ export const tournamentApi = apiSlice.injectEndpoints({
         url: `/tournament/approved_teams/${tournamentId}`,
         method: "GET",
       }),
+      providesTags: (_result, _args, {tournamentId}) => [
+        {type: "ApprovedTeam", id: tournamentId},
+      ]
     }),
   }),
 });

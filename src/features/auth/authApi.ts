@@ -84,6 +84,9 @@ const authApi = apiSlice.injectEndpoints({
         method: "GET",
         params: search ? { name: search } : undefined,
       }),
+      providesTags: () => [
+        {type: "Umpire", id: "LIST"}
+      ]
     }),
   }),
 });

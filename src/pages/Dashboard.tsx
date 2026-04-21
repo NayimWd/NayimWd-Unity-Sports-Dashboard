@@ -1,33 +1,20 @@
 import ResultSummary from "../component/common/banner/ResultSummary";
-import SummaryCard from "../component/common/card/SummaryCard";
 import PageLayout from "../component/layout/PageLayout";
 import SectionLayout from "../component/layout/SectionLayout";
-import { useGetLatestResultQuery, useGetSummaryQuery } from "../features/dashboard/summaryApi";
+import { useCurrentUserQuery } from "../features/auth/authApi";
+import { useGetLatestResultQuery } from "../features/dashboard/summaryApi";
 import { fontStyle } from "../utils/ClassUtils";
+import AdminSummary from "./Dashboard/AdminSummary";
+import ManagerSummary from "./Dashboard/ManagerSummary";
 import PointSummary from "./pointTable/PointSummary";
-import { Trophy, Users, User, Clock, Star, Building2 } from "lucide-react";
 
-
-const statItems = [
-  { key: "tournamentCount", label: "Tournaments", icon: Trophy, color: "text-primary", bg: "bg-primary/10" },
-  { key: "teamCount", label: "Teams", icon: Users, color: "text-green-600", bg: "bg-green-500/10" },
-  { key: "playerCount", label: "Players", icon: User, color: "text-purple-600", bg: "bg-purple-500/10" },
-  { key: "runningPlayerCount", label: "Active Players", icon: Clock, color: "text-orange-500", bg: "bg-orange-500/10" },
-  { key: "umpireCount", label: "Umpires", icon: Star, color: "text-red-500", bg: "bg-red-500/10" },
-  { key: "venueCount", label: "Venues", icon: Building2, color: "text-teal-600", bg: "bg-teal-500/10" },
-];
 
 const Dashboard = () => {
-
-  const { data, isLoading } = useGetSummaryQuery();
+  const { data: user } = useCurrentUserQuery();
   const { data: results } = useGetLatestResultQuery(undefined);
-
-  const summary = data?.data ?? null;
-
 
   const result = results?.data.result;
   const tournament = results?.data.tournament;
-
 
   return (
     <PageLayout>
@@ -41,40 +28,14 @@ const Dashboard = () => {
           Live
         </span>
       </div>
-      <section className="mb-8">
-        <p className={`${fontStyle.SectionHeading} text-font mb-5`}>Overview</p>
-
-        {/* Skeleton */}
-        {isLoading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {Array(6).fill(null).map((_, i) => (
-              <div key={i} className="h-28 rounded-xl bg-subSurface animate-pulse" />
-            ))}
-          </div>
-        )}
-
-        {/* Empty */}
-        {!isLoading && !summary && (
-          <div className="border border-border rounded-xl p-8 text-center text-muted text-sm">
-            No summary data available.
-          </div>
-        )}
-
-        {/* Grid */}
-        {!isLoading && summary && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {statItems.map(({ key, label, icon: Icon, color, bg }) => (
-              <SummaryCard
-                key={key}
-                label={label}
-                value={(summary as any)[key] ?? 0}
-                icon={<Icon className={`w-4 h-4 ${color}`} />}
-                iconBg={bg}
-              />
-            ))}
-          </div>
-        )}
-      </section>
+      {/* manager summary */}
+      {
+        user?.role === "manager" && <ManagerSummary />
+      }
+      {/* admin summary */}
+      {
+        user?.role === "admin" || user?.role === "staff" && <AdminSummary />
+      }
       {/* result card */}
       <section className="my-10 md:my-12 lg:my-20">
         <ResultSummary result={result as any} tournament={tournament as any} />
