@@ -16,13 +16,13 @@ const MyProfile = () => {
   const isUmpire = user?.role === "umpire";
 
   const { data: manager, isLoading: mLoading } = useGetManagerProfileQuery(
-    undefined, { skip: !isManager }
+    user?._id, { skip: !isManager }
   );
   const { data: player, isLoading: pLoading } = useGetPlayerProfileQuery(
-    undefined, { skip: !isPlayer }
+    user?._id, { skip: !isPlayer }
   );
   const { data: umpire, isLoading: uLoading } = useGetUmpireProfileQuery(
-    undefined, { skip: !isUmpire }
+    user?._id, { skip: !isUmpire }
   );
 
   const isLoading = userLoading || mLoading || pLoading || uLoading;

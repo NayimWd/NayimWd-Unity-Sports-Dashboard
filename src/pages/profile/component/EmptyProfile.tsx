@@ -12,17 +12,17 @@ const EmptyProfile = ({
         manager: {
             message: "Create a team to generate your manager profile.",
             cta: "Create Team",
-            to: "/dashboard/team/create",
+            to: "/dashboard/team/m/create",
         },
         player: {
             message: "You haven't set up your player profile yet.",
             cta: "Create Profile",
-            to: "/dashboard/profile/create",
+            to: "/dashboard/profile/p/create",
         },
         umpire: {
             message: "You haven't set up your umpire profile yet.",
             cta: "Create Profile",
-            to: "/dashboard/profile/create",
+            to: "/dashboard/profile/u/create",
         },
     };
 

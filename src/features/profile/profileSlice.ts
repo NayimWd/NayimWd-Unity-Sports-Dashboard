@@ -15,6 +15,9 @@ const profileApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: ApiResponse<PlayerProfile>) =>
         response.data,
+      providesTags: () => [
+         {type: "PlayerProfile", id: "LIST"},
+      ]
     }),
     getManagerProfile: builder.query<ManagerProfile, any>({
       query: () => ({
@@ -23,6 +26,9 @@ const profileApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: ApiResponse<ManagerProfile>) =>
         response.data,
+      providesTags: () => [
+         {type: "managerProfile", id: "LIST"},
+      ]
     }),
     getUmpireProfile: builder.query<UmpireProfile, any>({
       query: () => ({
@@ -31,6 +37,9 @@ const profileApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: ApiResponse<UmpireProfile>) =>
         response.data,
+      providesTags: () => [
+         {type: "umpireProfile", id: "LIST"},
+      ]
     }),
     createPlayerProfile: builder.mutation({
       query: (data)=> ({
