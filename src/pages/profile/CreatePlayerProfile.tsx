@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useGoBack } from "../../hooks/useGoBack";
-import { useCurrentUserQuery } from "../../features/auth/authApi";
 import { useForm } from "react-hook-form";
 import { PlayerProfileFormData, PlayerProfileSchema } from "../../utils/schema/profileSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,40 +29,40 @@ const CreatePlayerProfile = () => {
     mode: "onSubmit"
   });
 
- const handleSubmit = async (data: PlayerProfileFormData) => {
-  const toastId = LoadingToast({ msg: "Wait a moment, creating..." });
+  const handleSubmit = async (data: PlayerProfileFormData) => {
+    const toastId = LoadingToast({ msg: "Wait a moment, creating..." });
 
-  try {
-    await createPlayerProfile({
-      player_role: data.player_role,
-      batingStyle: data.batingStyle,
-      bowlingArm: data.bowlingArm,
-      bowlingStyle: data.bowlingStyle,
-      DateOfBirth: data.DateOfBirth,
-    }).unwrap();
+    try {
+      await createPlayerProfile({
+        player_role: data.player_role,
+        batingStyle: data.batingStyle,
+        bowlingArm: data.bowlingArm,
+        bowlingStyle: data.bowlingStyle,
+        DateOfBirth: data.DateOfBirth,
+      }).unwrap();
 
-    toast.dismiss(toastId);
-    SuccessToast({ msg: "Profile created successfully" });
+      toast.dismiss(toastId);
+      SuccessToast({ msg: "Profile created successfully" });
 
-    navigate("/dashboard/profile");
-    methods.reset();
+      navigate("/dashboard/profile");
+      methods.reset();
 
-  } catch (error: any) {
-    toast.dismiss(toastId);
+    } catch (error: any) {
+      toast.dismiss(toastId);
 
-    ErrorToast({
-      msg: error?.data?.message || "Failed to create profile",
-    });
-  }
-};
+      ErrorToast({
+        msg: error?.data?.message || "Failed to create profile",
+      });
+    }
+  };
 
   return (
     <PageLayout>
       <BackButton onClick={goBack}></BackButton>
       <PageHeader
-        topTitle="Start your team"
-        title="Create Team"
-        subtitle="Enter Name & Logo"
+        topTitle="Profile"
+        title="Create your profile"
+        subtitle="Enter information"
       />
       <SectionLayout>
         <FormContainer

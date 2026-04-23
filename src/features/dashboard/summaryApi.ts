@@ -23,8 +23,14 @@ const summaryApi = apiSlice.injectEndpoints({
             providesTags: () => [
                 {type: "LatestResult", id: "LIST"}
             ]
+        }),
+        umpireSummary: builder.query({
+            query: () => ({
+                url: `report/umpire_summary`,
+                method: "GET"
+            })
         })
     })
 })
 
-export const {useGetSummaryQuery, useGetLatestResultQuery} = summaryApi;
+export const {useGetSummaryQuery, useGetLatestResultQuery, useUmpireSummaryQuery} = summaryApi;

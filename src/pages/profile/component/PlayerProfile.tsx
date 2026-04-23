@@ -3,8 +3,12 @@ import InfoBadge from "./InfoBadge";
 import ProfileAvatar from "./ProfileAvatar";
 import ProfileCard from "./ProfileCard";
 
-const PlayerProfile = ({ data }: { data: any }) => (
-    <ProfileCard editTo="/dashboard/profile/edit">
+const PlayerProfile = ({ data }: { data: any }) => {
+
+
+    return (
+    <>
+    <ProfileCard editTo={`/dashboard/profile/p/update/${data?._id}`}>
         <div className="flex items-center gap-4">
             <ProfileAvatar photo={data.userId?.photo} name={data.userId?.name} />
             <div className="space-y-1.5">
@@ -42,7 +46,9 @@ const PlayerProfile = ({ data }: { data: any }) => (
             ))}
         </div>
     </ProfileCard>
-);
+    </>
+    )
+};
 
 
 export default PlayerProfile

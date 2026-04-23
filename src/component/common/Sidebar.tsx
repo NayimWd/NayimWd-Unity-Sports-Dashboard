@@ -21,7 +21,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
   useClickOutSide(sidebarRef, () => setIsOpen(false));
 
   type UserRole = keyof typeof navLinks;
-  const userRole: UserRole = (user?.role && ["admin", "manager", "player"].includes(user.role))
+  const userRole: UserRole = (user?.role && ["admin", "manager", "player", "umpire"].includes(user.role))
     ? user.role as UserRole
     : "player";
 

@@ -1,12 +1,12 @@
+import {  Suspense } from "react";
 import ResultSummary from "../component/common/banner/ResultSummary";
 import PageLayout from "../component/layout/PageLayout";
 import SectionLayout from "../component/layout/SectionLayout";
 import { useCurrentUserQuery } from "../features/auth/authApi";
 import { useGetLatestResultQuery } from "../features/dashboard/summaryApi";
 import { fontStyle } from "../utils/ClassUtils";
-import AdminSummary from "./Dashboard/AdminSummary";
-import ManagerSummary from "./Dashboard/ManagerSummary";
 import PointSummary from "./pointTable/PointSummary";
+import { useDashboardSummary } from "./Dashboard/StrategyConfig";
 
 
 const Dashboard = () => {
@@ -15,6 +15,8 @@ const Dashboard = () => {
 
   const result = results?.data.result;
   const tournament = results?.data.tournament;
+
+  const { RoleSummary } = useDashboardSummary(user?.role);
 
   return (
     <PageLayout>
@@ -28,14 +30,15 @@ const Dashboard = () => {
           Live
         </span>
       </div>
-      {/* manager summary */}
-      {
-        user?.role === "manager" && <ManagerSummary />
-      }
-      {/* admin summary */}
-      {
-        user?.role === "admin" || user?.role === "staff" && <AdminSummary />
-      }
+      {/*  summary */}
+      {RoleSummary && (
+        <section className="mb-8">
+          <p className={`${fontStyle.SectionHeading} text-subtext m-2`}>My Overview</p>
+          <Suspense fallback={<div className="h-32 rounded-2xl bg-subSurface animate-pulse" />}>
+            <RoleSummary />
+          </Suspense>
+        </section>
+      )}
       {/* result card */}
       <section className="my-10 md:my-12 lg:my-20">
         <ResultSummary result={result as any} tournament={tournament as any} />

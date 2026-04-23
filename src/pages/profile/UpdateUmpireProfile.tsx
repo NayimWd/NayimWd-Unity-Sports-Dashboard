@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useGoBack } from "../../hooks/useGoBack";
 import { useForm } from "react-hook-form";
-import { useCreateUmpireProfileMutation } from "../../features/profile/profileSlice";
+import {  useGetUmpireProfileQuery, useUpdateUmpireProfileMutation } from "../../features/profile/profileSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PageLayout from "../../component/layout/PageLayout";
 import BackButton from "../../utils/BackButton";
@@ -15,48 +15,58 @@ import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
 import toast from "react-hot-toast";
 import { createUmpireProfileData, createUmpireProfileSchema } from "../../utils/schema/profileSchema";
 import {  experiences } from "./component/helper/helper";
+import { useEffect } from "react";
 
-const CreateUmpireProfile = () => {
-  const goBack = useGoBack();
+const UpdateUmpireProfile = () => {
 
-  const navigate = useNavigate();
-  const [createUmpireProfile, { isLoading }] = useCreateUmpireProfileMutation();
+    const goBack = useGoBack();
+    
+      const navigate = useNavigate();
+      const [updateUmpireProfile, { isLoading }] = useUpdateUmpireProfileMutation();
+      const {data} = useGetUmpireProfileQuery(undefined);
 
-  // form method
-  const methods = useForm<createUmpireProfileData>({
-    resolver: zodResolver(createUmpireProfileSchema),
-    mode: "onSubmit"
-  });
-
-  const handleSubmit = async (data: createUmpireProfileData) => {
-    const toastId = LoadingToast({ msg: "Wait a moment, creating..." });
-
-    try {
-      await createUmpireProfile(
-        data
-      ).unwrap();
-
-      toast.dismiss(toastId);
-      SuccessToast({ msg: "Profile created successfully" });
-
-      navigate("/dashboard/profile");
-      methods.reset();
-
-    } catch (error: any) {
-      toast.dismiss(toastId);
-
-      ErrorToast({
-        msg: error?.data?.message || "Failed to create profile",
+      useEffect(()=> {
+        if(data?.yearsOfExperience){
+          methods.reset({
+            yearsOfExperience: data.yearsOfExperience,
+          })
+        }
+      },[data])
+    
+      // form method
+      const methods = useForm<createUmpireProfileData>({
+        resolver: zodResolver(createUmpireProfileSchema),
+        mode: "onSubmit"
       });
-    }
-  };
-
+    
+      const handleSubmit = async (data: createUmpireProfileData) => {
+        const toastId = LoadingToast({ msg: "Wait a moment, updating..." });
+    
+        try {
+          await updateUmpireProfile(
+            data
+          ).unwrap();
+    
+          toast.dismiss(toastId);
+          SuccessToast({ msg: "Profile updated successfully" });
+    
+          navigate("/dashboard/profile");
+          methods.reset();
+    
+        } catch (error: any) {
+          toast.dismiss(toastId);
+    
+          ErrorToast({
+            msg: error?.data?.message || "Failed to update profile",
+          });
+        }
+      };
   return (
-    <PageLayout>
+     <PageLayout>
       <BackButton onClick={goBack}></BackButton>
       <PageHeader
         topTitle="profile"
-        title="Create your profile"
+        title="Update your profile"
         subtitle="Enter year of experience"
       />
       <SectionLayout>
@@ -67,13 +77,13 @@ const CreateUmpireProfile = () => {
         >
           <DropdownInput
             label="Experience"
-            name="experience"
+            name="yearsOfExperience"
             placeholder="Pick your Experience"
             options={experiences}
           />
 
           <Buttons className="rounded-md" loading={isLoading} iconRight={<Plus size={16} />} disabled={isLoading}>
-            Create profile
+            Update profile
           </Buttons>
         </FormContainer>
       </SectionLayout>
@@ -81,4 +91,4 @@ const CreateUmpireProfile = () => {
   )
 }
 
-export default CreateUmpireProfile
+export default UpdateUmpireProfile

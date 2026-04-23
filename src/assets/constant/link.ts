@@ -342,4 +342,81 @@ export const navLinks = {
       children: [],
     },
   ],
+   umpire: [
+    {
+      path: "/dashboard",
+      icon: Home,
+      label: "Dashboard",
+      children: [],
+    },
+    {
+      path: "/dashboard/account",
+      icon: Users,
+      label: "Account",
+      children: [],
+    },
+    {
+      path: "/dashboard/profile",
+      icon: ShieldUser,
+      label: "Profile",
+      children: [],
+    },
+    {
+      path: "/dashboard/team",
+      icon: BookType,
+      label: "Team",
+    },
+    {
+      path: "",
+      icon: Layers,
+      label: "Tournament",
+      children: [
+        {
+          path: "/dashboard/tournament",
+          icon: FileText,
+          label: "ALL Tournament",
+        },
+        {
+          path: "/dashboard/currentTournament",
+          icon: Component,
+          label: "Running Tournament",
+        },
+      ],
+    },
+    {
+      path: "/dashboard/schedule",
+      icon: CalendarDays,
+      label: "Schedule",
+      children: [],
+    },
+    {
+      path: "",
+      icon: SquareSigma,
+      label: "Match",
+      children: [
+        {
+          path: "/dashboard/match",
+          icon: GalleryHorizontalEnd,
+          label: "All Match",
+        },
+      ],
+    },
+    {
+      path: "/dashboard/pointTable",
+      icon: ChartLine,
+      label: "Point Table",
+    },
+    {
+      path: "/dashboard/venue",
+      icon: School,
+      label: "Venue",
+      children: [],
+    },
+    {
+      path: "/dashboard/blogs",
+      icon: Newspaper,
+      label: "Blog",
+      children: [],
+    },
+  ],
 };

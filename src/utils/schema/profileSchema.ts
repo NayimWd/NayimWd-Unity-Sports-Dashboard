@@ -39,19 +39,17 @@ export const updatePlayerProfileSchema = z
     batingStyle: z.string().optional(),
     bowlingArm: z.string().optional(),
     bowlingStyle: z.string().optional(),
-    DateOfBirth: z
-      .string()
-      .regex(/^\d{2}-\d{2}-\d{4}$/, "Invalid date format (DD-MM-YYYY)")
-      .optional(),
   })
-  .refine((data) => Object.keys(data).length > 0, {
+  .refine((data) => Object.values(data).some((value) => value !== undefined), {
     message: "At least one field is required to update",
   });
 
+export type UpdatePlayerProfileFormData = z.infer<
+  typeof updatePlayerProfileSchema
+>;
 
-  export type UpdatePlayerProfileFormData = z.infer<typeof updatePlayerProfileSchema>;
+export const createUmpireProfileSchema = z.object({
+  yearsOfExperience: z.number().min(1, "minimum 1 year experience is required"),
+});
 
-
-  
-
-  
+export type createUmpireProfileData = z.infer<typeof createUmpireProfileSchema>;

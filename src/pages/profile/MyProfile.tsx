@@ -24,7 +24,7 @@ const MyProfile = () => {
   const { data: umpire, isLoading: uLoading } = useGetUmpireProfileQuery(
     user?._id, { skip: !isUmpire }
   );
-
+  
   const isLoading = userLoading || mLoading || pLoading || uLoading;
 
   return (

@@ -8,7 +8,6 @@ const MyTeam = lazy(() => import("../pages/teams/MyTeam"));
 const CreateTeam = lazy(() => import("../pages/teams/CreateTeam"));
 const ManageTeam = lazy(()=> import("../pages/teams/ManageTeam"));
 const Editteam = lazy(()=> import("../pages/teams/EditTeam"));
-const Addplayer = lazy(()=> import("../pages/teams/Addplayer"));
 const RemovePlayer = lazy(()=> import("../pages/teams/RemovePlayer"));
 const CangeTeamInfo = lazy(()=> import("../pages/teams/CangeTeamInfo"));
 const UpdateTeamName = lazy(()=> import("../pages/teams/UpdateTeamName"));
@@ -72,16 +71,6 @@ export const teamRoutes: RouteObject[] = [
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
                     <Editteam/>
-                </SuspenseWrapper>
-            </ErrorBoundaryWrapper>
-        )
-    },
-    {
-        path: "team/:teamId/addPlayer",
-        element: (
-            <ErrorBoundaryWrapper>
-                <SuspenseWrapper>
-                    <Addplayer/>
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )

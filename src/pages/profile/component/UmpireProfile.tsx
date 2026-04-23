@@ -4,7 +4,7 @@ import ProfileAvatar from "./ProfileAvatar";
 import ProfileCard from "./ProfileCard";
 
 const UmpireProfile = ({ data }: { data: any }) => (
-  <ProfileCard editTo="/dashboard/profile/edit">
+  <ProfileCard editTo="/dashboard/profile/u/update">
     <div className="flex items-center gap-4">
       <ProfileAvatar photo={data.userId?.photo} name={data.userId?.name} />
       <div className="space-y-1.5">
