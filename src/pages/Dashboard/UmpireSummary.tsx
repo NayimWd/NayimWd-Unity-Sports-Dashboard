@@ -65,7 +65,7 @@ const UmpireSummary = () => {
                     </div>
                     <Link to="/dashboard/myAccount">
                     <span className="text-xs font-medium bg-blue-500/10 text-primary
-                           px-3 py-1.5 rounded-lg border border-blue-500/20">
+                           px-3 py-1.5 rounded-lg border border-blue-500/20 flex">
                         Account <ArrowRight size={16} className="text-primary ml-2"/>
                     </span>
                     </Link>

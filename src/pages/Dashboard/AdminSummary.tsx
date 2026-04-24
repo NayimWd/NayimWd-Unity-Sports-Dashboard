@@ -1,6 +1,5 @@
 import SummaryCard from "../../component/common/card/SummaryCard";
 import { useGetSummaryQuery } from "../../features/dashboard/summaryApi";
-import { fontStyle } from "../../utils/ClassUtils";
 import { Trophy, Users, User, Clock, Star, Building2 } from "lucide-react";
 
 const statItems = [
@@ -21,7 +20,7 @@ function AdminSummary() {
 
     return (
         <section className="mb-8">
-            <p className={`${fontStyle.SectionHeading} text-font mb-5`}>Overview</p>
+      
 
             {/* Skeleton */}
             {isLoading && (

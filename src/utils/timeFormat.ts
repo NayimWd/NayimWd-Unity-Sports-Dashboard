@@ -20,3 +20,9 @@ export const parseDMY = (value?: string) => {
   const [d, m, y] = value.split("-");
   return new Date(`${y}-${m}-${d}`);
 };
+
+export const parseDate = (dateStr?: string) => {
+  if (!dateStr) return null;
+  const [day, month, year] = dateStr.split("-");
+  return new Date(Number(year), Number(month) - 1, Number(day));
+};

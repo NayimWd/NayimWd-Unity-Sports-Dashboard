@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 import { TUpdateTournamentDate, updateTournamentDateSchema } from "../../utils/schema/tournamentSchema";
 import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
 import DateInput from "../../component/common/input/DateInput";
-import { formatDDMMYYYY, parseDMY } from "../../utils/timeFormat";
+import { formatDDMMYYYY } from "../../utils/timeFormat";
 
 const UpdateTournamentDate = () => {
   const goBack = useGoBack();
@@ -41,9 +41,9 @@ const UpdateTournamentDate = () => {
   useEffect(() => {
     if (tournament) {
       methods.reset({
-        startDate: parseDMY(tournament.startDate),
-        endDate: parseDMY(tournament.endDate),
-        registrationDeadline: parseDMY(tournament.registrationDeadline),
+        startDate: formatDDMMYYYY(tournament.startDate),
+        endDate: formatDDMMYYYY(tournament.endDate),
+        registrationDeadline: formatDDMMYYYY(tournament.registrationDeadline),
       })
     };
   }, [tournament])
