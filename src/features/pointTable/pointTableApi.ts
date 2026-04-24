@@ -3,9 +3,17 @@ import { apiSlice } from "../api/apiSlice";
 
 export const pointTableApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getPointTable: builder.query<ApiResponse<PointTableData>, string>({
-            query: (tournamentId: string) => `pointTable/get/${tournamentId}`
-        })
+        getPointTable: builder.query<ApiResponse<PointTableData>, any>({
+            query: (tournamentId) => ({
+                url: `pointTable/get/${tournamentId}`,
+                method: "GET"
+            }),
+             providesTags: (_result, _args, {tournamentId}) => [
+                { type: "PointTable", id: tournamentId },
+                { type: "PointTable", id: "LIST" },
+             ]  
+        }),
+        
     })
 });
  

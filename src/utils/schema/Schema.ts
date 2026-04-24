@@ -15,7 +15,9 @@ export const registrationSchema = z.object({
     .refine((val) => ["player", "manager", "umpire"].includes(val), {
       message: "Please select a role",
     }),
-  phoneNumber: z.string().min(10, "Miminum 10 Digits are required").max(12),
+  phoneNumber: z
+    .string()
+    .regex(/^(?:\+8801|01)[3-9]\d{8}$/, "Invalid Bangladeshi phone number"),
   photo: z
     .custom<File>((v) => v instanceof File && v.size > 0, {
       message: "Photo is required",
@@ -47,14 +49,14 @@ export const blogSchema = z.object({
       (tag) => ["news", "highlight", "tournaments", "awards"].includes(tag),
       {
         message: "Please Select a tag",
-      }
+      },
     ),
   isPublished: z.boolean(),
   photo: z
     .array(
       z.custom<File>((v) => v instanceof File && v.size > 0, {
         message: "Each file must be a valid image",
-      })
+      }),
     )
     .min(1, { message: "At least one blog image is required" }),
 });
@@ -64,7 +66,7 @@ export const updateBlogPhotoSchema = z.object({
   photo: z.array(
     z.custom<File>((v) => v instanceof File && v.size > 0, {
       message: "At least one photo is required",
-    })
+    }),
   ),
 });
 
@@ -79,7 +81,7 @@ export const updateBlogSchema = z
         (tag) => ["news", "highlight", "tournaments", "awards"].includes(tag),
         {
           message: "Please select a valid tag",
-        }
+        },
       )
       .optional(),
   })
@@ -96,7 +98,7 @@ export const filterBlogSchema = z.object({
       (tag) => ["news", "highlight", "tournaments", "awards", ""].includes(tag),
       {
         message: "Select a valid tag",
-      }
+      },
     )
     .optional(),
   search: z.string().optional(),
@@ -112,7 +114,7 @@ export const filterAllBlogsSchema = z.object({
       (tag) => ["news", "highlight", "tournaments", "awards", ""].includes(tag),
       {
         message: "Select a valid tag",
-      }
+      },
     )
     .optional(),
   search: z.string().optional(),

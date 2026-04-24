@@ -16,6 +16,7 @@ interface ModalProps {
   isLoading?: boolean;
   variant?: "default" | "info" | "danger" | "success";
   size?: "sm" | "md" | "lg" | "xl";
+   hideFooter?: boolean;
 }
 
 const RedixModal = ({
@@ -30,12 +31,13 @@ const RedixModal = ({
   isLoading = false,
   variant = "default",
   size = "md",
+  hideFooter
 }: ModalProps) => {
   return (
     <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40" />
-        <Dialog.Content className={baseModal({ variant, size })}>
+        <Dialog.Content aria-describedby={description ? "modal-description" : undefined} className={baseModal({ variant, size })}>
           {/* Header */}
           <div className="flex justify-between items-start mb-4">
             {title && (
@@ -52,7 +54,7 @@ const RedixModal = ({
 
           {/* Description */}
           {description && (
-            <Dialog.Description className="text-sm text-subtext mb-4">
+            <Dialog.Description aria-describedby={description ? "modal-description" : undefined} className="text-sm text-subtext mb-4">
               {description}
             </Dialog.Description>
           )}
@@ -61,7 +63,7 @@ const RedixModal = ({
           {children}
 
           {/* Footer */}
-          <div className="mt-6 flex justify-end gap-3">
+         { !hideFooter && <div className="mt-6 flex justify-end gap-3">
             <Dialog.Close asChild>
               <button className="px-4 py-2 text-sm rounded-md border border-border text-font hover:bg-subSurface transition">
                 {cancelText}
@@ -77,7 +79,7 @@ const RedixModal = ({
             >
               {isLoading ? "Processing..." : confirmText}
             </button>
-          </div>
+          </div>}
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

@@ -10,7 +10,7 @@ interface CardProps {
 const SummaryCard = ({ label, value, icon, iconBg }: CardProps) => {
   return (
     <div className={cn(
-      "group relative rounded-xl border border-border bg-surface",
+      "group  relative rounded-xl border border-border bg-surface",
       "p-5 flex flex-col justify-between overflow-hidden",
       "transition-all duration-200 hover:-translate-y-[2px] hover:border-inputBorder"
     )}>
