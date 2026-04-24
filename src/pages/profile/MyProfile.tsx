@@ -1,31 +1,16 @@
 import PageLayout from "../../component/layout/PageLayout";
 import BackButton from "../../utils/BackButton";
-import { useGetManagerProfileQuery, useGetPlayerProfileQuery, useGetUmpireProfileQuery } from "../../features/profile/profileSlice";
 import { useCurrentUserQuery } from "../../features/auth/authApi";
+import { useProfileStragegy } from "./component/helper/ProfileConfit";
+import { Suspense } from "react";
 import ProfileSkeleton from "./component/ProfileSkeleton";
-import ManagerProfile from "./component/ManagerProfile";
-import EmptyProfile from "./component/EmptyProfile";
-import PlayerProfile from "./component/PlayerProfile";
-import UmpireProfile from "./component/UmpireProfile";
+
+
 
 const MyProfile = () => {
   const { data: user, isLoading: userLoading } = useCurrentUserQuery();
 
-  const isManager = user?.role === "manager";
-  const isPlayer = user?.role === "player";
-  const isUmpire = user?.role === "umpire";
-
-  const { data: manager, isLoading: mLoading } = useGetManagerProfileQuery(
-    user?._id, { skip: !isManager }
-  );
-  const { data: player, isLoading: pLoading } = useGetPlayerProfileQuery(
-    user?._id, { skip: !isPlayer }
-  );
-  const { data: umpire, isLoading: uLoading } = useGetUmpireProfileQuery(
-    user?._id, { skip: !isUmpire }
-  );
-  
-  const isLoading = userLoading || mLoading || pLoading || uLoading;
+  const { ProfileComponent } = useProfileStragegy(user?.role);
 
   return (
     <PageLayout>
@@ -40,29 +25,14 @@ const MyProfile = () => {
             Your {user?.role} profile overview.
           </p>
         </div>
+        {/* Profile section */}
 
-        {/* Loading */}
-        {isLoading && <ProfileSkeleton />}
+        {userLoading && <ProfileSkeleton />}
 
-        {/* Manager */}
-        {!isLoading && isManager && (
-          manager
-            ? <ManagerProfile data={manager} />
-            : <EmptyProfile role="manager" />
-        )}
-
-        {/* Player */}
-        {!isLoading && isPlayer && (
-          player
-            ? <PlayerProfile data={player} />
-            : <EmptyProfile role="player" />
-        )}
-
-        {/* Umpire */}
-        {!isLoading && isUmpire && (
-          umpire
-            ? <UmpireProfile data={umpire} />
-            : <EmptyProfile role="umpire" />
+        {!userLoading && ProfileComponent && (
+          <Suspense fallback={<ProfileSkeleton />}>
+            <ProfileComponent />
+          </Suspense>
         )}
 
       </div>

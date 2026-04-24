@@ -2,9 +2,25 @@ import { Calendar } from "lucide-react";
 import InfoBadge from "./InfoBadge";
 import ProfileAvatar from "./ProfileAvatar";
 import ProfileCard from "./ProfileCard";
+import { useGetUmpireProfileQuery } from "../../../features/profile/profileSlice";
+import ProfileSkeleton from "./ProfileSkeleton";
+import EmptyProfile from "./EmptyProfile";
 
-const UmpireProfile = ({ data }: { data: any }) => (
-  <ProfileCard editTo="/dashboard/profile/u/update">
+const UmpireProfile = () => {
+
+  const { data, isLoading, isError } = useGetUmpireProfileQuery(undefined);
+
+  // loading state
+  if (isLoading) {
+    return <ProfileSkeleton />;
+  }
+
+  // error or no data
+  if (isError || !data) {
+    return <EmptyProfile role="umpire" />;
+  }
+
+  return (<ProfileCard editTo="/dashboard/profile/u/update">
     <div className="flex items-center gap-4">
       <ProfileAvatar photo={data.userId?.photo} name={data.userId?.name} />
       <div className="space-y-1.5">
@@ -16,6 +32,7 @@ const UmpireProfile = ({ data }: { data: any }) => (
       </div>
     </div>
   </ProfileCard>
-);
+  )
+};
 
 export default UmpireProfile;
