@@ -3,8 +3,11 @@ import { RouteObject } from "react-router-dom";
 import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
 import SuspenseWrapper from "../utils/SuspenseWrapper";
 
-const TournamentApplications = lazy(()=> import("../pages/registration/GetTournamentApplication"));
-const ApplicationDetails = lazy(()=> import("../pages/registration/ApplicationDetails"))
+const GetTournamentApplication = lazy(()=> import("../pages/registration/GetTournamentApplication"));
+const ApplicationDetails = lazy(()=> import("../pages/registration/ApplicationDetails"));
+const TournamentApplication = lazy(()=> import("../pages/registration/TournamentApplication"));
+const MyApplication = lazy(()=> import("../pages/registration/MyApplication"));
+
 
 export const applicationRoutes: RouteObject[] = [
     {
@@ -12,7 +15,7 @@ export const applicationRoutes: RouteObject[] = [
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
-                    <TournamentApplications/>
+                    <GetTournamentApplication/>
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )
@@ -26,5 +29,25 @@ export const applicationRoutes: RouteObject[] = [
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )
-    }
+    },
+    {
+        path: "application/apply/:tournamentId",
+        element: (
+         <ErrorBoundaryWrapper>
+            <SuspenseWrapper>
+                <TournamentApplication/>
+            </SuspenseWrapper>
+         </ErrorBoundaryWrapper>
+        )
+    },
+    {
+        path: "application/my_application",
+        element: (
+         <ErrorBoundaryWrapper>
+            <SuspenseWrapper>
+                <MyApplication/>
+            </SuspenseWrapper>
+         </ErrorBoundaryWrapper>
+        )
+    },
 ]

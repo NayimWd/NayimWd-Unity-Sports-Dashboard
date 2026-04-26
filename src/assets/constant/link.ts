@@ -218,10 +218,21 @@ export const navLinks = {
       ],
     },
     {
-      path: "/dashboard/tournament",
+      path: "",
       icon: Layers,
       label: "Tournament",
-      children: [],
+      children: [
+        {
+          path: "/dashboard/tournament",
+          icon: Layers,
+          label: "All Tournaments"
+        },
+        {
+          path: "/dashboard/application/my_application",
+          icon: FileStack,
+          label: "My Application"
+        }
+      ],
     },
     {
       path: "/dashboard/schedule",

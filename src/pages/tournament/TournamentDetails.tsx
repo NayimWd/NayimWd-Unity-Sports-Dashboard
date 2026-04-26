@@ -26,6 +26,8 @@ const TournamentDetails = () => {
   const { data, isLoading } = useGetTournamentDetailsQuery(id as string);
   const t = data?.data;
 
+
+
   if (isLoading) {
     return (
       <PageLayout>
@@ -69,8 +71,9 @@ const TournamentDetails = () => {
               {
 
                 t?.status === "upcoming" && user?.role === "manager" ?
-
+                  <Link to={`/dashboard/application/apply/${id}`}>
                   <Buttons iconRight={<Rocket size={16} />} size="sm" className="rounded px-5" variant="primary">Apply  </Buttons>
+                  </Link>
                   :
                   ""
 

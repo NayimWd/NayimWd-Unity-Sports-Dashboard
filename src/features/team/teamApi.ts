@@ -170,6 +170,12 @@ const teamApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: () => [{ type: "Team", id: "LIST" }, {type: "MyTeam", id: "LIST"}],
     }),
+    myTeamSummary: builder.query({
+      query: () => ({
+        url: `team/team_summary`,
+        method: "GET"
+      })
+    })
   }),
 });
 
@@ -185,4 +191,5 @@ export const {
   useUpdateTeamLogoMutation,
   useTeamSummaryQuery,
   useCreateTeamMutation,
+  useMyTeamSummaryQuery
 } = teamApi;

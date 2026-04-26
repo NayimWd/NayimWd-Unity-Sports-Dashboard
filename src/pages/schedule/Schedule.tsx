@@ -5,21 +5,23 @@ import { useGetSchedultQuery } from "../../features/schedule/scheduleApi";
 import { useLatestTournamentQuery } from "../../features/tournament/tournamentApi";
 import { useGoBack } from "../../hooks/useGoBack";
 import BackButton from "../../utils/BackButton";
-import { fontStyle } from "../../utils/ClassUtils";
 import cn from "../../utils/cn";
 import { Link } from "react-router-dom";
 import Buttons from "../../component/common/Buttons";
 import MatchCardSkeleton from "../../component/common/skeleton/MatchCardSkeleton";
+import PageHeader from "../../component/ui/PageHeader";
 
 const Schedule = () => {
   const goBack = useGoBack();
 
   // get letest tournament id based on point table
-  const { data: tournament } = useLatestTournamentQuery();
+  const { data: tournament, isLoading: Tloading } = useLatestTournamentQuery(undefined);
 
   const tournamentId = tournament?.data._id;
 
-  const { data, isLoading, isFetching } = useGetSchedultQuery({ tournamentId }, { skip: !tournamentId });
+  const { data, isLoading: sLoading, isFetching } = useGetSchedultQuery({ tournamentId }, { skip: !tournamentId });
+
+  const isLoading = Tloading || sLoading;
 
   if (isLoading || isFetching) {
     return (
@@ -35,14 +37,12 @@ const Schedule = () => {
     <PageLayout>
       <BackButton onClick={goBack}>Back</BackButton>
       {/* header */}
-      <div className="flex items-center justify-between mb-6">
-        <h1 className={`text-font text-center mt-5 ${fontStyle.pageTitle}`}>Tournament Matches</h1>
-        <span className="text-sm text-subtext">
-          Total Matches: {data?.total}
-        </span>
-      </div>
+      <PageHeader
+        topTitle="Schedule"
+        title={tournament?.data.tournamentName ?? "Tournament"}
+        subtitle={`total: ${data?.total}`}
+      />
 
-      {/* header */}
       {/* Schedule List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
         {data?.schedules.map((schedule) => {

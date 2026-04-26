@@ -12,11 +12,13 @@ const GetMatches = () => {
   const goBack = useGoBack();
 
   // get letest tournament id based on point table
-  const { data } = useLatestTournamentQuery();
+  const { data, isLoading: tLoading } = useLatestTournamentQuery(undefined);
 
   const tournamentId = data?.data._id;
   // fetch match
-  const { data: matches, isLoading, isFetching } = useGetMatchQuery({ tournamentId }, { skip: !tournamentId });
+  const { data: matches, isLoading: mLoading, isFetching } = useGetMatchQuery({ tournamentId }, { skip: !tournamentId });
+
+  const isLoading = tLoading || mLoading;
 
   if (isLoading || isFetching) {
     return (
@@ -31,7 +33,8 @@ const GetMatches = () => {
   return (
     <PageLayout>
       <BackButton onClick={goBack}>Back</BackButton>
-      <h1 className={`text-font text-center mt-5 ${fontStyle.pageTitle}`}>Tournament Matches</h1>
+      <h1 className={`text-font text-center mt-5 ${fontStyle.pageTitle}`}>{data?.data.tournamentName}</h1>
+      <p className={`text-subtext text-center mt-5 ${fontStyle.SectionHeading}`}>Tournament Matches</p>
       <SectionLayout className="bg-transparent">
         <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
 

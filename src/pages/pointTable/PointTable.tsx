@@ -5,21 +5,22 @@ import TableSkeleton from "../../component/common/Table/TableSkeleton";
 import TableEmpty from "../../component/common/Table/TableEmpty";
 import { useLatestTournamentQuery } from "../../features/tournament/tournamentApi";
 import { useGetPointTableQuery } from "../../features/pointTable/pointTableApi";
-import { fontStyle } from "../../utils/ClassUtils";
 import PageLayout from "../../component/layout/PageLayout";
 import BackButton from "../../utils/BackButton";
 import { useGoBack } from "../../hooks/useGoBack";
+import PageHeader from "../../component/ui/PageHeader";
 
 const PointTable = () => {
   // fetch latest tournament 
-  const { data: latestTournament } = useLatestTournamentQuery();
+  const { data: latestTournament, isLoading: tLoading } = useLatestTournamentQuery(undefined);
 
   // fetch point table data based on tournament id
-  const { data: pointTable, isLoading: loading } = useGetPointTableQuery(latestTournament?.data._id ?? "", {
+  const { data: pointTable, isLoading } = useGetPointTableQuery(latestTournament?.data._id ?? "", {
     skip: !latestTournament?.data?._id, // skip query if tournament id is not available
     refetchOnMountOrArgChange: true, // refetch when component mounts or any arg change
   })
 
+  const loading = tLoading || isLoading;
 
   const headerData = [
     "Team",
@@ -74,33 +75,37 @@ const PointTable = () => {
   return (
     <PageLayout>
       <BackButton className="mb-5" onClick={useGoBack()}>Go Back</BackButton>
-      <h1 className={`${fontStyle.pageTitle} text-font text-center my-3`}>Point Table</h1>
-    <div className="rounded-2xl border border-border overflow-hidden bg-surface">
+      <PageHeader
+        topTitle="Point Table"
+        title={latestTournament?.data.tournamentName ?? "Tournament"}
+        subtitle={`Count ${pointTable?.data.pointTable.length}`}
+      />
+      <div className="rounded-2xl border border-border overflow-hidden bg-surface">
 
-    {/* Table header */}
-    <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-      {loading ? (
-        <div className="h-4 w-40 rounded bg-subSurface animate-pulse" />
-      ) : (
-        <div className="flex items-center gap-3">
-          <img className="w-8 h-8 rounded-lg object-cover border border-border"
-            src={pointTable?.data?.tournament?.photo} alt="" />
-          <p className="text-sm font-medium text-font">
-            {pointTable?.data?.tournament?.tournamentName}
-          </p>
+        {/* Table header */}
+        <div className="flex items-center justify-between px-5 py-4 border-b border-border">
+          {loading ? (
+            <div className="h-4 w-40 rounded bg-subSurface animate-pulse" />
+          ) : (
+            <div className="flex items-center gap-3">
+              <img className="w-8 h-8 rounded-lg object-cover border border-border"
+                src={pointTable?.data?.tournament?.photo} alt="" />
+              <p className="text-sm font-medium text-font">
+                {pointTable?.data?.tournament?.tournamentName}
+              </p>
+            </div>
+          )}
+          <span className="text-xs text-muted bg-subSurface border border-border px-3 py-1 rounded-full">
+            Point Table
+          </span>
         </div>
-      )}
-      <span className="text-xs text-muted bg-subSurface border border-border px-3 py-1 rounded-full">
-        Point Table
-      </span>
-    </div>
 
-    <Table>
-      <TableHeader headers={headerData} />
-      {content}
-    </Table>
+        <Table>
+          <TableHeader headers={headerData} />
+          {content}
+        </Table>
 
-  </div>
+      </div>
     </PageLayout>
   )
 }

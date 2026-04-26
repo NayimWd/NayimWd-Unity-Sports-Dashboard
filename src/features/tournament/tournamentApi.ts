@@ -8,16 +8,25 @@ import { apiSlice } from "../api/apiSlice";
 
 export const tournamentApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    latestTournament: builder.query<ApiResponse<Tournament>, void>({
-      query: () => ({
-        url: `tournament/latest`,
-        method: "GET",
-      }),
+    latestTournament: builder.query<
+      ApiResponse<Tournament>,
+      { status?: string } | any
+    >({
+      query: (arg) => {
+        const status = arg?.status;
+
+        return {
+          url: status
+            ? `tournament/latest?status=${status}`
+            : `tournament/latest`,
+          method: "GET",
+        };
+      },
       keepUnusedDataFor: 600,
       providesTags: () => [
-        {type: "LatestTournament", id: "LIST"},
-        {type: "Tournament", id: "LIST"},
-      ]
+        { type: "LatestTournament", id: "LIST" },
+        { type: "Tournament", id: "LIST" },
+      ],
     }),
     getAllTournament: builder.query<ApiResponse<ITournaments>, string | void>({
       query: (status) => {
@@ -59,17 +68,15 @@ export const tournamentApi = apiSlice.injectEndpoints({
       transformResponse: (response: ApiResponse<ITournamentFinalResult>) =>
         response,
       providesTags: (_result, _error, tournamentId) => [
-        {type: "Tournament", id: tournamentId}
-      ]
+        { type: "Tournament", id: tournamentId },
+      ],
     }),
     searchTournament: builder.query({
       query: () => ({
         url: "tournament/search",
         method: "GET",
       }),
-      providesTags: () => [
-        {type: "Tournament", id: "LIST"}
-      ]
+      providesTags: () => [{ type: "Tournament", id: "LIST" }],
     }),
     createTournament: builder.mutation({
       query: (data) => ({
@@ -130,20 +137,20 @@ export const tournamentApi = apiSlice.injectEndpoints({
       ],
     }),
     approvedTeam: builder.query({
-      query: ({tournamentId}) => ({
+      query: ({ tournamentId }) => ({
         url: `/tournament/approved_teams/${tournamentId}`,
         method: "GET",
       }),
-      providesTags: (_result, _args, {tournamentId}) => [
-        {type: "ApprovedTeam", id: tournamentId},
-      ]
+      providesTags: (_result, _args, { tournamentId }) => [
+        { type: "ApprovedTeam", id: tournamentId },
+      ],
     }),
     upcomingTournament: builder.query({
       query: () => ({
         url: `tournament/upcoming`,
         method: "GET",
-      })
-    })
+      }),
+    }),
   }),
 });
 
@@ -160,5 +167,5 @@ export const {
   useCreateTournamentResultMutation,
   useSearchTournamentQuery,
   useApprovedTeamQuery,
-  useUpcomingTournamentQuery
+  useUpcomingTournamentQuery,
 } = tournamentApi;
