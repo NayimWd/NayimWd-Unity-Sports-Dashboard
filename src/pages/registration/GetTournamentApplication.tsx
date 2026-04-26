@@ -1,10 +1,8 @@
 import { useState } from "react";
 import PageLayout from "../../component/layout/PageLayout";
-import { useGetRegisterApplicationQuery } from "../../features/registration/registrationApi";
-import { useLatestTournamentQuery } from "../../features/tournament/tournamentApi"
+import { useActionMutation, useGetRegisterApplicationQuery } from "../../features/registration/registrationApi";
 import { useGoBack } from "../../hooks/useGoBack";
 import BackButton from "../../utils/BackButton";
-import { fontStyle } from "../../utils/ClassUtils";
 import { statusOption } from "./index";
 import SectionLayout from "../../component/layout/SectionLayout";
 import TableSkeleton from "../../component/common/Table/TableSkeleton";
@@ -14,6 +12,10 @@ import Dropdown from "../../component/common/dropdown/Dropdown";
 import { BookOpenText, Check, Settings, X } from "lucide-react";
 import Table from "../../component/common/Table/Table";
 import TableHeader from "../../component/common/Table/TableHeader";
+import { usePriorityTournament } from "../tournament/LatestTournament";
+import toast from "react-hot-toast";
+import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
+import PageHeader from "../../component/ui/PageHeader";
 
 const TournamentApplications = () => {
     const goBack = useGoBack();
@@ -21,17 +23,36 @@ const TournamentApplications = () => {
     const [status, setStatus] = useState<string | undefined>();
 
     // get  tournament id
-    const { data } = useLatestTournamentQuery();
+    // const { data } = useLatestTournamentQuery({status: "upcoming"});
+    const { tournament } = usePriorityTournament();
 
     // get application by that id
     const { data: applications, isLoading, isError } = useGetRegisterApplicationQuery({
-        id: data?.data._id,
+        id: tournament?.data._id,
         status: status
     },
         {
-            skip: !data?.data._id
+            skip: !tournament?.data._id
         }
     );
+
+    const [action] = useActionMutation();
+
+    const handleApplication = async (data: any) => {
+        const loadingId = LoadingToast({ msg: "Wait a momment..." })
+        try {
+            await action({
+                tournamentId: tournament?.data._id,
+                data: data
+            })
+            toast.dismiss(loadingId);
+            SuccessToast({ msg: `application ${data?.status ?? "success"}` })
+
+        } catch (error) {
+            toast.dismiss(loadingId);
+            ErrorToast({ msg: `Action ${data?.status ?? ""} failed!` })
+        }
+    }
 
     const allApplications = applications?.data.registration;
     // table header
@@ -74,11 +95,15 @@ const TournamentApplications = () => {
                                 {
                                     application.status === "pending" ?
                                         <div>
-                                            <Dropdown.Item>
+                                            <Dropdown.Item
+                                                onClick={() => handleApplication({ status: "approved", teamId: application.teamId })}
+                                            >
                                                 <Check className="text-green-500" size={14} /> Approve
                                             </Dropdown.Item>
-                                            <Dropdown.Item>
-                                                <X className="text-green-500" size={14} /> Reject
+                                            <Dropdown.Item
+                                                onClick={() => handleApplication({ status: "rejected", teamId: application.teamId })}
+                                            >
+                                                <X className="text-red-500" size={14} /> Reject
                                             </Dropdown.Item>
                                         </div>
                                         :
@@ -98,9 +123,11 @@ const TournamentApplications = () => {
         <PageLayout>
             <BackButton onClick={goBack}>Go Back</BackButton>
             <SectionLayout>
-                <h1 className={`${fontStyle.pageTitle} text-center text-font my-6`}>
-                    Tournaments Application
-                </h1>
+                <PageHeader
+                    topTitle="Applications"
+                    title={tournament?.data.tournamentName ?? "Tournament"}
+                    subtitle={`Total: ${applications?.data.total}`}
+                />
                 {/* pils for filter */}
                 <div className="flex flex-wrap justify-center gap-3">
                     {statusOption.map((f) => (

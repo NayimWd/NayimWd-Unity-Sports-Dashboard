@@ -3,7 +3,7 @@ import { fontStyle } from "../../utils/ClassUtils";
 interface PageHeaderProps {
     topTitle?: string;
     title: string;
-    subtitle?: string;
+    subtitle?: string | number;
 }
 
 const PageHeader = ({ topTitle, title, subtitle }: PageHeaderProps) => {

@@ -33,6 +33,7 @@ export const registrationApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (_result, _error, { tournamentId }) => [
         { type: "Registration", id: tournamentId },
+        { type: "Registration", id: "LIST" },
       ],
     }),
     myApplication: builder.query({
@@ -52,6 +53,9 @@ export const registrationApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (_result, _error, { tournamentId }) => [
         { type: "Registration", id: tournamentId },
+         { type: "Registration", id: "LIST" },
+         { type: "ApprovedTeam", id: "LIST" },
+         { type: "ApprovedTeam", id: "LIST" },
       ],
     }),
     reApply: builder.mutation({
@@ -62,8 +66,22 @@ export const registrationApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (_result, _error, { tournamentId }) => [
         { type: "Registration", id: tournamentId },
+        { type: "Registration", id: "LIST" },
+        { type: "ApprovedTeam", id: "LIST" },
       ],
     }),
+    action: builder.mutation({
+        query: ({tournamentId, data}) => ({
+            url: `tournamentRegister/update_status/${tournamentId}`,
+            method: "PATCH",
+            body: data
+        }),
+        invalidatesTags: (_result, _error, { tournamentId }) => [
+        { type: "Registration", id: tournamentId },
+        { type: "Registration", id: "LIST" },
+        { type: "ApprovedTeam", id: "LIST" },
+      ],
+    })
   }),
 });
 
@@ -73,5 +91,6 @@ export const {
   useApplyForTournamentMutation,
   useMyApplicationQuery,
   useWithdrawMutation,
-  useReApplyMutation
+  useReApplyMutation,
+  useActionMutation,
 } = registrationApi;
