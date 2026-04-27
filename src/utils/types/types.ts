@@ -66,6 +66,7 @@ export interface Tournament {
   tournamentName: string;
   status: string,
   photo: string;
+  teamCount: number;
 }
 // -------------------------------------------------------------------- //
 // point table type

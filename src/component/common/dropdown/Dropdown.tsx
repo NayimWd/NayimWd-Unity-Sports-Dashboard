@@ -99,6 +99,7 @@ interface DropdownItemProps {
   href?: string;
   value?: string | number;
   className?: string;
+  disabled?: any
 }
 
 function DropdownItem({ children, onClick, href, value, className }: DropdownItemProps) {

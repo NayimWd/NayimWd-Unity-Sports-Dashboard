@@ -80,6 +80,8 @@ export const registrationApi = apiSlice.injectEndpoints({
         { type: "Registration", id: tournamentId },
         { type: "Registration", id: "LIST" },
         { type: "ApprovedTeam", id: "LIST" },
+        {type: "Tournament", id: tournamentId},
+        {type: "Tournament", id: "LIST"},
       ],
     })
   }),
