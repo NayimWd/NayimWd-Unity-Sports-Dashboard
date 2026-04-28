@@ -3,20 +3,34 @@ import TableHeader from "../../component/common/Table/TableHeader";
 import TableRow from "../../component/common/Table/TableRow";
 import TableSkeleton from "../../component/common/Table/TableSkeleton";
 import TableEmpty from "../../component/common/Table/TableEmpty";
-import { useLatestTournamentQuery } from "../../features/tournament/tournamentApi";
 import { useGetPointTableQuery } from "../../features/pointTable/pointTableApi";
+import { useState } from "react";
+import { useTournamentPicker } from "../../hooks/useTournamentPicker";
+import PickerModal from "../../component/ui/modal/PickerModal";
+import TournamentPickerTrigger from "../tournament/TournamentPickerTrigger";
+
 
 
 
 const PointSummary = () => {
-  // fetch latest tournament 
-  const { data: latestTournament } = useLatestTournamentQuery();
+
+  const {
+    activeTournamentId,
+    selected,
+    tournaments,
+    handleSelect,
+    handleClear,
+    latestTournamentId,
+    latestTournamentName,
+  } = useTournamentPicker();
+
+  const [pickerOpen, setPickerOpen] = useState(false);
 
   // fetch point table data based on tournament id
-  const { data: pointTable, isLoading: loading } = useGetPointTableQuery(latestTournament?.data._id ?? "", {
-    skip: !latestTournament?.data?._id, // skip query if tournament id is not available
-  })
-
+  const { data: pointTable, isLoading: loading } = useGetPointTableQuery(
+    activeTournamentId ?? "",
+    { skip: !activeTournamentId }
+  );
 
   const headerData = [
     "Team",
@@ -69,32 +83,48 @@ const PointSummary = () => {
   }
 
   return (
-   <div className="rounded-2xl border border-border overflow-hidden bg-surface">
+    <div className="rounded-2xl border border-border overflow-hidden bg-surface">
 
-    {/* Table header */}
-    <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-      {loading ? (
-        <div className="h-4 w-40 rounded bg-subSurface animate-pulse" />
-      ) : (
-        <div className="flex items-center gap-3">
-          <img className="w-8 h-8 rounded-lg object-cover border border-border"
-            src={pointTable?.data?.tournament?.photo} alt="" />
-          <p className="text-sm font-medium text-font">
-            {pointTable?.data?.tournament?.tournamentName}
-          </p>
-        </div>
-      )}
-      <span className="text-xs text-muted bg-subSurface border border-border px-3 py-1 rounded-full">
-        Point Table
-      </span>
+      {/* Table header */}
+      <div className="flex items-center justify-between px-5 py-4 border-b border-border">
+        {loading ? (
+          <div className="h-4 w-40 rounded bg-subSurface animate-pulse" />
+        ) : (
+          <div className="flex items-center gap-3">
+            <img className="w-8 h-8 rounded-lg object-cover border border-border"
+              src={pointTable?.data?.tournament?.photo} alt="" />
+            <p className="text-sm font-medium text-font">
+              {pointTable?.data?.tournament?.tournamentName}
+            </p>
+          </div>
+        )}
+        <PickerModal
+          isOpen={pickerOpen}
+          onOpenChange={setPickerOpen}
+          title="Select Tournament"
+          items={tournaments}
+          selectedId={selected?._id ?? latestTournamentId}
+          onSelect={(item) => { handleSelect(item); setPickerOpen(false); }}
+        />
+          <TournamentPickerTrigger
+        selectedName={selected?.name}
+        defaultName={latestTournamentName}
+        showClear={!!selected}
+        onOpen={() => setPickerOpen(true)}
+        onClear={handleClear}
+      />
+        <span className="text-xs text-muted bg-subSurface border border-border px-3 py-1 rounded-full">
+          Point Table
+        </span>
+      </div>
+
+      <Table>
+        <TableHeader headers={headerData} />
+        {content}
+      </Table>
+
+    
     </div>
-
-    <Table>
-      <TableHeader headers={headerData} />
-      {content}
-    </Table>
-
-  </div>
   )
 }
 

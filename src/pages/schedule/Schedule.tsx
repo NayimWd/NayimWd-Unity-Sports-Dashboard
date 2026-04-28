@@ -13,12 +13,12 @@ import EmptyData from "./EmptyData";
 import { useLatestTournamentQuery } from "../../features/tournament/tournamentApi";
 
 
+
 const Schedule = () => {
   const goBack = useGoBack();
 
   // get letest tournament id based on point table
   const { data:tournament, isLoading: Tloading } = useLatestTournamentQuery(undefined);
-
   const tournamentId = tournament?.data?._id;
 
   const { data, isLoading: sLoading, isFetching } = useGetSchedultQuery({ tournamentId },

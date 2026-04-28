@@ -3,25 +3,16 @@ import {
   ITournamentFinalResult,
   ITournaments,
 } from "../../utils/types/tournamentTypes";
-import { ApiResponse, Tournament } from "../../utils/types/types";
+import { ApiResponse } from "../../utils/types/types";
 import { apiSlice } from "../api/apiSlice";
 
 export const tournamentApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    latestTournament: builder.query<
-      ApiResponse<Tournament>,
-      { status?: string } | any
-    >({
-      query: (arg) => {
-        const status = arg?.status;
-
-        return {
-          url: status
-            ? `tournament/latest?status=${status}`
-            : `tournament/latest`,
-          method: "GET",
-        };
-      },
+    latestTournament: builder.query({
+      query: () => ({
+        url: `tournament/latest`,
+        method: "GET",
+      }),
       keepUnusedDataFor: 600,
       providesTags: () => [
         { type: "LatestTournament", id: "LIST" },
