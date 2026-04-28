@@ -18,6 +18,7 @@ import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
 import PageHeader from "../../component/ui/PageHeader";
 import { Link } from "react-router-dom";
 import Buttons from "../../component/common/Buttons";
+import { skipToken } from "@reduxjs/toolkit/query";
 
 const TournamentApplications = () => {
     const goBack = useGoBack();
@@ -28,15 +29,15 @@ const TournamentApplications = () => {
     // const { data } = useLatestTournamentQuery({status: "upcoming"});
     const { tournament, isLoading: tLoading } = usePriorityTournament();
     const tournamentId = tournament?.data?._id;
-    const teamCount = tournament?.data.teamCount;
+    const teamCount = tournament?.data?.teamCount ?? "";
     // get application by that id
-    const { data: applications, isLoading: appLoading, isError } = useGetRegisterApplicationQuery({
-        id: tournamentId,
-        status: status
-    },
-        {
-            skip: !tournamentId
+    const { data: applications, isLoading: appLoading, isError } = useGetRegisterApplicationQuery(
+        tournamentId ? {
+            id: tournamentId,
+            status: status
         }
+            :
+            skipToken
     );
 
     const isLoading = tLoading || appLoading;

@@ -2,7 +2,6 @@ import { Calendar, Clock } from "lucide-react";
 import Card from "../../component/common/card/Card";
 import PageLayout from "../../component/layout/PageLayout";
 import { useGetSchedultQuery } from "../../features/schedule/scheduleApi";
-import { useLatestTournamentQuery } from "../../features/tournament/tournamentApi";
 import { useGoBack } from "../../hooks/useGoBack";
 import BackButton from "../../utils/BackButton";
 import cn from "../../utils/cn";
@@ -10,16 +9,21 @@ import { Link } from "react-router-dom";
 import Buttons from "../../component/common/Buttons";
 import MatchCardSkeleton from "../../component/common/skeleton/MatchCardSkeleton";
 import PageHeader from "../../component/ui/PageHeader";
+import EmptyData from "./EmptyData";
+import { useLatestTournamentQuery } from "../../features/tournament/tournamentApi";
+
 
 const Schedule = () => {
   const goBack = useGoBack();
 
   // get letest tournament id based on point table
-  const { data: tournament, isLoading: Tloading } = useLatestTournamentQuery(undefined);
+  const { data:tournament, isLoading: Tloading } = useLatestTournamentQuery(undefined);
 
-  const tournamentId = tournament?.data._id;
+  const tournamentId = tournament?.data?._id;
 
-  const { data, isLoading: sLoading, isFetching } = useGetSchedultQuery({ tournamentId }, { skip: !tournamentId });
+  const { data, isLoading: sLoading, isFetching } = useGetSchedultQuery({ tournamentId },
+    { skip: !tournamentId }
+  );
 
   const isLoading = Tloading || sLoading;
 
@@ -33,17 +37,26 @@ const Schedule = () => {
     )
   };
 
+ 
+
   return (
     <PageLayout>
       <BackButton onClick={goBack}>Back</BackButton>
       {/* header */}
       <PageHeader
         topTitle="Schedule"
-        title={tournament?.data.tournamentName ?? "Tournament"}
-        subtitle={`total: ${data?.total}`}
+        title={tournamentId ? tournament?.data.tournamentName : "Tournament schedule"}
+        subtitle={`${data?.total ? `total: ${data?.total}` : "schedule not created yet"}`}
       />
 
       {/* Schedule List */}
+      {
+        (!isLoading && data?.total === 0 )? <EmptyData
+      title="No Schedule Found!"
+      message="There is no match schedule found for this tournament"
+    />
+        :
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
         {data?.schedules.map((schedule) => {
           const teamA = schedule.teams?.teamA;
@@ -137,6 +150,7 @@ const Schedule = () => {
           );
         })}
       </div>
+      }
 
     </PageLayout>
   )

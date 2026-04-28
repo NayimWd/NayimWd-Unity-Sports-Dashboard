@@ -21,6 +21,10 @@ import PickerModal from "../../component/ui/modal/PickerModal";
 import DateInput from "../../component/common/input/DateInput";
 import StepIndicator from "../../component/stepper/StepIndicator";
 import StepNavigation from "../../component/stepper/stepNavigation";
+import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
+import toast from "react-hot-toast";
+import { useCreateScheduleMutation } from "../../features/schedule/scheduleApi";
+import { useNavigate } from "react-router-dom";
 
 
 // interface
@@ -33,14 +37,15 @@ interface PickerItem {
 type ActivePicker = "tournament" | "venue" | "teamA" | "teamB" | null;
 
 type SelectedMap = Record<Exclude<ActivePicker, null>, PickerItem | null>;
-// pickerKey - rhf field name
-const pickerKeyToField: Record<Exclude<ActivePicker, null>, keyof ScheduleR1FormData> = {
+
+type ScheduleR1Keys = keyof ScheduleR1FormData;
+
+const pickerKeyToField: Record<Exclude<ActivePicker, null>, ScheduleR1Keys> = {
   tournament: "tournamentId",
   venue: "venueId",
   teamA: "teamA",
-  teamB: "teamB"
+  teamB: "teamB",
 };
-
 // normalize data for maintain api data shape
 const normalizeTournament = (t: ITournamentSearch): PickerItem => ({
   _id: t._id, name: t.tournamentName
@@ -56,9 +61,9 @@ const normalizeTeam = (t: ITeamSearch): PickerItem => ({
 
 
 // set step map for RHF trigger(stepper)
-const stepFields: Record<number, (keyof ScheduleR1FormData)[]> = {
+const stepFields: Record<number, ScheduleR1Keys[]> = {
   1: ["tournamentId"],
-  2: ["venueId", "round", "matchNumber", "matchDate", "matchTime"],
+  2: ["venueId", "round", "matchNumber", "matchDate", "matchTime", "endTime"],
   3: ["teamA", "teamB"],
 };
 
@@ -67,6 +72,7 @@ const STEPS = ["Tournament", "Details", "Teams"];
 
 const CreateScheduleR1 = () => {
   const goBack = useGoBack();
+  const navigate = useNavigate();
 
   const [step, setStep] = useState(1);
   const [activePicker, setActivePicker] = useState<ActivePicker>(null);
@@ -91,6 +97,8 @@ const CreateScheduleR1 = () => {
     { tournamentId: tId }, { skip: !tId }
   );
 
+  // create schdule mutaion
+  const [createSchedule] = useCreateScheduleMutation();
 
   // normalize API data
   const tournaments = (tournamentRes?.data ?? []).map(normalizeTournament);
@@ -100,7 +108,7 @@ const CreateScheduleR1 = () => {
   // for pick options from list to extract id
   const handleSelect = (pickerKey: Exclude<ActivePicker, null>, item: PickerItem) => {
     const rhfField = pickerKeyToField[pickerKey];
-    setValue(rhfField as keyof ScheduleR1FormData, item._id, { shouldValidate: true });
+    setValue(rhfField as any, item._id, { shouldValidate: true });
     setSelected((prev) => ({ ...prev, [pickerKey]: item }));
     if (pickerKey === "tournament") setTId(item._id);
     setActivePicker(null);
@@ -109,7 +117,7 @@ const CreateScheduleR1 = () => {
   // clear form handler
   const handleClear = (PickerKey: Exclude<ActivePicker, null>) => {
     const rhfField = pickerKeyToField[PickerKey];
-    setValue(rhfField as keyof ScheduleR1FormData, "" as any, { shouldValidate: false });
+    setValue(rhfField as any, "" as any, { shouldValidate: false });
     setSelected(prev => ({ ...prev, [PickerKey]: null }));
     if (PickerKey === "tournament") {
       setTId("");
@@ -123,13 +131,30 @@ const CreateScheduleR1 = () => {
 
   // next button trigger
   const handleNext = async () => {
-    const valid = await trigger(stepFields[step]);
+    const valid = await trigger(stepFields[step] as any);
     if (valid) setStep(s => s + 1);
   };
 
   const onSubmit = (data: ScheduleR1FormData) => {
-    console.log(data);
-    // fire RTK mutation here
+    const toastId = LoadingToast({ msg: "Creating..." });
+
+    const { tournamentId, ...body } = data;
+
+    try {
+      createSchedule({
+        tournamentId,
+        data: body
+      }).unwrap();
+
+      toast.dismiss(toastId);
+      SuccessToast({ msg: "Schedule creation successful" });
+      methods.reset();
+      navigate("/dashboard/schedule")
+
+    } catch (error) {
+      toast.dismiss(toastId);
+      ErrorToast({ msg: "Create schedule failed!" })
+    }
   };
 
   const pickerConfig: Record<
@@ -202,6 +227,12 @@ const CreateScheduleR1 = () => {
                   placeholder="e.g. 3pm"
                   type="text"
                 />
+                <TextInput
+                  label="Estimated End Time"
+                  name="endTime"
+                  placeholder="e.g. 3pm"
+                  type="text"
+                />
               </div>
               <EntityPickerInput
                 name="venueId"
@@ -221,7 +252,7 @@ const CreateScheduleR1 = () => {
                 <EntityPickerInput
                   name="teamA"
                   label="Team A"
-                  placeholder="Auto-resolved after R1"
+                  placeholder="Select TeamA"
                   selected={selected.teamA}
                   onPick={() => setActivePicker("teamA")}
                   onClear={() => handleClear("teamA")}
@@ -229,7 +260,7 @@ const CreateScheduleR1 = () => {
                 <EntityPickerInput
                   name="teamB"
                   label="Team B"
-                  placeholder="Auto-resolved after R1"
+                  placeholder="Select TeamB"
                   selected={selected.teamB}
                   onPick={() => setActivePicker("teamB")}
                   onClear={() => handleClear("teamB")}

@@ -174,7 +174,10 @@ const teamApi = apiSlice.injectEndpoints({
       query: () => ({
         url: `team/team_summary`,
         method: "GET"
-      })
+      }),
+      providesTags: () => [
+        { type: "Team", id: "LIST" },
+      ],
     })
   }),
 });
