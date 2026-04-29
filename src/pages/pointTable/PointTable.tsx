@@ -3,20 +3,33 @@ import TableHeader from "../../component/common/Table/TableHeader";
 import TableRow from "../../component/common/Table/TableRow";
 import TableSkeleton from "../../component/common/Table/TableSkeleton";
 import TableEmpty from "../../component/common/Table/TableEmpty";
-import { useLatestTournamentQuery } from "../../features/tournament/tournamentApi";
 import { useGetPointTableQuery } from "../../features/pointTable/pointTableApi";
 import PageLayout from "../../component/layout/PageLayout";
 import BackButton from "../../utils/BackButton";
 import { useGoBack } from "../../hooks/useGoBack";
 import PageHeader from "../../component/ui/PageHeader";
+import { useState } from "react";
+import { useTournamentPicker } from "../../hooks/useTournamentPicker";
+import PickerModal from "../../component/ui/modal/PickerModal";
+import TournamentPickerTrigger from "../tournament/TournamentPickerTrigger";
 
 const PointTable = () => {
-  // fetch latest tournament 
-  const { data: latestTournament, isLoading: tLoading } = useLatestTournamentQuery(undefined);
+   const {
+      activeTournamentId,
+      selected,
+      tournaments,
+      handleSelect,
+      handleClear,
+      latestTournamentId,
+      latestTournamentName,
+      isLoading:tLoading,
+    } = useTournamentPicker();
+  
+    const [pickerOpen, setPickerOpen] = useState(false);
 
   // fetch point table data based on tournament id
-  const { data: pointTable, isLoading } = useGetPointTableQuery(latestTournament?.data._id ?? "", {
-    skip: !latestTournament?.data?._id,
+  const { data: pointTable, isLoading } = useGetPointTableQuery(activeTournamentId ?? "", {
+    skip: !activeTournamentId,
 
   })
 
@@ -77,7 +90,7 @@ const PointTable = () => {
       <BackButton className="mb-5" onClick={useGoBack()}>Go Back</BackButton>
       <PageHeader
         topTitle="Point Table"
-        title={latestTournament?.data.tournamentName ?? "Tournament"}
+        title={latestTournamentName ?? "Tournament"}
         subtitle={`Count ${pointTable?.data.pointTable.length}`}
       />
       <div className="rounded-2xl border border-border overflow-hidden bg-surface">
@@ -95,6 +108,21 @@ const PointTable = () => {
               </p>
             </div>
           )}
+          <PickerModal
+          isOpen={pickerOpen}
+          onOpenChange={setPickerOpen}
+          title="Select Tournament"
+          items={tournaments}
+          selectedId={selected?._id ?? latestTournamentId}
+          onSelect={(item) => { handleSelect(item); setPickerOpen(false); }}
+        />
+          <TournamentPickerTrigger
+        selectedName={selected?.name}
+        defaultName={latestTournamentName}
+        showClear={!!selected}
+        onOpen={() => setPickerOpen(true)}
+        onClear={handleClear}
+      />
           <span className="text-xs text-muted bg-subSurface border border-border px-3 py-1 rounded-full">
             Point Table
           </span>

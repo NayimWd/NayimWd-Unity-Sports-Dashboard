@@ -19,9 +19,8 @@ const MatchCard = ({ match, className }: MatchCardProps) => {
     matchSummary,
     previousMatches,
     matchNumber,
-    _id
+    _id,
   } = match;
-
   const isCompleted = status === "completed";
 
   const getTeamLabel = (
@@ -97,17 +96,26 @@ const MatchCard = ({ match, className }: MatchCardProps) => {
 
         {/* match info */}
         {isCompleted ? (
-          <div className="rounded-lg bg-surface border border-border p-3 space-y-1">
-            <p className="text-sm font-semibold text-primary">
-             <span className="font-bold  mr-1">
-              {matchSummary?.winner ? matchSummary?.winner.teamName : ""}
-              </span>  
+          <div className="rounded-xl bg-subSurface border border-border p-3 space-y-2">
+            {/* Winner */}
+            <p className="text-xs font-medium text-primary">
+              {matchSummary?.winner?.teamName && (
+                <span className="font-semibold">{matchSummary.winner.teamName} </span>
+              )}
               {matchSummary?.margin}
             </p>
-            <p className="text-xs text-subtext">
-              {matchSummary?.teamA_stats} |{" "}
-              {matchSummary?.teamB_stats}
-            </p>
+             
+            {/* Team stats */}
+            <div className="space-y-1">
+              <div className="flex items-center gap-2 text-xs text-subtext">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                {matchSummary?.teamA_stats}
+              </div>
+              <div className="flex items-center gap-2 text-xs text-subtext">
+                <span className="w-1.5 h-1.5 rounded-full bg-muted flex-shrink-0" />
+                {matchSummary?.teamB_stats}
+              </div>
+            </div>
           </div>
         ) : (
           <div className="flex items-center gap-6 text-sm text-subtext">
@@ -130,7 +138,7 @@ const MatchCard = ({ match, className }: MatchCardProps) => {
       {/* footer */}
       <Card.Footer className="justify-end">
         <Link to={`/dashboard/match/${_id}`}>
-          <Buttons size="sm" variant="primary">
+          <Buttons className="rounded" size="sm" variant="primary">
             View details
           </Buttons>
         </Link>

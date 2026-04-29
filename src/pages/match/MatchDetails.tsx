@@ -132,7 +132,7 @@ const MatchDetails = () => {
                 <div className="flex items-center gap-2 bg-bg p-4 rounded-lg">
                   <RadioTower className="w-5 h-5 text-primary" />
                   <p className="font-semibold text-primary">
-                    {MatchResult?.report ? MatchResult.report : ""}
+                    {MatchResult?.report ? MatchResult.report : "Match Report will be after match complete"}
                   </p>
                 </div>
               )

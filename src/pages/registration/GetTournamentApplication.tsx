@@ -12,183 +12,201 @@ import Dropdown from "../../component/common/dropdown/Dropdown";
 import { BookOpenText, Check, Plus, Settings, X } from "lucide-react";
 import Table from "../../component/common/Table/Table";
 import TableHeader from "../../component/common/Table/TableHeader";
-import { usePriorityTournament } from "../tournament/LatestTournament";
 import toast from "react-hot-toast";
 import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
 import PageHeader from "../../component/ui/PageHeader";
 import { Link } from "react-router-dom";
 import Buttons from "../../component/common/Buttons";
-import { skipToken } from "@reduxjs/toolkit/query";
+import PickerModal from "../../component/ui/modal/PickerModal";
+import TournamentPickerTrigger from "../tournament/TournamentPickerTrigger";
+import { useTournamentPicker } from "../../hooks/useTournamentPicker";
+
 
 const TournamentApplications = () => {
     const goBack = useGoBack();
-    // for status filter
     const [status, setStatus] = useState<string | undefined>();
+    const [pickerOpen, setPickerOpen] = useState(false);
 
     // get  tournament id
-    // const { data } = useLatestTournamentQuery({status: "upcoming"});
-    const { tournament, isLoading: tLoading } = usePriorityTournament();
-    const tournamentId = tournament?.data?._id;
-    const teamCount = tournament?.data?.teamCount ?? "";
-    // get application by that id
-    const { data: applications, isLoading: appLoading, isError } = useGetRegisterApplicationQuery(
-        tournamentId ? {
-            id: tournamentId,
-            status: status
-        }
-            :
-            skipToken
+    const {
+        activeTournamentId,
+        selected,
+        tournaments,
+        handleSelect,
+        handleClear,
+        latestTournamentId,
+        latestTournamentName,
+        isLoading: tLoading,
+        teamCount,
+        activeTournamentStatus,
+    } = useTournamentPicker();
+
+
+    const {
+        data: applications,
+        isLoading: appLoading,
+        isError,
+    } = useGetRegisterApplicationQuery(
+        { id: activeTournamentId, status },
+        { skip: !activeTournamentId }
     );
-
-    const isLoading = tLoading || appLoading;
-
+    // mutaion 
     const [action] = useActionMutation();
 
+    const isLoading = tLoading || appLoading;
+    const allApplications = applications?.data?.registration ?? [];
+    const total = applications?.data?.total ?? 0;
+
     const handleApplication = async (data: any) => {
-
-        const loadingId = LoadingToast({ msg: "Wait a momment..." })
+        const loadingId = LoadingToast({ msg: "Please wait..." });
         try {
-            await action({
-                tournamentId: tournamentId,
-                data: data
-            }).unwrap();
+            await action({ tournamentId: activeTournamentId, data }).unwrap();
             toast.dismiss(loadingId);
-            SuccessToast({ msg: `application ${data?.status ?? "success"}` })
-
-        } catch (error) {
+            SuccessToast({ msg: `Application ${data?.status ?? "updated"}` });
+        } catch {
             toast.dismiss(loadingId);
-            ErrorToast({ msg: `Action ${data?.status ?? ""} failed!` })
+            ErrorToast({ msg: `Action failed` });
         }
-    }
+    };
 
+    const tableHeader = ["Photo", "Team", "Manager", "Status", "Action"];
 
-
-    const allApplications = applications?.data.registration;
-    // table header
-    const tableHeader = ["Photo", "Team", "Manager", "Status", "Action"]
-
-    // table
     let content = null;
 
     if (isLoading) {
-        content = [...Array(5)].map((_, index) => (
-            <TableSkeleton key={index} columns={tableHeader.length} />
+        content = [...Array(5)].map((_, i) => (
+            <TableSkeleton key={i} columns={tableHeader.length} />
         ));
-    } else if (isError || applications?.data.total === 0) {
-        content = <TableEmpty message="No Data Found!" />
+    } else if (isError || total === 0) {
+        content = <TableEmpty message="No applications found" />;
     } else {
-        content = allApplications?.map((application) => (
+        content = allApplications.map((application: any) => (
             <TableRow
-                key={application?._id}
+                key={application._id}
                 rowData={[
-                    <div className="flex items-center gap-4">
-                        <img
-                            className="w-10 h-10 rounded-full object-cover object-center"
-                            src={application.teamId.teamLogo}
-                            alt="Blog"
-                            loading="lazy"
-                        />
-                    </div>,
+                    <img
+                        className="w-9 h-9 rounded-lg object-cover border border-border"
+                        src={application.teamId.teamLogo}
+                        alt={application.teamId.teamName}
+                        loading="lazy"
+                    />,
                     application.teamId.teamName,
                     application.managerId.name,
-                    appLoading ? <span className="animate-pulse">{application.status}</span> : application.status,
-                    <div>
-                        <Dropdown className="bg-primary rounded-md">
-                            <Dropdown.Trigger className="bg-primary text-white">
-                                <Settings size="14" /> Controll
-                            </Dropdown.Trigger>
-                            <Dropdown.Menu className="-left-[168px] -top-3">
-                                <Dropdown.Item href={`/dashboard/application/details/${application?._id}`}>
-                                    <BookOpenText size={14} /> Read Details
-                                </Dropdown.Item>
-
-                                {
-                                    application.status === "pending" || tournament?.data.status === "upcoming" ?
-                                        <div>
-                                            <Dropdown.Item
-                                                disabled={application.status ? application.status === "approved" : null}
-                                                onClick={() => handleApplication({ status: "approved", teamId: application.teamId })}
-                                            >
-                                                <Check className="text-green-500" size={14} /> {application.status === "approved" ? <span className="disable cursor-not-allowed text-green-500">Approved</span> : "Approve"}
-                                            </Dropdown.Item>
-                                            <Dropdown.Item
-                                                disabled={application.status === "rejected"}
-                                                onClick={() => handleApplication({ status: "rejected", teamId: application.teamId })}
-                                            >
-                                                <X className="text-red-500" size={14} />
-                                                {application.status === "rejected" ? <span className="disable cursor-not-allowed text-red-500">Rejected</span> : "Reject"}
-                                            </Dropdown.Item>
-                                        </div>
-                                        :
-                                        ""
-                                }
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </div>
+                    <span className={`text-[11px] font-medium px-2.5 py-1 rounded-full
+            ${application.status === "approved" ? "bg-green-500/10 text-green-600"
+                            : application.status === "rejected" ? "bg-toastErrorBg text-toastErrorText"
+                                : "bg-yellow-500/10 text-yellow-600"}`}>
+                        {application.status}
+                    </span>,
+                    <Dropdown className="bg-primary rounded-md">
+                        <Dropdown.Trigger className="bg-primary text-white">
+                            <Settings size={14} /> Control
+                        </Dropdown.Trigger>
+                        <Dropdown.Menu className="-left-[168px] -top-3">
+                            <Dropdown.Item href={`/dashboard/application/details/${application._id}`}>
+                                <BookOpenText size={14} /> Read Details
+                            </Dropdown.Item>
+                            {application.status === "pending" && (
+                                <>
+                                    <Dropdown.Item
+                                        onClick={() => handleApplication({
+                                            status: "approved",
+                                            teamId: application.teamId,
+                                        })}
+                                    >
+                                        <Check className="text-green-500" size={14} /> Approve
+                                    </Dropdown.Item>
+                                    <Dropdown.Item
+                                        onClick={() => handleApplication({
+                                            status: "rejected",
+                                            teamId: application.teamId,
+                                        })}
+                                    >
+                                        <X className="text-red-500" size={14} /> Reject
+                                    </Dropdown.Item>
+                                </>
+                            )}
+                        </Dropdown.Menu>
+                    </Dropdown>,
                 ]}
             />
-        ))
+        ));
     }
 
     return (
         <PageLayout>
             <BackButton onClick={goBack}>Go Back</BackButton>
+
             <SectionLayout>
                 <PageHeader
                     topTitle="Applications"
-                    title={tournament?.data?.tournamentName ?? "Tournament"}
-                    subtitle={`Total: ${applications?.data.total ?? "in-progress"}`}
+                    title={selected?.name ?? latestTournamentName ?? "Tournament"}
+                    subtitle={`Total: ${isLoading ? "..." : total}`}
                 />
-                {/* pils for filter */}
-                <div className="flex flex-wrap justify-center gap-3">
+
+                {/* Status filter pills */}
+                <div className="flex flex-wrap justify-center gap-2">
                     {statusOption.map((f) => (
                         <button
                             key={f.label}
-                            onClick={() => setStatus(f.value)}
-                            className={`
-                px-4 py-2 rounded-lg border border-border text-subtext text-sm font-medium 
-                transition-all duration-200
+                            onClick={() => setStatus(prev => prev === f.value ? undefined : f.value)}
+                            className={`px-3.5 py-1.5 rounded-lg border text-xs font-medium
+                transition-colors duration-150
                 ${status === f.value
-                                    ? "bg-bg text-font border-subSurface shadow-md"
-                                    : "bg-transparent  dark:hover:bg-subSurface"
-                                }
-              `}
+                                    ? "bg-subSurface text-font border-inputBorder"
+                                    : "bg-transparent border-border text-subtext hover:bg-subSurface"
+                                }`}
                         >
                             {f.label}
                         </button>
                     ))}
-
                 </div>
             </SectionLayout>
 
             <SectionLayout>
-                {teamCount !== undefined && (
-                    <div className="my-6 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-lg border-muted bg-bg px-4 py-3 shadow-sm">
 
-                        <p className="text-base sm:text-lg font-medium text-subtext">
-                            Approved Teams:{" "}
-                            <span className="text-gray-900 font-semibold">{teamCount}</span>
-                        </p>
+                {/* Tournament picker */}
+                <div className="flex items-center justify-between mb-5">
+                    <TournamentPickerTrigger
+                        selectedName={selected?.name}
+                        defaultName={latestTournamentName}
+                        showClear={!!selected}
+                        onOpen={() => setPickerOpen(true)}
+                        onClear={handleClear}
+                    />
 
-                        <Link to="/dashboard/schedule/create">
-                            <Buttons
-                                iconRight={<Plus size={16} />}
-                                className="rounded-md px-4 py-2"
-                            >
-                                Create Schedule
-                            </Buttons>
-                        </Link>
+                    {/* Approved teams + create schedule */}
+                    {teamCount !== undefined && activeTournamentStatus === "upcoming" && (
+                        <div className="flex items-center gap-3">
+                            <span className="text-xs text-muted">
+                                Approved: <span className="font-medium text-font">{teamCount}</span>
+                            </span>
+                            <Link to="/dashboard/schedule/create">
+                                <Buttons iconRight={<Plus size={14} />} className="rounded-lg" size="sm">
+                                    Create Schedule
+                                </Buttons>
+                            </Link>
+                        </div>
+                    )}
+                </div>
 
-                    </div>
-                )}
                 <Table>
                     <TableHeader headers={tableHeader} />
                     {content}
                 </Table>
+
             </SectionLayout>
 
+            <PickerModal
+                isOpen={pickerOpen}
+                onOpenChange={setPickerOpen}
+                title="Select Tournament"
+                items={tournaments}
+                selectedId={selected?._id ?? latestTournamentId}
+                onSelect={(item) => { handleSelect(item); setPickerOpen(false); }}
+            />
         </PageLayout>
     )
 }
 
-export default TournamentApplications
+export default TournamentApplications;
