@@ -7,7 +7,7 @@ import {
 import { clearCredenTials } from "../auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_API_URL_LOCAL as string,
+  baseUrl: import.meta.env.VITE_API_URL.replace(/\/$/, ""),
   credentials: "include",
 });
 
