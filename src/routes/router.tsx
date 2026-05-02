@@ -8,6 +8,7 @@ import { authRoutes } from "./authRoute";
 import { dashboardRoutes } from "./dashboardRoute";
 import PageSkeleton from "../component/common/loader/PageSkeleton";
 import DashboardSkeleton from "../component/common/loader/DashboardSkeleton";
+import ErrorComp from "../component/common/error/ErrorComp";
 const NotFound = lazy(() => import("../pages/NotFound"));
 const Layout = lazy(() => import("../component/layout/DashBoardLayout"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
+    errorElement: <ErrorComp/>,
     element: (
       <ErrorBoundaryWrapper>
         <ProtectedRoute>
@@ -49,10 +51,7 @@ export const router = createBrowserRouter([
   {
     path: "*",
     element: (
-      <ErrorBoundaryWrapper>
-      <SuspenseWrapper CustomLoader={<PageSkeleton />}>
-        <NotFound />
-      </SuspenseWrapper>
-      </ErrorBoundaryWrapper>),
+      <NotFound />
+    ),
   },
 ]);
