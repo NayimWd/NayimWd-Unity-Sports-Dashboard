@@ -16,7 +16,7 @@ function ManagerSummary() {
     } = useTeamSummaryQuery(teamId, { skip: !teamId });
 
     const isLoading = teamLoading || summaryLoading;
-    const isError = teamError || summaryError;
+
 
     // ── loading ──
     if (isLoading) return (

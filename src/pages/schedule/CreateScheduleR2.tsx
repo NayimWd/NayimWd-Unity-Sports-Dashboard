@@ -98,7 +98,7 @@ const CreateScheduleR2 = () => {
   // for pick options from list to extract id
   const handleSelect = (pickerKey: Exclude<ActivePicker, null>, item: PickerItem) => {
     const rhfField = pickerKeyToField[pickerKey];
-    setValue(rhfField, item._id, { shouldValidate: true });
+    setValue(rhfField as any, item._id, { shouldValidate: true });
     setSelected(prev => ({ ...prev, [pickerKey]: item }));
     if (pickerKey === "tournament") setTId(item._id);
     setActivePicker(null);
@@ -107,12 +107,12 @@ const CreateScheduleR2 = () => {
   // clear form handler
   const handleClear = (pickerKey: Exclude<ActivePicker, null>) => {
     const rhfField = pickerKeyToField[pickerKey];
-    setValue(rhfField, "" as any, { shouldValidate: false });
+    setValue(rhfField as any, "" as any, { shouldValidate: false });
     setSelected(prev => ({ ...prev, [pickerKey]: null }));
     if (pickerKey === "tournament") {
       setTId("");
       (["matchA", "matchB"] as const).forEach(f => {
-        setValue(pickerKeyToField[f], null);
+        setValue(pickerKeyToField[f] as any, null);
         setSelected(prev => ({ ...prev, [f]: null }));
       });
     }
@@ -120,7 +120,7 @@ const CreateScheduleR2 = () => {
 
   // next button trigger
   const handleNext = async () => {
-    const valid = await trigger(stepFields[step]);
+    const valid = await trigger(stepFields[step] as any);
     if (valid) setStep(s => s + 1);
   };
 
