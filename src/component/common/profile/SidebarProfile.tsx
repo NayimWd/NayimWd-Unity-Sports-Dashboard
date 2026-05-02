@@ -30,8 +30,8 @@ const SidebarProfile = () => {
         }
     }
     return (
-        <div className="border-t border-border p-3 absolute left-0 bottom-0 md:bottom-14">
-      <div className="flex items-center gap-2.5 px-2 py-2 rounded-xl bg-subSurface">
+        <div className="border-t w-full border-border p-3 absolute left-0 bottom-0 md:bottom-14">
+      <div className="flex items-center gap-2.5 px-2 py-2 rounded-xl w-[90%] bg-subSurface">
 
         {/* Avatar */}
         {user?.photo ? (

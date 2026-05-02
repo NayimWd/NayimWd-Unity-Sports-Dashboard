@@ -40,7 +40,7 @@ const MatchDetails = () => {
   if (!details) return (
     <PageLayout>
       <BackButton onClick={goBack}>Back</BackButton>
-        <div className={`${fontStyle.pageTitle} text-center text-font my-10`}></div>
+      <div className={`${fontStyle.pageTitle} text-center text-font my-10`}></div>
     </PageLayout>
   );
 
@@ -54,91 +54,91 @@ const MatchDetails = () => {
 
       {/* Match Header Card */}
       <div className="flex w-full justify-center">
-      <Card className="max-w-xl mt-10" variant="match" size="lg">
-        <div className="flex flex-col gap-6">
+        <Card className="max-w-xl mt-10" variant="match" size="lg">
+          <div className="flex flex-col gap-6">
 
-          {/* Match Title */}
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold">
-              Match #{match.matchNumber}
-            </h1>
+            {/* Match Title */}
+            <div className="flex items-center justify-between">
+              <h1 className="text-2xl font-bold">
+                Match #{match.matchNumber}
+              </h1>
 
-            <span
-              className={cn(
-                "px-3 py-1 rounded-full text-xs font-medium",
-                isCompleted
-                  ? "bg-green-500/10 text-green-600"
-                  : isLive
-                    ? "bg-orange-500/10 text-orange-600"
-                    : "bg-blue-500/10 text-blue-600"
-              )}
-            >
-              {match.status}
-            </span>
-          </div>
-
-          {/* Teams */}
-          <div className="grid grid-cols-1 items-center gap-4">
-            {/* Team A */}
-            <div className="flex items-center gap-3">
-              <img
-                src={match.teamA?.teamLogo}
-                alt={match.teamA?.teamName}
-                className="w-12 h-12 rounded-full object-cover"
-              />
-              <div>
-                <p className="font-semibold">{match.teamA?.teamName} </p>
-                {MatchResult?.teamA_stats && (
-                  <p className="text-sm text-subtext">
-                    {MatchResult.teamA_stats}
-                  </p>
+              <span
+                className={cn(
+                  "px-3 py-1 rounded-full text-xs font-medium",
+                  isCompleted
+                    ? "bg-green-500/10 text-green-600"
+                    : isLive
+                      ? "bg-orange-500/10 text-orange-600"
+                      : "bg-blue-500/10 text-blue-600"
                 )}
+              >
+                {match.status}
+              </span>
+            </div>
+
+            {/* Teams */}
+            <div className="grid grid-cols-1 items-center gap-4">
+              {/* Team A */}
+              <div className="flex items-center gap-3">
+                <img
+                  src={match.teamA?.teamLogo}
+                  alt={match.teamA?.teamName}
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                  <p className="font-semibold">{match.teamA?.teamName} </p>
+                  {MatchResult?.teamA_stats && (
+                    <p className="text-sm text-subtext">
+                      {MatchResult.teamA_stats}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <p className="text-center text-sm font-semibold text-subtext">
+                VS
+              </p>
+
+              {/* Team B */}
+              <div className="flex items-center gap-3 justify-end">
+                <div className="text-right">
+                  <p className="font-semibold">{match.teamB?.teamName}</p>
+                  {MatchResult?.teamB_stats && (
+                    <p className="text-sm text-subtext">
+                      {MatchResult.teamB_stats}
+                    </p>
+                  )}
+                </div>
+                <img
+                  src={match.teamB?.teamLogo}
+                  alt={match.teamB?.teamName}
+                  className="w-12 h-12 rounded-full object-cover"
+                />
               </div>
             </div>
 
-            <p className="text-center text-sm font-semibold text-subtext">
-              VS
-            </p>
-
-            {/* Team B */}
-            <div className="flex items-center gap-3 justify-end">
-              <div className="text-right">
-                <p className="font-semibold">{match.teamB?.teamName}</p>
-                {MatchResult?.teamB_stats && (
-                  <p className="text-sm text-subtext">
-                    {MatchResult.teamB_stats}
-                  </p>
-                )}
+            {/* Result */}
+            {isCompleted && MatchResult?.margin ? (
+              <div className="flex items-center gap-2 bg-bg p-4 rounded-lg">
+                <Trophy className="w-5 h-5 text-primary" />
+                <p className="font-semibold text-primary">
+                  <span className="font bold mr-1"> {MatchResult.winner ? MatchResult.winner.teamName : ""} </span> {MatchResult.margin}
+                </p>
               </div>
-              <img
-                src={match.teamB?.teamLogo}
-                alt={match.teamB?.teamName}
-                className="w-12 h-12 rounded-full object-cover"
-              />
-            </div>
+            )
+              :
+              (
+                <div className="flex items-center gap-2 bg-bg p-4 rounded-lg">
+                  <RadioTower className="w-5 h-5 text-primary" />
+                  <p className="font-semibold text-primary">
+                    {MatchResult?.report ? MatchResult.report : "Match Report will be after match complete"}
+                  </p>
+                </div>
+              )
+            }
           </div>
-
-          {/* Result */}
-          {isCompleted && MatchResult?.margin ? (
-            <div className="flex items-center gap-2 bg-bg p-4 rounded-lg">
-              <Trophy className="w-5 h-5 text-primary" />
-              <p className="font-semibold text-primary">
-               <span className="font bold mr-1"> {MatchResult.winner ? MatchResult.winner.teamName : ""} </span> {MatchResult.margin}
-              </p>
-            </div>
-          )
-          : 
-          (
-            <div className="flex items-center gap-2 bg-bg p-4 rounded-lg">
-                <RadioTower className="w-5 h-5 text-primary" />
-              <p className="font-semibold text-primary">
-               {MatchResult?.report ? MatchResult.report : ""}
-              </p>
-            </div>
-          )
-        }
-        </div>
-      </Card>
+        </Card>
       </div>
 
       {/* Match Information Grid */}
@@ -249,7 +249,7 @@ const MatchDetails = () => {
             </div>
           ) : (
             <div className="p-6 rounded-xl bg-muted/30 border border-border text-center">
-              <Trophy className="w-12 h-12 text-muted mx-auto mb-3" />
+              <Trophy className="w-12 h-12 text-amber-500 text-muted mx-auto mb-3" />
               <p className="text-sm text-subtext font-medium">
                 Awards will be announced after match completion
               </p>

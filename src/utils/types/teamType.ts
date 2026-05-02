@@ -44,3 +44,8 @@ export interface ITeamDetails {
 players: IPlayer[];
 team: ITeamD;
 }
+
+export interface ITeamSearch {
+  _id: string,
+  teamName: string,
+}

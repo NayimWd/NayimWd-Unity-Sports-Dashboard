@@ -150,3 +150,17 @@ export interface IMatchDetailsResponse {
   matchInfo: IMatchInfo | null;
   MatchResult: IMatchResult | null;
 }
+
+export interface IMatchSearch {
+  _id: string,
+  matchNumber: string,
+  status: string,
+}
+
+// umpire list interface for create qualifier round match 
+export interface IUmpireSearch {
+  _id: string;
+  name: string;
+  role: string;
+}
+

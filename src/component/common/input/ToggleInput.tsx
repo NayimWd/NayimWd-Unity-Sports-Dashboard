@@ -49,7 +49,7 @@ const ToggleInput = ({ name, label, disabled }: toggleInputProps) => {
                 />
                 <input type="hidden" {...register(name)} />
             </div>
-             {error && <p className="errorText flex items-center justify-center gap-1"> <BadgeAlert size={14}/> {error}</p>
+             {error && <p className="errorText flex items-center justify-center gap-1 truncate"> <BadgeAlert size={14}/> {error}</p>
         }
         </div>
     )

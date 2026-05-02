@@ -8,20 +8,33 @@ import TableSkeleton from "../../component/common/Table/TableSkeleton";
 import PageLayout from "../../component/layout/PageLayout"
 import SectionLayout from "../../component/layout/SectionLayout";
 import { useGetMatchQuery } from "../../features/match/matchApi";
-import { useLatestTournamentQuery } from "../../features/tournament/tournamentApi";
 import { useGoBack } from "../../hooks/useGoBack"
 import BackButton from "../../utils/BackButton"
 import { fontStyle } from "../../utils/ClassUtils";
+import { useTournamentPicker } from "../../hooks/useTournamentPicker";
+import { useState } from "react";
+import TournamentPickerTrigger from "../tournament/TournamentPickerTrigger";
+import PickerModal from "../../component/ui/modal/PickerModal";
 
 const ManageMatch = () => {
   const goBack = useGoBack();
 
-  // get letest tournament id based on point table
-  const { data } = useLatestTournamentQuery();
+  // get letest tournament id based on point table and selector
+  const [pickerOpen, setPickerOpen] = useState(false);
 
-  const tournament = data?.data;
+  // get  tournament id
+  const {
+    activeTournamentId,
+    selected,
+    tournaments,
+    handleSelect,
+    handleClear,
+    latestTournamentId,
+    latestTournamentName,
+    activeTournamentStatus
+  } = useTournamentPicker();
 
-  const tournamentId = tournament?._id;
+  const tournamentId = activeTournamentId;
   // fetch match
   const { data: matches, isLoading, isError } = useGetMatchQuery({ tournamentId }, { skip: !tournamentId });
 
@@ -49,30 +62,14 @@ const ManageMatch = () => {
             match?.teamB ? <div className="flex items-center gap-2"> <img className="w-9 h-9 rounded-full bg-center object-contain" src={match.teamB.teamLogo} alt="Team A" loading="lazy" aria-label="teamBlogo" /> {match.teamB.teamName} </div> : "TBD",
             <div>
               {(() => {
-                const isOngoing = tournament?.status === "ongoing";
-                const isCompleted = tournament?.status === "completed";
-                const isScheduled = match.status === "scheduled" || match.status === "rescheduled";
+                const isOngoing = activeTournamentStatus === "ongoing";
+                const isUpcoming = activeTournamentStatus === "upcoming";
+                const isCompleted = activeTournamentStatus === "completed";
+                const isScheduled = match.status === "scheduled" || match.status === "rescheduled" || match.status === "upcoming";
                 const isInProgress = match.status === "in-progress";
                 const isMatchCompleted = match.status === "completed";
-
-                // Tournament completed → read only
-                if (isCompleted) {
-                  return (
-                    <Dropdown>
-                      <Dropdown.Trigger className="bg-primary text-white">
-                        <Book size="14" /> Read
-                      </Dropdown.Trigger>
-                      <Dropdown.Menu className="-ml-[165px] -mt-8">
-                        <Dropdown.Item href={`/dashboard/match/${match._id}`}>
-                          <BookOpen size={14} /> Match Details
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  );
-                }
-
-                // Tournament ongoing + match scheduled/rescheduled → full edit access
-                if (isOngoing && isScheduled) {
+                // 1. full edit — upcoming or ongoing + scheduled/rescheduled
+                if ((isUpcoming || isOngoing) && isScheduled) {
                   return (
                     <Dropdown>
                       <Dropdown.Trigger className="bg-primary text-white">
@@ -92,6 +89,9 @@ const ManageMatch = () => {
                           <Edit3 size={14} /> Reschedule
                         </Dropdown.Item>
                         <Dropdown.Item href={`/dashboard/match/updateResult/${match._id}`}>
+                          <Edit3 size={14} /> Create Result
+                        </Dropdown.Item>
+                        <Dropdown.Item href={`/dashboard/match/updateResult/${match._id}`}>
                           <Edit3 size={14} /> Update Result
                         </Dropdown.Item>
                       </Dropdown.Menu>
@@ -99,14 +99,14 @@ const ManageMatch = () => {
                   );
                 }
 
-                // Tournament ongoing + match in-progress → read + result only
+                // 2. result only — ongoing + in-progress
                 if (isOngoing && isInProgress) {
                   return (
                     <Dropdown>
                       <Dropdown.Trigger className="bg-primary text-white">
                         <Edit2 size="14" /> Edit
                       </Dropdown.Trigger>
-                      <Dropdown.Menu className="-ml-40 -mt-20">
+                      <Dropdown.Menu className="-ml-40 -mt-8">
                         <Dropdown.Item href={`/dashboard/match/${match._id}`}>
                           <Book size={14} /> Match Details
                         </Dropdown.Item>
@@ -118,19 +118,35 @@ const ManageMatch = () => {
                   );
                 }
 
-                // Tournament ongoing + match completed → read + result only
+                // 3. result + read — ongoing + match completed
                 if (isOngoing && isMatchCompleted) {
                   return (
                     <Dropdown>
                       <Dropdown.Trigger className="bg-primary text-white">
                         <Edit2 size="14" /> Edit
                       </Dropdown.Trigger>
-                      <Dropdown.Menu className="-ml-40 -mt-20">
+                      <Dropdown.Menu className="-ml-40 -mt-8">
                         <Dropdown.Item href={`/dashboard/match/${match._id}`}>
                           <Book size={14} /> Match Details
                         </Dropdown.Item>
                         <Dropdown.Item href={`/dashboard/match/updateResult/${match._id}`}>
                           <Edit3 size={14} /> Update Result
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  );
+                }
+
+                // 4. read only — tournament completed
+                if (isCompleted) {
+                  return (
+                    <Dropdown>
+                      <Dropdown.Trigger className="bg-primary text-white">
+                        <Book size="14" /> Read
+                      </Dropdown.Trigger>
+                      <Dropdown.Menu className="-ml-40 -mt-8">
+                        <Dropdown.Item href={`/dashboard/match/${match._id}`}>
+                          <BookOpen size={14} /> Match Details
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
@@ -153,6 +169,28 @@ const ManageMatch = () => {
       <BackButton onClick={goBack}>Back</BackButton>
       <h1 className={`text-font text-center my-5 ${fontStyle.pageTitle}`}>Match List</h1>
       <SectionLayout>
+        {/* Tournament picker */}
+        <div className="flex items-center justify-start gap-10 mb-5">
+          <div className="text-lg text-subtext">Pick Tournament:</div>
+          <TournamentPickerTrigger
+            selectedName={selected?.name}
+            defaultName={latestTournamentName}
+            showClear={!!selected}
+            onOpen={() => setPickerOpen(true)}
+            onClear={handleClear}
+          />
+
+          <PickerModal
+            isOpen={pickerOpen}
+            onOpenChange={setPickerOpen}
+            title="Select Tournament"
+            items={tournaments}
+            selectedId={selected?._id ?? latestTournamentId}
+            onSelect={(item) => { handleSelect(item); setPickerOpen(false); }}
+          />
+
+
+        </div>
         <Table>
           <TableHeader headers={headerData} />
           {

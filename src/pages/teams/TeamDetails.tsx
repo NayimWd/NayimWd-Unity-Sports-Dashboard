@@ -32,7 +32,7 @@ const TeamDetails = () => {
           className="h-56 w-full object-cover bg-center opacity-80"
           loading="lazy"
         />
-        <h1 className={`${fontStyle.SectionHeading} absolute bottom-4 left-6 text-font drop-shadow-lg`}>
+        <h1 className={`${fontStyle.SectionHeading} absolute bg-surface p-5 rounded-lg bottom-4 left-6 text-font drop-shadow-lg`}>
           {teamName}
         </h1>
       </div>

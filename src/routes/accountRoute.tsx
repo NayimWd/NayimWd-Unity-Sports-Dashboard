@@ -4,7 +4,6 @@ import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
 import ProtectedRoute from "./ProtectedRoute";
 import SuspenseWrapper from "../utils/SuspenseWrapper";
 import AccountSkeleton from "../pages/account/AccountSkeleton";
-import FormSkeleton from "../component/common/loader/FormSkeleton";
 const Account = lazy(() => import("../pages/account/Account"));
 const EditAccount = lazy(() => import("../pages/account/EditAccount"));
 const EditPhoto = lazy(() => import("../pages/account/EditPhoto"));
@@ -52,7 +51,7 @@ export const accountRoutes: RouteObject[] = [
         path: "editAccount/photo",
         element: (
             <ErrorBoundaryWrapper>
-                <SuspenseWrapper CustomLoader={<FormSkeleton />}>
+                <SuspenseWrapper>
                     <EditPhoto />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
@@ -62,7 +61,7 @@ export const accountRoutes: RouteObject[] = [
         path: "editAccount/details",
         element: (
             <ErrorBoundaryWrapper>
-                <SuspenseWrapper CustomLoader={<FormSkeleton />}>
+                <SuspenseWrapper>
                     <EditDetails />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
@@ -72,7 +71,7 @@ export const accountRoutes: RouteObject[] = [
         path: "editAccount/changePassword",
         element: (
             <ErrorBoundaryWrapper>
-                <SuspenseWrapper CustomLoader={<FormSkeleton />}>
+                <SuspenseWrapper>
                     <ChangePassword />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>

@@ -10,9 +10,28 @@ const scheduleApi = apiSlice.injectEndpoints({
             method: "GET"
         }),
         transformResponse: (response: ApiResponse<ScheduleListPayload>) => response.data,
-        
-       })
+        providesTags: (_result, _error, tournamentId)=> [
+            {type: "Schedule", id: tournamentId},
+            {type: "Schedule", id: "LIST"},
+        ]
+       }),
+       createSchedule: builder.mutation(({
+        query: ({tournamentId, data}) => ({
+            url:   `schedule/create/${tournamentId}`,
+            method: "POST",
+            body: data
+        }),
+        invalidatesTags: (_result, _error, {tournamentId})=>[
+            {type: "Schedule", id: tournamentId},
+            {type: "Schedule", id: "List"},
+
+            {type: "Match", id: "LIST"},
+
+            {type: "Venue", id: "LIST"}
+        ]
+       })),
+
     })
 });
 
-export const {useGetSchedultQuery} = scheduleApi;
+export const {useGetSchedultQuery, useCreateScheduleMutation} = scheduleApi;

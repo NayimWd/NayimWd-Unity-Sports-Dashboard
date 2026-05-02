@@ -26,8 +26,10 @@ const EmailInput = ({ name, label, placeholder, icon, autoComplete }: EmailInput
   let variant: "primary" | "success" | "error" = "primary";
 
   // set the input variant based on the error and focus state
-  if (focused && value) {
-    variant = error ? "error" : "success";
+  if (error) {
+    variant = "error";
+  } else if (value) {
+    variant = "success";
   }
 
   useEffect(() => {
@@ -35,7 +37,7 @@ const EmailInput = ({ name, label, placeholder, icon, autoComplete }: EmailInput
     if (focused) {
       trigger(name);
     }
-  }, [value, name, focused]);
+  }, [name]);
 
   return (
     <div className="space-y-1">

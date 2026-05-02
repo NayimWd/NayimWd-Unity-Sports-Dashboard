@@ -6,6 +6,7 @@ import { useGoBack } from "../../hooks/useGoBack";
 import { fontStyle } from "../../utils/ClassUtils";
 import Badge from "../../component/ui/Badge";
 import Card from "../../component/common/card/Card";
+import PlayerDetailsSkeleton from "../../component/common/skeleton/PlayerDetailsSkeleton";
 
 const fallBackImg = "/lightImg.jpeg"
 
@@ -14,7 +15,7 @@ const PlayerDetails = () => {
   const { playerId } = useParams();
   const goBack = useGoBack();
 
-  const { data, isError } = useGetPlayerDetailsQuery(
+  const { data, isLoading, isError } = useGetPlayerDetailsQuery(
     playerId as string
   );
   // destructuring data
@@ -41,7 +42,12 @@ const PlayerDetails = () => {
       <BackButton onClick={goBack}>Back</BackButton>
 
       {/* Hero Banner */}
-      <div className="relative mt-6 rounded-xl overflow-hidden shadow-md bg-card">
+      {
+      isLoading ? 
+        <PlayerDetailsSkeleton/>
+      :
+      <section>
+       <div className="relative mt-6 rounded-xl overflow-hidden shadow-md bg-card">
         <img
           src={teamDetails?.teamLogo}
           alt={teamDetails?.teamName}
@@ -118,6 +124,8 @@ const PlayerDetails = () => {
           </div>
         </Card>
       </section>
+      </section>
+      }
     </PageLayout>
   );
 };

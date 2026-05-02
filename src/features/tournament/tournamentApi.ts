@@ -3,17 +3,21 @@ import {
   ITournamentFinalResult,
   ITournaments,
 } from "../../utils/types/tournamentTypes";
-import { ApiResponse, Tournament } from "../../utils/types/types";
+import { ApiResponse } from "../../utils/types/types";
 import { apiSlice } from "../api/apiSlice";
 
 export const tournamentApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    latestTournament: builder.query<ApiResponse<Tournament>, void>({
+    latestTournament: builder.query({
       query: () => ({
         url: `tournament/latest`,
-        method: "GET"
+        method: "GET",
       }),
-      keepUnusedDataFor: 600
+      keepUnusedDataFor: 600,
+      providesTags: () => [
+        { type: "LatestTournament", id: "LIST" },
+        { type: "Tournament", id: "LIST" },
+      ],
     }),
     getAllTournament: builder.query<ApiResponse<ITournaments>, string | void>({
       query: (status) => {
@@ -41,14 +45,29 @@ export const tournamentApi = apiSlice.injectEndpoints({
       transformResponse: (response: ApiResponse<ITournamentData>) => response,
       providesTags: (_result, _error, tournamentId) => [
         { type: "Tournament", id: tournamentId },
+        { type: "Tournament", id: "LIST" },
       ],
     }),
-    getTournamentResult: builder.query<ApiResponse<ITournamentFinalResult>, string>({
+    getTournamentResult: builder.query<
+      ApiResponse<ITournamentFinalResult>,
+      string
+    >({
       query: (tournamentId) => ({
         url: `tournament/results/${tournamentId}`,
         method: "GET",
       }),
-      transformResponse: (response: ApiResponse<ITournamentFinalResult>) => response
+      transformResponse: (response: ApiResponse<ITournamentFinalResult>) =>
+        response,
+      providesTags: (_result, _error, tournamentId) => [
+        { type: "Tournament", id: tournamentId },
+      ],
+    }),
+    searchTournament: builder.query({
+      query: () => ({
+        url: "tournament/search",
+        method: "GET",
+      }),
+      providesTags: () => [{ type: "Tournament", id: "LIST" }],
     }),
     createTournament: builder.mutation({
       query: (data) => ({
@@ -108,6 +127,21 @@ export const tournamentApi = apiSlice.injectEndpoints({
         { type: "Tournament", id: id },
       ],
     }),
+    approvedTeam: builder.query({
+      query: ({ tournamentId }) => ({
+        url: `/tournament/approved_teams/${tournamentId}`,
+        method: "GET",
+      }),
+      providesTags: (_result, _args, { tournamentId }) => [
+        { type: "ApprovedTeam", id: tournamentId },
+      ],
+    }),
+    upcomingTournament: builder.query({
+      query: () => ({
+        url: `tournament/upcoming`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -121,5 +155,8 @@ export const {
   useUpdateTournamentDateMutation,
   useUpdateTournamentPhotoMutation,
   useUpdateTournamentStatusMutation,
-  useCreateTournamentResultMutation
+  useCreateTournamentResultMutation,
+  useSearchTournamentQuery,
+  useApprovedTeamQuery,
+  useUpcomingTournamentQuery,
 } = tournamentApi;

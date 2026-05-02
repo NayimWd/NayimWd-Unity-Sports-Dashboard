@@ -3,7 +3,6 @@ import { RouteObject } from "react-router-dom";
 import SuspenseWrapper from "../utils/SuspenseWrapper";
 import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
 import PageSkeleton from "../component/common/loader/PageSkeleton";
-import FormSkeleton from "../component/common/loader/FormSkeleton";
 const Blogs = lazy(() => import("../pages/Blogs/Blogs"));
 const BlogDetails = lazy(() => import("../pages/Blogs/BlogDetails"));
 const CreateBlog = lazy(() => import("../pages/Blogs/CreateBlogs"));
@@ -36,7 +35,7 @@ export const blogRoutes: RouteObject[] = [
         path: "blog/create",
         element: (
           <ErrorBoundaryWrapper>
-            <SuspenseWrapper CustomLoader={<FormSkeleton/>}>
+            <SuspenseWrapper>
               <CreateBlog />
             </SuspenseWrapper>
           </ErrorBoundaryWrapper>
@@ -46,7 +45,7 @@ export const blogRoutes: RouteObject[] = [
         path: "blog/update/:blogId",
         element: (
           <ErrorBoundaryWrapper>
-            <SuspenseWrapper CustomLoader={<FormSkeleton/>}>
+            <SuspenseWrapper>
               <UpdateBlogDetails/>
             </SuspenseWrapper>
           </ErrorBoundaryWrapper>
@@ -56,7 +55,7 @@ export const blogRoutes: RouteObject[] = [
         path: "blog/updatePhoto/:blogId",
         element: (
           <ErrorBoundaryWrapper>
-            <SuspenseWrapper CustomLoader={<FormSkeleton/>}>
+            <SuspenseWrapper>
               <UpdatePhoto/>
             </SuspenseWrapper>
           </ErrorBoundaryWrapper>

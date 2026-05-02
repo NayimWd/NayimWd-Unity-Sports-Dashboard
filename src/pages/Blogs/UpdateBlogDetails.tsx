@@ -96,7 +96,7 @@ const UpdateBlogDetails = () => {
           <div className="flex justify-between items-center flex-wrap gap-5">
             <DropdownInput label="Tags" name="tags" placeholder="Select an option" options={tags} />
           </div>
-          <Buttons disabled={isLoading} iconRight={<PenLine size={16} />} variant="primary" className="w-full md:w-32 rounded">Update</Buttons>
+          <Buttons loading={isLoading} disabled={isLoading} iconRight={<PenLine size={16} />} variant="primary" className="w-full md:w-32 rounded">Update</Buttons>
         </FormContainer>
       </div>
     </PageLayout>

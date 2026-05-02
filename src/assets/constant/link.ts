@@ -101,6 +101,11 @@ export const navLinks = {
           icon: CalendarPlus,
           label: "Create Schedule",
         },
+        {
+          path: "/dashboard/schedule/manage",
+          icon: SquarePen,
+          label: "Manage Schedule",
+        },
       ],
     },
     {
@@ -116,7 +121,7 @@ export const navLinks = {
         {
           path: "/dashboard/match/manage",
           icon: List,
-          label: "Match List",
+          label: "Manage Match",
         },
         {
           path: "/dashboard/match/create",
@@ -213,10 +218,21 @@ export const navLinks = {
       ],
     },
     {
-      path: "/dashboard/tournament",
+      path: "",
       icon: Layers,
       label: "Tournament",
-      children: [],
+      children: [
+        {
+          path: "/dashboard/tournament",
+          icon: Layers,
+          label: "All Tournaments"
+        },
+        {
+          path: "/dashboard/application/my_application",
+          icon: FileStack,
+          label: "My Application"
+        }
+      ],
     },
     {
       path: "/dashboard/schedule",
@@ -283,6 +299,83 @@ export const navLinks = {
           label: "My Team",
         },
       ],
+    },
+    {
+      path: "",
+      icon: Layers,
+      label: "Tournament",
+      children: [
+        {
+          path: "/dashboard/tournament",
+          icon: FileText,
+          label: "ALL Tournament",
+        },
+        {
+          path: "/dashboard/currentTournament",
+          icon: Component,
+          label: "Running Tournament",
+        },
+      ],
+    },
+    {
+      path: "/dashboard/schedule",
+      icon: CalendarDays,
+      label: "Schedule",
+      children: [],
+    },
+    {
+      path: "",
+      icon: SquareSigma,
+      label: "Match",
+      children: [
+        {
+          path: "/dashboard/match",
+          icon: GalleryHorizontalEnd,
+          label: "All Match",
+        },
+      ],
+    },
+    {
+      path: "/dashboard/pointTable",
+      icon: ChartLine,
+      label: "Point Table",
+    },
+    {
+      path: "/dashboard/venue",
+      icon: School,
+      label: "Venue",
+      children: [],
+    },
+    {
+      path: "/dashboard/blogs",
+      icon: Newspaper,
+      label: "Blog",
+      children: [],
+    },
+  ],
+   umpire: [
+    {
+      path: "/dashboard",
+      icon: Home,
+      label: "Dashboard",
+      children: [],
+    },
+    {
+      path: "/dashboard/account",
+      icon: Users,
+      label: "Account",
+      children: [],
+    },
+    {
+      path: "/dashboard/profile",
+      icon: ShieldUser,
+      label: "Profile",
+      children: [],
+    },
+    {
+      path: "/dashboard/team",
+      icon: BookType,
+      label: "Team",
     },
     {
       path: "",
