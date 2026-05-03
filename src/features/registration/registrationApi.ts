@@ -9,7 +9,7 @@ export const registrationApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getRegisterApplication: builder.query<ApiResponse<IRegistrations>, any>({
       query: ({ id, status }) => ({
-        url: `tournamentRegister/get_all/${id}?status=${status}`,
+        url: `/tournamentRegister/get_all/${id}?status=${status}`,
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<IRegistrations>) => response,
@@ -20,14 +20,14 @@ export const registrationApi = apiSlice.injectEndpoints({
       string
     >({
       query: (id) => ({
-        url: `tournamentRegister/application/details/${id}`,
+        url: `/tournamentRegister/application/details/${id}`,
         method: "GET",
       }),
       providesTags: [{ type: "Registration", id: "LIST" }],
     }),
     applyForTournament: builder.mutation({
       query: ({ tournamentId, teamId }) => ({
-        url: `tournamentRegister/apply/${tournamentId}`,
+        url: `/tournamentRegister/apply/${tournamentId}`,
         method: "POST",
         body: { teamId },
       }),
@@ -38,7 +38,7 @@ export const registrationApi = apiSlice.injectEndpoints({
     }),
     myApplication: builder.query({
       query: ({ tournamentId }) => ({
-        url: `tournamentRegister/application/${tournamentId}`,
+        url: `/tournamentRegister/application/${tournamentId}`,
         method: "GET",
       }),
       providesTags: (_result, _error, { tournamentId }) => [
@@ -47,7 +47,7 @@ export const registrationApi = apiSlice.injectEndpoints({
     }),
     withdraw: builder.mutation({
       query: ({ tournamentId, teamId }) => ({
-        url: `tournamentRegister/withdraw/${tournamentId}`,
+        url: `/tournamentRegister/withdraw/${tournamentId}`,
         method: "PATCH",
         body: {teamId},
       }),
@@ -60,7 +60,7 @@ export const registrationApi = apiSlice.injectEndpoints({
     }),
     reApply: builder.mutation({
       query: ({ tournamentId, teamId }) => ({
-        url: `tournamentRegister/reApply/${tournamentId}`,
+        url: `/tournamentRegister/reApply/${tournamentId}`,
         method: "PATCH",
         body: {teamId},
       }),
@@ -72,7 +72,7 @@ export const registrationApi = apiSlice.injectEndpoints({
     }),
     action: builder.mutation({
         query: ({tournamentId, data}) => ({
-            url: `tournamentRegister/update_status/${tournamentId}`,
+            url: `/tournamentRegister/update_status/${tournamentId}`,
             method: "PATCH",
             body: data
         }),

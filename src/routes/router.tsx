@@ -9,7 +9,7 @@ import { dashboardRoutes } from "./dashboardRoute";
 import PageSkeleton from "../component/common/loader/PageSkeleton";
 import DashboardSkeleton from "../component/common/loader/DashboardSkeleton";
 import ErrorComp from "../component/common/error/ErrorComp";
-const NotFound = lazy(() => import("../pages/NotFound"));
+import NotFound from "../pages/NotFound";
 const Layout = lazy(() => import("../component/layout/DashBoardLayout"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
 

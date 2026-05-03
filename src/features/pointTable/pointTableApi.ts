@@ -5,7 +5,7 @@ export const pointTableApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getPointTable: builder.query<ApiResponse<PointTableData>, any>({
             query: (tournamentId) => ({
-                url: `pointTable/get/${tournamentId}`,
+                url: `/pointTable/get/${tournamentId}`,
                 method: "GET"
             }),
              providesTags: (_result, _args, {tournamentId}) => [

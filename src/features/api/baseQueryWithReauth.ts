@@ -22,7 +22,7 @@ export const baseQueryWithAuth: BaseQueryFn<
   // 2 if token expired, try to refresh
   if (result.error && result.error.status === 401) {
     const refreshToken = await baseQuery(
-      "auth/refreshToken",
+    { url: "/auth/refreshToken", method: "POST" },
       api,
       extraOptions
     );

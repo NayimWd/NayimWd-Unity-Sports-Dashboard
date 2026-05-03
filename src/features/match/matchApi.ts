@@ -6,7 +6,7 @@ const matchApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getMatch: builder.query<MatchListData, any>({
       query: ({ tournamentId }) => ({
-        url: `match/all/${tournamentId}`,
+        url: `/match/all/${tournamentId}`,
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<MatchListData>) =>
@@ -24,14 +24,14 @@ const matchApi = apiSlice.injectEndpoints({
     }),
     getMatchDetails: builder.query<IMatchDetailsResponse, string>({
       query: ( matchId ) => ({
-        url: `match/details/${matchId}`,
+        url: `/match/details/${matchId}`,
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<IMatchDetailsResponse>) => response.data
     }),
     matchOverview: builder.query({
       query: ({tournamentId}) => ({
-        url: `match/overview/${tournamentId}`,
+        url: `/match/overview/${tournamentId}`,
         method: "GET"
       })
     })

@@ -10,7 +10,7 @@ const profileApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getPlayerProfile: builder.query<PlayerProfile, any>({
       query: () => ({
-        url: `profile/get_player_profile`,
+        url: `/profile/get_player_profile`,
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<PlayerProfile>) =>
@@ -19,7 +19,7 @@ const profileApi = apiSlice.injectEndpoints({
     }),
     getManagerProfile: builder.query<ManagerProfile, any>({
       query: () => ({
-        url: `profile/get_manager_profile`,
+        url: `/profile/get_manager_profile`,
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<ManagerProfile>) =>
@@ -28,7 +28,7 @@ const profileApi = apiSlice.injectEndpoints({
     }),
     getUmpireProfile: builder.query<UmpireProfile, any>({
       query: () => ({
-        url: `profile/get_umpire_profile`,
+        url: `/profile/get_umpire_profile`,
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<UmpireProfile>) =>
@@ -37,7 +37,7 @@ const profileApi = apiSlice.injectEndpoints({
     }),
     createPlayerProfile: builder.mutation({
       query: (data) => ({
-        url: "profile/create_player_profile",
+        url: "/profile/create_player_profile",
         method: "POST",
         body: data,
       }),
@@ -45,7 +45,7 @@ const profileApi = apiSlice.injectEndpoints({
     }),
     updatePlayerProfile: builder.mutation({
       query: (data) => ({
-        url: `profile/update_playerProfile_details`,
+        url: `/profile/update_playerProfile_details`,
         method: "PATCH",
         body: data,
       }),
@@ -53,7 +53,7 @@ const profileApi = apiSlice.injectEndpoints({
     }),
     createUmpireProfile: builder.mutation({
       query: (data) => ({
-        url: `profile/create_umpire_profile`,
+        url: `/profile/create_umpire_profile`,
         method: "POST",
         body: data,
       }),
@@ -61,7 +61,7 @@ const profileApi = apiSlice.injectEndpoints({
     }),
     updateUmpireProfile: builder.mutation({
       query: (data) => ({
-        url: `profile/update_umpireProfile_details`,
+        url: `/profile/update_umpireProfile_details`,
         method: "PATCH",
         body: data,
       }),

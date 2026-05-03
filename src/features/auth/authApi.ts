@@ -11,28 +11,28 @@ const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     signUp: builder.mutation({
       query: (data: FormData) => ({
-        url: "auth/register",
+        url: "/auth/register",
         method: "POST",
         body: data,
       }),
     }),
     signIn: builder.mutation({
       query: (data) => ({
-        url: "auth/login",
+        url: "/auth/login",
         method: "POST",
         body: data,
       }),
     }),
     signOut: builder.mutation({
       query: () => ({
-        url: "auth/logout",
+        url: "/auth/logout",
         method: "POST",
         credentials: "include",
       }),
     }),
     currentUser: builder.query<IUser, void>({
       query: () => ({
-        url: "auth/current_user",
+        url: "/auth/current_user",
       }),
       transformResponse: (response: ApiResponse<IUser>) => response.data,
       keepUnusedDataFor: 300,
@@ -63,7 +63,7 @@ const authApi = apiSlice.injectEndpoints({
         if (params.sortOrder) queryString.append("sortOrder", params.sortOrder);
 
         return {
-          url: `auth/all_users?${queryString}`,
+          url: `/auth/all_users?${queryString}`,
           method: "GET",
         };
       },
@@ -80,7 +80,7 @@ const authApi = apiSlice.injectEndpoints({
     }),
     umpireList: builder.query<unknown, { search?: string } | void>({
       query: ({ search } = {}) => ({
-        url: `auth/umpire_list`,
+        url: `/auth/umpire_list`,
         method: "GET",
         params: search ? { name: search } : undefined,
       }),

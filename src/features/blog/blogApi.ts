@@ -25,7 +25,7 @@ const blogApi = apiSlice.injectEndpoints({
           .join("&");
 
         return {
-          url: `blog/getAll?${queryParams}`,
+          url: `/blog/getAll?${queryParams}`,
           method: "GET",
         };
       },
@@ -65,7 +65,7 @@ const blogApi = apiSlice.injectEndpoints({
           .join("&");
 
         return {
-          url: `blog/manage?${queryParams}`,
+          url: `/blog/manage?${queryParams}`,
           method: "GET",
         };
       },
@@ -83,7 +83,7 @@ const blogApi = apiSlice.injectEndpoints({
     }),
     blogDetails: builder.query({
       query: (blogId) => ({
-        url: `blog/details/${blogId}`,
+        url: `/blog/details/${blogId}`,
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<BlogDetails>) => response.data,
@@ -92,7 +92,7 @@ const blogApi = apiSlice.injectEndpoints({
     }),
     getRelatedBlogs: builder.query<Blogs, { tags: string; limit: number }>({
       query: ({ tags, limit = 5 }) => ({
-        url: `blog/getAll`,
+        url: `/blog/getAll`,
         method: "GET",
         params: { tags, limit },
       }),
@@ -100,7 +100,7 @@ const blogApi = apiSlice.injectEndpoints({
     }),
     createBlog: builder.mutation({
       query: (data) => ({
-        url: "blog/create",
+        url: "/blog/create",
         method: "POST",
         body: data,
       }),

@@ -10,7 +10,7 @@ export const tournamentApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     latestTournament: builder.query({
       query: () => ({
-        url: `tournament/latest`,
+        url: `/tournament/latest`,
         method: "GET",
       }),
       keepUnusedDataFor: 600,
@@ -23,7 +23,7 @@ export const tournamentApi = apiSlice.injectEndpoints({
       query: (status) => {
         const param = status ? `status=${status}` : "";
 
-        return { url: `tournament/status?${param}`, method: "GET" };
+        return { url: `/tournament/status?${param}`, method: "GET" };
       },
       transformResponse: (response: ApiResponse<ITournaments>) => response,
       providesTags: (result) =>
@@ -39,7 +39,7 @@ export const tournamentApi = apiSlice.injectEndpoints({
     }),
     getTournamentDetails: builder.query<ApiResponse<ITournamentData>, string>({
       query: (tournamentId) => ({
-        url: `tournament/tournamentDetails/${tournamentId}`,
+        url: `/tournament/tournamentDetails/${tournamentId}`,
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<ITournamentData>) => response,
@@ -53,7 +53,7 @@ export const tournamentApi = apiSlice.injectEndpoints({
       string
     >({
       query: (tournamentId) => ({
-        url: `tournament/results/${tournamentId}`,
+        url: `/tournament/results/${tournamentId}`,
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<ITournamentFinalResult>) =>
@@ -64,14 +64,14 @@ export const tournamentApi = apiSlice.injectEndpoints({
     }),
     searchTournament: builder.query({
       query: () => ({
-        url: "tournament/search",
+        url: "/tournament/search",
         method: "GET",
       }),
       providesTags: () => [{ type: "Tournament", id: "LIST" }],
     }),
     createTournament: builder.mutation({
       query: (data) => ({
-        url: `tournament/create`,
+        url: `/tournament/create`,
         method: "POST",
         body: data,
       }),
@@ -79,7 +79,7 @@ export const tournamentApi = apiSlice.injectEndpoints({
     }),
     updateTournamentDetails: builder.mutation({
       query: ({ id, data }) => ({
-        url: `tournament/update_details/${id}`,
+        url: `/tournament/update_details/${id}`,
         method: "PATCH",
         body: data,
       }),
@@ -89,7 +89,7 @@ export const tournamentApi = apiSlice.injectEndpoints({
     }),
     updateTournamentDate: builder.mutation({
       query: ({ id, data }) => ({
-        url: `tournament/update_date/${id}`,
+        url: `/tournament/update_date/${id}`,
         method: "PATCH",
         body: data,
       }),
@@ -99,7 +99,7 @@ export const tournamentApi = apiSlice.injectEndpoints({
     }),
     updateTournamentPhoto: builder.mutation({
       query: ({ id, data }) => ({
-        url: `tournament/update_photo/${id}`,
+        url: `/tournament/update_photo/${id}`,
         method: "PATCH",
         body: data,
       }),
@@ -109,7 +109,7 @@ export const tournamentApi = apiSlice.injectEndpoints({
     }),
     updateTournamentStatus: builder.mutation({
       query: ({ id, data }) => ({
-        url: `tournament/update_status/${id}`,
+        url: `/tournament/update_status/${id}`,
         method: "PATCH",
         body: data,
       }),
@@ -119,7 +119,7 @@ export const tournamentApi = apiSlice.injectEndpoints({
     }),
     createTournamentResult: builder.mutation({
       query: ({ id, data }) => ({
-        url: `tournament/create_result/${id}`,
+        url: `/tournament/create_result/${id}`,
         method: "POST",
         body: data,
       }),
@@ -129,7 +129,7 @@ export const tournamentApi = apiSlice.injectEndpoints({
     }),
     approvedTeam: builder.query({
       query: ({ tournamentId }) => ({
-        url: `/tournament/approved_teams/${tournamentId}`,
+        url: `//tournament/approved_teams/${tournamentId}`,
         method: "GET",
       }),
       providesTags: (_result, _args, { tournamentId }) => [
@@ -138,7 +138,7 @@ export const tournamentApi = apiSlice.injectEndpoints({
     }),
     upcomingTournament: builder.query({
       query: () => ({
-        url: `tournament/upcoming`,
+        url: `/tournament/upcoming`,
         method: "GET",
       }),
     }),

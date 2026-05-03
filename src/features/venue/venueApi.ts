@@ -6,7 +6,7 @@ const venueApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getVenue: builder.query<ApiResponse<IVenue>, void>({
       query: () => ({
-        url: `venue/all`,
+        url: `/venue/all`,
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<IVenue>) => response,
@@ -23,7 +23,7 @@ const venueApi = apiSlice.injectEndpoints({
     }),
     getVenueDetails: builder.query<ApiResponse<IVenueDetails>, string>({
       query: (venueId) => ({
-        url: `venue/details/${venueId}`,
+        url: `/venue/details/${venueId}`,
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<IVenueDetails>) => response,
@@ -36,7 +36,7 @@ const venueApi = apiSlice.injectEndpoints({
     }),
     createVenue: builder.mutation({
       query: (data) => ({
-        url: `venue/create`,
+        url: `/venue/create`,
         method: "POST",
         body: data
       }),
@@ -44,7 +44,7 @@ const venueApi = apiSlice.injectEndpoints({
     }),
     updateVenueDetails: builder.mutation({
       query: ({venueId, data}) => ({
-        url: `venue/update/${venueId}`,
+        url: `/venue/update/${venueId}`,
         method: "PATCH",
         body: data
       }),
@@ -55,7 +55,7 @@ const venueApi = apiSlice.injectEndpoints({
     }),
     updateVenuePhoto: builder.mutation({
       query: ({venueId, data}) =>({
-        url: `venue/updatePhoto/${venueId}`,
+        url: `/venue/updatePhoto/${venueId}`,
         method: "PATCH",
         body: data
       }),
@@ -66,7 +66,7 @@ const venueApi = apiSlice.injectEndpoints({
     }),
     venueSearch: builder.query({
       query: () => ({
-        url: `venue/search`,
+        url: `/venue/search`,
         method: "GET"
       })
     })

@@ -5,7 +5,7 @@ const accountApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     myAccount: builder.query<IUser, void>({
       query: () => ({
-        url: "auth/current_user",
+        url: "/auth/current_user",
       }),
       transformResponse: (response: ApiResponse<IUser>) => response.data,
       keepUnusedDataFor: 300,
@@ -13,7 +13,7 @@ const accountApi = apiSlice.injectEndpoints({
     }),
     editAccountDetails: builder.mutation({
       query: (data) => ({
-        url: "auth/update_account",
+        url: "/auth/update_account",
         method: "PATCH",
         body: data,
       }),
@@ -21,7 +21,7 @@ const accountApi = apiSlice.injectEndpoints({
     }),
     editAccountPhoto: builder.mutation({
       query: (data) => ({
-        url: "auth/photo",
+        url: "/auth/photo",
         method: "PATCH",
         body: data,
       }),
@@ -29,7 +29,7 @@ const accountApi = apiSlice.injectEndpoints({
     }),
     changePassword: builder.mutation({
       query: (data) => ({
-        url: "auth/change_password",
+        url: "/auth/change_password",
         method: "PATCH",
         body: data,
       }),
@@ -37,7 +37,7 @@ const accountApi = apiSlice.injectEndpoints({
     }),
     changeRole: builder.mutation({
       query: ({ userId, data }) => ({
-        url: `auth/change_role/${userId}`,
+        url: `/auth/change_role/${userId}`,
         method: "PATCH",
         body: data,
       }),

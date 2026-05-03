@@ -6,7 +6,7 @@ const playerApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getPlayerDetails: builder.query<IPlayerDetails, string>({
       query: (playerId) => ({
-        url: `team/player_details/${playerId}`,
+        url: `/team/player_details/${playerId}`,
         method: "GET",
       }),
       // transform api response
@@ -33,13 +33,13 @@ const playerApi = apiSlice.injectEndpoints({
     }),
     getAvailablePlayer: builder.query({
       query: () => ({
-        url: `player/available_players`,
+        url: `/player/available_players`,
         method: "GET"
       })
     }),
     getAvailablePlayerProfile: builder.query({
       query: () => ({
-        url: `player/available_players_profile`,
+        url: `/player/available_players_profile`,
         method: "GET"
       }),
       providesTags: () => [

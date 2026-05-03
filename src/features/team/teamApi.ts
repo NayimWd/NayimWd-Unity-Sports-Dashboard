@@ -23,7 +23,7 @@ const teamApi = apiSlice.injectEndpoints({
         ]
           .filter(Boolean)
           .join("&");
-        return { url: `team/all_teams?${queryParams}`, method: "GET" };
+        return { url: `/team/all_teams?${queryParams}`, method: "GET" };
       },
       transformResponse: (response: ApiResponse<any>): IAllTeams => {
         const { teams, currentPage, totalPages, totalTeams } = response.data;
@@ -42,7 +42,7 @@ const teamApi = apiSlice.injectEndpoints({
     }),
     getTeamDetails: builder.query<ITeamDetails, any>({
       query: (teamId) => ({
-        url: `team/details/${teamId}`,
+        url: `/team/details/${teamId}`,
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<ITeamDetails>) => response.data,
@@ -56,7 +56,7 @@ const teamApi = apiSlice.injectEndpoints({
     }),
     getMyTeam: builder.query<IMyTeam, any>({
       query: () => ({
-        url: `team/my_team`,
+        url: `/team/my_team`,
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<IMyTeam>) => response.data,
@@ -64,7 +64,7 @@ const teamApi = apiSlice.injectEndpoints({
     }),
     PlayerList: builder.query({
       query: (teamId) => ({
-        url: `team/player_list/${teamId}`,
+        url: `/team/player_list/${teamId}`,
         method: "GET",
       }),
       providesTags: (_result, _args, { teamId }) => [
@@ -73,7 +73,7 @@ const teamApi = apiSlice.injectEndpoints({
     }),
     removePlayer: builder.mutation({
       query: ({ teamId, playerId }) => ({
-        url: `team/removePlayer/${teamId}`,
+        url: `/team/removePlayer/${teamId}`,
         method: "POST",
         body: { playerId },
       }),
@@ -91,7 +91,7 @@ const teamApi = apiSlice.injectEndpoints({
     }),
     addPlayer: builder.mutation({
       query: ({ teamId, playerId }) => ({
-        url: `team/addPlayers/${teamId}`,
+        url: `/team/addPlayers/${teamId}`,
         method: "POST",
         body: { playerId },
       }),
@@ -109,7 +109,7 @@ const teamApi = apiSlice.injectEndpoints({
     }),
     makeCaptain: builder.mutation({
       query: ({ teamId, playerId }) => ({
-        url: `team/makeCaptain/${teamId}`,
+        url: `/team/makeCaptain/${teamId}`,
         method: "PATCH",
         body: { playerId },
       }),
@@ -126,7 +126,7 @@ const teamApi = apiSlice.injectEndpoints({
     }),
     updateTeamName: builder.mutation({
       query: ({ teamId, teamName }) => ({
-        url: `team/update_name/${teamId}`,
+        url: `/team/update_name/${teamId}`,
         method: "PATCH",
         body: teamName,
       }),
@@ -140,7 +140,7 @@ const teamApi = apiSlice.injectEndpoints({
     }),
     updateTeamLogo: builder.mutation({
       query: ({ teamId, formData }) => ({
-        url: `team/update_logo/${teamId}`,
+        url: `/team/update_logo/${teamId}`,
         method: "PATCH",
         body: formData,
       }),
@@ -154,7 +154,7 @@ const teamApi = apiSlice.injectEndpoints({
     }),
     teamSummary: builder.query({
       query: ({ teamId }) => ({
-        url: `team/summary/${teamId}`,
+        url: `/team/summary/${teamId}`,
         method: "GET",
       }),
       providesTags: (_result, _args, { teamId }) => [
@@ -164,7 +164,7 @@ const teamApi = apiSlice.injectEndpoints({
     }),
     createTeam: builder.mutation({
       query: (data: FormData) => ({
-        url: `team/create`,
+        url: `/team/create`,
         method: "POST",
         body: data,
       }),
@@ -172,7 +172,7 @@ const teamApi = apiSlice.injectEndpoints({
     }),
     myTeamSummary: builder.query({
       query: () => ({
-        url: `team/team_summary`,
+        url: `/team/team_summary`,
         method: "GET"
       }),
       providesTags: () => [

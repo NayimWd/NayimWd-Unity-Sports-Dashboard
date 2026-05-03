@@ -6,7 +6,7 @@ const summaryApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getSummary: builder.query<ApiResponse<ISummary>, void>({
             query: () => ({
-                url: "report/summary",
+                url: "/report/summary",
                 method: "GET"
             }),
             transformResponse: (response: ApiResponse<ISummary>) => response,
@@ -16,7 +16,7 @@ const summaryApi = apiSlice.injectEndpoints({
         }),
         getLatestResult: builder.query<ApiResponse<ILatestTournamentResponse>, void>({
             query: () => ({
-                url: `report/latestResult`,
+                url: `/report/latestResult`,
                 method: "GET"
             }),
             transformResponse: (response: ApiResponse<ILatestTournamentResponse>) => response,
@@ -26,7 +26,7 @@ const summaryApi = apiSlice.injectEndpoints({
         }),
         umpireSummary: builder.query({
             query: () => ({
-                url: `report/umpire_summary`,
+                url: `/report/umpire_summary`,
                 method: "GET"
             })
         })
