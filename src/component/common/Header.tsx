@@ -45,6 +45,7 @@ const Header = ({ handleToggle }: HeaderProps) => {
       SuccessToast({ msg: "Logout Successfull" })
     } catch (error) {
       ErrorToast({ msg: "Sign Out Failed!", position: "top-center", duration: 3000 });
+      
     }
   }
 

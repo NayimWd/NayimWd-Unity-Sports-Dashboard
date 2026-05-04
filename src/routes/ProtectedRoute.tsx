@@ -11,10 +11,10 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   // access user and auth satatus
-  const { isAuthenticated, user } = useSelector((state: RootState) => state.auth);
+  const { isAuthenticated, user, authLoaded } = useSelector((state: RootState) => state.auth);
 
   // persist user 
-  const { isLoading, isFetching } = useCurrentUserQuery(undefined, { skip: isAuthenticated });
+  const { isLoading, isFetching } = useCurrentUserQuery(undefined, { skip: isAuthenticated || authLoaded });
 
   if (isLoading || isFetching) {
     return <Loader />
