@@ -1,7 +1,6 @@
 import PageLayout from "../../component/layout/PageLayout"
 import { useGoBack } from "../../hooks/useGoBack"
 import BackButton from "../../utils/BackButton"
-import { fontStyle } from "../../utils/ClassUtils";
 import Table from "../../component/common/Table/Table";
 import TableHeader from "../../component/common/Table/TableHeader";
 import { useGetVenueQuery } from "../../features/venue/venueApi";
@@ -10,7 +9,7 @@ import TableEmpty from "../../component/common/Table/TableEmpty";
 import TableRow from "../../component/common/Table/TableRow";
 import Dropdown from "../../component/common/dropdown/Dropdown";
 import { Book, Edit2, Edit3 } from "lucide-react";
-import SectionLayout from "../../component/layout/SectionLayout";
+import PageHeader from "../../component/ui/PageHeader";
 
 
 const ManageVenue = () => {
@@ -74,13 +73,16 @@ const ManageVenue = () => {
   return (
     <PageLayout>
       <BackButton onClick={goBack}>Back</BackButton>
-      <h1 className={`${fontStyle.pageTitle} text-font text-center`}>Manage Tournament Blogs</h1>
-      <SectionLayout>
+      <PageHeader
+      topTitle="Venue List"
+      title="manage venue"
+      />
+      <div className="rounded-2xl border border-border overflow-hidden bg-surface mt-5">
       <Table>
         <TableHeader headers={headerData} />
         {content}
       </Table>
-      </SectionLayout>
+      </div>
     </PageLayout>
   )
 }

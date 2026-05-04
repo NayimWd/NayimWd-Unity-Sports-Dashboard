@@ -129,12 +129,12 @@ const ManageTournament = () => {
 
         </div>
       </SectionLayout>
-      <SectionLayout>
+      <div className="rounded-2xl border border-border overflow-hidden bg-surface">
       <Table>
         <TableHeader headers={headerData} />
       {content}
       </Table>
-      </SectionLayout>
+      </div>
     </PageLayout>
   )
 };

@@ -23,6 +23,7 @@ import PageLayout from "../../component/layout/PageLayout";
 import BackButton from "../../utils/BackButton";
 import { useGoBack } from "../../hooks/useGoBack";
 import Dropdown from "../../component/common/dropdown/Dropdown";
+import SectionLayout from "../../component/layout/SectionLayout";
 
 
 
@@ -216,7 +217,8 @@ const ManageBlogs = () => {
     <PageLayout>
       <BackButton className="mb-5" onClick={useGoBack()}>Go Back</BackButton>
       <h1 className={`${fontStyle.pageTitle} text-font text-center`}>Manage Tournament Blogs</h1>
-      <div className="w-full bg-surface paddingTable my-5 overflow-x-auto py-8 rounded-lg">
+      <div className="w-full  my-5 overflow-x-auto py-8 rounded-lg">
+        <SectionLayout variant="surface">
         <FormContainer
           methods={form}
           onSubmit={onSubmit}
@@ -241,11 +243,13 @@ const ManageBlogs = () => {
             </Buttons>
           </div>
         </FormContainer>
-
+        </SectionLayout>
+        <div className="rounded-2xl border border-border overflow-hidden bg-surface">
         <Table>
           <TableHeader headers={headerData} />
           {content}
         </Table>
+        </div>
       </div>
 
       <div className="w-full flex justify-center mt-6">

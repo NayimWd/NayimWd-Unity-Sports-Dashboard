@@ -14,7 +14,7 @@
 
 <br/>
 
-🔗 **Live Dashboard** → `[Deployment in progress — coming soon]`
+🔗 **Live Dashboard** → [vercel](https://unity-sports-dashboard.vercel.app)
 &nbsp;&nbsp;|&nbsp;&nbsp;
 🔗 **Live API** → [Railway](https://nayimwd-unitysportsclubapi-production.up.railway.app/api/v1)
 &nbsp;&nbsp;|&nbsp;&nbsp;

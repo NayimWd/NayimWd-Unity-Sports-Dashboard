@@ -117,7 +117,7 @@ const AllUsers = () => {
             const { userId, role } = userRole;
             await changeRole({
                 userId,
-                data: {role}
+                data: { role }
             }).unwrap();
             toast.dismiss(loadingId);
             SuccessToast({ msg: `Changed role to ${userRole.role}!` });
@@ -247,12 +247,14 @@ const AllUsers = () => {
                         </Buttons>
                     </div>
                 </FormContainer>
-                {/* Table */}
+            </SectionLayout>
+            {/* Table */}
+            <div className="rounded-2xl border border-border overflow-hidden bg-surface">
                 <Table>
                     <TableHeader headers={headerData} />
                     {content}
                 </Table>
-            </SectionLayout>
+            </div>
 
             {/* Pagination */}
             <div className="w-full flex justify-center mt-6">

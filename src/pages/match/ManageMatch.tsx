@@ -6,15 +6,14 @@ import TableHeader from "../../component/common/Table/TableHeader";
 import TableRow from "../../component/common/Table/TableRow";
 import TableSkeleton from "../../component/common/Table/TableSkeleton";
 import PageLayout from "../../component/layout/PageLayout"
-import SectionLayout from "../../component/layout/SectionLayout";
 import { useGetMatchQuery } from "../../features/match/matchApi";
 import { useGoBack } from "../../hooks/useGoBack"
 import BackButton from "../../utils/BackButton"
-import { fontStyle } from "../../utils/ClassUtils";
 import { useTournamentPicker } from "../../hooks/useTournamentPicker";
 import { useState } from "react";
 import TournamentPickerTrigger from "../tournament/TournamentPickerTrigger";
 import PickerModal from "../../component/ui/modal/PickerModal";
+import PageHeader from "../../component/ui/PageHeader";
 
 const ManageMatch = () => {
   const goBack = useGoBack();
@@ -56,6 +55,7 @@ const ManageMatch = () => {
         <TableRow
           key={match._id}
           rowData={[
+            
             match.matchNumber,
             match.status,
             match?.teamA ? <div className="flex items-center gap-2"> <img className="w-9 h-9 rounded-full bg-center object-contain" src={match.teamA.teamLogo} alt="Team A" loading="lazy" aria-label="teamAlogo" /> {match.teamA.teamName} </div> : "TBD",
@@ -167,10 +167,14 @@ const ManageMatch = () => {
   return (
     <PageLayout>
       <BackButton onClick={goBack}>Back</BackButton>
-      <h1 className={`text-font text-center my-5 ${fontStyle.pageTitle}`}>Match List</h1>
-      <SectionLayout>
+      <PageHeader
+        topTitle="manage matches"
+        title="Match List"
+        subtitle="select tournament to manage"
+      />
+      <div className="rounded-2xl border border-border overflow-hidden bg-surface">
         {/* Tournament picker */}
-        <div className="flex items-center justify-start gap-10 mb-5">
+        <div className="flex items-center justify-between px-5 py-4 border border-border">
           <div className="text-lg text-subtext">Pick Tournament:</div>
           <TournamentPickerTrigger
             selectedName={selected?.name}
@@ -197,7 +201,7 @@ const ManageMatch = () => {
             content
           }
         </Table>
-      </SectionLayout>
+      </div>
     </PageLayout>
   )
 }
