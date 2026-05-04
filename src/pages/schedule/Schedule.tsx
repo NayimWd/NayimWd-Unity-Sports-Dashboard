@@ -51,7 +51,6 @@ const Schedule = () => {
   };
 
 
-
   return (
     <PageLayout>
       <BackButton onClick={goBack}>Back</BackButton>

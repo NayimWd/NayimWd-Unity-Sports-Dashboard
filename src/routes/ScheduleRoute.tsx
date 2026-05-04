@@ -2,10 +2,11 @@ import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 import ErrorBoundaryWrapper from "../utils/ErrorWrapper";
 import SuspenseWrapper from "../utils/SuspenseWrapper";
-const Schedule = lazy(()=> import("../pages/schedule/Schedule"));
-const CreateSchedule = lazy(()=> import("../pages/schedule/CreateScheduleR1"));
-const CreateScheduleR2 = lazy(()=> import("../pages/schedule/CreateScheduleR2"));
-const ScheduleSwith = lazy(()=> import("../pages/schedule/ScheduleSwith"));
+const Schedule = lazy(() => import("../pages/schedule/Schedule"));
+const CreateSchedule = lazy(() => import("../pages/schedule/CreateScheduleR1"));
+const CreateScheduleR2 = lazy(() => import("../pages/schedule/CreateScheduleR2"));
+const ScheduleSwith = lazy(() => import("../pages/schedule/ScheduleSwith"));
+const ManageSchdeule = lazy(() => import("../pages/schedule/ManageSchdeule"));
 
 export const ScheduleRoute: RouteObject[] = [
     {
@@ -13,7 +14,7 @@ export const ScheduleRoute: RouteObject[] = [
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
-                    <Schedule/>
+                    <Schedule />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )
@@ -24,7 +25,7 @@ export const ScheduleRoute: RouteObject[] = [
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
-                    <ScheduleSwith/>
+                    <ScheduleSwith />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )
@@ -34,7 +35,7 @@ export const ScheduleRoute: RouteObject[] = [
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
-                    <CreateSchedule/>
+                    <CreateSchedule />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )
@@ -44,7 +45,7 @@ export const ScheduleRoute: RouteObject[] = [
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
-                    <CreateScheduleR2/>
+                    <CreateScheduleR2 />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )
@@ -54,7 +55,7 @@ export const ScheduleRoute: RouteObject[] = [
         element: (
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
-                    <CreateScheduleR2/>
+                    <ManageSchdeule />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )
