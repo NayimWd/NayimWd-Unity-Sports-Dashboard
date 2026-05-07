@@ -86,7 +86,13 @@ const PointSummary = () => {
     <div className="rounded-2xl border border-border overflow-hidden bg-surface">
 
       {/* Table header */}
-      <div className="flex items-center justify-between px-5 py-4 border-b border-border">
+      <div className="flex flex-col gap-5 items-center justify-between px-5 py-4 border-b border-border ">
+        <div className="flex">
+        <span className="text-font border border-border px-3 text-xl  py-1 rounded-xl">
+          Point Table
+        </span>
+        </div>
+        <div className="w-full flex flex-wrap gap-5 items-center justify-center lg:justify-between">
         {loading ? (
           <div className="h-4 w-40 rounded bg-subSurface animate-pulse" />
         ) : (
@@ -98,6 +104,7 @@ const PointSummary = () => {
             </p>
           </div>
         )}
+
         <PickerModal
           isOpen={pickerOpen}
           onOpenChange={setPickerOpen}
@@ -113,9 +120,7 @@ const PointSummary = () => {
         onOpen={() => setPickerOpen(true)}
         onClear={handleClear}
       />
-        <span className="text-xs text-muted bg-subSurface border border-border px-3 py-1 rounded-full">
-          Point Table
-        </span>
+        </div>
       </div>
 
       <Table>

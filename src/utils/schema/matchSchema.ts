@@ -1,5 +1,14 @@
 import { z } from "zod";
 
+export const MATCH_STATUSES = [
+  "upcoming",
+  "scheduled",
+  "rescheduled",
+  "in-progress",
+  "completed",
+  "cancelled",
+] as const;
+
 const baseMatchSchema = z.object({
   tournamentId: z.string().min(1, "Tournament is required"),
   matchNumber: z
@@ -22,5 +31,17 @@ export const createMatchRQSchema = baseMatchSchema.extend({
   }),
 });
 
+export const updateUmpireSchema = baseMatchSchema.omit({
+  tournamentId: true,
+  matchNumber: true
+})
+export const updateStatusSchema = z.object({
+  status: z.enum(MATCH_STATUSES, {
+    errorMap: () => ({message: "Select valid status"})
+  })
+})
+
+
 export type CreateMatchR1FormData = z.infer<typeof createMatchR1Schema>;
 export type CreateMatchRQFormData = z.infer<typeof createMatchRQSchema>;
+export type UpdateUmpireFormData = z.infer<typeof updateUmpireSchema>;
