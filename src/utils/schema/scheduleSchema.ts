@@ -63,7 +63,30 @@ export const scheduleSchemaRQ = withTimeValidation(
   }),
 );
 
+export const updateTeamSchema = z.object({
+    teamA: z.string().optional().nullable(),
+    teamB: z.string().optional().nullable(),
+    matchA: z.string().optional().nullable(),
+    matchB: z.string().optional().nullable(),
+  });
 
+
+export const updateSheduleTimeSchema = withTimeValidation(
+  scheduleBaseSchema.pick({
+    matchDate: true,
+    matchTime: true,
+    endTime: true,
+  }),
+);
+
+export const updateScheduleDetailsSchema = scheduleBaseSchema.pick({
+  venueId: true,
+  matchNumber: true,
+  round: true,
+});
 
 export type ScheduleR1FormData = z.infer<typeof scheduleSchemaR1>;
 export type ScheduleRQFormData = z.infer<typeof scheduleSchemaRQ>;
+export type UpdateScheduleTimeData = z.infer<typeof updateSheduleTimeSchema>;
+export type UpdateScheduleDetailsData = z.infer< typeof updateScheduleDetailsSchema>;
+export type UpdateTeamData = z.infer<typeof updateTeamSchema>;

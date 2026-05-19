@@ -7,6 +7,9 @@ const CreateSchedule = lazy(() => import("../pages/schedule/CreateScheduleR1"));
 const CreateScheduleR2 = lazy(() => import("../pages/schedule/CreateScheduleR2"));
 const ScheduleSwith = lazy(() => import("../pages/schedule/ScheduleSwith"));
 const ManageSchdeule = lazy(() => import("../pages/schedule/ManageSchdeule"));
+const UpdateTime = lazy(()=> import("../pages/schedule/UpdateTime"));
+const UpdateTeam = lazy(()=> import("../pages/schedule/UpdateTeam"));
+const UpdateDetails = lazy(()=> import("../pages/schedule/UpdateDetails"));
 
 export const ScheduleRoute: RouteObject[] = [
     {
@@ -56,6 +59,36 @@ export const ScheduleRoute: RouteObject[] = [
             <ErrorBoundaryWrapper>
                 <SuspenseWrapper>
                     <ManageSchdeule />
+                </SuspenseWrapper>
+            </ErrorBoundaryWrapper>
+        )
+    },
+    {
+        path: "schedule/changeTime/:scheduleId",
+        element: (
+            <ErrorBoundaryWrapper>
+                <SuspenseWrapper>
+                    <UpdateTime />
+                </SuspenseWrapper>
+            </ErrorBoundaryWrapper>
+        )
+    },
+    {
+        path: "schedule/updateDetails/:scheduleId",
+        element: (
+            <ErrorBoundaryWrapper>
+                <SuspenseWrapper>
+                    <UpdateDetails />
+                </SuspenseWrapper>
+            </ErrorBoundaryWrapper>
+        )
+    },
+    {
+        path: "schedule/changeTeam/:scheduleId/:matchId",
+        element: (
+            <ErrorBoundaryWrapper>
+                <SuspenseWrapper>
+                    <UpdateTeam />
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )
