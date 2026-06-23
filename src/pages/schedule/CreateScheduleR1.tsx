@@ -135,13 +135,13 @@ const CreateScheduleR1 = () => {
     if (valid) setStep(s => s + 1);
   };
 
-  const onSubmit = (data: ScheduleR1FormData) => {
+  const onSubmit = async (data: ScheduleR1FormData) => {
     const toastId = LoadingToast({ msg: "Creating..." });
 
     const { tournamentId, ...body } = data;
 
     try {
-      createSchedule({
+     await createSchedule({
         tournamentId,
         data: body
       }).unwrap();
@@ -174,7 +174,7 @@ const CreateScheduleR1 = () => {
       <BackButton onClick={goBack}>Back</BackButton>
       <PageHeader
         topTitle="· Schedule Setup ·"
-        title="Create Match Schedule for Qualifier Round"
+        title="Create Match Schedule for 1st Round"
         subtitle="Fill in the details to schedule a new match"
       />
       <SectionLayout>
@@ -275,7 +275,7 @@ const CreateScheduleR1 = () => {
             totalSteps={3}
             onNext={handleNext}
             onBack={() => setStep(s => s - 1)}
-            submitLabel="Create Match"
+            submitLabel="Create Schedule"
           />
         </FormContainer>
       </SectionLayout>

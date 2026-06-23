@@ -3,15 +3,15 @@ import cn from "../../utils/cn";
 import { ReactNode } from "react";
 
 const badgeVariants = cva(
-  "inline-flex items-center gap-1.5 rounded-md px-2.5 py-0.5 text-xs font-medium select-none tracking-wide transition-all duration-200",
+  "inline-flex items-center gap-1.5 rounded-xl px-2.5 py-0.5 text-xs font-medium select-none tracking-wide transition-all duration-200",
   {
     variants: {
       variant: {
         default:
-          "bg-surface text-font border border-border hover:bg-subSurface",
+          "bg-surface text-font border border-border ",
 
         primary:
-          "bg-primary text-white border border-primary/20 hover:bg-primary",
+          "text-primary border border-primary/20 hover:bg-primary",
 
         success:
           "bg-emerald-500/10 text-emerald-700 border border-emerald-500/20 hover:bg-emerald-500/15",
@@ -26,10 +26,10 @@ const badgeVariants = cva(
           "bg-blue-500/10 text-blue-500 border border-blue-500/20 hover:bg-blue-500/15",
 
         outline:
-          "bg-transparent text-font border border-border hover:bg-surface",
+          "bg-transparent text-font border border-border ",
 
         ghost:
-          "bg-transparent text-font border border-transparent hover:bg-surface",
+          "bg-transparent text-font border border-transparent ",
       },
 
       size: {

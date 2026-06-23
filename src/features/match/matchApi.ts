@@ -37,13 +37,22 @@ const matchApi = apiSlice.injectEndpoints({
       query: ({tournamentId}) => ({
         url: `/match/overview/${tournamentId}`,
         method: "GET"
-      })
+      }),
+      providesTags: (_result, _args, {matchId}) =>[
+        {type: "Match", id: matchId},
+        {type: "Match", id: "LIST"},
+      ]
     }),
     matchUmpireList: builder.query({
       query: ({matchId})=> ({
         url: `/match/umpires/${matchId}`,
         method: "GET"
-      })
+      }),
+      providesTags: () =>[
+        {type: "Umpire", id: "LIST"},
+        {type: "Match", id: "LIST"},
+        { type: "Schedule", id: "List" },
+      ]
     }),
     updateUmpire: builder.mutation({
       query: ({tournamentId, matchId, data}) => ({
@@ -55,8 +64,20 @@ const matchApi = apiSlice.injectEndpoints({
         {type: "Match", id: matchId},
         {type: "Match", id: "LIST"}
       ]
+    }),
+    createMatch: builder.mutation({
+      query: ({tournamentId, data}) => ({
+        url: `/match/create/${tournamentId}`,
+        method: "POST",
+        body: data
+      }),
+      invalidatesTags: ({matchId}) => [
+        {type: "Match", id: matchId},
+        {type: "Match", id: "LIST"},
+        { type: "Schedule", id: "List" },
+      ]
     })
   }),
 });
 
-export const { useGetMatchQuery, useGetMatchDetailsQuery, useMatchOverviewQuery, useMatchUmpireListQuery, useUpdateUmpireMutation } = matchApi;
+export const { useGetMatchQuery, useGetMatchDetailsQuery, useMatchOverviewQuery, useMatchUmpireListQuery, useUpdateUmpireMutation, useCreateMatchMutation } = matchApi;

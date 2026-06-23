@@ -22,6 +22,10 @@ import PickerModal from "../../component/ui/modal/PickerModal";
 import DateInput from "../../component/common/input/DateInput";
 import StepIndicator from "../../component/stepper/StepIndicator";
 import StepNavigation from "../../component/stepper/stepNavigation";
+import { useCreateScheduleMutation } from "../../features/schedule/scheduleApi";
+import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 // interface
 interface PickerItem {
@@ -30,7 +34,7 @@ interface PickerItem {
   photo?: string;
 }
 
-type ActivePicker = "tournament" | "venue" | "matchA" | "matchB" | null;
+type ActivePicker = "tournament" | "venue" | "matchA" | "matchB" | "matchId" | null;
 
 type SelectedMap = Record<Exclude<ActivePicker, null>, PickerItem | null>;
 
@@ -39,6 +43,7 @@ const pickerKeyToField: Record<Exclude<ActivePicker, null>, keyof ScheduleRQForm
   venue: "venueId",
   matchA: "matchA",
   matchB: "matchB",
+  matchId: "matchId"
 };
 
 // normalize data for maintain api data shape
@@ -57,16 +62,18 @@ const normalizeMatch = (m: IMatchSearch): PickerItem => ({
 // set step map for RHF trigger(stepper)
 const stepFields: Record<number, (keyof ScheduleRQFormData)[]> = {
   1: ["tournamentId"],
-  2: ["venueId", "round", "matchNumber", "matchDate", "matchTime"],
-  3: ["matchA", "matchB"],
+  2: ["venueId", "round", "matchNumber", "matchDate", "matchTime", "endTime"],
+  3: ["matchA", "matchB", "Match"],
 };
 
-const STEPS = ["Tournament", "Details", "Teams & Matches"];
+const STEPS = ["Tournament", "Details", " Matches"];
 
 
 
 const CreateScheduleR2 = () => {
   const goBack = useGoBack();
+  const navigate = useNavigate();
+
   const [step, setStep] = useState(1);
   const [activePicker, setActivePicker] = useState<ActivePicker>(null);
   const [tId, setTId] = useState<string>("");
@@ -75,6 +82,7 @@ const CreateScheduleR2 = () => {
     venue: null,
     matchA: null,
     matchB: null,
+    matchId: null,
   });
 
   const methods = useForm<ScheduleRQFormData>({
@@ -89,6 +97,9 @@ const CreateScheduleR2 = () => {
   const { data: matchRes, isLoading: mLoading } = useMatchOverviewQuery(
     { tournamentId: tId }, { skip: !tId }
   );
+
+  // create schdule mutaion
+  const [createSchedule] = useCreateScheduleMutation();
 
   // normalize API data
   const tournaments = (tournamentRes?.data ?? []).map(normalizeTournament);
@@ -124,9 +135,33 @@ const CreateScheduleR2 = () => {
     if (valid) setStep(s => s + 1);
   };
 
-  const onSubmit = (data: ScheduleRQFormData) => {
-    console.log(data);
-    // fire RTK mutation here
+  const onSubmit = async (data: ScheduleRQFormData) => {
+
+    const toastId = LoadingToast({ msg: "Creating..." });
+
+    const { tournamentId, matchA, matchB, ...body } = data;
+
+    const QualifierData = {
+      ...body,
+      previousMatches: {matchA, matchB}
+    }
+   
+
+    try {
+     await createSchedule({
+        tournamentId,
+        data: QualifierData
+      }).unwrap();
+
+      toast.dismiss(toastId);
+      SuccessToast({ msg: "Schedule creation successful" });
+      methods.reset();
+      navigate("/dashboard/schedule")
+
+    } catch (error) {
+      toast.dismiss(toastId);
+      ErrorToast({ msg: "Create schedule failed!" })
+    }
   };
 
 
@@ -138,6 +173,7 @@ const CreateScheduleR2 = () => {
     venue: { title: "Select Venue", items: venues, isLoading: vLoading },
     matchA: { title: "Select Match A", items: matches, isLoading: mLoading },
     matchB: { title: "Select Match B", items: matches, isLoading: mLoading },
+    matchId: {title: "Select match", items: matches, isLoading: mLoading},
   };
 
   const active = activePicker ? pickerConfig[activePicker] : null;
@@ -203,6 +239,12 @@ const CreateScheduleR2 = () => {
                   placeholder="e.g. 3pm"
                   type="text"
                 />
+                <TextInput
+                  label="Estimated End Time"
+                  name="endTime"
+                  placeholder="e.g. 3pm"
+                  type="text"
+                />
               </div>
               <EntityPickerInput
                 name="venueId"
@@ -235,6 +277,14 @@ const CreateScheduleR2 = () => {
                   onPick={() => setActivePicker("matchB")}
                   onClear={() => handleClear("matchB")}
                 />
+                <EntityPickerInput
+                  name="matchId"
+                  label="Match"
+                  placeholder="Pick Match"
+                  selected={selected.matchId}
+                  onPick={() => setActivePicker("matchId")}
+                  onClear={() => handleClear("matchId")}
+                />
               </div>
             </div>
           )}
@@ -245,7 +295,7 @@ const CreateScheduleR2 = () => {
             totalSteps={3}
             onNext={handleNext}
             onBack={() => setStep(s => s - 1)}
-            submitLabel="Create Match"
+            submitLabel="Create Schedule"
           />
         </FormContainer>
       </SectionLayout>

@@ -11,9 +11,9 @@ const UpdateTeam = () => {
    const { scheduleId, matchId  } = useParams();
 
      // fetch team 
-    const {data, } = useScheduleTeamQuery({scheduleId});
+    const {data } = useScheduleTeamQuery({scheduleId});
 
-    console.log(data.data);
+    // console.log(data.data);
 
   return (
     <PageLayout>

@@ -60,6 +60,7 @@ export const scheduleSchemaRQ = withTimeValidation(
     teamB: z.string().optional().nullable(),
     matchA: z.string().min(1, "Match A is required"),
     matchB: z.string().min(1, "Match B is required"),
+    matchId: z.string().min(5, "Match Id is required")
   }),
 );
 
