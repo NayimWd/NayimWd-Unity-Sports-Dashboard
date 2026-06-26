@@ -53,7 +53,12 @@ const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", ico
           variant={variant}
           defaultValue={defaultValue}
           {...register(name, {
-            valueAsNumber: type === "number",
+            setValueAs: (val) => {
+              if (type !== "number") return val;
+              if (val === "" || val === null) return undefined;
+              const parsed = parseFloat(val);
+              return isNaN(parsed) ? val : parsed;
+            },
           })}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}

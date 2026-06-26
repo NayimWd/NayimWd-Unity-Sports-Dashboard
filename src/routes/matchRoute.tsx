@@ -12,6 +12,8 @@ const UpdateMatchResult = lazy(() => import("../pages/match/UpdateMatchResult"))
 const ManageMatch = lazy(() => import("../pages/match/ManageMatch"));
 const CreateMatchR1 = lazy(()=> import("../pages/match/CreateMatchR1"));
 const CreateMatchR2 = lazy(()=> import("../pages/match/CreateMatchR2"));
+const CreateInnings = lazy(()=> import("../pages/innings/CreateInnings"));
+const MatchResult = lazy(()=> import("../pages/match/MatchResult"));
 
 
 export const matchRoutes: RouteObject[] = [
@@ -114,6 +116,26 @@ export const matchRoutes: RouteObject[] = [
                 </SuspenseWrapper>
             </ErrorBoundaryWrapper>
         )
-    }
+    },
+    {
+        path: "innings/create/:tournamentId/:matchId",
+        element: (
+            <ErrorBoundaryWrapper>
+                <SuspenseWrapper>
+                    <CreateInnings/>
+                </SuspenseWrapper>
+            </ErrorBoundaryWrapper>
+        )
+    },
+    {
+        path: "matchResult/create/:tournamentId/:matchId",
+        element: (
+            <ErrorBoundaryWrapper>
+                <SuspenseWrapper>
+                    <MatchResult/>
+                </SuspenseWrapper>
+            </ErrorBoundaryWrapper>
+        )
+    },
 
 ]

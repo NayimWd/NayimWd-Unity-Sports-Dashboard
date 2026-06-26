@@ -90,7 +90,7 @@ const ManageMatch = () => {
                         {/* <Dropdown.Item href={`/dashboard/match/reschedule/${match._id}`}>
                           <Edit3 size={14} /> Reschedule
                         </Dropdown.Item> */}
-                        <Dropdown.Item href={`/dashboard/match/updateResult/${match._id}`}>
+                        <Dropdown.Item href={`/dashboard/match/createResult/${match.tournamentId}/${match._id}`}>
                           <Edit3 size={14} /> Create Result
                         </Dropdown.Item>
                         <Dropdown.Item href={`/dashboard/match/updateResult/${match._id}`}>

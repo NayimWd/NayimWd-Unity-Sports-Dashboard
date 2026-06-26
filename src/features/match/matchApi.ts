@@ -65,6 +65,12 @@ const matchApi = apiSlice.injectEndpoints({
         {type: "Match", id: "LIST"}
       ]
     }),
+    matchTeams: builder.query({
+      query: ({matchId}) => ({
+        url: `/match/teamsOfMatch/${matchId}`,
+        method: "GET"
+      })
+    }),
     createMatch: builder.mutation({
       query: ({tournamentId, data}) => ({
         url: `/match/create/${tournamentId}`,
@@ -76,8 +82,9 @@ const matchApi = apiSlice.injectEndpoints({
         {type: "Match", id: "LIST"},
         { type: "Schedule", id: "List" },
       ]
-    })
+    }),
+   
   }),
 });
 
-export const { useGetMatchQuery, useGetMatchDetailsQuery, useMatchOverviewQuery, useMatchUmpireListQuery, useUpdateUmpireMutation, useCreateMatchMutation } = matchApi;
+export const { useGetMatchQuery, useGetMatchDetailsQuery, useMatchTeamsQuery, useMatchOverviewQuery, useMatchUmpireListQuery, useUpdateUmpireMutation, useCreateMatchMutation } = matchApi;
