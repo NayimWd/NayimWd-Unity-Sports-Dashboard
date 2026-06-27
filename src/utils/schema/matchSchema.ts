@@ -76,7 +76,14 @@ export const createInningsSchema = z.object({
     .min(0, { message: "byes can not be less than 0" }),
 });
 
+
+export const createMatchResultSchema = z.object({
+  manOfTheMatch: z.string().min(1, "Man of the match required"),
+  matchReport: z.string().min(1, "Match report required"),
+})
+
 export type CreateMatchR1FormData = z.infer<typeof createMatchR1Schema>;
 export type CreateMatchRQFormData = z.infer<typeof createMatchRQSchema>;
 export type UpdateUmpireFormData = z.infer<typeof updateUmpireSchema>;
-export type CreateInningsFormData = z.infer<typeof createInningsSchema>
+export type CreateInningsFormData = z.infer<typeof createInningsSchema>;
+export type CreateMatchResultData = z.infer<typeof createMatchResultSchema>

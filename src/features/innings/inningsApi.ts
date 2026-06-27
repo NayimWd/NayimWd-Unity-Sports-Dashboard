@@ -8,6 +8,10 @@ const inningsApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ({matchId}) => [
+        {type: "Innings", id: matchId},
+        {type: "matchResult", id: matchId}
+      ] 
     }),
   }),
 });

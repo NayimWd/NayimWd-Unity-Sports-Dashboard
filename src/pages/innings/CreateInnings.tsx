@@ -78,7 +78,7 @@ const CreateInnings = () => {
         tournamentId,
         matchId,
         data: formData
-      })
+      }).unwrap();
 
       toast.dismiss(toastId);
       SuccessToast({ msg: "Innings creation successful" });

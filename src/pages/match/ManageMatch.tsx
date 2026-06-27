@@ -93,9 +93,9 @@ const ManageMatch = () => {
                         <Dropdown.Item href={`/dashboard/match/createResult/${match.tournamentId}/${match._id}`}>
                           <Edit3 size={14} /> Create Result
                         </Dropdown.Item>
-                        <Dropdown.Item href={`/dashboard/match/updateResult/${match._id}`}>
+                        {/* <Dropdown.Item href={`/dashboard/match/updateResult/${match._id}`}>
                           <Edit3 size={14} /> Update Result
-                        </Dropdown.Item>
+                        </Dropdown.Item> */}
                       </Dropdown.Menu>
                     </Dropdown>
                   );
@@ -111,6 +111,9 @@ const ManageMatch = () => {
                       <Dropdown.Menu className="-ml-40 -mt-8">
                         <Dropdown.Item href={`/dashboard/match/${match._id}`}>
                           <Book size={14} /> Match Details
+                        </Dropdown.Item>
+                        <Dropdown.Item href={`/dashboard/match/createResult/${match.tournamentId}/${match._id}`}>
+                          <Edit3 size={14} /> Create Result
                         </Dropdown.Item>
                         <Dropdown.Item href={`/dashboard/match/updateResult/${match._id}`}>
                           <Edit3 size={14} /> Update Result
