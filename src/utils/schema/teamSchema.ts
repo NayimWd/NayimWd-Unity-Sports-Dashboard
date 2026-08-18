@@ -40,4 +40,4 @@ export const createTeamSchema = z.object({
     .refine((file) => file.type.startsWith("image/"), "File Must be an image"),
 });
 
-export type createTeamType = z.infer<typeof createTeamSchema>
+export type createTeamType = z.infer<typeof createTeamSchema>;

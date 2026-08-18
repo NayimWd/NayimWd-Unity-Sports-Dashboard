@@ -33,7 +33,7 @@ const CreateBlogs = () => {
   })
 
 
-  let tags = [
+  const tags = [
     { label: "news", value: "news" },
     { label: "highlight", value: "highlight" },
     { label: "tournaments", value: "tournaments" },
@@ -58,7 +58,7 @@ const CreateBlogs = () => {
       methods.reset();
       navigate("/dashboard/blogs")
 
-    } catch (error) {
+    } catch {
       toast.dismiss(loadingId);
       ErrorToast({ msg: "Blog Posted Failed!" })
     }

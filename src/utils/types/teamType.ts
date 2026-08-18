@@ -49,3 +49,8 @@ export interface ITeamSearch {
   _id: string,
   teamName: string,
 }
+
+export interface IPlayerSearch {
+  _id: string,
+  name: string
+}
