@@ -14,6 +14,7 @@ import { useState } from "react";
 import TournamentPickerTrigger from "../tournament/TournamentPickerTrigger";
 import PickerModal from "../../component/ui/modal/PickerModal";
 import PageHeader from "../../component/ui/PageHeader";
+import Badge from "../../component/ui/Badge";
 
 const ManageMatch = () => {
   const goBack = useGoBack();
@@ -79,21 +80,22 @@ const ManageMatch = () => {
                         <Dropdown.Item href={`/dashboard/match/${match._id}`}>
                           <Book size={14} /> Match Details
                         </Dropdown.Item>
-                        <Dropdown.Item href={`/dashboard/match/updateTeam/${match._id}`}>
+                        <Dropdown.Item >
                           <Edit3 size={14} /> Edit Team
+                          <Badge rounded="full"  variant="default">Beta</Badge>
                         </Dropdown.Item>
-                        <Dropdown.Item href={`/dashboard/match/updateUmpire/${match._id}`}>
+                        <Dropdown.Item href={`/dashboard/match/updateUmpire/${match.tournamentId}/${match._id}`}>
                           <Edit3 size={14} /> Edit Umpire
                         </Dropdown.Item>
-                        <Dropdown.Item href={`/dashboard/match/reschedule/${match._id}`}>
+                        {/* <Dropdown.Item href={`/dashboard/match/reschedule/${match._id}`}>
                           <Edit3 size={14} /> Reschedule
-                        </Dropdown.Item>
-                        <Dropdown.Item href={`/dashboard/match/updateResult/${match._id}`}>
+                        </Dropdown.Item> */}
+                        <Dropdown.Item href={`/dashboard/match/createResult/${match.tournamentId}/${match._id}`}>
                           <Edit3 size={14} /> Create Result
                         </Dropdown.Item>
-                        <Dropdown.Item href={`/dashboard/match/updateResult/${match._id}`}>
+                        {/* <Dropdown.Item href={`/dashboard/match/updateResult/${match._id}`}>
                           <Edit3 size={14} /> Update Result
-                        </Dropdown.Item>
+                        </Dropdown.Item> */}
                       </Dropdown.Menu>
                     </Dropdown>
                   );
@@ -109,6 +111,9 @@ const ManageMatch = () => {
                       <Dropdown.Menu className="-ml-40 -mt-8">
                         <Dropdown.Item href={`/dashboard/match/${match._id}`}>
                           <Book size={14} /> Match Details
+                        </Dropdown.Item>
+                        <Dropdown.Item href={`/dashboard/match/createResult/${match.tournamentId}/${match._id}`}>
+                          <Edit3 size={14} /> Create Result
                         </Dropdown.Item>
                         <Dropdown.Item href={`/dashboard/match/updateResult/${match._id}`}>
                           <Edit3 size={14} /> Update Result

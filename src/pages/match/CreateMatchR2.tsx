@@ -9,7 +9,7 @@ import { CreateMatchRQFormData, createMatchRQSchema } from "../../utils/schema/m
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSearchTournamentQuery } from "../../features/tournament/tournamentApi";
-import { useMatchOverviewQuery } from "../../features/match/matchApi";
+import { useCreateMatchMutation, useMatchOverviewQuery } from "../../features/match/matchApi";
 import PageHeader from "../../component/ui/PageHeader";
 import SectionLayout from "../../component/layout/SectionLayout";
 import StepIndicator from "../../component/stepper/StepIndicator";
@@ -19,6 +19,9 @@ import DropdownInput from "../../component/common/input/DropdownInput";
 import { matchNumbers } from "../schedule/formHelper/formUtils";
 import PickerModal from "../../component/ui/modal/PickerModal";
 import StepNavigation from "../../component/stepper/stepNavigation";
+import { ErrorToast, LoadingToast, SuccessToast } from "../../utils/toastUtils";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 // interface for list items to normalize
 interface PickerItem {
@@ -71,6 +74,9 @@ const STEPS = ["Tournament", "Match Info", "Umpires"];
 
 const CreateMatchR2 = () => {
   const goBack = useGoBack();
+  const navigate = useNavigate();
+  // create match mutaion 
+  const [createMatch] = useCreateMatchMutation();
   const [step, setStep] = useState(1);
   const [activePicker, setActivePicker] = useState<ActivePicker>(null);
   const [tId, setTId] = useState("");
@@ -80,6 +86,7 @@ const CreateMatchR2 = () => {
     umpire1: null, umpire2: null, umpire3: null,
   });
 
+  // form method
   const methods = useForm<CreateMatchRQFormData>({
     resolver: zodResolver(createMatchRQSchema),
     mode: "onSubmit",
@@ -130,9 +137,27 @@ const CreateMatchR2 = () => {
     if (valid) setStep(s => s + 1);
   };
 
-  const onSubmit = (data: CreateMatchRQFormData) => {
-    console.log(data)
-    // createMatch(payload);
+  const onSubmit = async (data: CreateMatchRQFormData) => {
+    const toastId = LoadingToast({ msg: "Creating..." });
+
+    const { tournamentId, ...body } = data;
+
+    try {
+     await createMatch({
+        tournamentId,
+        data: body
+      }).unwrap();
+
+      toast.dismiss(toastId);
+      SuccessToast({ msg: "Match creation successful" });
+      methods.reset();
+      navigate("/dashboard/match")
+
+    } catch (error) {
+      toast.dismiss(toastId);
+      ErrorToast({ msg: "Create match failed!" })
+    }
+
   };
 
   const pickerConfig: Record<

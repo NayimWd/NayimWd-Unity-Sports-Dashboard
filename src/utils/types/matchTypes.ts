@@ -164,3 +164,17 @@ export interface IUmpireSearch {
   role: string;
 }
 
+export interface IMatchTeamSearch {
+  _id: string;
+  teamName: string;
+  teamLogo: string;
+}
+
+export interface IMatchOfPlayer {
+  _id: string;
+  playerId: {
+    _id: string;
+    name: string;
+    photo?: string;
+  };
+}

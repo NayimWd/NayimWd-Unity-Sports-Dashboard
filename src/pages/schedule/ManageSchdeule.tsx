@@ -14,6 +14,8 @@ import TournamentPickerTrigger from "../tournament/TournamentPickerTrigger";
 import PickerModal from "../../component/ui/modal/PickerModal";
 import Table from "../../component/common/Table/Table";
 import TableHeader from "../../component/common/Table/TableHeader";
+import { Link } from "react-router-dom";
+import Badge from "../../component/ui/Badge";
 
 const ManageSchdeule = () => {
     const goBack = useGoBack();
@@ -58,6 +60,7 @@ const ManageSchdeule = () => {
             data?.schedules.map((schedule) => (
 
                 <TableRow
+                    
                     key={schedule._id}
                     rowData={[
                         schedule.matchNumber,
@@ -68,25 +71,30 @@ const ManageSchdeule = () => {
                         schedule?.teams.teamB?.teamName
                         ?? schedule?.previousMatches?.matchB?.matchNumber
                         ?? "TBD",
-                        <div>
+                        <div className="">
                             {
-                                (schedule.status === "scheduled") ?
-                                    <Dropdown>
+                                (schedule.status === "scheduled" || schedule.status === "rescheduled") ?
+                                    <Dropdown >
                                         <Dropdown.Trigger className="bg-primary text-white">
                                             <Edit2 size="14" /> Edit
                                         </Dropdown.Trigger>
-                                        <Dropdown.Menu>
+                                        <Dropdown.Menu className="-left-20">
                                             <Dropdown.Item href={`/dashboard/match/${schedule.matchId}`}>
                                                 <BookOpen size="14" /> Read
                                             </Dropdown.Item>
+                                            <Link to={`/dashboard/schedule/changeTime/${schedule._id}`}>
                                             <Dropdown.Item>
                                                 <Edit size="14" /> Change Time
                                             </Dropdown.Item>
+                                            </Link>
+                                            <Link to={`/dashboard/schedule/changeTeam/${schedule._id}/${schedule.matchId}`}>
                                             <Dropdown.Item>
                                                 <Edit size="14" /> Change Team
                                             </Dropdown.Item>
-                                            <Dropdown.Item>
-                                                <Edit size="14" /> Change Details
+                                            </Link>
+                                            <Dropdown.Item >
+                                                <Edit  size="14" />  Details
+                                                <Badge rounded="full"  variant="default">Beta</Badge>
                                             </Dropdown.Item>
 
                                         </Dropdown.Menu>

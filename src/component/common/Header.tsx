@@ -33,6 +33,9 @@ const Header = ({ handleToggle }: HeaderProps) => {
     { label: "Account", href: "/dashboard/myAccount", icon: <User2 size={14} /> },
     { label: "Profile", href: "/dashboard/profile", icon: <Settings size={14} /> },
   ]
+  const adminLinks = [
+    { label: "Account", href: "/dashboard/myAccount", icon: <User2 size={14} /> },
+  ]
 
 
   // logout function 
@@ -131,7 +134,7 @@ const Header = ({ handleToggle }: HeaderProps) => {
                   onClose={() => setIsOpen(false)}
                   user={user}
                   onLogout={handleLogout}
-                  links={links}
+                  links={user.role === "admin" ? adminLinks : links}
                 />
               </div>
             ) : (

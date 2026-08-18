@@ -60,8 +60,34 @@ export const scheduleSchemaRQ = withTimeValidation(
     teamB: z.string().optional().nullable(),
     matchA: z.string().min(1, "Match A is required"),
     matchB: z.string().min(1, "Match B is required"),
+    matchId: z.string().min(5, "Match Id is required")
   }),
 );
 
+export const updateTeamSchema = z.object({
+    teamA: z.string().optional().nullable(),
+    teamB: z.string().optional().nullable(),
+    matchA: z.string().optional().nullable(),
+    matchB: z.string().optional().nullable(),
+  });
+
+
+export const updateSheduleTimeSchema = withTimeValidation(
+  scheduleBaseSchema.pick({
+    matchDate: true,
+    matchTime: true,
+    endTime: true,
+  }),
+);
+
+export const updateScheduleDetailsSchema = scheduleBaseSchema.pick({
+  venueId: true,
+  matchNumber: true,
+  round: true,
+});
+
 export type ScheduleR1FormData = z.infer<typeof scheduleSchemaR1>;
 export type ScheduleRQFormData = z.infer<typeof scheduleSchemaRQ>;
+export type UpdateScheduleTimeData = z.infer<typeof updateSheduleTimeSchema>;
+export type UpdateScheduleDetailsData = z.infer< typeof updateScheduleDetailsSchema>;
+export type UpdateTeamData = z.infer<typeof updateTeamSchema>;

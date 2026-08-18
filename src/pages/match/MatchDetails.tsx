@@ -82,17 +82,22 @@ const MatchDetails = () => {
               {/* Team A */}
               <div className="flex items-center gap-3">
                 <img
-                  src={match.teamA?.teamLogo}
+                  src={match.teamA?.teamLogo ?? "/lightImg.jpeg"}
                   alt={match.teamA?.teamName}
                   className="w-12 h-12 rounded-full object-cover"
                 />
                 <div>
                   <p className="font-semibold">{match.teamA?.teamName} </p>
-                  {MatchResult?.teamA_stats && (
+                  {MatchResult?.teamA_stats ? (
                     <p className="text-sm text-subtext">
                       {MatchResult.teamA_stats}
                     </p>
-                  )}
+                  )
+                : 
+                <p>
+                  TBD
+                </p>
+                }
                 </div>
               </div>
 
@@ -104,14 +109,18 @@ const MatchDetails = () => {
               <div className="flex items-center gap-3 justify-end">
                 <div className="text-right">
                   <p className="font-semibold">{match.teamB?.teamName}</p>
-                  {MatchResult?.teamB_stats && (
+                  {MatchResult?.teamB_stats ? (
                     <p className="text-sm text-subtext">
                       {MatchResult.teamB_stats}
                     </p>
-                  )}
+                  ) : 
+                  <p>
+                  TBD
+                </p>
+                  }
                 </div>
                 <img
-                  src={match.teamB?.teamLogo}
+                  src={match.teamB?.teamLogo ?? "/lightImg.jpeg"}
                   alt={match.teamB?.teamName}
                   className="w-12 h-12 rounded-full object-cover"
                 />
@@ -154,7 +163,7 @@ const MatchDetails = () => {
           </div>
 
           <div className="space-y-4">
-            {matchInfo?.matchDate && (
+            
               <div className="flex items-start gap-4 p-3 rounded-lg hover:bg-bg/50 transition-colors">
                 <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0">
                   <Calendar className="w-5 h-5 text-blue-600" />
@@ -163,11 +172,10 @@ const MatchDetails = () => {
                   <p className="text-xs font-semibold text-subtext uppercase tracking-wide mb-1">
                     Date
                   </p>
-                  <p className="text-base font-medium">{matchInfo.matchDate}</p>
+                  <p className="text-base font-medium">{matchInfo?.matchDate ?? "Schedule In-progress"}</p>
                 </div>
               </div>
-            )}
-            {matchInfo?.round && (
+                       
               <div className="flex items-start gap-4 p-3 rounded-lg hover:bg-bg/50 transition-colors">
                 <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0">
                   <Tv className="w-5 h-5 text-blue-600" />
@@ -176,12 +184,10 @@ const MatchDetails = () => {
                   <p className="text-xs font-semibold text-subtext uppercase tracking-wide mb-1">
                     Playing Round
                   </p>
-                  <p className="text-base font-medium uppercase">{matchInfo.round}</p>
+                  <p className="text-base font-medium uppercase">{matchInfo?.round ?? "TBD"}</p>
                 </div>
               </div>
-            )}
-
-            {matchInfo?.matchTime && (
+           
               <div className="flex items-start gap-4 p-3 rounded-lg hover:bg-bg/50 transition-colors">
                 <div className="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center flex-shrink-0">
                   <Clock className="w-5 h-5 text-purple-600" />
@@ -190,12 +196,10 @@ const MatchDetails = () => {
                   <p className="text-xs font-semibold text-subtext uppercase tracking-wide mb-1">
                     Time
                   </p>
-                  <p className="text-base font-medium">{matchInfo.matchTime}</p>
+                  <p className="text-base font-medium">{matchInfo?.matchTime ?? "Match Time is under schedule"}</p>
                 </div>
               </div>
-            )}
-
-            {matchInfo?.venueId && (
+        
               <div className="flex items-start gap-4 p-3 rounded-lg hover:bg-bg/50 transition-colors">
                 <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-5 h-5 text-green-600" />
@@ -204,10 +208,10 @@ const MatchDetails = () => {
                   <p className="text-xs font-semibold text-subtext uppercase tracking-wide mb-1">
                     Venue
                   </p>
-                  <p className="text-base font-medium">{matchInfo.venueId.location}</p>
+                  <p className="text-base font-medium">{matchInfo?.venueId?.location ?? "City will be updated"}</p>
                 </div>
               </div>
-            )}
+       
           </div>
         </Card>
 

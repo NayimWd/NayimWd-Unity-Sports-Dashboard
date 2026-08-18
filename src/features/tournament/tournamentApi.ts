@@ -129,7 +129,7 @@ export const tournamentApi = apiSlice.injectEndpoints({
     }),
     approvedTeam: builder.query({
       query: ({ tournamentId }) => ({
-        url: `//tournament/approved_teams/${tournamentId}`,
+        url: `/tournament/approved_teams/${tournamentId}`,
         method: "GET",
       }),
       providesTags: (_result, _args, { tournamentId }) => [

@@ -99,10 +99,11 @@ interface DropdownItemProps {
   href?: string;
   value?: string | number;
   className?: string;
-  disabled?: any
+  disabled?: any;
+ 
 }
 
-function DropdownItem({ children, onClick, href, value, className }: DropdownItemProps) {
+function DropdownItem({ children, onClick, href, value, className, }: DropdownItemProps) {
   const { close, onSelect } = useDropdownContext();
 
   const handleClick = () => {
@@ -134,11 +135,12 @@ function DropdownItem({ children, onClick, href, value, className }: DropdownIte
       tabIndex={0}
       onClick={handleClick}
       className={cn(
-        "flex justify-left items-center gap-1 px-2 py-1 text-sm hover:bg-subtle rounded w-full text-left transition-colors hover:bg-bg",
+        "flex justify-left items-center gap-1 px-2 py-1 text-sm hover:bg-subtle rounded w-full text-left transition-colors hover:bg-bg relative",
         className
       )}
     >
       {children}
+     
     </button>
   );
 }

@@ -45,3 +45,18 @@ export interface ILatestTournamentResponse {
   result: ITournamentResult;
   tournament: ITournamentSummary;
 }
+
+// tournamentTypes.ts
+export interface ITournamentResultForm {
+  manOfTheTournament: string;
+  awardFor: string;
+}
+
+export interface IPlayerListItem {
+  _id: string;
+  playerId: {
+    _id: string;
+    name: string;
+    photo?: string;
+  };
+}
