@@ -54,7 +54,7 @@ const UpdateStatus = () => {
       methods.reset();
       navigate(`/dashboard/tournament/manage`)
 
-    } catch (error) {
+    } catch {
       toast.dismiss(loadingId);
       ErrorToast({ msg: "Tournament status Update Failed!" })
     }

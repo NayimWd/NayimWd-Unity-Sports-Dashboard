@@ -86,7 +86,7 @@ const EditUmpire = () => {
             setValue(pickerKeyToField[key] as any, data._id, { shouldValidate: false });
             setSelected(prev => ({ ...prev, [key]: item }));
         });
-    }, [existingUmpires]);
+    }, [existingUmpires, setValue]);
 
     // fetch all umpire list
     const { data: umpireRes, isLoading: uLoading } = useUmpireListQuery(undefined);

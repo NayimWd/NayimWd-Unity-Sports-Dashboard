@@ -71,7 +71,7 @@ const CreateTournament = () => {
       method.reset();
       navigate("/dashboard/tournament")
 
-    } catch (error) {
+    } catch {
       toast.dismiss(toastId);
       ErrorToast({ msg: "Tournament Created Failed!" })
     }

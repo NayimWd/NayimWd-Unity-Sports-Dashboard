@@ -43,7 +43,7 @@ const Login = () => {
       SuccessToast({ msg: "Login Success" })
       // navigate to Dashboard
       navigate("/dashboard")
-    } catch (error) {
+    } catch {
       // hide loading toast
       toast.dismiss(loadingId);
       // set success toast

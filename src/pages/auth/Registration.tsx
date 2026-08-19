@@ -53,7 +53,7 @@ const RegistrationForm = () => {
       navigate("/login")
       methods.reset();
 
-    } catch (err) {
+    } catch {
       toast.dismiss(loadingId);
       ErrorToast({ msg: "SignUp Failed!", position: "top-center" })
     }

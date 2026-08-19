@@ -27,18 +27,24 @@ const UpdateBlogDetails = () => {
   // get blog id
   const { blogId } = useParams();
 
+  const methods = useForm<blogType>({
+    resolver: zodResolver(updateBlogSchema),
+    mode: "onSubmit"
+  })
+  const { reset } = methods;
+
   // get default content by blogId
   const { data: blog } = useBlogDetailsQuery(blogId, {refetchOnMountOrArgChange: true});
 
   useEffect(() => {
     if (blog) {
-      methods.reset({
+      reset({
         title: blog?.title,
         content: blog.content,
         tags: blog.tags,
       })
     }
-  }, [blog])
+  }, [blog, reset])
 
   // post blog api throw apiSlice
   const [updateBlog, { isLoading }] = useUpdateBlogMutation();
@@ -46,12 +52,6 @@ const UpdateBlogDetails = () => {
 
   // navigate
   const navigate = useNavigate();
-
-    const methods = useForm<blogType>({
-    resolver: zodResolver(updateBlogSchema),
-    mode: "onSubmit"
-  })
-
 
   let tags = [
     { label: "news", value: "news" },
@@ -76,7 +76,7 @@ const UpdateBlogDetails = () => {
       methods.reset();
       navigate("/dashboard/blogs/manage")
 
-    } catch (error) {
+    } catch {
       toast.dismiss(loadingId);
       ErrorToast({ msg: "Blog Update Failed!" })
     }

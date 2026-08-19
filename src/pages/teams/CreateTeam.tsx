@@ -48,7 +48,7 @@ const CreateTeam = () => {
       methods.reset();
       navigate(`/dashboard/team/myTeam`)
 
-    } catch (error) {
+    } catch {
       toast.dismiss(loadingId);
       ErrorToast({ msg: "Team creation Failed!" })
     }

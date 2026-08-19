@@ -12,7 +12,7 @@ const Account = () => {
 
   const { data: account } = useCurrentUserQuery();
 
-  let content = (
+  let content  = (
     <SectionLayout className="flex flex-col gap-1 md:gap-0 items-center text-center">
       <h1 className={`${fontStyle.pageTitle} text-font`}>My Account</h1>
 

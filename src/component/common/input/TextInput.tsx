@@ -36,7 +36,7 @@ const TextInput = ({ name, label, placeholder = "Write Your thoughts here!", ico
     if (focused) {
       trigger(name);
     }
-  }, [value]);
+  }, [value, name, focused, trigger]);
 
   return (
     <div className="relative space-y-1">

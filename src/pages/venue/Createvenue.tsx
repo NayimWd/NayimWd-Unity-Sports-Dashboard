@@ -49,7 +49,7 @@ const Createvenue = () => {
       SuccessToast({ msg: "Venue created successfully!" });
       methods.reset();
       navigate("/dashboard/venue");
-    } catch (error) {
+    } catch {
       toast.dismiss(toastId);
       ErrorToast({ msg: "Failed to create venue" });
     }

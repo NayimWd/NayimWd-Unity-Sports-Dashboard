@@ -42,7 +42,7 @@ const ChangePassword = () => {
             toast.success("Account Password updated");
             navigate("/dashboard/myAccount")
 
-        } catch (error) {
+        } catch {
             toast.dismiss(toastId);
             toast.error("Failed to update account Password");
         }

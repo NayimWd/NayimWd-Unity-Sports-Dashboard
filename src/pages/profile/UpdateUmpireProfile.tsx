@@ -25,19 +25,21 @@ const UpdateUmpireProfile = () => {
       const [updateUmpireProfile, { isLoading }] = useUpdateUmpireProfileMutation();
       const {data} = useGetUmpireProfileQuery(undefined);
 
+      // form method
+      const methods = useForm<createUmpireProfileData>({
+        resolver: zodResolver(createUmpireProfileSchema),
+        mode: "onSubmit"
+      });
+
       useEffect(()=> {
         if(data?.yearsOfExperience){
           methods.reset({
             yearsOfExperience: data.yearsOfExperience,
           })
         }
-      },[data])
+      },[data, methods])
     
-      // form method
-      const methods = useForm<createUmpireProfileData>({
-        resolver: zodResolver(createUmpireProfileSchema),
-        mode: "onSubmit"
-      });
+      
     
       const handleSubmit = async (data: createUmpireProfileData) => {
         const toastId = LoadingToast({ msg: "Wait a moment, updating..." });

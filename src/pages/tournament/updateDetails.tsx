@@ -55,7 +55,7 @@ const UpdateDetails = () => {
         description: tournament.description
       })
     }
-  }, [data])
+  }, [data, tournament, methods])
 
 
   const handleSubmit = async (data: TUpdateTournamentDetails) => {
@@ -72,7 +72,7 @@ const UpdateDetails = () => {
       methods.reset();
       navigate(`/dashboard/tournament/manage`)
 
-    } catch (error) {
+    } catch  {
       toast.dismiss(loadingId);
       ErrorToast({ msg: "Tournament details Update Failed!" })
     }

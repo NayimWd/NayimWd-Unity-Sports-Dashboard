@@ -45,7 +45,7 @@ const UpdateTeamLogo = () => {
       methods.reset();
       navigate(`/dashboard/team/manage/${teamId}`)
 
-    } catch (error) {
+    } catch {
       toast.dismiss(loadingId);
       ErrorToast({ msg: "Update Team Logo Failed!" })
     }

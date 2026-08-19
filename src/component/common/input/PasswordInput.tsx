@@ -40,7 +40,7 @@ const PasswordInput = ({
     if (focused) {
       trigger(name);
     }
-  }, [ name, value]);
+  }, [ name, value, focused, trigger]);
 
   return (
     <div className=" space-y-2 relative">

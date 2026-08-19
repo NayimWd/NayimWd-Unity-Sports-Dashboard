@@ -27,7 +27,6 @@ const SafeHtmlRender = ({ html, className, style, fallback = <p className="text-
         <div
             className={className}
             style={style}
-            // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
             data-testid="safe-html-renderer"
         />

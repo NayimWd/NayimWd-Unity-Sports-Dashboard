@@ -32,15 +32,16 @@ const EditDetails = () => {
     resolver: zodResolver(accountUpdateSchema),
     mode: "onSubmit"
   });
+  const { reset } = method;
 
   useEffect(() => {
     if (user) {
-      method.reset({
+      reset({
         name: user.name ?? "",
         phoneNumber: user.phoneNumber ?? ""
       })
     }
-  }, [user])
+  }, [user, reset])
 
   const handleEdit = async (data: detailsType) => {
     const toastId = LoadingToast({ msg: "Updating Account Details..." });
@@ -53,7 +54,7 @@ const EditDetails = () => {
       toast.dismiss(toastId);
       toast.success("Account details updated");
       navigate("/dashboard/myAccount")
-    } catch (error) {
+    } catch {
       toast.dismiss(toastId);
       toast.error("Failed to update account details");
     }

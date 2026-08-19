@@ -51,7 +51,7 @@ const UpdateBlogPhoto = () => {
       methods.reset();
       navigate("/dashboard/blogs")
 
-    } catch (error) {
+    } catch {
       toast.dismiss(loadingId);
       ErrorToast({ msg: "Update Blog Photo Failed!" })
     }

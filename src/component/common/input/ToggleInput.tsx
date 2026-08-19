@@ -29,7 +29,7 @@ const ToggleInput = ({ name, label, disabled }: toggleInputProps) => {
         if (focused) {
             trigger(name);
         }
-    }, [checked, focused])
+    }, [checked, focused, name, trigger])
 
     return (
         <div className="space-y-1">

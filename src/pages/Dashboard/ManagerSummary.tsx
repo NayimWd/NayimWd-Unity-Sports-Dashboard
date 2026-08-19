@@ -78,7 +78,7 @@ function ManagerSummary() {
 
     if (!data) return null;
 
-    const { teamInfo, stats, tournamentStats } = data?.data;
+    const { teamInfo, stats, tournamentStats } = data.data;
   
     const statCards = [
         { label: "Matches", value: stats.totalMatches, icon: TrendingUp, color: "text-primary", bg: "bg-blue-500/10" },

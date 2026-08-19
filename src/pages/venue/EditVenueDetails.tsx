@@ -30,6 +30,11 @@ const EditVenueDetails = () => {
   // venue  update api
   const [updateVenueDetails, { isLoading }] = useUpdateVenueDetailsMutation(venueId);
 
+   const method = useForm<TUpdateVenueDtails>({
+    resolver: zodResolver(updateVenueDetailsSchema),
+    mode: "onSubmit"
+  })
+
   // set default value on inputs
   const defaultDetails = data?.data;
   useEffect(() => {
@@ -41,12 +46,9 @@ const EditVenueDetails = () => {
         features: defaultDetails.features
       })
     };
-  }, [data])
+  }, [data, defaultDetails, method])
 
-  const method = useForm<TUpdateVenueDtails>({
-    resolver: zodResolver(updateVenueDetailsSchema),
-    mode: "onSubmit"
-  })
+ 
 
   const handleSubmit = async (data: TUpdateVenueDtails) => {
     const toastId = LoadingToast({ msg: "Updating venue Details" });
@@ -63,11 +65,11 @@ const EditVenueDetails = () => {
         }
       }).unwrap();
 
-      toast.dismiss(toastId),
+      toast.dismiss(toastId)
         SuccessToast({ msg: "Venue Update Successfully!" })
       navigate("/dashboard/venue/manage")
 
-    } catch (error) {
+    } catch  {
       toast.dismiss(toastId);
       ErrorToast({ msg: "Update Venue Failed!" })
     }

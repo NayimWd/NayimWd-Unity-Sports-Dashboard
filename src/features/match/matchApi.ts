@@ -17,7 +17,7 @@ const matchApi = apiSlice.injectEndpoints({
       providesTags: (result) =>
         result
           ? [
-              ...result?.match.map((m) => ({
+              ...result.match.map((m) => ({
                 type: "Match" as const,
                 id: m._id,
               })),

@@ -27,6 +27,12 @@ const EditPlayerProfile = () => {
     const [updatePlayerProfile, { isLoading }] = useUpdatePlayerProfileMutation();
     const { data: player } = useGetPlayerProfileQuery(playerId);
 
+     // form method
+    const methods = useForm<UpdatePlayerProfileFormData>({
+        resolver: zodResolver(updatePlayerProfileSchema),
+        mode: "onSubmit"
+    });
+
     // set default value for from 
     useEffect(() => {
         if (player) {
@@ -37,14 +43,9 @@ const EditPlayerProfile = () => {
                 bowlingStyle: player.bowlingStyle,
             })
         }
-    }, [player])
+    }, [player, methods])
 
 
-    // form method
-    const methods = useForm<UpdatePlayerProfileFormData>({
-        resolver: zodResolver(updatePlayerProfileSchema),
-        mode: "onSubmit"
-    });
 
     const handleSubmit = async (data: UpdatePlayerProfileFormData) => {
         const toastId = LoadingToast({ msg: "Wait a moment, updating..." });

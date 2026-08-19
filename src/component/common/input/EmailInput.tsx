@@ -37,7 +37,7 @@ const EmailInput = ({ name, label, placeholder, icon, autoComplete }: EmailInput
     if (focused) {
       trigger(name);
     }
-  }, [name]);
+  }, [name, focused, trigger]);
 
   return (
     <div className="space-y-1">

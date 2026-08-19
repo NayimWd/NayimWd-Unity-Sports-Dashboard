@@ -46,7 +46,7 @@ const Header = ({ handleToggle }: HeaderProps) => {
       dispatch(apiSlice.util.resetApiState())
       navigate("/login")
       SuccessToast({ msg: "Logout Successfull" })
-    } catch (error) {
+    } catch  {
       ErrorToast({ msg: "Sign Out Failed!", position: "top-center", duration: 3000 });
       
     }
