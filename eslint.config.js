@@ -56,5 +56,20 @@ export default tseslint.config(
       "no-sequences": "off",
 
     },
+  ],
+
+  "@typescript-eslint/no-explicit-any": "off",
+
+  "@typescript-eslint/no-unused-vars": [
+    "warn",
+    {
+      argsIgnorePattern: "^_",
+      varsIgnorePattern: "^_",
+      caughtErrorsIgnorePattern: "^_",
+    },
+  ],
+
+  "prefer-const": "warn",
+},
   },
 );

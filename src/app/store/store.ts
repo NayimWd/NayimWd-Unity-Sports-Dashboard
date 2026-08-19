@@ -9,7 +9,7 @@ export const store = configureStore({
     theme: themeReducer,
     auth: authReducer,
   },
-  devTools: import.meta.env.NODE_ENV !== "production",
+  devTools: import.meta.env.MODE !== "production",
   middleware: (getDefaultMiddlewares) =>
     getDefaultMiddlewares().concat(apiSlice.middleware),
 });
