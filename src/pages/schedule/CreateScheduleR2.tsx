@@ -158,7 +158,7 @@ const CreateScheduleR2 = () => {
       methods.reset();
       navigate("/dashboard/schedule")
 
-    } catch (error) {
+    } catch {
       toast.dismiss(toastId);
       ErrorToast({ msg: "Create schedule failed!" })
     }

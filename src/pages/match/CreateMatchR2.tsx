@@ -153,7 +153,7 @@ const CreateMatchR2 = () => {
       methods.reset();
       navigate("/dashboard/match")
 
-    } catch (error) {
+    } catch {
       toast.dismiss(toastId);
       ErrorToast({ msg: "Create match failed!" })
     }

@@ -49,7 +49,7 @@ const UpdateTime = () => {
       methods.reset();
       navigate("/dashboard/schedule/manage");
 
-    } catch (error) {
+    } catch {
       toast.dismiss(toastId);
       ErrorToast({ msg: "Create schedule failed!" })
     }

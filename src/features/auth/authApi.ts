@@ -43,7 +43,7 @@ const authApi = apiSlice.injectEndpoints({
         try {
           const { data } = await queryFulfilled;
           dispatch(setCredentials(data));
-        } catch (error) {
+        } catch {
           dispatch(clearCredenTials());
         } finally {
           dispatch(setAuthLoaded(true));

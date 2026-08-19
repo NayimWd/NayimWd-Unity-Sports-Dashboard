@@ -46,7 +46,7 @@ const UpdateTournamentDate = () => {
         registrationDeadline: formatDDMMYYYY(tournament.registrationDeadline),
       })
     };
-  }, [tournament])
+  }, [tournament, methods])
 
   const handleSubmit = async (data: TUpdateTournamentDate) => {
     const loadingId = LoadingToast({ msg: "Updating Tournament details" });
@@ -78,7 +78,7 @@ const UpdateTournamentDate = () => {
       methods.reset();
       navigate(`/dashboard/tournament/manage`)
 
-    } catch (error) {
+    } catch {
       toast.dismiss(loadingId);
       ErrorToast({ msg: "Tournament details Update Failed!" })
     }

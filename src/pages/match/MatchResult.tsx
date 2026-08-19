@@ -95,7 +95,7 @@ const MatchResult = () => {
       methods.reset();
       navigate(`/dashboard/match/manage`)
 
-    } catch (error) {
+    } catch {
       toast.dismiss(toastId);
       ErrorToast({ msg: "Create Result failed!" })
     }

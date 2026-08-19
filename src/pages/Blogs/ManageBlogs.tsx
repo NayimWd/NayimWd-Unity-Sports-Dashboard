@@ -58,7 +58,7 @@ const ManageBlogs = () => {
       setSelectedBlog(null);
       setOpen(false)
 
-    } catch (error) {
+    } catch {
       ErrorToast({ msg: "Blog status update failed" })
       toast.dismiss(loadingId)
       setOpen(false);

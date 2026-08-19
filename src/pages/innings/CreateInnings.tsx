@@ -85,7 +85,7 @@ const CreateInnings = () => {
       methods.reset();
       navigate(`/dashboard/match/createResult/${tournamentId}/${matchId}`)
 
-    } catch (error) {
+    } catch {
       toast.dismiss(toastId);
       ErrorToast({ msg: "Create innings failed!" })
     }

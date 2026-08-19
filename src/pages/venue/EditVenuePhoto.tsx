@@ -51,7 +51,7 @@ const EditVenuePhoto = () => {
         SuccessToast({ msg: "Photo Update Successfully!" });
       navigate("/dashboard/venue/manage");
       method.reset();
-    } catch (error) {
+    } catch {
       toast.dismiss(toastId);
       ErrorToast({ msg: "Update Venue Failed!" })
     }

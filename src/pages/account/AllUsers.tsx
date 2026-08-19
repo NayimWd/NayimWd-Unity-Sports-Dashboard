@@ -123,7 +123,7 @@ const AllUsers = () => {
             SuccessToast({ msg: `Changed role to ${userRole.role}!` });
             setUserRole({ userId: "", role: "" });
             setOpen(false);
-        } catch (error) {
+        } catch {
             toast.dismiss(loadingId);
             ErrorToast({ msg: "Change role failed!" });
             setUserRole({ userId: "", role: "" });
@@ -172,10 +172,16 @@ const AllUsers = () => {
                                 <Edit2 size="14" /> Role
                             </Dropdown.Trigger>
                             <Dropdown.Menu className="absolute -left-10">
-                                <Dropdown.Item onClick={() => { setUserRole({ userId: (user as any)._id, role: "admin" }), setOpen(true) }}>
+                                <Dropdown.Item onClick={() => {
+                                    setUserRole({ userId: (user as any)._id, role: "admin" });
+                                    setOpen(true);
+                                }}>
                                     <Edit3 size={14} /> Make Admin
                                 </Dropdown.Item>
-                                <Dropdown.Item onClick={() => { setUserRole({ userId: (user as any)._id, role: "staff" }), setOpen(true) }}>
+                                <Dropdown.Item onClick={() => {
+                                    setUserRole({ userId: (user as any)._id, role: "staff" });
+                                    setOpen(true);
+                                }}>
                                     <Edit2 size={14} /> Make Staff
                                 </Dropdown.Item>
                             </Dropdown.Menu>
